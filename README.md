@@ -77,8 +77,10 @@ npm run build    # 重新打包到 dist/index.html
 ```bash
 npm run dev                # 开发服务器
 npm run build              # 打包（产出 dist/index.html）
-npm test                   # 4 条结构测试
+npm test                   # 9 条结构 / 数据回归测试
 npm run validate:content   # 关卡：没有来源的数字不许进页面
+npm run check:doc:selftest # 文档解析器 LF / CRLF 自测
+npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
 npm run check:ui           # 关卡：先构建，再逐章查 11 章五段 / 图契约 / 字号 / 栅格 / 无 JS 错误
 npm run verify:gates       # 关卡自检：正样本应绿、坏样本应红
 
@@ -126,7 +128,7 @@ npm run phases             # 日志 → 阶段表
 - 专精：暗影牧师（执政官 / 虚空编织者）已实装；噬灭（歼灭者）占位，切过去看到骨架预览
 - 章节 11 篇：L0×4、L1×6、L2×1
 - 数据：246 个 runId（含配装 36 + 属性优化 80 + 动作 trace 5）、9 段真实日志阶段、1 条副本路线（祭牙祭坛）、4 个输出模型
-- 门禁：`validate:content` 通过（55 段图契约：48 有图 / 2 缺图 / 5 不适用） · `check:ui` 逐章检查 11 章 + 窄屏 · `verify:gates` 4/4（含坏样本） · `vitest` 4/4 · `tsc` 通过 · 单文件构建约 682KB
+- 门禁：`validate:content` 通过（55 段图契约：48 有图 / 2 缺图 / 5 不适用） · `check:doc` 11/11 章一致 · `check:ui` 逐章检查 11 章 + 窄屏 · `verify:gates` 6/6（含坏样本） · `vitest` 9/9 · `tsc` 通过 · 单文件构建 686.45KB
 
 ## 三条红线
 

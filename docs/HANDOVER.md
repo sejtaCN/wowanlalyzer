@@ -6,7 +6,7 @@
 
 ---
 
-## 1. 现状（2026-10-26）
+## 1. 现状（2026-10-27）
 
 | 项 | 数量 | 位置 |
 | --- | --- | --- |
@@ -18,6 +18,7 @@
 | 图契约 | 11 章 × 5 段；48 有图 / 2 缺图 / 5 不适用 | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 | `content/analysis/`、`content/logs/` |
 | 代码量 | 约 4,050 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -107,7 +108,9 @@ node <抓取脚本或手工存 content/routes/>
 ```bash
 npm run validate:content   # 数字来源 + 结构完整性 + 55 段图契约
 npx tsc -p tsconfig.json   # 类型
-npx vitest run             # 4 条，含依赖方向测试
+npx vitest run             # 9 条，含依赖方向与数据层回归
+npm run check:doc:selftest  # 文档解析器 LF / CRLF 自测
+npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
 npm run check:ui           # 先构建，再逐章查 11 章；图契约标 ready 的段必须有真图
 npm run verify:gates       # 门禁自检：正样本绿、坏样本红
 npm run build              # 单文件产出
@@ -115,6 +118,7 @@ npm run build              # 单文件产出
 
 `validate:content` 会拦：不存在的 runId / 没来源的百分比 / 缺模型卡 / 缺结论 / 技能名对不上 / 未知图类型。
 缺图不是错误，会逐条列出并标下一批；`check:ui` 同时检查图的 DOM 是否真的存在。
+`check:ui` 会自动寻找 Chrome、Edge 或 Chromium；也可用 `CHROME_PATH` 指定浏览器。
 
 ---
 

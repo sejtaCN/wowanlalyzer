@@ -26,7 +26,12 @@ const CH_DIR = 'content/chapters';
 const errors = [];
 
 // ---------- 取 §4 ----------
-const doc = readFileSync(DOC, 'utf8');
+/** Windows 检出通常使用 CRLF；校验内容前统一换行，避免行尾让 `$` 失配。 */
+function normalizeNewlines(text) {
+  return text.replace(/\r\n?/g, '\n');
+}
+
+const doc = normalizeNewlines(readFileSync(DOC, 'utf8'));
 const secStart = doc.indexOf('## §4 ');
 if (secStart < 0) errors.push(`${DOC}: 找不到「## §4」小节`);
 const secEnd = doc.indexOf('\n## ', secStart + 1);
@@ -70,6 +75,31 @@ function parseBlock(body) {
     }
   }
   return items;
+}
+
+// 直接验证同一个解析器在 LF / CRLF 下得到一致结果。CI 和本地都可单独运行。
+if (process.argv.includes('--self-test')) {
+  const sample = [
+    '### L0-01 测试',
+    '',
+    '- **副标题**：副标题',
+    '- **结论**：结论',
+    '- **图题**：图题',
+    '- **优先级·加**｜技能：理由',
+    '  - 依据：依据',
+    '- **对照**：对照',
+    '  - 读法：读法',
+  ].join('\n');
+  const parse = (text) => parseBlock(normalizeNewlines(text));
+  const lf = parse(sample);
+  const crlf = parse(sample.replace(/\n/g, '\r\n'));
+  const ok = JSON.stringify(lf) === JSON.stringify(crlf) && lf.length === 5;
+  if (!ok) {
+    console.error('✗ check:doc 换行自测失败：LF / CRLF 解析结果不一致');
+    process.exit(1);
+  }
+  console.log('✓ check:doc 换行自测通过：LF / CRLF 解析一致');
+  process.exit(0);
 }
 
 // ---------- 读 JSON ----------

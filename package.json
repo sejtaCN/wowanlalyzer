@@ -19,6 +19,7 @@
     "validate:content": "node scripts/validate-content.mjs",
     "check:copy": "node scripts/check-copy.mjs",
     "check:doc": "node scripts/check-doc-sync.mjs",
+    "check:doc:selftest": "node scripts/check-doc-sync.mjs --self-test",
     "check:design": "node scripts/check-design.mjs",
     "check:ui": "npm run build && node scripts/check-ui.mjs",
     "verify:gates": "npm run build && node scripts/verify-gates.mjs",

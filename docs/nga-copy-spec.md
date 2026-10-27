@@ -465,12 +465,14 @@ NGA 那篇《职业攻略撰写心得》把优秀职业攻略的品质拆成**�
 
 ```
 npm run typecheck       ✅
-npm run test            ✅ 4 tests
-npm run build           ✅ 单文件 685.10 kB
+npm run test            ✅ 9 tests
+npm run build           ✅ 单文件 686.45 kB
 npm run validate:content ✅ 11 章 / 246 个 runId / 24 个优先级技能
 npm run check:ui        ✅ 字号四档 12/30/14/21px · 内容宽 720 · 顶图带 3 格 + 五段
 npm run check:copy      ✅ 0 错 / 9 提醒
+npm run check:doc:selftest ✅ LF / CRLF 解析一致
 npm run check:doc       ✅ 11 章 / 11 节逐字一致
+npm run verify:gates    ✅ 6/6
 ```
 
 `validate-content` 的百分比规则本次做了一次窄口径豁免：标注「APL 条件」的逐字引用算有出处（APL 与 `priority-table.json` 都在仓库里），其余百分比照旧必须有 runId 或日志。两个方向都做了回归验证。

@@ -25,7 +25,19 @@ const argOf = (name, fallback) => {
 };
 const DIST = resolve(argOf('dist', join(ROOT, 'dist', 'index.html')));
 const SHOTS = resolve(argOf('shots', join(ROOT, '.tools', 'tmp', 'ui')));
-const CHROME = process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const BROWSER_CANDIDATES = [
+  process.env.CHROME_PATH,
+  'C:/Program Files/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
+  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium',
+  '/usr/bin/chromium-browser',
+].filter(Boolean);
+const BROWSER = BROWSER_CANDIDATES.find((path) => existsSync(path));
 const CHAPTERS_DIR = join(ROOT, 'content', 'chapters');
 const FIGURES = JSON.parse(readFileSync(join(ROOT, 'content', 'figures', 'chapters.json'), 'utf8'));
 
@@ -38,6 +50,11 @@ const check = (cond, msg) => {
 
 if (!existsSync(DIST)) {
   console.error(`没有构建产物：${DIST} —— 先 npm run build`);
+  process.exit(1);
+}
+if (!BROWSER) {
+  console.error('找不到 Chrome / Edge / Chromium。');
+  console.error('安装浏览器后重试，或通过 CHROME_PATH 指定可执行文件。');
   process.exit(1);
 }
 mkdirSync(SHOTS, { recursive: true });
@@ -71,7 +88,7 @@ const chapters = readdirSync(CHAPTERS_DIR)
   .sort((a, b) => a.level.localeCompare(b.level) || a.order - b.order);
 
 const browser = await puppeteer.launch({
-  executablePath: CHROME,
+  executablePath: BROWSER,
   headless: 'new',
   args: ['--allow-file-access-from-files'],
 });
