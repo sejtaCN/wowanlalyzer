@@ -34,7 +34,7 @@ export default function ComingSoon({ onBack }: { onBack: () => void }) {
         <div className="kicker">数据筹备中 · 界面已就绪</div>
         <h1>
           {spec.name}
-          {hero ? <span style={{ color: 'var(--muted)', fontWeight: 600 }}> · {hero}</span> : null}
+          {hero ? <span style={{ color: 'var(--muted)', fontWeight: 500 }}> · {hero}</span> : null}
         </h1>
         <p>页面模板已就绪，前四步数据待补。补齐后页面自动长出来，不用改界面。</p>
         <Pipeline steps={PIPELINE} />

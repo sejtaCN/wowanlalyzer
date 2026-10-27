@@ -73,7 +73,7 @@ function Shell() {
 
   return (
     <>
-      <header className="topbar">
+      <header className={`topbar${chapter && chapter.level !== 'L0' ? ' reader-topbar' : ''}`}>
         <span className="brand">{PRODUCT.name}</span>
         <SpecSwitcher />
         <nav>

@@ -53,67 +53,71 @@ export default function Sources({ summary, crosscheck }: { summary: SourcesSumma
       </div>
 
       <h3>四家一致的（可以直接当结论）</h3>
-      <table className="tbl">
-        <thead>
-          <tr>
-            <th style={{ width: 180 }}>结论</th>
-            <th style={{ width: 150 }}>哪几家</th>
-            <th>原文怎么说</th>
-          </tr>
-        </thead>
-        <tbody>
-          {crosscheck.agreements.map((a) => (
-            <tr key={a.point}>
-              <td>{a.point}</td>
-              <td className="dim">{a.sources.length} 家</td>
-              <td className="dim">{a.detail ?? '—'}</td>
+      <div className="tblwrap">
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ width: 180 }}>结论</th>
+              <th style={{ width: 150 }}>哪几家</th>
+              <th>原文怎么说</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {crosscheck.agreements.map((a) => (
+              <tr key={a.point}>
+                <td>{a.point}</td>
+                <td className="dim">{a.sources.length} 家</td>
+                <td className="dim">{a.detail ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <h3 style={{ marginTop: 16 }}>四家不一致的（以及我们怎么处理）</h3>
-      <table className="tbl">
-        <thead>
-          <tr>
-            <th style={{ width: 104 }}>分歧</th>
-            <th>各家说法</th>
-            <th style={{ width: 208 }}>我们的处理</th>
-            <th style={{ width: 122 }}>状态</th>
-          </tr>
-        </thead>
-        <tbody>
-          {crosscheck.divergences.map((d) => {
-            const st = STATUS_LABEL[d.status] ?? { text: d.status, tone: 'info' as const };
-            const claims = [d.method, d.maxroll, d.nga, d.detail].filter(Boolean) as string[];
-            return (
-              <React.Fragment key={d.id}>
-                <tr>
-                  <td style={{ fontWeight: 600 }}>{d.point}</td>
-                  <td className="dim">
-                    {claims.map((c, i) => (
-                      <div key={i}>{c}</div>
-                    ))}
-                  </td>
-                  <td className="dim">{d.verdict ?? '—'}</td>
-                  <td>
-                    <span className={`state ${st.tone === 'warn' ? 'flat' : 'unused'}`} style={st.tone === 'ok' ? { color: 'var(--up)' } : undefined}>
-                      {st.text}
-                    </span>
-                  </td>
-                </tr>
-                {d.apl ? (
+      <div className="tblwrap">
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ width: 104 }}>分歧</th>
+              <th>各家说法</th>
+              <th style={{ width: 208 }}>我们的处理</th>
+              <th style={{ width: 122 }}>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            {crosscheck.divergences.map((d) => {
+              const st = STATUS_LABEL[d.status] ?? { text: d.status, tone: 'info' as const };
+              const claims = [d.method, d.maxroll, d.nga, d.detail].filter(Boolean) as string[];
+              return (
+                <React.Fragment key={d.id}>
                   <tr>
-                    <td colSpan={4} className="src-apl">
-                      <b>APL 原文</b> <span className="mono">{d.apl}</span>
+                    <td style={{ fontWeight: 500 }}>{d.point}</td>
+                    <td className="dim">
+                      {claims.map((c, i) => (
+                        <div key={i}>{c}</div>
+                      ))}
+                    </td>
+                    <td className="dim">{d.verdict ?? '—'}</td>
+                    <td>
+                      <span className={`state ${st.tone === 'warn' ? 'flat' : 'unused'}`} style={st.tone === 'ok' ? { color: 'var(--up)' } : undefined}>
+                        {st.text}
+                      </span>
                     </td>
                   </tr>
-                ) : null}
-              </React.Fragment>
-            );
-          })}
-        </tbody>
-      </table>
+                  {d.apl ? (
+                    <tr>
+                      <td colSpan={4} className="src-apl">
+                        <b>APL 原文</b> <span className="mono">{d.apl}</span>
+                      </td>
+                    </tr>
+                  ) : null}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
       <div className="note" style={{ marginTop: 10 }}>
         {summary.howWeUse}

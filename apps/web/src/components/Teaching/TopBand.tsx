@@ -1,7 +1,8 @@
 import React from 'react';
 import type { Chapter } from '@learn';
 import { ALTAR_WAVES, burstPairs, getRun } from '../../data/content';
-import { burstValueFor, parseTargets } from './rules';
+import { useReaderRefresh } from '../../state/reader-refresh';
+import { burstAdvice, burstValueFor, parseTargets } from './rules';
 import DecisionFlow from './DecisionFlow';
 
 /**
@@ -32,6 +33,7 @@ function MiniRoute({ range, selectedPull }: { range: [number, number] | null; se
 }
 
 export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; selectedPull?: number }) {
+  const readerRefresh = useReaderRefresh();
   const isRoute = chapter.level === 'L2';
   const routeWave = isRoute ? ALTAR_WAVES.waves.find((w) => w.pull === selectedPull) : null;
   const modelKind = routeWave ? (routeWave.isBoss ? 'boss' : 'wave') : chapter.model?.kind ?? 'wave';
@@ -46,10 +48,25 @@ export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; s
   const ciPct = routeValue?.ciPct ?? top?.ciPct ?? null;
   const samples = routeOn?.samples ?? top?.on.samples ?? null;
   const routeType = routeWave ? (routeWave.isBoss ? 'BOSS' : routeWave.mobCount >= 10 ? '大波' : routeWave.mobCount >= 5 ? '中波' : '小波') : null;
+  const advice = modelKind === 'rhythm'
+    ? {
+        text: '看间隔',
+        tone: 'maybe' as const,
+        why: '两波间隔 <122.4s 给大波；≥122.4s 两波都能开',
+      }
+    : modelKind === 'adds'
+      ? {
+          text: '开',
+          tone: 'yes' as const,
+          why: '加怪窗口看爆发放大倍数，不套普通目标数阈值',
+        }
+      : range
+        ? burstAdvice({ mobCount: range[0], isBoss: modelKind === 'boss' })
+        : null;
 
   return (
-    <div className="topband">
-      <div className="tb-cell">
+    <div className={`topband${readerRefresh ? ' reader-topband' : ''}`}>
+      <div className={`tb-cell${readerRefresh ? ' reader-situation' : ''}`}>
         <div className="tb-k">{isRoute ? '当前选中的波' : '这一波长什么样'}</div>
         <MiniRoute range={range} selectedPull={isRoute ? routeWave?.pull : undefined} />
         <div className="tb-v">
@@ -60,7 +77,7 @@ export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; s
         </div>
       </div>
 
-      <div className="tb-cell">
+      <div className={`tb-cell${readerRefresh ? ' reader-value' : ''}`}>
         <div className="tb-k">一条数字结论</div>
         <div className="tb-big">
           {deltaPct != null ? `+${deltaPct.toFixed(1)}%` : chapter.model?.frequency ?? '—'}
@@ -79,16 +96,30 @@ export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; s
         </div>
       </div>
 
-      <div className="tb-cell">
+      <div className={`tb-cell${readerRefresh ? ' reader-action' : ''}`}>
         <div className="tb-k">该做什么</div>
-        <DecisionFlow
-          targets={routeWave ? String(routeWave.mobCount) : chapter.model?.targets ?? null}
-          durationSec={routeWave ? 30 : chapter.model?.durationSec ?? null}
-          isBoss={modelKind === 'boss'}
-          isAdds={modelKind === 'adds'}
-          isRhythm={modelKind === 'rhythm'}
-          compact
-        />
+        {readerRefresh && advice ? (
+          <>
+            <div className={`reader-verdict ${advice.tone}`}>{advice.text}</div>
+            <div className="reader-verdict-why">{advice.why}</div>
+            <div className="reader-decision-path">
+              {routeWave ? routeWave.mobCount : chapter.model?.targets ?? '—'} 只
+              {' › '}
+              {routeWave ? 30 : chapter.model?.durationSec ?? '—'} 秒
+              {' › '}
+              {advice.text}
+            </div>
+          </>
+        ) : (
+          <DecisionFlow
+            targets={routeWave ? String(routeWave.mobCount) : chapter.model?.targets ?? null}
+            durationSec={routeWave ? 30 : chapter.model?.durationSec ?? null}
+            isBoss={modelKind === 'boss'}
+            isAdds={modelKind === 'adds'}
+            isRhythm={modelKind === 'rhythm'}
+            compact
+          />
+        )}
       </div>
     </div>
   );

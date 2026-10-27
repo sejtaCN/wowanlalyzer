@@ -51,7 +51,7 @@ export default function Gearing({ doc }: { doc: GearingDoc }) {
               const best = bestByStat.get(row.stat);
               return (
                 <tr key={row.stat}>
-                  <td style={{ fontWeight: 600 }}>{row.label}</td>
+                  <td style={{ fontWeight: 500 }}>{row.label}</td>
                   {scs.map((sc) => {
                     const v = row.perPct[sc.id];
                     return (

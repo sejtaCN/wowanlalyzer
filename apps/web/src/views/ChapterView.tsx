@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import type { Chapter } from '@learn';
 import { ChapterBody } from '../components/ChapterSections';
+import ChapterToc from '../components/ChapterToc';
+import { ReaderRefreshProvider } from '../state/reader-refresh';
 
 export default function ChapterView({
   chapter,
@@ -16,8 +18,9 @@ export default function ChapterView({
     window.scrollTo({ top: 0 });
   }, [chapter.id, onSee]);
 
-  return (
-    <div className="page">
+  const readerRefresh = chapter.level !== 'L0';
+  const page = (
+    <div className={`page${readerRefresh ? ' reader-page' : ''}`}>
       <div className="crumb">
         <button
           onClick={onBack}
@@ -30,7 +33,18 @@ export default function ChapterView({
       </div>
       <h1>{chapter.title}</h1>
       <p className="page-sub">{chapter.subtitle}</p>
-      <ChapterBody key={chapter.id} chapter={chapter} />
+      <ReaderRefreshProvider value={readerRefresh}>
+        <ChapterBody key={chapter.id} chapter={chapter} />
+      </ReaderRefreshProvider>
+    </div>
+  );
+
+  if (!readerRefresh) return page;
+
+  return (
+    <div className="chapter-shell">
+      <ChapterToc />
+      {page}
     </div>
   );
 }

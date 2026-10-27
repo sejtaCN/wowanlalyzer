@@ -115,7 +115,8 @@ npm run phases             # 日志 → 阶段表
 | --- | --- |
 | [writing-style.md](docs/writing-style.md) | 页面写作规范（参照 NGA / Wowhead） |
 | [product.md](docs/product.md) | 产品定义、教学主线、数据红线 |
-| [ui-design.md](docs/ui-design.md) | 界面规范（四档字号、720 栅格、五段结构、多专精架构） |
+| [ui-design.md](docs/ui-design.md) | 界面规范（六档字号、720 栅格、五段结构、多专精架构） |
+| [ui-reference-decomposition.md](docs/ui-reference-decomposition.md) | 参考站拆解、第一性原理、L1-02 视觉重构基线 |
 | [curriculum.md](docs/curriculum.md) | 章节结构与进度表 |
 | [methods.md](docs/methods.md) | 方法说明：联动/杠杆 · 日志阶段推断 · 教程交叉核对 · 配装与属性优化 |
 | [figure-contract.md](docs/figure-contract.md) | 图契约：五段图清单、缺图状态、11 章 UI 门禁与坏样本自检 |
@@ -128,7 +129,7 @@ npm run phases             # 日志 → 阶段表
 - 专精：暗影牧师（执政官 / 虚空编织者）已实装；噬灭（歼灭者）占位，切过去看到骨架预览
 - 章节 11 篇：L0×4、L1×6、L2×1
 - 数据：246 个 runId（含配装 36 + 属性优化 80 + 动作 trace 5）、9 段真实日志阶段、1 条副本路线（祭牙祭坛）、4 个输出模型
-- 门禁：`validate:content` 通过（55 段图契约：48 有图 / 2 缺图 / 5 不适用） · `check:doc` 11/11 章一致 · `check:ui` 逐章检查 11 章 + 窄屏 · `verify:gates` 6/6（含坏样本） · `vitest` 9/9 · `tsc` 通过 · 单文件构建 686.45KB
+- 门禁：`validate:content` 通过（55 段图契约：48 有图 / 2 缺图 / 5 不适用） · `check:doc` 11/11 章一致 · `check:ui` 逐章检查 11 章 + 桌面宽屏；移动端仅保留冻结冒烟 · `verify:gates` 8/8（含坏样本） · `vitest` 9/9 · `tsc` 通过 · 单文件构建 698.91KB
 
 ## 三条红线
 

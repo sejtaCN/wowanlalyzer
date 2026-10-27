@@ -13,6 +13,7 @@ import { RouteExplorer, SelectedWavePanel } from './Teaching/RouteExplorer';
 import ActionBudget from './Teaching/ActionBudget';
 import CooldownWindow from './Teaching/CooldownWindow';
 import CastChart from './Teaching/CastChart';
+import { useReaderRefresh } from '../state/reader-refresh';
 
 /** 段外壳：编号 + 一句话（这一段回答什么）→ 图 → 一句说明 */
 export function Section({
@@ -32,9 +33,17 @@ export function Section({
   figureStatus?: 'ready' | 'missing' | 'not-applicable';
   children: React.ReactNode;
 }) {
+  const readerRefresh = useReaderRefresh();
+  const readerTone = readerRefresh
+    ? no === '①' || no === '②'
+      ? ' reader-section-primary'
+      : no === '⑤'
+        ? ' reader-section-evidence'
+        : ' reader-section-support'
+    : '';
   return (
     <section
-      className="sec"
+      className={`sec${readerTone}`}
       data-figure-section={no}
       data-figure-kind={figureKind}
       data-figure-status={figureStatus}
@@ -157,42 +166,44 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
             {sec.label}
             <span className="note">{sec.rows.length} 条</span>
           </h3>
-          <table className="tbl">
-            <thead>
-              <tr>
-                <th style={{ width: 34 }}>#</th>
-                <th style={{ width: 150 }}>技能</th>
-                <th>条件（什么时候用它）</th>
-                <th style={{ width: 210 }}>选目标</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sec.rows.map((r) => {
-                const s = skillName(r.skill);
-                return (
-                  <tr key={`${sec.key}-${r.order}-${r.skill}`}>
-                    <td className="n dim">{r.order}</td>
-                    <td title={r.skill}>{s.text}</td>
-                    <td style={{ fontSize: 12 }}>
-                      {r.conditionGroups?.length ? (
-                        <div className="cond-groups">
-                          {r.conditionGroups.map((g, gi) => (
-                            <div className="cond-line" key={gi}>
-                              {gi > 0 ? <span className="cond-or">或</span> : null}
-                              <span>{g}</span>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <span className="dim">{r.conditionZh || '无条件（按顺序直接用）'}</span>
-                      )}
-                    </td>
-                    <td className="dim" style={{ fontSize: 12 }}>{r.targetSelectZh || '当前目标'}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="tblwrap">
+            <table className="tbl tbl-priority">
+              <thead>
+                <tr>
+                  <th style={{ width: 34 }}>#</th>
+                  <th style={{ width: 150 }}>技能</th>
+                  <th>条件（什么时候用它）</th>
+                  <th style={{ width: 210 }}>选目标</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sec.rows.map((r) => {
+                  const s = skillName(r.skill);
+                  return (
+                    <tr key={`${sec.key}-${r.order}-${r.skill}`}>
+                      <td className="n dim">{r.order}</td>
+                      <td title={r.skill}>{s.text}</td>
+                      <td>
+                        {r.conditionGroups?.length ? (
+                          <div className="cond-groups">
+                            {r.conditionGroups.map((g, gi) => (
+                              <div className="cond-line" key={gi}>
+                                {gi > 0 ? <span className="cond-or">或</span> : null}
+                                <span>{g}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="dim">{r.conditionZh || '无条件（按顺序直接用）'}</span>
+                        )}
+                      </td>
+                      <td className="dim">{r.targetSelectZh || '当前目标'}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       ))}
       <div className="note">表格顺序来自 APL 原文。条件翻成了人话，逻辑一个字没改。</div>
@@ -274,31 +285,38 @@ export function LogStats({ logId }: { logId: string }) {
 export { burstAdvice } from './Teaching/rules';
 
 export function WaveTable() {
+  const readerRefresh = useReaderRefresh();
   const waves = ALTAR_WAVES.waves;
   const values = waves.map((w) => burstValueFor(w.mobCount, w.isBoss, getRun).deltaDamage ?? 0);
   const maxV = Math.max(...values, 1);
   return (
     <>
-      <table className="tbl">
-        <thead>
-          <tr><th>波</th><th>怪数</th><th>类型</th><th>一次爆发增量</th><th>建议</th></tr>
-        </thead>
-        <tbody>
-          {waves.map((w, i) => {
-            const v = values[i];
-            const adv = burstAdvice(w);
-            const kind = w.isBoss ? 'BOSS' : w.mobCount >= 10 ? '大波' : w.mobCount >= 5 ? '中波' : '小波';
-            return (
-              <tr key={w.pull}>
-                <td className="n dim">{w.pull}</td><td className="n">{w.mobCount}</td><td>{kind}</td>
-                <td><span className="wave-value"><span className="tr"><i style={{ width: `${(v / maxV) * 100}%` }} /></span><b className="mono">{v.toFixed(2)}M</b></span></td>
-                <td><span className={`adv ${adv.tone}`}>{adv.text}</span></td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="note">目标档与 BOSS 档分别读取对应 runId；超过 8 只按 8 只档。</div>
+      <div className="tblwrap">
+        <table className="tbl">
+          <thead>
+            <tr><th>波</th><th>怪数</th><th>类型</th><th>一次爆发增量</th><th>建议</th></tr>
+          </thead>
+          <tbody>
+            {waves.map((w, i) => {
+              const v = values[i];
+              const adv = burstAdvice(w);
+              const kind = w.isBoss ? 'BOSS' : w.mobCount >= 10 ? '大波' : w.mobCount >= 5 ? '中波' : '小波';
+              return (
+                <tr key={w.pull}>
+                  <td className="n dim">{w.pull}</td><td className="n">{w.mobCount}</td><td>{kind}</td>
+                  <td><span className="wave-value"><span className="tr"><i style={{ width: `${(v / maxV) * 100}%` }} /></span><b className="mono">{v.toFixed(2)}M</b></span></td>
+                  <td><span className={`adv ${adv.tone}`}>{adv.text}</span></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div className="note">
+        {readerRefresh
+          ? '目标档与 BOSS 档分别读取对应模拟记录；超过 8 只按 8 只档。'
+          : '目标档与 BOSS 档分别读取对应 runId；超过 8 只按 8 只档。'}
+      </div>
     </>
   );
 }
@@ -366,6 +384,7 @@ export function MapPanel({
 
 /* ⑤ 高手对照 */
 export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: React.ReactNode }) {
+  const readerRefresh = useReaderRefresh();
   if (block.status === 'pending') {
     return <div className="figempty" data-figure-kind="missing">待补：{block.reason}</div>;
   }
@@ -429,16 +448,31 @@ export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: Re
           </table>
           </div>
         </details>
-        <div className="note" style={{ marginTop: 8 }}>
-          推断方法：{doc.method.summary}。全程 {Math.round(doc.totalSec)} 秒共 {total} 次爆发。
-          标「重点」的行是这一章要读者看的阶段。
-        </div>
-        <div className="note" style={{ marginTop: 4 }}>
-          「路线匹配」读法：`≈第N波 · X%` = 这一阶段的怪物组成与路线第 N 波的<b>重合度</b>（Jaccard），不是“打到第几波”。只列最高的一波；低于 40% 说明他走的是另一条顺序。
-        </div>
-        <div className="note" style={{ marginTop: 4, color: 'var(--ink-on-gold-soft)' }}>
-          限制：{doc.limitation}
-        </div>
+        {readerRefresh ? (
+          <details className="phase-method">
+            <summary>方法、样本范围与限制</summary>
+            <div className="note" style={{ marginTop: 8 }}>
+              推断方法：{doc.method.summary}。全程 {Math.round(doc.totalSec)} 秒共 {total} 次爆发。
+              标「重点」的行是这一章要读者看的阶段。
+            </div>
+            <div className="note" style={{ marginTop: 4, color: 'var(--ink-on-gold-soft)' }}>
+              限制：{doc.limitation}
+            </div>
+          </details>
+        ) : (
+          <>
+            <div className="note" style={{ marginTop: 8 }}>
+              推断方法：{doc.method.summary}。全程 {Math.round(doc.totalSec)} 秒共 {total} 次爆发。
+              标「重点」的行是这一章要读者看的阶段。
+            </div>
+            <div className="note" style={{ marginTop: 4 }}>
+              「路线匹配」读法：`≈第N波 · X%` = 这一阶段的怪物组成与路线第 N 波的<b>重合度</b>（Jaccard），不是“打到第几波”。只列最高的一波；低于 40% 说明他走的是另一条顺序。
+            </div>
+            <div className="note" style={{ marginTop: 4, color: 'var(--ink-on-gold-soft)' }}>
+              限制：{doc.limitation}
+            </div>
+          </>
+        )}
       </>
     );
   }
@@ -460,7 +494,34 @@ export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: Re
 
 /* 证据条 */
 export function EvidenceBar({ evidence }: { evidence: EvidenceRef }) {
+  const readerRefresh = useReaderRefresh();
   const commits = [...new Set(evidence.runIds.map((id) => id.split('__')[0]))];
+  if (readerRefresh) {
+    const runs = evidence.runIds.map(getRun).filter((run): run is NonNullable<typeof run> => Boolean(run));
+    const pairs = burstPairs(evidence.runIds);
+    const primary = pairs[0]?.on ?? runs[0] ?? null;
+    const traceCount = runs.filter((run) => run.kind === 'action-trace').length;
+    const simcRefs = [...new Set(runs
+      .map((run) => run.simc ? `${run.simc.version}（${run.simc.commit}）` : null)
+      .filter((ref): ref is string => Boolean(ref)))];
+
+    return (
+      <div className="evidence">
+        <span><b>场景</b> {primary?.label ?? '模拟记录'}</span>
+        <span><b>样本</b> {primary?.samples != null ? `${primary.samples.toLocaleString('zh-CN')} 次有效模拟` : '样本数未记录'}</span>
+        <span><b>对照</b> {pairs.length} 组开 / 不开{traceCount ? ` · 动作轨迹 ${traceCount} 份` : ''}</span>
+        <details className="evidence-raw">
+          <summary>查看原始记录</summary>
+          <div className="note">模拟 runId：{evidence.runIds.join(' · ') || '无'}</div>
+          {evidence.logs?.length ? <div className="note">日志：{evidence.logs.join(' · ')}</div> : null}
+          <div className="note">来源：{evidence.sources.join(' · ')}</div>
+          {simcRefs.length ? <div className="note">模拟器：{simcRefs.join(' · ')}</div> : null}
+          <div className="note">组：{commits.join(' / ')}</div>
+          <div className="note">日期：{evidence.generatedAt}</div>
+        </details>
+      </div>
+    );
+  }
   return (
     <div className="evidence">
       <span>
@@ -477,6 +538,7 @@ export function EvidenceBar({ evidence }: { evidence: EvidenceRef }) {
 
 /* 章节页组装：顶图带 + 五段固定顺序（每段：编号 + 一句话 → 图 → 一句说明） */
 export function ChapterBody({ chapter }: { chapter: Chapter }) {
+  const readerRefresh = useReaderRefresh();
   const model = chapter.model;
   const figures = FIGURES[chapter.id] ?? [];
   const figure = (n: number) => figures[n - 1];
@@ -532,7 +594,9 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         figureKind={isRoute ? 'selected-wave' : chapter.chart.kind}
         figureStatus={figure(2)?.status}
         question={isRoute ? '选中的这一波值多少' : '开爆发值多少'}
-        tag={isRoute ? '当前波 · 配对 runId' : chapter.chart.kind === 'burst-bars' ? '模拟 · 5000 迭代' : chapter.chart.kind}
+        tag={isRoute
+          ? readerRefresh ? '当前波 · 开 / 不开对照' : '当前波 · 配对 runId'
+          : chapter.chart.kind === 'burst-bars' ? '模拟 · 5000 迭代' : chapter.chart.kind}
         note={
           isRoute && routeWave
             ? routeWave.mobCount > 8
@@ -569,7 +633,9 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         note={
           isRoute && routeGuide
             ? `当前第 ${routeWave?.pull} 波有 ${routeWave?.mobCount} 只，套用「${routeGuide.title}」的同档调整。这是规则映射，不是这一波专属数据。`
-            : `这一波加 ${chapter.priorityDiff.add.length} 条、降 ${chapter.priorityDiff.drop.length} 条。序号是 APL 表里的真实位置，每条都挂着理由。`
+            : chapter.id === 'l1-02-large'
+              ? '全程走多目标表，虚空齐射提前；精神鞭笞和暗言术：痛往后挪'
+              : `这一波加 ${chapter.priorityDiff.add.length} 条、降 ${chapter.priorityDiff.drop.length} 条。序号是 APL 表里的真实位置，每条都挂着理由。`
         }
       >
         {isRoute && routeGuide ? (
@@ -602,7 +668,11 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         figureStatus={figure(5)?.status}
         question="真人怎么打"
         tag={chapter.casePanel.status === 'pending' ? '待补' : '真实日志'}
-        note="整场日志推出的阶段，不是单波。这份导出没有死亡事件，切不出「第 N 波几时开始」。"
+        note={
+          chapter.id === 'l1-02-large'
+            ? '「≈第N波」是这段的怪物组成和路线第 N 波有多像（重合度 %），不是“他现在打到了第几波”。只列最高的一波；低于 40% 说明他走的是另一条顺序。'
+            : '整场日志推出的阶段，不是单波。这份导出没有死亡事件，切不出「第 N 波几时开始」。'
+        }
       >
         <CasePanel
           block={chapter.casePanel}

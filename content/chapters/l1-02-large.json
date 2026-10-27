@@ -31,7 +31,7 @@
    {
     "skill": "void_volley",
     "reason": "多目标时它覆盖的目标最多，冷却好了就用",
-    "evidence": "APL 条件：「actions.main」里，虚空齐射排在前段；模拟「w30_8」增益稳定",
+    "evidence": "虚空齐射排在主循环前段；8 只目标、30 秒模拟的增益稳定",
     "raw": "actions.main+=/void_volley 排在前段；模拟 w30_8 增益稳定"
    }
   ],
@@ -39,7 +39,7 @@
    {
     "skill": "mind_flay",
     "reason": "大波里它占比很低，别为它打断持续伤害",
-    "evidence": "模拟「w30_8」的动作构成：精神鞭笞的占比下降",
+    "evidence": "8 只目标、30 秒模拟的动作构成：精神鞭笞的占比下降",
     "raw": "模拟 w30_8 的动作构成（mind_flay 占比下降）"
    },
    {

@@ -5,10 +5,12 @@
  *   1. valid negative: 图契约减一段 → validate 必须失败并点名「图契约必须有 5 段」
  *   2. valid positive: 原图契约 → validate 必须通过
  *   3. UI negative: 构建产物把 play-budget 类型改坏 → check:ui 必须失败并点名有图段未渲染
- *   4. UI positive: 原构建产物 → check:ui 必须通过
- *   5. design negative: ui.css 注入离阶间距 + 中文标签正字距 + token 块外色值
+ *   4. UI negative: 删掉 L1-02 的 evidence-raw → check:ui 必须点名原始记录折叠缺失
+ *   5. UI negative: 给 L1-02 第五段读法注入反引号 → check:ui 必须点名 Markdown
+ *   6. UI positive: 原构建产物 → check:ui 必须通过
+ *   7. design negative: ui.css 注入离阶间距 + 中文标签正字距 + token 块外色值
  *      → check:design 必须失败并逐条点名（改完必须还原）
- *   6. design positive: 还原后的 ui.css → check:design 必须通过
+ *   8. design positive: 还原后的 ui.css → check:design 必须通过
  *
  * 用法：npm run verify:gates
  */
@@ -57,6 +59,28 @@ try {
   if (mutated === src) throw new Error('构建产物里找不到 play-budget，无法做 UI 负样本');
   writeFileSync(index, mutated);
 
+  const evidenceBadDir = join(temp, 'dist-evidence-bad');
+  cpSync(join(ROOT, 'dist'), evidenceBadDir, { recursive: true });
+  const evidenceIndex = join(evidenceBadDir, 'index.html');
+  const evidenceSrc = readFileSync(evidenceIndex, 'utf8');
+  const evidenceMutated = evidenceSrc.split('evidence-raw').join('evidence-raw-broken');
+  if (evidenceMutated === evidenceSrc) {
+    throw new Error('构建产物里找不到 evidence-raw，无法做原始记录负样本');
+  }
+  writeFileSync(evidenceIndex, evidenceMutated);
+
+  const markdownBadDir = join(temp, 'dist-markdown-bad');
+  cpSync(join(ROOT, 'dist'), markdownBadDir, { recursive: true });
+  const markdownIndex = join(markdownBadDir, 'index.html');
+  const markdownSrc = readFileSync(markdownIndex, 'utf8');
+  const l102 = JSON.parse(readFileSync(join(ROOT, 'content', 'chapters', 'l1-02-large.json'), 'utf8'));
+  const reading = l102.casePanel.reading;
+  const markdownMutated = markdownSrc.replace(reading, `\`${reading}`);
+  if (markdownMutated === markdownSrc) {
+    throw new Error('构建产物里找不到 L1-02 读法，无法做 Markdown 负样本');
+  }
+  writeFileSync(markdownIndex, markdownMutated);
+
   run('UI 正样本：11 章 + 解析台 + 骨架页', process.execPath, [
     'scripts/check-ui.mjs',
     `--dist=${join(ROOT, 'dist', 'index.html')}`,
@@ -67,6 +91,16 @@ try {
     `--dist=${index}`,
     `--shots=${shotsBad}`,
   ], false, 'DOM 未渲染对应图');
+  run('UI 负样本：L1-02 原始记录折叠被破坏', process.execPath, [
+    'scripts/check-ui.mjs',
+    `--dist=${evidenceIndex}`,
+    `--shots=${join(temp, 'shots-evidence-bad')}`,
+  ], false, '缺少原始记录折叠');
+  run('UI 负样本：L1-02 读法注入反引号', process.execPath, [
+    'scripts/check-ui.mjs',
+    `--dist=${markdownIndex}`,
+    `--shots=${join(temp, 'shots-markdown-bad')}`,
+  ], false, '可见文本含 Markdown 标记');
 
   // ---- check:design ----
   // 它跑源码，负样本必须临时改 ui.css，用完必须还原。
