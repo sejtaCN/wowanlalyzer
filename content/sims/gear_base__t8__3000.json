@@ -1,0 +1,38 @@
+{
+  "runId": "gear_base__t8__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "base",
+  "variantLabel": "基线（全装）",
+  "variantKind": "base",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标 300s（大波）",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 839532.65,
+    "ci95": 550.59,
+    "ci95Pct": 0.07,
+    "stdDev": 280.92,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "scaleFactors": {
+    "Int": 228.4937933981275,
+    "SP": 202.61185574797193,
+    "Crit": 158.42836124537808,
+    "Haste": 95.48997434661966,
+    "Mastery": 128.29637704109442,
+    "Vers": 146.01004846766062
+  },
+  "generatedAt": "2026-10-26T06:40:34.602Z"
+}

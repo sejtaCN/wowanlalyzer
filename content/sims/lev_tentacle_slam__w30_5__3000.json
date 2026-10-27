@@ -1,0 +1,32 @@
+{
+  "runId": "lev_tentacle_slam__w30_5__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "tentacle_slam",
+  "scenarioId": "w30_5",
+  "scenarioLabel": "5 目标 30s",
+  "durationSec": 30,
+  "targets": 5,
+  "disabledLines": 5,
+  "dps": {
+    "mean": 728476.83,
+    "ci95": 1311.2,
+    "ci95Pct": 0.18,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "deltaPct": -30.26,
+  "deltaCiPct": 0.34,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:36.856Z"
+}

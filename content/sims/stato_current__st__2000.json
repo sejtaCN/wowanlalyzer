@@ -1,0 +1,31 @@
+{
+  "runId": "stato_current__st__2000",
+  "layer": "S",
+  "kind": "stat-opt",
+  "profileId": "archon",
+  "scenarioId": "st",
+  "scenarioLabel": "单体 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 1,
+  "durationSec": 300,
+  "iterations": 2000,
+  "overrides": [],
+  "ratings": {
+    "mastery": 1424,
+    "vers": 123,
+    "crit": 380,
+    "haste": 1282
+  },
+  "dps": {
+    "mean": 231308.45,
+    "ci95": 208.51,
+    "ci95Pct": 0.09,
+    "samples": 1999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:48:50.260Z"
+}

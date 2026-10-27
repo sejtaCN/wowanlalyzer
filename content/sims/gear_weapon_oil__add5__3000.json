@@ -1,0 +1,30 @@
+{
+  "runId": "gear_weapon_oil__add5__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "weapon_oil",
+  "variantLabel": "武器油（临时附魔）",
+  "variantKind": "consumable",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s（ADD 窗口）",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "iterations": 3007,
+  "dps": {
+    "mean": 1043843.72,
+    "ci95": 1693.02,
+    "ci95Pct": 0.16,
+    "stdDev": 863.79,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:43:06.595Z"
+}

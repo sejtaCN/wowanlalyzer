@@ -1,0 +1,38 @@
+{
+  "runId": "gear_base__st__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "base",
+  "variantLabel": "基线（全装）",
+  "variantKind": "base",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "st",
+  "scenarioLabel": "单体 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 1,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 231434.73,
+    "ci95": 167.38,
+    "ci95Pct": 0.07,
+    "stdDev": 85.4,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "scaleFactors": {
+    "Int": 62.336431909430594,
+    "SP": 54.9508451893011,
+    "Crit": 43.68803276553222,
+    "Haste": 32.750776041302316,
+    "Mastery": 37.03458928678721,
+    "Vers": 39.510775400868994
+  },
+  "generatedAt": "2026-10-26T06:38:55.944Z"
+}

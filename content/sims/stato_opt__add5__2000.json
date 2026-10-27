@@ -1,0 +1,36 @@
+{
+  "runId": "stato_opt__add5__2000",
+  "layer": "S",
+  "kind": "stat-opt",
+  "profileId": "archon",
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s（ADD 窗口）",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "iterations": 2000,
+  "overrides": [
+    "gear_crit_rating=800",
+    "gear_haste_rating=800",
+    "gear_mastery_rating=1600",
+    "gear_versatility_rating=9"
+  ],
+  "ratings": {
+    "mastery": 1600,
+    "vers": 9,
+    "crit": 800,
+    "haste": 800
+  },
+  "dps": {
+    "mean": 1075287.53,
+    "ci95": 2139.38,
+    "ci95Pct": 0.2,
+    "samples": 1999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:57:00.911Z"
+}

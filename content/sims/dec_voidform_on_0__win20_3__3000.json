@@ -1,0 +1,28 @@
+{
+  "runId": "dec_voidform_on_0__win20_3__3000",
+  "layer": "A",
+  "kind": "adds-window",
+  "hero": "archon",
+  "scenarioId": "win20_3",
+  "scenarioLabel": "窗口 20s · 3 目标（2 只小怪）",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 20,
+  "iterations": 3000,
+  "dps": {
+    "mean": 541074.36,
+    "ci95": 1120.4,
+    "ci95Pct": 0.21,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "edit": {
+    "note": "注释掉 actions.cds 的 voidform 行（整场不施放虚空形态）"
+  },
+  "generatedAt": "2026-10-26T10:34:49.916Z",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc"
+}

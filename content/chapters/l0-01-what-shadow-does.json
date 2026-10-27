@@ -1,0 +1,58 @@
+{
+ "id": "l0-01-what-shadow-does",
+ "level": "L0",
+ "order": 1,
+ "title": "暗牧在做什么",
+ "subtitle": "先认两根轴：持续伤害挂在几个目标上，资源在爆发窗口里怎么花",
+ "model": null,
+ "claim": "开打先铺持续伤害，再考虑爆发。他这一场：吸血鬼之触平均挂在 4.91 个目标、暗言术：痛 4.68 个，虚空形态开了 11 次、每次约 35.5 秒。",
+ "chart": {
+  "kind": "log-stats",
+  "title": "他这一场的整场读数",
+  "logId": "xiaohuasheng-events"
+ },
+ "priorityDiff": {
+  "add": [
+   {
+    "skill": "vampiric_touch",
+    "reason": "开打第一个 GCD 就给它，别等聚完怪",
+    "evidence": "APL: actions.main 顺序里 vampiric_touch 排在填充技能之前"
+   },
+   {
+    "skill": "shadow_word_pain",
+    "reason": "第二个持续伤害，和上一条一起铺",
+    "evidence": "APL: active_dot.shadow_word_pain>=active_dot.vampiric_touch 作为补充条件"
+   }
+  ],
+  "drop": [
+   {
+    "skill": "mind_flay",
+    "reason": "它是填充：DoT 没铺满时不要拿它换刷新",
+    "evidence": "APL: actions.main 里 mind_flay 排在所有 DoT 之后"
+   }
+  ]
+ },
+ "map": null,
+ "casePanel": {
+  "status": "log",
+  "logId": "xiaohuasheng-events",
+  "headline": "整场读数（不是某一波）",
+  "points": [
+   "吸血鬼之触覆盖 4.91 个目标，暗言术：痛 4.68 个——他不是单目标打法。",
+   "11 次虚空形态，持续中位 35.5 秒。",
+   "GCD 中位 0.95 秒，每分钟 85.9 次施法。"
+  ],
+  "evidence": "来源：WCL 事件表 CSV（88 文件 / 25,152 事件）；日志无战斗分段，因此不能拆到每一波。"
+ },
+ "evidence": {
+  "runIds": [],
+  "logs": [
+   "xiaohuasheng-events"
+  ],
+  "sources": [
+   "WCL 事件表 CSV（离线导入）",
+   "SimC 1210.01 APL 顺序"
+  ],
+  "generatedAt": "2026-10-25T16:30:00Z"
+ }
+}

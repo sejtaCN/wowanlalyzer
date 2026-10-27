@@ -1,0 +1,36 @@
+{
+  "runId": "stato_opt__t3__2000",
+  "layer": "S",
+  "kind": "stat-opt",
+  "profileId": "archon",
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "iterations": 2000,
+  "overrides": [
+    "gear_crit_rating=800",
+    "gear_haste_rating=1000",
+    "gear_mastery_rating=1400",
+    "gear_versatility_rating=9"
+  ],
+  "ratings": {
+    "mastery": 1400,
+    "vers": 9,
+    "crit": 800,
+    "haste": 1000
+  },
+  "dps": {
+    "mean": 419112.21,
+    "ci95": 354.22,
+    "ci95Pct": 0.08,
+    "samples": 1999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:56:54.048Z"
+}

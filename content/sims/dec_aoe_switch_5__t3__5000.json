@@ -1,0 +1,38 @@
+{
+  "runId": "dec_aoe_switch_5__t3__5000",
+  "layer": "A",
+  "decisionId": "aoe_switch",
+  "decisionLabel": "AoE 循环切换阈值（目标数 > N 时切 AoE）",
+  "value": 5,
+  "baseValue": 2,
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "iterations": 5007,
+  "dps": {
+    "mean": 323874,
+    "ci95": 190.98,
+    "ci95Pct": 0.06,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "lines": [
+      {
+        "before": "actions+=/call_action_list,name=aoe,if=active_enemies>2",
+        "after": "actions+=/call_action_list,name=aoe,if=active_enemies>5"
+      }
+    ],
+    "pattern": "active_enemies>\\d+",
+    "appliedValue": 5
+  },
+  "generatedAt": "2026-10-25T09:06:40.220Z",
+  "kind": "decision-ab"
+}

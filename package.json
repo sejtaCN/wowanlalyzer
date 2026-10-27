@@ -1,0 +1,49 @@
+{
+  "name": "wowanlalyzer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "暗牧学习系统 — 看图学输出：这一波怎么打，爆发给哪一波",
+  "scripts": {
+    "dev": "vite --config apps/web/vite.config.ts",
+    "build": "vite build --config apps/web/vite.config.ts",
+    "preview": "vite preview --config apps/web/vite.config.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "test:watch": "vitest",
+    "sims:run": "node scripts/sims-run.mjs",
+    "sims:ab": "node scripts/decision-ab.mjs",
+    "guide:apl": "node scripts/apl-to-guide.mjs",
+    "wcl:events": "node scripts/wcl-events-import.mjs",
+    "wcl:table": "node scripts/wcl-table-import.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "check:ui": "npm run build && node scripts/check-ui.mjs",
+    "verify:gates": "npm run build && node scripts/verify-gates.mjs",
+    "sims:summary": "node scripts/sims-summary.mjs",
+    "sims:adds": "node scripts/adds-run.mjs",
+    "sims:trace": "node scripts/action-trace.mjs",
+    "analysis:budget": "node scripts/play-budget.mjs",
+    "analysis:cooldown": "node scripts/cooldown-window.mjs",
+    "analysis:interactions": "node scripts/analyze-interactions.mjs",
+    "analysis:leverage": "node scripts/leverage.mjs",
+    "analysis:share": "node scripts/ability-share.mjs",
+    "gearing": "node scripts/gearing-run.mjs",
+    "statopt": "node scripts/stat-opt.mjs",
+    "phases": "node scripts/infer-phases.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "puppeteer-core": "^25.16.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vite-plugin-singlefile": "^2.0.3",
+    "vitest": "^2.1.8"
+  }
+}

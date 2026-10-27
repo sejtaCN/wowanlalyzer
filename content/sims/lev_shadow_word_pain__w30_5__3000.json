@@ -1,0 +1,32 @@
+{
+  "runId": "lev_shadow_word_pain__w30_5__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "shadow_word_pain",
+  "scenarioId": "w30_5",
+  "scenarioLabel": "5 目标 30s",
+  "durationSec": 30,
+  "targets": 5,
+  "disabledLines": 2,
+  "dps": {
+    "mean": 677716.53,
+    "ci95": 6457.97,
+    "ci95Pct": 0.95,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "deltaPct": -35.12,
+  "deltaCiPct": 1.11,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:34.652Z"
+}

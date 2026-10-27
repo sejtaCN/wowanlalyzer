@@ -1,0 +1,30 @@
+{
+  "runId": "gear_set_4pc_off__add5__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "set_4pc_off",
+  "variantLabel": "4 件套效果（关掉）",
+  "variantKind": "set",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s（ADD 窗口）",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "iterations": 3007,
+  "dps": {
+    "mean": 1036212.37,
+    "ci95": 1958.98,
+    "ci95Pct": 0.19,
+    "stdDev": 999.48,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:43:11.807Z"
+}

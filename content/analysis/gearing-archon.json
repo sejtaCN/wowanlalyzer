@@ -1,0 +1,405 @@
+{
+ "hero": "archon",
+ "generatedAt": "2026-10-26T06:43:17.075Z",
+ "iterations": 3000,
+ "scenarios": [
+  {
+   "id": "st",
+   "label": "单体 300s",
+   "targets": 1,
+   "maxTime": 300
+  },
+  {
+   "id": "t3",
+   "label": "3 目标 300s",
+   "targets": 3,
+   "maxTime": 300
+  },
+  {
+   "id": "t8",
+   "label": "8 目标 300s（大波）",
+   "targets": 8,
+   "maxTime": 300
+  },
+  {
+   "id": "add5",
+   "label": "5 小怪 30s（ADD 窗口）",
+   "targets": 5,
+   "maxTime": 30
+  }
+ ],
+ "baseline": {
+  "st": {
+   "runId": "gear_base__st__3000",
+   "dps": 231434.73,
+   "ci95Pct": 0.07,
+   "samples": 2999
+  },
+  "t3": {
+   "runId": "gear_base__t3__3000",
+   "dps": 413182.41,
+   "ci95Pct": 0.07,
+   "samples": 2999
+  },
+  "t8": {
+   "runId": "gear_base__t8__3000",
+   "dps": 839532.65,
+   "ci95Pct": 0.07,
+   "samples": 2999
+  },
+  "add5": {
+   "runId": "gear_base__add5__3000",
+   "dps": 1044306.18,
+   "ci95Pct": 0.16,
+   "samples": 2999
+  }
+ },
+ "secondary": [
+  {
+   "stat": "Crit",
+   "label": "暴击",
+   "perPointDps": {
+    "st": 43.688,
+    "t3": 81.6822,
+    "t8": 158.4284,
+    "add5": 189.0001
+   },
+   "perPct": {
+    "st": 13.21,
+    "t3": 13.84,
+    "t8": 13.21,
+    "add5": 12.67
+   },
+   "ratingPerStep": 700
+  },
+  {
+   "stat": "Haste",
+   "label": "急速",
+   "perPointDps": {
+    "st": 32.7508,
+    "t3": 65.6168,
+    "t8": 95.49,
+    "add5": 96.1789
+   },
+   "perPct": {
+    "st": 9.91,
+    "t3": 11.12,
+    "t8": 7.96,
+    "add5": 6.45
+   },
+   "ratingPerStep": 700
+  },
+  {
+   "stat": "Mastery",
+   "label": "精通",
+   "perPointDps": {
+    "st": 37.0346,
+    "t3": 65.3652,
+    "t8": 128.2964,
+    "add5": 163.6921
+   },
+   "perPct": {
+    "st": 11.2,
+    "t3": 11.07,
+    "t8": 10.7,
+    "add5": 10.97
+   },
+   "ratingPerStep": 700
+  },
+  {
+   "stat": "Vers",
+   "label": "全能",
+   "perPointDps": {
+    "st": 39.5108,
+    "t3": 70.0451,
+    "t8": 146.01,
+    "add5": 180.4183
+   },
+   "perPct": {
+    "st": 11.95,
+    "t3": 11.87,
+    "t8": 12.17,
+    "add5": 12.09
+   },
+   "ratingPerStep": 700
+  }
+ ],
+ "effects": [
+  {
+   "id": "enchant_main_hand",
+   "label": "武器附魔",
+   "kind": "enchant",
+   "perScenario": {
+    "st": {
+     "runId": "gear_enchant_main_hand__st__3000",
+     "baseRunId": "gear_base__st__3000",
+     "dps": 228768.12,
+     "deltaDps": -2666.61,
+     "deltaPct": -1.15
+    },
+    "t3": {
+     "runId": "gear_enchant_main_hand__t3__3000",
+     "baseRunId": "gear_base__t3__3000",
+     "dps": 408326.32,
+     "deltaDps": -4856.09,
+     "deltaPct": -1.18
+    },
+    "t8": {
+     "runId": "gear_enchant_main_hand__t8__3000",
+     "baseRunId": "gear_base__t8__3000",
+     "dps": 829987.76,
+     "deltaDps": -9544.89,
+     "deltaPct": -1.14
+    },
+    "add5": {
+     "runId": "gear_enchant_main_hand__add5__3000",
+     "baseRunId": "gear_base__add5__3000",
+     "dps": 1034887.95,
+     "deltaDps": -9418.23,
+     "deltaPct": -0.9
+    }
+   }
+  },
+  {
+   "id": "weapon_oil",
+   "label": "武器油（临时附魔）",
+   "kind": "consumable",
+   "perScenario": {
+    "st": {
+     "runId": "gear_weapon_oil__st__3000",
+     "baseRunId": "gear_base__st__3000",
+     "dps": 231395.26,
+     "deltaDps": -39.47,
+     "deltaPct": -0.02
+    },
+    "t3": {
+     "runId": "gear_weapon_oil__t3__3000",
+     "baseRunId": "gear_base__t3__3000",
+     "dps": 413228.95,
+     "deltaDps": 46.54,
+     "deltaPct": 0.01
+    },
+    "t8": {
+     "runId": "gear_weapon_oil__t8__3000",
+     "baseRunId": "gear_base__t8__3000",
+     "dps": 839411.18,
+     "deltaDps": -121.47,
+     "deltaPct": -0.01
+    },
+    "add5": {
+     "runId": "gear_weapon_oil__add5__3000",
+     "baseRunId": "gear_base__add5__3000",
+     "dps": 1043843.72,
+     "deltaDps": -462.46,
+     "deltaPct": -0.04
+    }
+   }
+  },
+  {
+   "id": "embellishment",
+   "label": "美化（手腕 + 腰）",
+   "kind": "embellishment",
+   "perScenario": {
+    "st": {
+     "runId": "gear_embellishment__st__3000",
+     "baseRunId": "gear_base__st__3000",
+     "dps": 217735.53,
+     "deltaDps": -13699.2,
+     "deltaPct": -5.92
+    },
+    "t3": {
+     "runId": "gear_embellishment__t3__3000",
+     "baseRunId": "gear_base__t3__3000",
+     "dps": 388700.56,
+     "deltaDps": -24481.85,
+     "deltaPct": -5.93
+    },
+    "t8": {
+     "runId": "gear_embellishment__t8__3000",
+     "baseRunId": "gear_base__t8__3000",
+     "dps": 789912.2,
+     "deltaDps": -49620.45,
+     "deltaPct": -5.91
+    },
+    "add5": {
+     "runId": "gear_embellishment__add5__3000",
+     "baseRunId": "gear_base__add5__3000",
+     "dps": 994629.43,
+     "deltaDps": -49676.75,
+     "deltaPct": -4.76
+    }
+   }
+  },
+  {
+   "id": "trinket_1",
+   "label": "饰品 1 · 唤浪者海石",
+   "kind": "trinket",
+   "perScenario": {
+    "st": {
+     "runId": "gear_trinket_1__st__3000",
+     "baseRunId": "gear_base__st__3000",
+     "dps": 214834.4,
+     "deltaDps": -16600.33,
+     "deltaPct": -7.17
+    },
+    "t3": {
+     "runId": "gear_trinket_1__t3__3000",
+     "baseRunId": "gear_base__t3__3000",
+     "dps": 383320.91,
+     "deltaDps": -29861.5,
+     "deltaPct": -7.23
+    },
+    "t8": {
+     "runId": "gear_trinket_1__t8__3000",
+     "baseRunId": "gear_base__t8__3000",
+     "dps": 778032.62,
+     "deltaDps": -61500.03,
+     "deltaPct": -7.33
+    },
+    "add5": {
+     "runId": "gear_trinket_1__add5__3000",
+     "baseRunId": "gear_base__add5__3000",
+     "dps": 999904.98,
+     "deltaDps": -44401.2,
+     "deltaPct": -4.25
+    }
+   }
+  },
+  {
+   "id": "trinket_2",
+   "label": "饰品 2 · 走私者药瓶",
+   "kind": "trinket",
+   "perScenario": {
+    "st": {
+     "runId": "gear_trinket_2__st__3000",
+     "baseRunId": "gear_base__st__3000",
+     "dps": 212419.73,
+     "deltaDps": -19015,
+     "deltaPct": -8.22
+    },
+    "t3": {
+     "runId": "gear_trinket_2__t3__3000",
+     "baseRunId": "gear_base__t3__3000",
+     "dps": 379022.36,
+     "deltaDps": -34160.05,
+     "deltaPct": -8.27
+    },
+    "t8": {
+     "runId": "gear_trinket_2__t8__3000",
+     "baseRunId": "gear_base__t8__3000",
+     "dps": 769803.21,
+     "deltaDps": -69729.44,
+     "deltaPct": -8.31
+    },
+    "add5": {
+     "runId": "gear_trinket_2__add5__3000",
+     "baseRunId": "gear_base__add5__3000",
+     "dps": 922749.64,
+     "deltaDps": -121556.54,
+     "deltaPct": -11.64
+    }
+   }
+  },
+  {
+   "id": "set_4pc_off",
+   "label": "4 件套效果（关掉）",
+   "kind": "set",
+   "perScenario": {
+    "st": {
+     "runId": "gear_set_4pc_off__st__3000",
+     "baseRunId": "gear_base__st__3000",
+     "dps": 221805.69,
+     "deltaDps": -9629.04,
+     "deltaPct": -4.16
+    },
+    "t3": {
+     "runId": "gear_set_4pc_off__t3__3000",
+     "baseRunId": "gear_base__t3__3000",
+     "dps": 399615.32,
+     "deltaDps": -13567.09,
+     "deltaPct": -3.28
+    },
+    "t8": {
+     "runId": "gear_set_4pc_off__t8__3000",
+     "baseRunId": "gear_base__t8__3000",
+     "dps": 821626.18,
+     "deltaDps": -17906.47,
+     "deltaPct": -2.13
+    },
+    "add5": {
+     "runId": "gear_set_4pc_off__add5__3000",
+     "baseRunId": "gear_base__add5__3000",
+     "dps": 1036212.37,
+     "deltaDps": -8093.81,
+     "deltaPct": -0.78
+    }
+   }
+  },
+  {
+   "id": "set_2pc_off",
+   "label": "2 件套效果（关掉）",
+   "kind": "set",
+   "perScenario": {
+    "st": {
+     "runId": "gear_set_2pc_off__st__3000",
+     "baseRunId": "gear_base__st__3000",
+     "dps": 220941.57,
+     "deltaDps": -10493.16,
+     "deltaPct": -4.53
+    },
+    "t3": {
+     "runId": "gear_set_2pc_off__t3__3000",
+     "baseRunId": "gear_base__t3__3000",
+     "dps": 386059.12,
+     "deltaDps": -27123.29,
+     "deltaPct": -6.56
+    },
+    "t8": {
+     "runId": "gear_set_2pc_off__t8__3000",
+     "baseRunId": "gear_base__t8__3000",
+     "dps": 761838.55,
+     "deltaDps": -77694.1,
+     "deltaPct": -9.25
+    },
+    "add5": {
+     "runId": "gear_set_2pc_off__add5__3000",
+     "baseRunId": "gear_base__add5__3000",
+     "dps": 984823.35,
+     "deltaDps": -59482.83,
+     "deltaPct": -5.7
+    }
+   }
+  }
+ ],
+ "control": {
+  "label": "阳性对照：整把主手武器",
+  "perScenario": {
+   "st": {
+    "runId": "gear_control_main_hand__st__3000",
+    "deltaPct": -20.05
+   },
+   "t3": {
+    "runId": "gear_control_main_hand__t3__3000",
+    "deltaPct": -20.11
+   },
+   "t8": {
+    "runId": "gear_control_main_hand__t8__3000",
+    "deltaPct": -20.14
+   },
+   "add5": {
+    "runId": "gear_control_main_hand__add5__3000",
+    "deltaPct": -17.2
+   }
+  },
+  "passed": true
+ },
+ "method": {
+  "secondary": "SimC calculate_scale_factors：对每个次级属性做 ±delta 重跑，得到\"每 1 点 rating 换多少 DPS\"；换算成每 700 点的百分比。",
+  "effects": "逐个从 profile 摘掉一样东西（附魔 / 武器油 / 饰品）再跑同一场景，差值 = 那样东西的整套贡献。",
+  "caveat": "饰品是\"属性 + 特效\"的整体贡献，不是纯特效；附魔同理含其属性。差值在 95% CI 内视为无结论。"
+ },
+ "notes": [
+  "属性权重不是常数：同一个属性在不同输出模型里的每 700 点收益会变，这正是按波次模型分章的理由。",
+  "超过 8 只的波按 8 只计（SimC 目标上限），大波的属性收益是下限。"
+ ]
+}

@@ -1,0 +1,545 @@
+{
+ "hero": "archon",
+ "profile": "content/profiles/MID2_shadow_archon.simc",
+ "iterations": 3000,
+ "method": "一次基线模拟的 per-spell 统计：执行次数 num_executes、总伤害 compound_amount；占比 = 该技能伤害 / 全部技能伤害。",
+ "scenarios": {
+  "st300": {
+   "label": "单体 300s",
+   "targets": 1,
+   "maxTime": 300,
+   "dps": 231337,
+   "rows": [
+    {
+     "spell": "shadow_word_madness",
+     "spellName": "Shadow Word: Madness",
+     "executes": 246197,
+     "damage": 12841701,
+     "portion": 18.51,
+     "sharePct": 18.51
+    },
+    {
+     "spell": "mind_blast",
+     "spellName": "Mind Blast",
+     "executes": 122087,
+     "damage": 9059020,
+     "portion": 13.06,
+     "sharePct": 13.06
+    },
+    {
+     "spell": "void_volley",
+     "spellName": "Void Volley",
+     "executes": 198543,
+     "damage": 8338898,
+     "portion": null,
+     "sharePct": 12.38
+    },
+    {
+     "spell": "mind_flay",
+     "spellName": "Mind Flay",
+     "executes": 291648,
+     "damage": 7602876,
+     "portion": 10.96,
+     "sharePct": 10.96
+    },
+    {
+     "spell": "mind_flay_insanity",
+     "spellName": "Mind Flay: Insanity",
+     "executes": 65447,
+     "damage": 5607620,
+     "portion": 8.08,
+     "sharePct": 8.08
+    },
+    {
+     "spell": "shadow_word_pain",
+     "spellName": "Shadow Word: Pain",
+     "executes": 15668,
+     "damage": 3895529,
+     "portion": 5.62,
+     "sharePct": 5.62
+    },
+    {
+     "spell": "shadeburst",
+     "spellName": "Shadeburst",
+     "executes": 701507,
+     "damage": 3708800,
+     "portion": 5.35,
+     "sharePct": 5.35
+    },
+    {
+     "spell": "tentacle_slam",
+     "spellName": "Tentacle Slam",
+     "executes": 82269,
+     "damage": 2485135,
+     "portion": null,
+     "sharePct": 3.69
+    },
+    {
+     "spell": "shadowy_apparitions",
+     "spellName": "Shadowy Apparitions",
+     "executes": 521255,
+     "damage": 2419502,
+     "portion": null,
+     "sharePct": 3.59
+    },
+    {
+     "spell": "vampiric_touch",
+     "spellName": "Vampiric Touch",
+     "executes": 82157,
+     "damage": 2394448,
+     "portion": 3.45,
+     "sharePct": 3.45
+    },
+    {
+     "spell": "vision_of_nzoth",
+     "spellName": "Vision of N'Zoth",
+     "executes": 80185,
+     "damage": 2130259,
+     "portion": 3.07,
+     "sharePct": 3.07
+    },
+    {
+     "spell": "void_apparitions",
+     "spellName": "Void Apparitions",
+     "executes": 225003,
+     "damage": 2018414,
+     "portion": null,
+     "sharePct": 3
+    },
+    {
+     "spell": "void_bolt",
+     "spellName": "Void Bolt",
+     "executes": 225003,
+     "damage": 1320238,
+     "portion": 1.9,
+     "sharePct": 1.9
+    },
+    {
+     "spell": "halo",
+     "spellName": "Halo",
+     "executes": 19048,
+     "damage": 1035043,
+     "portion": null,
+     "sharePct": 1.54
+    },
+    {
+     "spell": "shadow_word_death",
+     "spellName": "Shadow Word: Death",
+     "executes": 19597,
+     "damage": 845980,
+     "portion": 1.22,
+     "sharePct": 1.22
+    },
+    {
+     "spell": "horrific_vision",
+     "spellName": "Horrific Vision",
+     "executes": 95857,
+     "damage": 665687,
+     "portion": 0.96,
+     "sharePct": 0.96
+    },
+    {
+     "spell": "rune_of_unleashed_fire",
+     "spellName": "Rune of Unleashed Fire",
+     "executes": 153629,
+     "damage": 401709,
+     "portion": 0.45,
+     "sharePct": 0.45
+    },
+    {
+     "spell": "idol_of_cthun",
+     "spellName": "idol_of_cthun",
+     "executes": 2999,
+     "damage": 383833,
+     "portion": null,
+     "sharePct": 0.57
+    },
+    {
+     "spell": "mental_fortitude",
+     "spellName": "Mental Fortitude",
+     "executes": 1628805,
+     "damage": 141408,
+     "portion": 100.17,
+     "sharePct": 100.17
+    },
+    {
+     "spell": "shadow_weaving",
+     "spellName": "Shadow Weaving",
+     "executes": 71452,
+     "damage": 37043,
+     "portion": 0.05,
+     "sharePct": 0.05
+    },
+    {
+     "spell": "augmentation",
+     "spellName": "Void-Touched",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "flask",
+     "spellName": "Flask of the Magisters",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "food",
+     "spellName": "Silvermoon Parade",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "potion",
+     "spellName": "Light's Potential",
+     "executes": 7376,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "power_infusion",
+     "spellName": "Power Infusion",
+     "executes": 11771,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "rune_of_unleashed_fire_heal",
+     "spellName": "Rune of Unleashed Fire",
+     "executes": 3724,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "shadow_word_death_self_damage",
+     "spellName": "Shadow Word: Death",
+     "executes": 19340,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "shadow_word_madness_heal",
+     "spellName": "Shadow Word: Madness",
+     "executes": 912111,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "shadowform",
+     "spellName": "Shadowform",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "tentacle_slam_dots",
+     "spellName": "tentacle_slam_dots",
+     "executes": 82157,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "vampiric_touch_heal",
+     "spellName": "Vampiric Touch",
+     "executes": 719693,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "voidform",
+     "spellName": "Voidform",
+     "executes": 11772,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    }
+   ]
+  },
+  "w30_5": {
+   "label": "5 目标 30s",
+   "targets": 5,
+   "maxTime": 30,
+   "dps": 1043178,
+   "rows": [
+    {
+     "spell": "psychic_link",
+     "spellName": "Psychic Link",
+     "executes": 2999,
+     "damage": 4782518,
+     "portion": null,
+     "sharePct": 15.73
+    },
+    {
+     "spell": "shadeburst",
+     "spellName": "Shadeburst",
+     "executes": 100641,
+     "damage": 3220045,
+     "portion": 10.3,
+     "sharePct": 10.3
+    },
+    {
+     "spell": "shadow_word_pain",
+     "spellName": "Shadow Word: Pain",
+     "executes": 17999,
+     "damage": 3131437,
+     "portion": 10.02,
+     "sharePct": 10.02
+    },
+    {
+     "spell": "void_volley",
+     "spellName": "Void Volley",
+     "executes": 47775,
+     "damage": 2839139,
+     "portion": null,
+     "sharePct": 9.34
+    },
+    {
+     "spell": "shadow_word_madness",
+     "spellName": "Shadow Word: Madness",
+     "executes": 35874,
+     "damage": 2546982,
+     "portion": 8.15,
+     "sharePct": 8.15
+    },
+    {
+     "spell": "tentacle_slam",
+     "spellName": "Tentacle Slam",
+     "executes": 14538,
+     "damage": 2130862,
+     "portion": null,
+     "sharePct": 7.01
+    },
+    {
+     "spell": "shadowy_apparitions",
+     "spellName": "Shadowy Apparitions",
+     "executes": 388749,
+     "damage": 2069825,
+     "portion": null,
+     "sharePct": 6.81
+    },
+    {
+     "spell": "vampiric_touch",
+     "spellName": "Vampiric Touch",
+     "executes": 60053,
+     "damage": 1967578,
+     "portion": 6.29,
+     "sharePct": 6.29
+    },
+    {
+     "spell": "void_apparitions",
+     "spellName": "Void Apparitions",
+     "executes": 168613,
+     "damage": 1731906,
+     "portion": null,
+     "sharePct": 5.7
+    },
+    {
+     "spell": "mind_flay_insanity",
+     "spellName": "Mind Flay: Insanity",
+     "executes": 14999,
+     "damage": 1268294,
+     "portion": 4.06,
+     "sharePct": 4.06
+    },
+    {
+     "spell": "void_bolt",
+     "spellName": "Void Bolt",
+     "executes": 168613,
+     "damage": 1187340,
+     "portion": 3.8,
+     "sharePct": 3.8
+    },
+    {
+     "spell": "mind_blast",
+     "spellName": "Mind Blast",
+     "executes": 16380,
+     "damage": 1165426,
+     "portion": 3.73,
+     "sharePct": 3.73
+    },
+    {
+     "spell": "halo",
+     "spellName": "Halo",
+     "executes": 5999,
+     "damage": 1073253,
+     "portion": null,
+     "sharePct": 3.53
+    },
+    {
+     "spell": "mind_flay",
+     "spellName": "Mind Flay",
+     "executes": 15792,
+     "damage": 418122,
+     "portion": 1.34,
+     "sharePct": 1.34
+    },
+    {
+     "spell": "vision_of_nzoth",
+     "spellName": "Vision of N'Zoth",
+     "executes": 11205,
+     "damage": 289101,
+     "portion": 0.92,
+     "sharePct": 0.92
+    },
+    {
+     "spell": "shadow_word_death",
+     "spellName": "Shadow Word: Death",
+     "executes": 5999,
+     "damage": 192913,
+     "portion": 0.62,
+     "sharePct": 0.62
+    },
+    {
+     "spell": "idol_of_cthun",
+     "spellName": "idol_of_cthun",
+     "executes": 2999,
+     "damage": 172493,
+     "portion": null,
+     "sharePct": 0.57
+    },
+    {
+     "spell": "horrific_vision",
+     "spellName": "Horrific Vision",
+     "executes": 19746,
+     "damage": 147455,
+     "portion": 0.47,
+     "sharePct": 0.47
+    },
+    {
+     "spell": "rune_of_unleashed_fire",
+     "spellName": "Rune of Unleashed Fire",
+     "executes": 17617,
+     "damage": 40552,
+     "portion": 0.09,
+     "sharePct": 0.09
+    },
+    {
+     "spell": "mental_fortitude",
+     "spellName": "Mental Fortitude",
+     "executes": 690542,
+     "damage": 26012,
+     "portion": 100.06,
+     "sharePct": 100.06
+    },
+    {
+     "spell": "shadow_weaving",
+     "spellName": "Shadow Weaving",
+     "executes": 17437,
+     "damage": 8935,
+     "portion": 0.03,
+     "sharePct": 0.03
+    },
+    {
+     "spell": "augmentation",
+     "spellName": "Void-Touched",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "flask",
+     "spellName": "Flask of the Magisters",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "food",
+     "spellName": "Silvermoon Parade",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "potion",
+     "spellName": "Light's Potential",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "power_infusion",
+     "spellName": "Power Infusion",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "rune_of_unleashed_fire_heal",
+     "spellName": "Rune of Unleashed Fire",
+     "executes": 3040,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "shadow_word_death_self_damage",
+     "spellName": "Shadow Word: Death",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "shadow_word_madness_heal",
+     "spellName": "Shadow Word: Madness",
+     "executes": 212553,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "shadowform",
+     "spellName": "Shadowform",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "tentacle_slam_dots",
+     "spellName": "tentacle_slam_dots",
+     "executes": 14410,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "vampiric_touch_heal",
+     "spellName": "Vampiric Touch",
+     "executes": 480988,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    },
+    {
+     "spell": "voidform",
+     "spellName": "Voidform",
+     "executes": 5999,
+     "damage": 0,
+     "portion": null,
+     "sharePct": 0
+    }
+   ]
+  }
+ },
+ "generatedAt": "2026-10-26T02:40:54.902Z"
+}

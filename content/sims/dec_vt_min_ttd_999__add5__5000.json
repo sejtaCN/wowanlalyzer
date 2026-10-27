@@ -1,0 +1,42 @@
+{
+  "runId": "dec_vt_min_ttd_999__add5__5000",
+  "layer": "A",
+  "decisionId": "vt_min_ttd_control",
+  "decisionLabel": "VT 阈值阳性对照（999s = 几乎不挂）",
+  "value": 999,
+  "baseValue": 10,
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "iterations": 5007,
+  "dps": {
+    "mean": 991859.49,
+    "ci95": 1312.67,
+    "ci95Pct": 0.13,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "lines": [
+      {
+        "before": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5",
+        "after": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=999&active_dot.vampiric_touch<5"
+      },
+      {
+        "before": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5",
+        "after": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=999&active_dot.vampiric_touch<5"
+      }
+    ],
+    "pattern": "time_to_die>=\\d+",
+    "appliedValue": 999
+  },
+  "generatedAt": "2026-10-25T08:59:55.243Z",
+  "kind": "decision-ab"
+}

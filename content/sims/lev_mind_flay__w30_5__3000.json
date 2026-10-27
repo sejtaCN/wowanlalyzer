@@ -1,0 +1,32 @@
+{
+  "runId": "lev_mind_flay__w30_5__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "mind_flay",
+  "scenarioId": "w30_5",
+  "scenarioLabel": "5 目标 30s",
+  "durationSec": 30,
+  "targets": 5,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 1007613.32,
+    "ci95": 1899.1,
+    "ci95Pct": 0.19,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "deltaPct": -3.53,
+  "deltaCiPct": 0.35,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:14.594Z"
+}

@@ -1,0 +1,45 @@
+{
+  "runId": "dec_vt_min_ttd_control_999__t3__5000",
+  "layer": "A",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "decisionId": "vt_min_ttd_control",
+  "decisionLabel": "VT 阈值阳性对照（999s = 几乎不挂）",
+  "value": 999,
+  "baseValue": 10,
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "iterations": 5007,
+  "dps": {
+    "mean": 413172.95,
+    "ci95": 228.64,
+    "ci95Pct": 0.06,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "lines": [
+      {
+        "before": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5",
+        "after": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=999&active_dot.vampiric_touch<5"
+      },
+      {
+        "before": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5",
+        "after": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=999&active_dot.vampiric_touch<5"
+      }
+    ],
+    "pattern": "time_to_die>=\\d+",
+    "appliedValue": 999
+  },
+  "generatedAt": "2026-10-26T10:33:12.831Z",
+  "kind": "decision-ab"
+}

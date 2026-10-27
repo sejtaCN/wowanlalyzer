@@ -1,0 +1,61 @@
+{
+ "hero": "archon",
+ "profile": "content/profiles/MID2_shadow_archon.simc",
+ "iterations": 3000,
+ "model": "adds-window-approximation",
+ "limitation": "SimC 1210-01 的 raid_events+=/adds 不生效（三种写法都试过，sim.options.raid_events 仍为 null），所以用「N 只怪同时存在 = N+1 目标打同样时长」近似加怪窗口；近似会略高估（主目标在加怪期间仍会掉血，模型里不会）。只用于比较窗口内外的相对差异。",
+ "method": "每个窗口跑\"开爆发 / 不开爆发\"两遍，差值＝这个窗口里爆发的价值；再把 4 目标窗口的 AoE 切换阈值提到 >4，看\"等更多怪\"是否值得。",
+ "rows": [
+  {
+   "id": "win12_1",
+   "label": "窗口 12s · 单体（无加怪）",
+   "kind": "baseline",
+   "targets": 1,
+   "durationSec": 12,
+   "onDps": 344989,
+   "offDps": 218562,
+   "burstDeltaPct": 57.85,
+   "burstDamage": 1517126,
+   "ciPct": 0.81,
+   "runIdOn": "dec_voidform_on_1__win12_1__3000",
+   "runIdOff": "dec_voidform_on_0__win12_1__3000"
+  },
+  {
+   "id": "win12_4",
+   "label": "窗口 12s · 4 目标（3 只小怪）",
+   "kind": "adds",
+   "targets": 4,
+   "durationSec": 12,
+   "onDps": 722773,
+   "offDps": 447553,
+   "burstDeltaPct": 61.49,
+   "burstDamage": 3302637,
+   "ciPct": 0.59,
+   "runIdOn": "dec_voidform_on_1__win12_4__3000",
+   "runIdOff": "dec_voidform_on_0__win12_4__3000"
+  },
+  {
+   "id": "win20_3",
+   "label": "窗口 20s · 3 目标（2 只小怪）",
+   "kind": "adds",
+   "targets": 3,
+   "durationSec": 20,
+   "onDps": 761828,
+   "offDps": 541074,
+   "burstDeltaPct": 40.8,
+   "burstDamage": 4415078,
+   "ciPct": 0.41,
+   "runIdOn": "dec_voidform_on_1__win20_3__3000",
+   "runIdOff": "dec_voidform_on_0__win20_3__3000"
+  }
+ ],
+ "amplification": 2.18,
+ "aoeThreshold": {
+  "label": "4 目标窗口里把 AoE 切换阈值提到 >4",
+  "dps": 723890,
+  "baselineDps": 722773,
+  "deltaPct": 0.15,
+  "runId": "dec_aoe4__win12_4__3000"
+ },
+ "generatedAt": "2026-10-26T10:34:50.234Z"
+}

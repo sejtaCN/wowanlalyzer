@@ -1,0 +1,30 @@
+{
+  "runId": "gear_set_4pc_off__t8__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "set_4pc_off",
+  "variantLabel": "4 件套效果（关掉）",
+  "variantKind": "set",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标 300s（大波）",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 821626.18,
+    "ci95": 603.24,
+    "ci95Pct": 0.07,
+    "stdDev": 307.78,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:42:28.664Z"
+}

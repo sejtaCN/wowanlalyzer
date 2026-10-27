@@ -1,0 +1,32 @@
+{
+  "runId": "lev_vampiric_touch__st300__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "vampiric_touch",
+  "scenarioId": "st300",
+  "scenarioLabel": "单体 300s",
+  "durationSec": 300,
+  "targets": 1,
+  "disabledLines": 3,
+  "dps": {
+    "mean": 231317.99,
+    "ci95": 165.25,
+    "ci95Pct": 0.07,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+  },
+  "deltaPct": 0.03,
+  "deltaCiPct": 0.14,
+  "beyondCi": false,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:39.105Z"
+}

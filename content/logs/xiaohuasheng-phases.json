@@ -1,0 +1,454 @@
+{
+ "runId": "xiaohuasheng-phases",
+ "sourceLog": "xiaohuasheng-events",
+ "label": "小花生 · Mythic S2 事件表",
+ "method": {
+  "summary": "按怪物族共现分区域 + BOSS 族单独成段；5 秒桶投票，短于 15 秒的段并入相邻",
+  "bucketSec": 5,
+  "minPhaseSec": 30,
+  "coWindowSec": 15,
+  "cohorts": {
+   "入口祭坛": [
+    "Ritual Chieftain",
+    "Primal Serpent",
+    "Twinfang Harrower",
+    "Ravenous Descendant",
+    "Venom Leech"
+   ],
+   "深处": [
+    "Rattling Writhe",
+    "High Evolutionist",
+    "Bloodletter",
+    "Hatchling"
+   ],
+   "盘绕回廊": [
+    "The Writhing Coil",
+    "Uncoiled Writhe"
+   ],
+   "上层平台": [
+    "Blade of the Altar",
+    "Ula'tek's Chosen",
+    "Ascendant Serpent"
+   ]
+  }
+ },
+ "limitation": "只有施法/增益/减益，没有死亡事件；怪物名后缀编号会被复用；全程无空场。所以这是阶段级推断，不是单波；要做单波需要带 Fights 或 UNIT_DIED 的导出。",
+ "totalSec": 1734.9,
+ "phases": [
+  {
+   "index": 1,
+   "kind": "area",
+   "label": "入口祭坛",
+   "from": 9,
+   "to": 419,
+   "durationSec": 410,
+   "families": [
+    {
+     "name": "Ritual Chieftain",
+     "count": 105
+    },
+    {
+     "name": "Twinfang Harrower",
+     "count": 53
+    },
+    {
+     "name": "Ravenous Descendant",
+     "count": 24
+    },
+    {
+     "name": "Primal Serpent",
+     "count": 20
+    },
+    {
+     "name": "Venom Leech",
+     "count": 10
+    }
+   ],
+   "enemyCasts": 212,
+   "allCasts": 550,
+   "castsPerMinute": 80.5,
+   "bursts": 2,
+   "burstUptimeSec": 67
+  },
+  {
+   "index": 2,
+   "kind": "boss",
+   "label": "BOSS 1 · Rav’i",
+   "from": 419,
+   "to": 679,
+   "durationSec": 260,
+   "families": [
+    {
+     "name": "Rav'i",
+     "count": 157
+    },
+    {
+     "name": "Venom Leech",
+     "count": 1
+    }
+   ],
+   "enemyCasts": 158,
+   "allCasts": 408,
+   "castsPerMinute": 94.2,
+   "bursts": 2,
+   "burstUptimeSec": 71
+  },
+  {
+   "index": 3,
+   "kind": "area",
+   "label": "深处",
+   "from": 689,
+   "to": 884,
+   "durationSec": 195,
+   "families": [
+    {
+     "name": "Rattling Writhe",
+     "count": 57
+    },
+    {
+     "name": "High Evolutionist",
+     "count": 27
+    },
+    {
+     "name": "Bloodletter",
+     "count": 14
+    },
+    {
+     "name": "Hatchling",
+     "count": 2
+    }
+   ],
+   "enemyCasts": 100,
+   "allCasts": 261,
+   "castsPerMinute": 80.3,
+   "bursts": 1,
+   "burstUptimeSec": 35.5
+  },
+  {
+   "index": 4,
+   "kind": "area",
+   "label": "盘绕回廊",
+   "from": 884,
+   "to": 1094,
+   "durationSec": 210,
+   "families": [
+    {
+     "name": "The Writhing Coil",
+     "count": 92
+    },
+    {
+     "name": "Uncoiled Writhe",
+     "count": 31
+    },
+    {
+     "name": "High Evolutionist",
+     "count": 2
+    }
+   ],
+   "enemyCasts": 125,
+   "allCasts": 319,
+   "castsPerMinute": 91.1,
+   "bursts": 2,
+   "burstUptimeSec": 71
+  },
+  {
+   "index": 5,
+   "kind": "area",
+   "label": "深处",
+   "from": 1094,
+   "to": 1174,
+   "durationSec": 80,
+   "families": [
+    {
+     "name": "High Evolutionist",
+     "count": 48
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 5
+    }
+   ],
+   "enemyCasts": 53,
+   "allCasts": 120,
+   "castsPerMinute": 90,
+   "bursts": 0,
+   "burstUptimeSec": 0
+  },
+  {
+   "index": 6,
+   "kind": "area",
+   "label": "上层平台",
+   "from": 1174,
+   "to": 1404,
+   "durationSec": 230,
+   "families": [
+    {
+     "name": "Ascendant Serpent",
+     "count": 37
+    },
+    {
+     "name": "Twinfang Harrower",
+     "count": 33
+    },
+    {
+     "name": "Ula'tek's Chosen",
+     "count": 23
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 17
+    },
+    {
+     "name": "Primal Serpent",
+     "count": 6
+    },
+    {
+     "name": "Hatchling",
+     "count": 2
+    }
+   ],
+   "enemyCasts": 118,
+   "allCasts": 332,
+   "castsPerMinute": 86.6,
+   "bursts": 2,
+   "burstUptimeSec": 71
+  },
+  {
+   "index": 7,
+   "kind": "area",
+   "label": "上层平台",
+   "from": 1404,
+   "to": 1464,
+   "durationSec": 60,
+   "families": [
+    {
+     "name": "Ula'tek's Chosen",
+     "count": 30
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 3
+    }
+   ],
+   "enemyCasts": 33,
+   "allCasts": 88,
+   "castsPerMinute": 88,
+   "bursts": 0,
+   "burstUptimeSec": 0
+  },
+  {
+   "index": 8,
+   "kind": "area",
+   "label": "入口祭坛",
+   "from": 1464,
+   "to": 1494,
+   "durationSec": 30,
+   "families": [
+    {
+     "name": "Ritual Chieftain",
+     "count": 18
+    },
+    {
+     "name": "Ula'tek's Chosen",
+     "count": 1
+    }
+   ],
+   "enemyCasts": 19,
+   "allCasts": 40,
+   "castsPerMinute": 80,
+   "bursts": 0,
+   "burstUptimeSec": 0
+  },
+  {
+   "index": 9,
+   "kind": "boss",
+   "label": "BOSS 2 · Zul’jan",
+   "from": 1494,
+   "to": 1744,
+   "durationSec": 250,
+   "families": [
+    {
+     "name": "Zul'jan",
+     "count": 158
+    }
+   ],
+   "enemyCasts": 158,
+   "allCasts": 379,
+   "castsPerMinute": 91,
+   "bursts": 2,
+   "burstUptimeSec": 71
+  }
+ ],
+ "routeMatches": {
+  "1": [
+   {
+    "pull": 1,
+    "mobs": 13,
+    "isBoss": false,
+    "jaccard": 0.8
+   },
+   {
+    "pull": 3,
+    "mobs": 9,
+    "isBoss": false,
+    "jaccard": 0.8
+   },
+   {
+    "pull": 2,
+    "mobs": 6,
+    "isBoss": false,
+    "jaccard": 0.6
+   }
+  ],
+  "2": [
+   {
+    "pull": 7,
+    "mobs": 1,
+    "isBoss": true,
+    "jaccard": 0.5
+   },
+   {
+    "pull": 1,
+    "mobs": 13,
+    "isBoss": false,
+    "jaccard": 0.2
+   },
+   {
+    "pull": 3,
+    "mobs": 9,
+    "isBoss": false,
+    "jaccard": 0.2
+   }
+  ],
+  "3": [
+   {
+    "pull": 8,
+    "mobs": 7,
+    "isBoss": false,
+    "jaccard": 0.75
+   },
+   {
+    "pull": 9,
+    "mobs": 10,
+    "isBoss": false,
+    "jaccard": 0.75
+   },
+   {
+    "pull": 10,
+    "mobs": 11,
+    "isBoss": false,
+    "jaccard": 0.5
+   }
+  ],
+  "4": [
+   {
+    "pull": 10,
+    "mobs": 11,
+    "isBoss": false,
+    "jaccard": 0.6
+   },
+   {
+    "pull": 8,
+    "mobs": 7,
+    "isBoss": false,
+    "jaccard": 0.2
+   },
+   {
+    "pull": 9,
+    "mobs": 10,
+    "isBoss": false,
+    "jaccard": 0.2
+   }
+  ],
+  "5": [
+   {
+    "pull": 11,
+    "mobs": 10,
+    "isBoss": false,
+    "jaccard": 0.67
+   },
+   {
+    "pull": 8,
+    "mobs": 7,
+    "isBoss": false,
+    "jaccard": 0.25
+   },
+   {
+    "pull": 9,
+    "mobs": 10,
+    "isBoss": false,
+    "jaccard": 0.25
+   }
+  ],
+  "6": [
+   {
+    "pull": 13,
+    "mobs": 7,
+    "isBoss": false,
+    "jaccard": 0.5
+   },
+   {
+    "pull": 11,
+    "mobs": 10,
+    "isBoss": false,
+    "jaccard": 0.29
+   },
+   {
+    "pull": 12,
+    "mobs": 11,
+    "isBoss": false,
+    "jaccard": 0.29
+   }
+  ],
+  "7": [
+   {
+    "pull": 12,
+    "mobs": 11,
+    "isBoss": false,
+    "jaccard": 0.67
+   },
+   {
+    "pull": 14,
+    "mobs": 7,
+    "isBoss": true,
+    "jaccard": 0.4
+   },
+   {
+    "pull": 11,
+    "mobs": 10,
+    "isBoss": false,
+    "jaccard": 0.25
+   }
+  ],
+  "8": [
+   {
+    "pull": 14,
+    "mobs": 7,
+    "isBoss": true,
+    "jaccard": 0.4
+   },
+   {
+    "pull": 2,
+    "mobs": 6,
+    "isBoss": false,
+    "jaccard": 0.25
+   },
+   {
+    "pull": 4,
+    "mobs": 9,
+    "isBoss": false,
+    "jaccard": 0.25
+   }
+  ],
+  "9": [
+   {
+    "pull": 14,
+    "mobs": 7,
+    "isBoss": true,
+    "jaccard": 0.2
+   }
+  ]
+ },
+ "routeSource": "content/routes/waves-altar-of-fangs.json",
+ "generatedAt": "2026-10-26T01:52:47.450Z"
+}

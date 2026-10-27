@@ -1,0 +1,551 @@
+{
+ "hero": "archon",
+ "generatedAt": "2026-10-26T06:57:00.911Z",
+ "iterations": 2000,
+ "budget": 3209,
+ "budgetNote": "预算 = 当前角色四项评级的真实合计（从 simc 文本报告读出，含宝石/附魔），四个场景同装备所以预算一致。",
+ "scenarios": [
+  {
+   "id": "st",
+   "label": "单体 300s",
+   "targets": 1,
+   "maxTime": 300
+  },
+  {
+   "id": "t3",
+   "label": "3 目标 300s",
+   "targets": 3,
+   "maxTime": 300
+  },
+  {
+   "id": "t8",
+   "label": "8 目标 300s（大波）",
+   "targets": 8,
+   "maxTime": 300
+  },
+  {
+   "id": "add5",
+   "label": "5 小怪 30s（ADD 窗口）",
+   "targets": 5,
+   "maxTime": 30
+  }
+ ],
+ "stats": [
+  {
+   "key": "crit",
+   "label": "暴击"
+  },
+  {
+   "key": "haste",
+   "label": "急速"
+  },
+  {
+   "key": "mastery",
+   "label": "精通"
+  },
+  {
+   "key": "vers",
+   "label": "全能"
+  }
+ ],
+ "perScenario": {
+  "st": {
+   "budget": 3209,
+   "currentRatings": {
+    "mastery": 1424,
+    "vers": 123,
+    "crit": 380,
+    "haste": 1282
+   },
+   "currentRunId": "stato_current__st__2000",
+   "currentDps": 231308.45,
+   "zeroDps": 123471.12,
+   "reproduced": {
+    "runId": "stato_repro__st__2000",
+    "dps": 231318.9,
+    "gapPct": 0,
+    "ok": true
+   },
+   "curves": {
+    "crit": [
+     {
+      "rating": 0,
+      "dps": 123471.12
+     },
+     {
+      "rating": 802,
+      "dps": 143485.41
+     },
+     {
+      "rating": 1605,
+      "dps": 161220.64
+     },
+     {
+      "rating": 2407,
+      "dps": 175414.14
+     },
+     {
+      "rating": 3209,
+      "dps": 186879.16
+     }
+    ],
+    "haste": [
+     {
+      "rating": 0,
+      "dps": 123471.12
+     },
+     {
+      "rating": 802,
+      "dps": 144144.28
+     },
+     {
+      "rating": 1605,
+      "dps": 164261.23
+     },
+     {
+      "rating": 2407,
+      "dps": 179768.52
+     },
+     {
+      "rating": 3209,
+      "dps": 191389.98
+     }
+    ],
+    "mastery": [
+     {
+      "rating": 0,
+      "dps": 123471.12
+     },
+     {
+      "rating": 802,
+      "dps": 148697.97
+     },
+     {
+      "rating": 1605,
+      "dps": 171820.71
+     },
+     {
+      "rating": 2407,
+      "dps": 190566.73
+     },
+     {
+      "rating": 3209,
+      "dps": 205605.74
+     }
+    ],
+    "vers": [
+     {
+      "rating": 0,
+      "dps": 123471.12
+     },
+     {
+      "rating": 802,
+      "dps": 139901.84
+     },
+     {
+      "rating": 1605,
+      "dps": 157950.17
+     },
+     {
+      "rating": 2407,
+      "dps": 173640.64
+     },
+     {
+      "rating": 3209,
+      "dps": 186913.32
+     }
+    ]
+   },
+   "optimum": {
+    "ratings": {
+     "crit": 800,
+     "haste": 900,
+     "mastery": 1500,
+     "vers": 9
+    },
+    "predictedDps": 233169.28,
+    "actualDps": 233718.18,
+    "runId": "stato_opt__st__2000",
+    "absErrorPct": 0.23,
+    "gainVsCurrentPct": 1.04,
+    "gainVsCurrentDps": 2409.73
+   }
+  },
+  "t3": {
+   "budget": 3209,
+   "currentRatings": {
+    "mastery": 1424,
+    "vers": 123,
+    "crit": 380,
+    "haste": 1282
+   },
+   "currentRunId": "stato_current__t3__2000",
+   "currentDps": 413066.01,
+   "zeroDps": 222796.7,
+   "reproduced": {
+    "runId": "stato_repro__t3__2000",
+    "dps": 413116.88,
+    "gapPct": 0.01,
+    "ok": true
+   },
+   "curves": {
+    "crit": [
+     {
+      "rating": 0,
+      "dps": 222796.7
+     },
+     {
+      "rating": 802,
+      "dps": 260471.37
+     },
+     {
+      "rating": 1605,
+      "dps": 292243.25
+     },
+     {
+      "rating": 2407,
+      "dps": 320963.09
+     },
+     {
+      "rating": 3209,
+      "dps": 344852.58
+     }
+    ],
+    "haste": [
+     {
+      "rating": 0,
+      "dps": 222796.7
+     },
+     {
+      "rating": 802,
+      "dps": 259186.18
+     },
+     {
+      "rating": 1605,
+      "dps": 295409.17
+     },
+     {
+      "rating": 2407,
+      "dps": 324641.41
+     },
+     {
+      "rating": 3209,
+      "dps": 346994.25
+     }
+    ],
+    "mastery": [
+     {
+      "rating": 0,
+      "dps": 222796.7
+     },
+     {
+      "rating": 802,
+      "dps": 266377.08
+     },
+     {
+      "rating": 1605,
+      "dps": 306080.05
+     },
+     {
+      "rating": 2407,
+      "dps": 338061.01
+     },
+     {
+      "rating": 3209,
+      "dps": 364582.3
+     }
+    ],
+    "vers": [
+     {
+      "rating": 0,
+      "dps": 222796.7
+     },
+     {
+      "rating": 802,
+      "dps": 252422.43
+     },
+     {
+      "rating": 1605,
+      "dps": 284597.04
+     },
+     {
+      "rating": 2407,
+      "dps": 312716.48
+     },
+     {
+      "rating": 3209,
+      "dps": 336960.22
+     }
+    ]
+   },
+   "optimum": {
+    "ratings": {
+     "crit": 800,
+     "haste": 1000,
+     "mastery": 1400,
+     "vers": 9
+    },
+    "predictedDps": 416839.58,
+    "actualDps": 419112.21,
+    "runId": "stato_opt__t3__2000",
+    "absErrorPct": 0.54,
+    "gainVsCurrentPct": 1.46,
+    "gainVsCurrentDps": 6046.2
+   }
+  },
+  "t8": {
+   "budget": 3209,
+   "currentRatings": {
+    "mastery": 1424,
+    "vers": 123,
+    "crit": 380,
+    "haste": 1282
+   },
+   "currentRunId": "stato_current__t8__2000",
+   "currentDps": 839476.94,
+   "zeroDps": 446438.91,
+   "reproduced": {
+    "runId": "stato_repro__t8__2000",
+    "dps": 839692.27,
+    "gapPct": 0.03,
+    "ok": true
+   },
+   "curves": {
+    "crit": [
+     {
+      "rating": 0,
+      "dps": 446438.91
+     },
+     {
+      "rating": 802,
+      "dps": 521906.2
+     },
+     {
+      "rating": 1605,
+      "dps": 588935.03
+     },
+     {
+      "rating": 2407,
+      "dps": 650997.88
+     },
+     {
+      "rating": 3209,
+      "dps": 703195.27
+     }
+    ],
+    "haste": [
+     {
+      "rating": 0,
+      "dps": 446438.91
+     },
+     {
+      "rating": 802,
+      "dps": 523861.14
+     },
+     {
+      "rating": 1605,
+      "dps": 603273.9
+     },
+     {
+      "rating": 2407,
+      "dps": 665968.51
+     },
+     {
+      "rating": 3209,
+      "dps": 715720.79
+     }
+    ],
+    "mastery": [
+     {
+      "rating": 0,
+      "dps": 446438.91
+     },
+     {
+      "rating": 802,
+      "dps": 531003.2
+     },
+     {
+      "rating": 1605,
+      "dps": 607626.65
+     },
+     {
+      "rating": 2407,
+      "dps": 670141.86
+     },
+     {
+      "rating": 3209,
+      "dps": 720630.55
+     }
+    ],
+    "vers": [
+     {
+      "rating": 0,
+      "dps": 446438.91
+     },
+     {
+      "rating": 802,
+      "dps": 506019.62
+     },
+     {
+      "rating": 1605,
+      "dps": 570493.31
+     },
+     {
+      "rating": 2407,
+      "dps": 627300.64
+     },
+     {
+      "rating": 3209,
+      "dps": 675431.95
+     }
+    ]
+   },
+   "optimum": {
+    "ratings": {
+     "crit": 800,
+     "haste": 1300,
+     "mastery": 1100,
+     "vers": 9
+    },
+    "predictedDps": 840529.44,
+    "actualDps": 850675,
+    "runId": "stato_opt__t8__2000",
+    "absErrorPct": 1.19,
+    "gainVsCurrentPct": 1.33,
+    "gainVsCurrentDps": 11198.06
+   }
+  },
+  "add5": {
+   "budget": 3209,
+   "currentRatings": {
+    "mastery": 1424,
+    "vers": 123,
+    "crit": 380,
+    "haste": 1282
+   },
+   "currentRunId": "stato_current__add5__2000",
+   "currentDps": 1045812.41,
+   "zeroDps": 568646.38,
+   "reproduced": {
+    "runId": "stato_repro__add5__2000",
+    "dps": 1045190.8,
+    "gapPct": -0.06,
+    "ok": true
+   },
+   "curves": {
+    "crit": [
+     {
+      "rating": 0,
+      "dps": 568646.38
+     },
+     {
+      "rating": 802,
+      "dps": 659693.69
+     },
+     {
+      "rating": 1605,
+      "dps": 738297.94
+     },
+     {
+      "rating": 2407,
+      "dps": 807335.71
+     },
+     {
+      "rating": 3209,
+      "dps": 860466.67
+     }
+    ],
+    "haste": [
+     {
+      "rating": 0,
+      "dps": 568646.38
+     },
+     {
+      "rating": 802,
+      "dps": 662641.49
+     },
+     {
+      "rating": 1605,
+      "dps": 728102.95
+     },
+     {
+      "rating": 2407,
+      "dps": 766692.97
+     },
+     {
+      "rating": 3209,
+      "dps": 793376.56
+     }
+    ],
+    "mastery": [
+     {
+      "rating": 0,
+      "dps": 568646.38
+     },
+     {
+      "rating": 802,
+      "dps": 686047.86
+     },
+     {
+      "rating": 1605,
+      "dps": 792808.24
+     },
+     {
+      "rating": 2407,
+      "dps": 880953.87
+     },
+     {
+      "rating": 3209,
+      "dps": 950795.43
+     }
+    ],
+    "vers": [
+     {
+      "rating": 0,
+      "dps": 568646.38
+     },
+     {
+      "rating": 802,
+      "dps": 646361.3
+     },
+     {
+      "rating": 1605,
+      "dps": 727526.75
+     },
+     {
+      "rating": 2407,
+      "dps": 801070.15
+     },
+     {
+      "rating": 3209,
+      "dps": 862782.99
+     }
+    ]
+   },
+   "optimum": {
+    "ratings": {
+     "crit": 800,
+     "haste": 800,
+     "mastery": 1600,
+     "vers": 9
+    },
+    "predictedDps": 1071772.59,
+    "actualDps": 1075287.53,
+    "runId": "stato_opt__add5__2000",
+    "absErrorPct": 0.33,
+    "gainVsCurrentPct": 2.82,
+    "gainVsCurrentDps": 29475.12
+   }
+  }
+ },
+ "method": {
+  "curves": "把全部预算压到一个属性上（25/50/75/100%），其余三项置 0，每个点真跑一次。",
+  "optimize": "乘区模型：DPS(分配) ≈ DPS(全零) × Π[单项曲线(i)/DPS(全零)]（属性各自是伤害乘区，实测误差 ±0.8%，可加模型会低估 8.5%），在 Σ评级 = 预算、单项 ≤ 预算 的约束下按 100 评级步长穷举。",
+  "validate": "两个校核：① 用当前评级复跑必须回到现装备 DPS；② 最优解真跑一次，与预测的差写进 absErrorPct。"
+ },
+ "caveats": [
+  "乘区近似：假定四项各自独立乘区。预测与实测的差已逐模型给出，超过 2% 说明该模型不能用这套近似。",
+  "曲线上限 = 全部预算压一项；实际配装一般不会极限到 100%，所以最优点多数落在曲线内侧。",
+  "只在 4 个输出模型上优化：单体 / 3 目标 / 8 目标 / 5 小怪 30s；大秘整场（DungeonSlice）不在这套网格里。"
+ ]
+}

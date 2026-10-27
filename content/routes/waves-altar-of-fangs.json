@@ -1,0 +1,467 @@
+{
+ "dungeon": "Altar of Fangs",
+ "route": "Skandar Tank +10 to +16",
+ "source": "keystone.guru",
+ "sourceUrl": "https://keystone.guru/route/altar-of-fangs/xwt8Pza/skandar-tank-altar-of-fangs-10-to-16-keys",
+ "fetchedAt": "2026-10-25",
+ "pulls": 14,
+ "totalMobs": 108,
+ "waves": [
+  {
+   "pull": 1,
+   "killZoneId": 18548776,
+   "mobs": [
+    {
+     "name": "Ravenous Descendant",
+     "count": 7
+    },
+    {
+     "name": "Venom Leech",
+     "count": 3
+    },
+    {
+     "name": "Primal Serpent",
+     "count": 2
+    },
+    {
+     "name": "Twinfang Harrower",
+     "count": 1
+    }
+   ],
+   "mobCount": 13,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 77,
+   "forcesPct": 9.3,
+   "scenarioId": "w30_8",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.55,
+    "deltaDamage": 10171103,
+    "dur": 30,
+    "targets": 8
+   },
+   "sourcePull": 1
+  },
+  {
+   "pull": 2,
+   "killZoneId": 18548777,
+   "mobs": [
+    {
+     "name": "Primal Serpent",
+     "count": 3
+    },
+    {
+     "name": "Ravenous Descendant",
+     "count": 2
+    },
+    {
+     "name": "Ritual Chieftain",
+     "count": 1
+    }
+   ],
+   "mobCount": 6,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 56,
+   "forcesPct": 16.1,
+   "scenarioId": "w30_6",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.02,
+    "deltaDamage": 8515496,
+    "dur": 30,
+    "targets": 6
+   },
+   "sourcePull": 2
+  },
+  {
+   "pull": 3,
+   "killZoneId": 18548778,
+   "mobs": [
+    {
+     "name": "Primal Serpent",
+     "count": 3
+    },
+    {
+     "name": "Venom Leech",
+     "count": 3
+    },
+    {
+     "name": "Ravenous Descendant",
+     "count": 2
+    },
+    {
+     "name": "Ritual Chieftain",
+     "count": 1
+    }
+   ],
+   "mobCount": 9,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 59,
+   "forcesPct": 23.3,
+   "scenarioId": "w30_8",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.55,
+    "deltaDamage": 10171103,
+    "dur": 30,
+    "targets": 8
+   },
+   "sourcePull": 3
+  },
+  {
+   "pull": 4,
+   "killZoneId": 18548779,
+   "mobs": [
+    {
+     "name": "Ravenous Descendant",
+     "count": 6
+    },
+    {
+     "name": "Primal Serpent",
+     "count": 2
+    },
+    {
+     "name": "Ritual Chieftain",
+     "count": 1
+    }
+   ],
+   "mobCount": 9,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 69,
+   "forcesPct": 31.6,
+   "scenarioId": "w30_8",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.55,
+    "deltaDamage": 10171103,
+    "dur": 30,
+    "targets": 8
+   },
+   "sourcePull": 4
+  },
+  {
+   "pull": 5,
+   "killZoneId": 18548780,
+   "mobs": [
+    {
+     "name": "Primal Serpent",
+     "count": 2
+    },
+    {
+     "name": "Ravenous Descendant",
+     "count": 2
+    },
+    {
+     "name": "Ritual Chieftain",
+     "count": 1
+    }
+   ],
+   "mobCount": 5,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 49,
+   "forcesPct": 37.6,
+   "scenarioId": "w30_5",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.0,
+    "deltaDamage": 7553046,
+    "dur": 30,
+    "targets": 5
+   },
+   "sourcePull": 5
+  },
+  {
+   "pull": 6,
+   "killZoneId": 18548781,
+   "mobs": [
+    {
+     "name": "Twinfang Harrower",
+     "count": 2
+    }
+   ],
+   "mobCount": 2,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 50,
+   "forcesPct": 43.6,
+   "scenarioId": "w30_2",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 30.37,
+    "deltaDamage": 3709145,
+    "dur": 30,
+    "targets": 2
+   },
+   "sourcePull": 6
+  },
+  {
+   "pull": 7,
+   "killZoneId": 18548782,
+   "mobs": [
+    {
+     "name": "Rav'i",
+     "count": 1
+    }
+   ],
+   "mobCount": 1,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 0,
+   "forcesPct": 43.6,
+   "scenarioId": "w90_1b",
+   "isBoss": true,
+   "burst": {
+    "deltaPct": 20.87,
+    "deltaDamage": 4005257,
+    "dur": 90,
+    "targets": 1
+   },
+   "sourcePull": 7
+  },
+  {
+   "pull": 8,
+   "killZoneId": 18548783,
+   "mobs": [
+    {
+     "name": "Bloodletter",
+     "count": 4
+    },
+    {
+     "name": "High Evolutionist",
+     "count": 2
+    },
+    {
+     "name": "Rattling Writhe",
+     "count": 1
+    }
+   ],
+   "mobCount": 7,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 59,
+   "forcesPct": 50.8,
+   "scenarioId": "w30_7",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.82,
+    "deltaDamage": 9442374,
+    "dur": 30,
+    "targets": 7
+   },
+   "sourcePull": 8
+  },
+  {
+   "pull": 9,
+   "killZoneId": 18548784,
+   "mobs": [
+    {
+     "name": "Bloodletter",
+     "count": 7
+    },
+    {
+     "name": "High Evolutionist",
+     "count": 2
+    },
+    {
+     "name": "Rattling Writhe",
+     "count": 1
+    }
+   ],
+   "mobCount": 10,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 74,
+   "forcesPct": 59.8,
+   "scenarioId": "w30_8",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.55,
+    "deltaDamage": 10171103,
+    "dur": 30,
+    "targets": 8
+   },
+   "sourcePull": 9
+  },
+  {
+   "pull": 10,
+   "killZoneId": 18548785,
+   "mobs": [
+    {
+     "name": "Uncoiled Writhe",
+     "count": 4
+    },
+    {
+     "name": "Bloodletter",
+     "count": 3
+    },
+    {
+     "name": "High Evolutionist",
+     "count": 2
+    },
+    {
+     "name": "Rattling Writhe",
+     "count": 1
+    },
+    {
+     "name": "The Writhing Coil",
+     "count": 1
+    }
+   ],
+   "mobCount": 11,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 54,
+   "forcesPct": 66.3,
+   "scenarioId": "w30_8",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.55,
+    "deltaDamage": 10171103,
+    "dur": 30,
+    "targets": 8
+   },
+   "sourcePull": 10
+  },
+  {
+   "pull": 11,
+   "killZoneId": 18548786,
+   "mobs": [
+    {
+     "name": "Blade of the Altar",
+     "count": 5
+    },
+    {
+     "name": "High Evolutionist",
+     "count": 4
+    },
+    {
+     "name": "Ascendant Serpent",
+     "count": 1
+    }
+   ],
+   "mobCount": 10,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 83,
+   "forcesPct": 76.4,
+   "scenarioId": "w30_8",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.55,
+    "deltaDamage": 10171103,
+    "dur": 30,
+    "targets": 8
+   },
+   "sourcePull": 11
+  },
+  {
+   "pull": 12,
+   "killZoneId": 18548788,
+   "mobs": [
+    {
+     "name": "Living Venom",
+     "count": 6
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 4
+    },
+    {
+     "name": "Ula'tek's Chosen",
+     "count": 1
+    }
+   ],
+   "mobCount": 11,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 51,
+   "forcesPct": 82.5,
+   "scenarioId": "w30_8",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.55,
+    "deltaDamage": 10171103,
+    "dur": 30,
+    "targets": 8
+   },
+   "sourcePull": 13
+  },
+  {
+   "pull": 13,
+   "killZoneId": 18548789,
+   "mobs": [
+    {
+     "name": "Blade of the Altar",
+     "count": 4
+    },
+    {
+     "name": "Primal Serpent",
+     "count": 2
+    },
+    {
+     "name": "Twinfang Harrower",
+     "count": 1
+    }
+   ],
+   "mobCount": 7,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 59,
+   "forcesPct": 89.7,
+   "scenarioId": "w30_7",
+   "isBoss": false,
+   "burst": {
+    "deltaPct": 34.82,
+    "deltaDamage": 9442374,
+    "dur": 30,
+    "targets": 7
+   },
+   "sourcePull": 14
+  },
+  {
+   "pull": 14,
+   "killZoneId": 18548790,
+   "mobs": [
+    {
+     "name": "Ritual Chieftain",
+     "count": 2
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 2
+    },
+    {
+     "name": "Ula'tek's Chosen",
+     "count": 1
+    },
+    {
+     "name": "Zul'jan",
+     "count": 1
+    },
+    {
+     "name": "Ritual Snake",
+     "count": 1
+    }
+   ],
+   "mobCount": 7,
+   "dangerous": [],
+   "skippable": 0,
+   "forces": 85,
+   "forcesPct": 100.0,
+   "scenarioId": "w90_1b",
+   "isBoss": true,
+   "burst": {
+    "deltaPct": 20.87,
+    "deltaDamage": 4005257,
+    "dur": 90,
+    "targets": 1
+   },
+   "sourcePull": 15
+  }
+ ]
+}

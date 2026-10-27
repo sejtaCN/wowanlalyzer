@@ -1,0 +1,30 @@
+{
+  "runId": "gear_trinket_1__t8__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "trinket_1",
+  "variantLabel": "饰品 1 · 唤浪者海石",
+  "variantKind": "trinket",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标 300s（大波）",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 778032.62,
+    "ci95": 520.7,
+    "ci95Pct": 0.07,
+    "stdDev": 265.66,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:42:08.809Z"
+}

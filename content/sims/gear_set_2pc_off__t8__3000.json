@@ -1,0 +1,30 @@
+{
+  "runId": "gear_set_2pc_off__t8__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "set_2pc_off",
+  "variantLabel": "2 件套效果（关掉）",
+  "variantKind": "set",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标 300s（大波）",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 761838.55,
+    "ci95": 610.92,
+    "ci95Pct": 0.08,
+    "stdDev": 311.69,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:42:38.748Z"
+}

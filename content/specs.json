@@ -1,0 +1,30 @@
+{
+  "note": "专精注册表。status=active 的才有内容；planned 的只保留界面骨架，切过去看到的是结构预览而不是空白。",
+  "specs": [
+    {
+      "id": "shadow-priest",
+      "className": "牧师",
+      "name": "暗影牧师",
+      "short": "暗牧",
+      "status": "active",
+      "heroTrees": [
+        { "id": "archon", "name": "执政官" },
+        { "id": "voidweaver", "name": "虚空编织者" }
+      ],
+      "baseline": "Midnight 12.1.5 · MID2",
+      "note": "当前唯一实装"
+    },
+    {
+      "id": "devourer",
+      "className": "恶魔猎手",
+      "name": "噬灭",
+      "short": "噬灭",
+      "status": "planned",
+      "heroTrees": [
+        { "id": "annihilator", "name": "歼灭者" }
+      ],
+      "baseline": "待接入",
+      "note": "界面已准备好，等数据：需要 profile、APL、模拟跑批"
+    }
+  ]
+}

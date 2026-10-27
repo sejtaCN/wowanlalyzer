@@ -1,0 +1,223 @@
+{
+  "runId": "voidweaver__mplus__5000",
+  "layer": "A",
+  "profileId": "voidweaver",
+  "profileFile": "content/profiles/MID2_shadow_voidweaver.simc",
+  "profileLabel": "Voidweaver",
+  "scenarioId": "mplus",
+  "scenarioLabel": "大秘波次",
+  "fightStyle": "DungeonSlice",
+  "targets": 5,
+  "durationSec": 1800,
+  "iterations": 5007,
+  "dps": {
+    "mean": 220130.46,
+    "ci95": 446.39,
+    "ci95Pct": 0.2,
+    "stdDev": 16102.6,
+    "samples": 4999,
+    "min": 171915.9,
+    "max": 271488.01
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026",
+    "buildTime": "02:58:23"
+  },
+  "actions": {
+    "totalActions": 282,
+    "durationApprox": 360.1,
+    "counts": {
+      "mind_flay": 50,
+      "shadow_word_madness": 47,
+      "void_volley": 37,
+      "mind_blast": 36,
+      "tentacle_slam": 29,
+      "shadow_word_pain": 27,
+      "void_blast": 26,
+      "shadow_word_death": 10,
+      "void_torrent": 9,
+      "voidform": 3,
+      "power_infusion": 3,
+      "use_items": 3,
+      "potion": 2
+    },
+    "opening": [
+      {
+        "t": 0.11,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 0,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 1.25,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 6,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 2.38,
+        "name": "void_torrent",
+        "spell": "Void Torrent",
+        "insanity": 9,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 5.66,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 37,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 6.77,
+        "name": "voidform",
+        "spell": "Voidform",
+        "insanity": 48,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 7.88,
+        "name": "power_infusion",
+        "spell": "Power Infusion",
+        "insanity": 58,
+        "target": "none"
+      },
+      {
+        "t": 7.88,
+        "name": "potion",
+        "spell": "Light's Potential",
+        "insanity": 58,
+        "target": "none"
+      },
+      {
+        "t": 7.88,
+        "name": "use_items",
+        "spell": "use_items",
+        "insanity": 58,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 7.88,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 58,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 8.8,
+        "name": "void_blast",
+        "spell": "Void Blast",
+        "insanity": 14.5,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 9.71,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 23,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 10.61,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 31,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 11.44,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 47,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 12.26,
+        "name": "void_blast",
+        "spell": "Void Blast",
+        "insanity": 5,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 13.07,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 16.5,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 13.88,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 26,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 14.68,
+        "name": "void_blast",
+        "spell": "Void Blast",
+        "insanity": 37.5,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 15.49,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 49,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 16.3,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 7.5,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 17.09,
+        "name": "mind_blast",
+        "spell": "Mind Blast",
+        "insanity": 21,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 17.88,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 30,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 18.69,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 42.5,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 19.5,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 57,
+        "target": "Dungeon_Boss1"
+      },
+      {
+        "t": 20.31,
+        "name": "mind_blast",
+        "spell": "Mind Blast",
+        "insanity": 15.5,
+        "target": "Dungeon_Boss1"
+      }
+    ]
+  },
+  "spec": "Shadow Priest",
+  "level": 90,
+  "talentsHash": "CIQAAAAAAAAA",
+  "elapsedMs": 7968,
+  "generatedAt": "2026-10-25T08:47:12.283Z"
+}

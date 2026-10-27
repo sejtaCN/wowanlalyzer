@@ -1,0 +1,934 @@
+{
+ "hero": "archon",
+ "profile": "content/profiles/MID2_shadow_archon.simc",
+ "iterations": 3000,
+ "method": "逐技能从 APL 注释掉该技能的全部动作行，重跑同一场景；差值 = 禁用后 DPS 相对基线。读法：这是「少这一个技能、其他照常打」的代价，不是它的全部伤害占比。",
+ "scenarios": [
+  {
+   "id": "st300",
+   "label": "单体 300s",
+   "targets": 1,
+   "maxTime": 300
+  },
+  {
+   "id": "w30_5",
+   "label": "5 目标 30s",
+   "targets": 5,
+   "maxTime": 30
+  }
+ ],
+ "baseline": {
+  "st300": {
+   "mean": 231255.54,
+   "ci95": 169.5,
+   "ci95Pct": 0.07,
+   "samples": 2999
+  },
+  "w30_5": {
+   "mean": 1044494.33,
+   "ci95": 1684.94,
+   "ci95Pct": 0.16,
+   "samples": 2999
+  }
+ },
+ "rows": [
+  {
+   "runId": "lev_shadow_word_pain__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "shadow_word_pain",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 2,
+   "dps": {
+    "mean": 120150.58,
+    "ci95": 85.8,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -48.04,
+   "deltaCiPct": 0.14,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:33.848Z"
+  },
+  {
+   "runId": "lev_shadow_word_pain__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "shadow_word_pain",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 2,
+   "dps": {
+    "mean": 677716.53,
+    "ci95": 6457.97,
+    "ci95Pct": 0.95,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -35.12,
+   "deltaCiPct": 1.11,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:34.652Z"
+  },
+  {
+   "runId": "lev_shadow_word_madness__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "shadow_word_madness",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 160906.49,
+    "ci95": 120.98,
+    "ci95Pct": 0.08,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -30.42,
+   "deltaCiPct": 0.15,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:31.069Z"
+  },
+  {
+   "runId": "lev_tentacle_slam__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "tentacle_slam",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 5,
+   "dps": {
+    "mean": 728476.83,
+    "ci95": 1311.2,
+    "ci95Pct": 0.18,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -30.26,
+   "deltaCiPct": 0.34,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:36.856Z"
+  },
+  {
+   "runId": "lev_voidform__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "voidform",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 733383.96,
+    "ci95": 1170.21,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -29.79,
+   "deltaCiPct": 0.32,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:53.708Z"
+  },
+  {
+   "runId": "lev_shadow_word_madness__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "shadow_word_madness",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 753226.94,
+    "ci95": 1626.49,
+    "ci95Pct": 0.22,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -27.89,
+   "deltaCiPct": 0.38,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:31.911Z"
+  },
+  {
+   "runId": "lev_mind_flay_insanity__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "mind_flay_insanity",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 178662.66,
+    "ci95": 139.24,
+    "ci95Pct": 0.08,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -22.74,
+   "deltaCiPct": 0.15,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:17.261Z"
+  },
+  {
+   "runId": "lev_void_volley__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "void_volley",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 2,
+   "dps": {
+    "mean": 178684.76,
+    "ci95": 119.05,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -22.73,
+   "deltaCiPct": 0.14,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:49.164Z"
+  },
+  {
+   "runId": "lev_tentacle_slam__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "tentacle_slam",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 5,
+   "dps": {
+    "mean": 184604.64,
+    "ci95": 144.98,
+    "ci95Pct": 0.08,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -20.17,
+   "deltaCiPct": 0.15,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:36.223Z"
+  },
+  {
+   "runId": "lev_voidform__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "voidform",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 185942.65,
+    "ci95": 121.52,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -19.59,
+   "deltaCiPct": 0.14,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:52.926Z"
+  },
+  {
+   "runId": "lev_mind_flay_insanity__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "mind_flay_insanity",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 852474.33,
+    "ci95": 1578.82,
+    "ci95Pct": 0.19,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -18.38,
+   "deltaCiPct": 0.35,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:18.473Z"
+  },
+  {
+   "runId": "lev_void_volley__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "void_volley",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 2,
+   "dps": {
+    "mean": 862152.96,
+    "ci95": 5508.96,
+    "ci95Pct": 0.64,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -17.46,
+   "deltaCiPct": 0.8,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:50.454Z"
+  },
+  {
+   "runId": "lev_halo__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "halo",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 862250.75,
+    "ci95": 1406.51,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -17.45,
+   "deltaCiPct": 0.32,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:07.872Z"
+  },
+  {
+   "runId": "lev_mind_flay__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "mind_flay",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 197452.81,
+    "ci95": 171.35,
+    "ci95Pct": 0.09,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -14.62,
+   "deltaCiPct": 0.16,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:13.674Z"
+  },
+  {
+   "runId": "lev_halo__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "halo",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 200050.76,
+    "ci95": 135.72,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -13.49,
+   "deltaCiPct": 0.14,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:07.018Z"
+  },
+  {
+   "runId": "lev_mind_blast__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "mind_blast",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 2,
+   "dps": {
+    "mean": 211574.28,
+    "ci95": 162.65,
+    "ci95Pct": 0.08,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -8.51,
+   "deltaCiPct": 0.15,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:10.153Z"
+  },
+  {
+   "runId": "lev_power_infusion__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "power_infusion",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 967380.98,
+    "ci95": 1574.89,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -7.38,
+   "deltaCiPct": 0.32,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:22.841Z"
+  },
+  {
+   "runId": "lev_power_infusion__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "power_infusion",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 219284.84,
+    "ci95": 178.21,
+    "ci95Pct": 0.08,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -5.18,
+   "deltaCiPct": 0.15,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:21.583Z"
+  },
+  {
+   "runId": "lev_mind_flay__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "mind_flay",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 1007613.32,
+    "ci95": 1899.1,
+    "ci95Pct": 0.19,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -3.53,
+   "deltaCiPct": 0.35,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:14.594Z"
+  },
+  {
+   "runId": "lev_mind_blast__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "mind_blast",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 2,
+   "dps": {
+    "mean": 1013591.79,
+    "ci95": 1961.55,
+    "ci95Pct": 0.19,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -2.96,
+   "deltaCiPct": 0.35,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:11.252Z"
+  },
+  {
+   "runId": "lev_shadow_word_death__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "shadow_word_death",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 5,
+   "dps": {
+    "mean": 230726.24,
+    "ci95": 169.76,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": -0.23,
+   "deltaCiPct": 0.14,
+   "beyondCi": true,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:26.769Z"
+  },
+  {
+   "runId": "lev_shadow_word_death__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "shadow_word_death",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 5,
+   "dps": {
+    "mean": 1042624.81,
+    "ci95": 1693.4,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -0.18,
+   "deltaCiPct": 0.32,
+   "beyondCi": false,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:28.218Z"
+  },
+  {
+   "runId": "lev_vampiric_touch__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "vampiric_touch",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 3,
+   "dps": {
+    "mean": 1042697.99,
+    "ci95": 1679.98,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -0.17,
+   "deltaCiPct": 0.32,
+   "beyondCi": false,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:40.025Z"
+  },
+  {
+   "runId": "lev_void_torrent__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "void_torrent",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 1043792.47,
+    "ci95": 1695.08,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -0.07,
+   "deltaCiPct": 0.32,
+   "beyondCi": false,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:46.324Z"
+  },
+  {
+   "runId": "lev_void_blast__w30_5__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "void_blast",
+   "scenarioId": "w30_5",
+   "scenarioLabel": "5 目标 30s",
+   "durationSec": 30,
+   "targets": 5,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 1043862.66,
+    "ci95": 1723.28,
+    "ci95Pct": 0.17,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+   },
+   "deltaPct": -0.06,
+   "deltaCiPct": 0.33,
+   "beyondCi": false,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:43.306Z"
+  },
+  {
+   "runId": "lev_void_torrent__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "void_torrent",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 231308.39,
+    "ci95": 168.27,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": 0.02,
+   "deltaCiPct": 0.14,
+   "beyondCi": false,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:45.064Z"
+  },
+  {
+   "runId": "lev_vampiric_touch__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "vampiric_touch",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 3,
+   "dps": {
+    "mean": 231317.99,
+    "ci95": 165.25,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": 0.03,
+   "deltaCiPct": 0.14,
+   "beyondCi": false,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:39.105Z"
+  },
+  {
+   "runId": "lev_void_blast__st300__3000",
+   "layer": "A",
+   "kind": "leverage",
+   "hero": "archon",
+   "skill": "void_blast",
+   "scenarioId": "st300",
+   "scenarioLabel": "单体 300s",
+   "durationSec": 300,
+   "targets": 1,
+   "disabledLines": 1,
+   "dps": {
+    "mean": 231350.52,
+    "ci95": 167.2,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+   },
+   "deltaPct": 0.04,
+   "deltaCiPct": 0.14,
+   "beyondCi": false,
+   "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+   },
+   "generatedAt": "2026-10-26T02:36:42.439Z"
+  }
+ ],
+ "generatedAt": "2026-10-26T02:36:53.709Z",
+ "note": "已剔除 meta 动作（run_action_list 等）；Δ = 禁用该技能后相对基线的 DPS 变化，负值=这个技能在贡献。"
+}

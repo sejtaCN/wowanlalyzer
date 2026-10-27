@@ -1,0 +1,79 @@
+{
+ "id": "l1-01-mid",
+ "level": "L1",
+ "order": 1,
+ "title": "中波（5–9 只）",
+ "subtitle": "最常遇到的一档：学会在这一档开爆发",
+ "model": {
+  "targets": "5–9",
+  "durationSec": 30,
+  "movement": "0–3s",
+  "dangers": 2,
+  "frequency": "35/84 波"
+ },
+ "claim": "5 只以上就开爆发。这一档一次换 9.3–11.6M，是同场 BOSS 波的 1.8–2.2 倍。",
+ "chart": {
+  "kind": "burst-bars",
+  "title": "5/6/7 目标开爆发 vs 不开",
+  "runIds": [
+   "dec_voidform_on_0__w30_5__5000",
+   "dec_voidform_on_1__w30_5__5000",
+   "dec_voidform_on_0__w30_6__5000",
+   "dec_voidform_on_1__w30_6__5000",
+   "dec_voidform_on_0__w30_7__5000",
+   "dec_voidform_on_1__w30_7__5000"
+  ]
+ },
+ "priorityDiff": {
+  "add": [
+   {
+    "skill": "aoe_loop",
+    "reason": "目标数 ≥3 就切多目标表，别继续打单体",
+    "evidence": "APL: actions+=/call_action_list,name=aoe,if=active_enemies>2"
+   },
+   {
+    "skill": "tentacle_slam",
+    "reason": "目标 ≥5 时它挂到多个目标，优先级前移",
+    "evidence": "APL: active_dot.vampiric_touch<5 条件；模拟 w30_5 起收益稳定"
+   }
+  ],
+  "drop": [
+   {
+    "skill": "shadow_word_death",
+    "reason": "只有残血目标才进循环，中波排不上",
+    "evidence": "APL: if=(forced|target.has_absorb)&talent.devour_matter"
+   },
+   {
+    "skill": "mind_flay",
+    "reason": "让位给多目标 DoT 与 AoE",
+    "evidence": "APL: actions.main+=/mind_flay 排在 DoT 之后"
+   }
+  ]
+ },
+ "map": {
+  "dungeon": "altar_of_fangs",
+  "routeKey": "xwt8Pza",
+  "pull": 2
+ },
+ "casePanel": {
+  "status": "pending",
+  "reason": "现有日志切不出波次边界；需要带 Fights 的导出才能说“他这一波怎么做”。"
+ },
+ "evidence": {
+  "runIds": [
+   "dec_voidform_on_0__w30_5__5000",
+   "dec_voidform_on_1__w30_5__5000",
+   "dec_voidform_on_0__w30_7__5000",
+   "dec_voidform_on_1__w30_7__5000",
+   "trace_archon__w30_5__5000",
+   "dec_voidform_on_0__w30_6__5000",
+   "dec_voidform_on_1__w30_6__5000"
+  ],
+  "sources": [
+   "SimC 1210.01 (73a372b)",
+   "keystone.guru xwt8Pza / 6 条路线统计"
+  ],
+  "generatedAt": "2026-10-25T16:00:00Z"
+ },
+ "budgetScenario": "w30_5"
+}

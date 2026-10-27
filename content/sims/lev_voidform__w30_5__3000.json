@@ -1,0 +1,32 @@
+{
+  "runId": "lev_voidform__w30_5__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "voidform",
+  "scenarioId": "w30_5",
+  "scenarioLabel": "5 目标 30s",
+  "durationSec": 30,
+  "targets": 5,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 733383.96,
+    "ci95": 1170.21,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "deltaPct": -29.79,
+  "deltaCiPct": 0.32,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:53.708Z"
+}

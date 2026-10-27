@@ -1,0 +1,145 @@
+{
+  "runId": "trace_archon__win12_4__5000",
+  "kind": "action-trace",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "win12_4",
+  "scenarioLabel": "4 目标 12s（加怪窗口）",
+  "fightStyle": "Patchwerk",
+  "targets": 4,
+  "durationSec": 12,
+  "iterations": 5000,
+  "dps": {
+    "mean": 722038.5,
+    "ci95": 1307.41,
+    "ci95Pct": 0.18,
+    "samples": 4999
+  },
+  "actions": {
+    "total": 19,
+    "series": [
+      {
+        "t": 0,
+        "name": "potion",
+        "insanity": 6,
+        "max": 100
+      },
+      {
+        "t": 0,
+        "name": "halo",
+        "insanity": 6,
+        "max": 100
+      },
+      {
+        "t": 0.872,
+        "name": "voidform",
+        "insanity": 11,
+        "max": 100
+      },
+      {
+        "t": 1.743,
+        "name": "power_infusion",
+        "insanity": 21,
+        "max": 100
+      },
+      {
+        "t": 1.743,
+        "name": "use_items",
+        "insanity": 21,
+        "max": 100
+      },
+      {
+        "t": 1.743,
+        "name": "tentacle_slam",
+        "insanity": 21,
+        "max": 100
+      },
+      {
+        "t": 2.498,
+        "name": "mind_flay_insanity",
+        "insanity": 27,
+        "max": 100
+      },
+      {
+        "t": 3.253,
+        "name": "tentacle_slam",
+        "insanity": 37.4,
+        "max": 100
+      },
+      {
+        "t": 4.008,
+        "name": "void_volley",
+        "insanity": 43.9,
+        "max": 100
+      },
+      {
+        "t": 4.762,
+        "name": "shadow_word_madness",
+        "insanity": 56.9,
+        "max": 100
+      },
+      {
+        "t": 5.517,
+        "name": "mind_blast",
+        "insanity": 15.4,
+        "max": 100
+      },
+      {
+        "t": 6.272,
+        "name": "mind_flay_insanity",
+        "insanity": 30.900000000000002,
+        "max": 100
+      },
+      {
+        "t": 7.025,
+        "name": "void_volley",
+        "insanity": 43.800000000000004,
+        "max": 100
+      },
+      {
+        "t": 7.779,
+        "name": "shadow_word_madness",
+        "insanity": 56.800000000000004,
+        "max": 100
+      },
+      {
+        "t": 8.533,
+        "name": "void_volley",
+        "insanity": 18.8,
+        "max": 100
+      },
+      {
+        "t": 9.289,
+        "name": "void_volley",
+        "insanity": 30.3,
+        "max": 100
+      },
+      {
+        "t": 10.044,
+        "name": "shadow_word_death",
+        "insanity": 44.800000000000004,
+        "max": 100
+      },
+      {
+        "t": 10.798,
+        "name": "shadow_word_madness",
+        "insanity": 51.300000000000004,
+        "max": 100
+      },
+      {
+        "t": 11.552,
+        "name": "mind_blast",
+        "insanity": 14.8,
+        "max": 100
+      }
+    ]
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T11:00:00.092Z"
+}

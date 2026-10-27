@@ -1,0 +1,41 @@
+{
+  "runId": "dec_voidform_on_1__w90_1b__5000",
+  "layer": "A",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "decisionId": "voidform_on",
+  "decisionLabel": "这一波开不开爆发（Voidform）",
+  "value": 1,
+  "baseValue": 1,
+  "scenarioId": "w90_1b",
+  "scenarioLabel": "BOSS 单体 90s",
+  "fightStyle": "Patchwerk",
+  "targets": 1,
+  "durationSec": 90,
+  "iterations": 5007,
+  "dps": {
+    "mean": 274264.12,
+    "ci95": 357.65,
+    "ci95Pct": 0.13,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "lines": [
+      {
+        "before": "actions.cds+=/voidform,if=active_dot.shadow_word_pain>=active_dot.vampiric_touch",
+        "after": "actions.cds+=/voidform,if=active_dot.shadow_word_pain>=active_dot.vampiric_touch"
+      }
+    ],
+    "pattern": ",if=.*$",
+    "appliedValue": 1
+  },
+  "generatedAt": "2026-10-26T10:34:27.681Z",
+  "kind": "decision-ab"
+}

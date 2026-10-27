@@ -1,0 +1,38 @@
+{
+  "runId": "dec_aoe_switch_5__add5__5000",
+  "layer": "A",
+  "decisionId": "aoe_switch",
+  "decisionLabel": "AoE 循环切换阈值（目标数 > N 时切 AoE）",
+  "value": 5,
+  "baseValue": 2,
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "iterations": 5007,
+  "dps": {
+    "mean": 881912.59,
+    "ci95": 1142.63,
+    "ci95Pct": 0.13,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "lines": [
+      {
+        "before": "actions+=/call_action_list,name=aoe,if=active_enemies>2",
+        "after": "actions+=/call_action_list,name=aoe,if=active_enemies>5"
+      }
+    ],
+    "pattern": "active_enemies>\\d+",
+    "appliedValue": 5
+  },
+  "generatedAt": "2026-10-25T09:06:33.863Z",
+  "kind": "decision-ab"
+}

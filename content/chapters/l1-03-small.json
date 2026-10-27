@@ -1,0 +1,73 @@
+{
+ "id": "l1-03-small",
+ "level": "L1",
+ "order": 3,
+ "title": "小波（≤4 只）",
+ "subtitle": "唯一不该花冷却的一档",
+ "model": {
+  "targets": "1–4",
+  "durationSec": 30,
+  "movement": "0–2s",
+  "dangers": 1,
+  "frequency": "8/84 波（10%）"
+ },
+ "claim": "4 只以下不开爆发。一次只换 4.93M，不到大波的 39%——把冷却留给下一波。",
+ "chart": {
+  "kind": "burst-bars",
+  "title": "2 目标 30 秒：开爆发 vs 不开",
+  "runIds": [
+   "dec_voidform_on_0__w30_2__5000",
+   "dec_voidform_on_1__w30_2__5000"
+  ]
+ },
+ "priorityDiff": {
+  "add": [
+   {
+    "skill": "mind_flay",
+    "reason": "目标 ≤2 时 AoE 循环不开启，填充重新有位置",
+    "evidence": "APL: aoe 段条件 active_enemies>2，2 只时不成立"
+   },
+   {
+    "skill": "vampiric_touch",
+    "reason": "目标少，但当前目标身上仍要挂满",
+    "evidence": "APL: actions.main 中 vampiric_touch 排在填充之前"
+   }
+  ],
+  "drop": [
+   {
+    "skill": "aoe_loop",
+    "reason": "目标数没到阈值，整段 AoE 不执行",
+    "evidence": "模拟 w30_2：AoE 开与不开都在 CI 内"
+   }
+  ]
+ },
+ "map": {
+  "dungeon": "altar_of_fangs",
+  "routeKey": "xwt8Pza",
+  "pull": 6
+ },
+ "casePanel": {
+  "status": "phases",
+  "logId": "xiaohuasheng-phases",
+  "highlight": [
+   5,
+   7,
+   8
+  ],
+  "headline": "三段零爆发：80 秒、60 秒、30 秒",
+  "reading": "三段加起来 170 秒，只够一次冷却。他没有在这些短段里花掉爆发。"
+ },
+ "evidence": {
+  "runIds": [
+   "dec_voidform_on_0__w30_2__5000",
+   "dec_voidform_on_1__w30_2__5000",
+   "trace_archon__w30_2__5000"
+  ],
+  "sources": [
+   "SimC 1210.01 (73a372b)",
+   "keystone.guru 6 条路线：小波 8/84"
+  ],
+  "generatedAt": "2026-10-25T16:45:00Z"
+ },
+ "budgetScenario": "w30_2"
+}

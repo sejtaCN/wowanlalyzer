@@ -1,0 +1,25 @@
+{
+  "runId": "dec_voidform_on_1__win12_1__3000",
+  "layer": "A",
+  "kind": "adds-window",
+  "hero": "archon",
+  "scenarioId": "win12_1",
+  "scenarioLabel": "窗口 12s · 单体（无加怪）",
+  "fightStyle": "Patchwerk",
+  "targets": 1,
+  "durationSec": 12,
+  "iterations": 3000,
+  "dps": {
+    "mean": 344988.79,
+    "ci95": 1087.42,
+    "ci95Pct": 0.32,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T10:34:48.179Z",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc"
+}

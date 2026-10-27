@@ -1,0 +1,223 @@
+{
+  "runId": "voidweaver__t8__5000",
+  "layer": "A",
+  "profileId": "voidweaver",
+  "profileFile": "content/profiles/MID2_shadow_voidweaver.simc",
+  "profileLabel": "Voidweaver",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 5007,
+  "dps": {
+    "mean": 857784.5,
+    "ci95": 446.73,
+    "ci95Pct": 0.05,
+    "stdDev": 16115.1,
+    "samples": 4999,
+    "min": 808894.08,
+    "max": 916383.59
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026",
+    "buildTime": "02:58:23"
+  },
+  "actions": {
+    "totalActions": 281,
+    "durationApprox": 299.9,
+    "counts": {
+      "shadow_word_madness": 52,
+      "mind_blast": 45,
+      "mind_flay": 42,
+      "void_volley": 35,
+      "shadow_word_pain": 32,
+      "tentacle_slam": 26,
+      "void_blast": 26,
+      "void_torrent": 10,
+      "voidform": 3,
+      "power_infusion": 3,
+      "use_items": 3,
+      "shadow_word_death": 3,
+      "potion": 1
+    },
+    "opening": [
+      {
+        "t": 0,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 6,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 0.87,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 12,
+        "target": "Dummy_Enemy_3"
+      },
+      {
+        "t": 1.74,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 18.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 2.62,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 22.5,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 3.49,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 26.5,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 4.36,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 33,
+        "target": "Dummy_Enemy_3"
+      },
+      {
+        "t": 5.23,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 38.5,
+        "target": "Dummy_Enemy_4"
+      },
+      {
+        "t": 6.1,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 41.5,
+        "target": "Dummy_Enemy_5"
+      },
+      {
+        "t": 6.95,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 45.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 7.81,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 0.5,
+        "target": "Dummy_Enemy_6"
+      },
+      {
+        "t": 8.66,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 3.5,
+        "target": "Dummy_Enemy_7"
+      },
+      {
+        "t": 9.51,
+        "name": "void_torrent",
+        "spell": "Void Torrent",
+        "insanity": 8.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 12.68,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 35,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 13.53,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 47.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 14.38,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 2.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 15.24,
+        "name": "voidform",
+        "spell": "Voidform",
+        "insanity": 12.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 16.09,
+        "name": "power_infusion",
+        "spell": "Power Infusion",
+        "insanity": 22.5,
+        "target": "none"
+      },
+      {
+        "t": 16.09,
+        "name": "potion",
+        "spell": "Light's Potential",
+        "insanity": 22.5,
+        "target": "none"
+      },
+      {
+        "t": 16.09,
+        "name": "use_items",
+        "spell": "use_items",
+        "insanity": 22.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 16.09,
+        "name": "void_blast",
+        "spell": "Void Blast",
+        "insanity": 22.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 16.84,
+        "name": "void_blast",
+        "spell": "Void Blast",
+        "insanity": 31.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 17.6,
+        "name": "void_blast",
+        "spell": "Void Blast",
+        "insanity": 42,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 18.35,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 53.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 19.11,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 10,
+        "target": "Dummy_Enemy_3"
+      }
+    ]
+  },
+  "spec": "Shadow Priest",
+  "level": 90,
+  "talentsHash": "CIQAAAAAAAAA",
+  "elapsedMs": 15690,
+  "generatedAt": "2026-10-25T08:46:53.596Z"
+}

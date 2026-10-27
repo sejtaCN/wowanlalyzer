@@ -1,0 +1,30 @@
+{
+  "runId": "gear_embellishment__t8__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "embellishment",
+  "variantLabel": "美化（手腕 + 腰）",
+  "variantKind": "embellishment",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标 300s（大波）",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 789912.2,
+    "ci95": 548.93,
+    "ci95Pct": 0.07,
+    "stdDev": 280.07,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:41:59.140Z"
+}

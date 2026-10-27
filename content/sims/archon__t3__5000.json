@@ -1,0 +1,2935 @@
+{
+  "runId": "archon__t3__5000",
+  "layer": "A",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileLabel": "Archon",
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "iterations": 5007,
+  "dps": {
+    "mean": 413024.66,
+    "ci95": 224.94,
+    "ci95Pct": 0.05,
+    "stdDev": 8114.23,
+    "samples": 4999,
+    "min": 388997.5,
+    "max": 446838.58
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026",
+    "buildTime": "02:58:23"
+  },
+  "actions": {
+    "totalActions": 301,
+    "durationApprox": 299,
+    "gaps": [
+      0.87,
+      0.87,
+      0.87,
+      0.87,
+      0.87,
+      0.89,
+      0.89,
+      0,
+      0,
+      0,
+      0.75,
+      0.75,
+      0.76,
+      0.75,
+      0.76,
+      0.75,
+      0.75,
+      0.75,
+      0.76,
+      0.75,
+      0.75,
+      0.75,
+      0.76,
+      0.76,
+      0.75,
+      0.75,
+      0.75,
+      0.75,
+      0.76,
+      0.75,
+      0.79,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.8,
+      0.79,
+      0.8,
+      0.81,
+      1.05,
+      1.16,
+      1.08,
+      1.07,
+      1.08,
+      1.09,
+      1.1,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.1,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.15,
+      1.14,
+      1.04,
+      1.04,
+      1.04,
+      1.06,
+      1.06,
+      1.16,
+      1.16,
+      1.23,
+      1.15,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.11,
+      1.12,
+      1.12,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      0,
+      0,
+      0.94,
+      0.96,
+      0.94,
+      0.94,
+      0.95,
+      0.95,
+      0.93,
+      0.93,
+      0.93,
+      0.93,
+      0.91,
+      0.89,
+      0.89,
+      0.89,
+      0.86,
+      0.87,
+      0.86,
+      1.06,
+      1.01,
+      0.92,
+      0.92,
+      0.92,
+      0.92,
+      0.92,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.07,
+      1.08,
+      1.09,
+      1.07,
+      1.09,
+      1.1,
+      1.11,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.34,
+      1.13,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.13,
+      1.13,
+      1.16,
+      1.15,
+      1.14,
+      1.14,
+      1.15,
+      1.15,
+      1.14,
+      1.15,
+      1.15,
+      1.14,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.13,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.15,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.12,
+      1.15,
+      1.15,
+      1.15,
+      1.16,
+      0,
+      0,
+      0.97,
+      0.95,
+      0.95,
+      0.95,
+      0.95,
+      0.93,
+      0.93,
+      0.93,
+      0.93,
+      0.93,
+      0.92,
+      0.89,
+      0.88,
+      0.88,
+      0.87,
+      0.87,
+      0.87,
+      1.04,
+      1.01,
+      1.01,
+      1.01,
+      1.01,
+      1.02,
+      1.02,
+      1.02,
+      1.02,
+      1.02,
+      1.02,
+      1.02,
+      1.02,
+      1.02,
+      1.02,
+      1.03,
+      1.03,
+      1.02,
+      1.02,
+      1.02,
+      1.01,
+      1.02,
+      1.03,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.98,
+      1.09,
+      1.1,
+      1.11,
+      1.11
+    ],
+    "counts": {
+      "mind_flay": 93,
+      "shadow_word_madness": 56,
+      "mind_blast": 39,
+      "void_volley": 38,
+      "tentacle_slam": 26,
+      "mind_flay_insanity": 20,
+      "shadow_word_pain": 9,
+      "halo": 5,
+      "shadow_word_death": 5,
+      "voidform": 3,
+      "power_infusion": 3,
+      "use_items": 3,
+      "potion": 1
+    },
+    "opening": [
+      {
+        "t": 0,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 6,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 0.87,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 12,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 1.74,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 15,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 2.61,
+        "name": "shadow_word_pain",
+        "spell": "Shadow Word: Pain",
+        "insanity": 20,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 3.49,
+        "name": "halo",
+        "spell": "Halo",
+        "insanity": 23,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 4.36,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 30,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 5.24,
+        "name": "voidform",
+        "spell": "Voidform",
+        "insanity": 42,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 6.13,
+        "name": "power_infusion",
+        "spell": "Power Infusion",
+        "insanity": 53,
+        "target": "none"
+      },
+      {
+        "t": 6.13,
+        "name": "potion",
+        "spell": "Light's Potential",
+        "insanity": 53,
+        "target": "none"
+      },
+      {
+        "t": 6.13,
+        "name": "use_items",
+        "spell": "use_items",
+        "insanity": 53,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 6.13,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 53,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 6.88,
+        "name": "mind_blast",
+        "spell": "Mind Blast",
+        "insanity": 11.5,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 7.64,
+        "name": "mind_flay_insanity",
+        "spell": "Mind Flay: Insanity",
+        "insanity": 18,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 8.39,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 28.900000000000002,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 9.15,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 37.4,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 9.9,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 57.4,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 10.66,
+        "name": "mind_flay_insanity",
+        "spell": "Mind Flay: Insanity",
+        "insanity": 17.900000000000002,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 11.41,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 32.3,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 12.17,
+        "name": "mind_blast",
+        "spell": "Mind Blast",
+        "insanity": 44.300000000000004,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 12.92,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 54.300000000000004,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 13.68,
+        "name": "tentacle_slam",
+        "spell": "Tentacle Slam",
+        "insanity": 13.8,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 14.43,
+        "name": "mind_flay_insanity",
+        "spell": "Mind Flay: Insanity",
+        "insanity": 26.3,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 15.19,
+        "name": "void_volley",
+        "spell": "Void Volley",
+        "insanity": 39.2,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 15.94,
+        "name": "shadow_word_madness",
+        "spell": "Shadow Word: Madness",
+        "insanity": 49.7,
+        "target": "Dummy_Enemy_1"
+      }
+    ],
+    "series": [
+      {
+        "t": 0,
+        "name": "tentacle_slam",
+        "insanity": 6,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 0.87,
+        "name": "shadow_word_pain",
+        "insanity": 12,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 1.74,
+        "name": "shadow_word_pain",
+        "insanity": 15,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 2.61,
+        "name": "shadow_word_pain",
+        "insanity": 20,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 3.49,
+        "name": "halo",
+        "insanity": 23,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 4.36,
+        "name": "void_volley",
+        "insanity": 30,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 5.24,
+        "name": "voidform",
+        "insanity": 42,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 6.13,
+        "name": "power_infusion",
+        "insanity": 53,
+        "max": 100,
+        "vf": true,
+        "target": "none"
+      },
+      {
+        "t": 6.13,
+        "name": "potion",
+        "insanity": 53,
+        "max": 100,
+        "vf": true,
+        "target": "none"
+      },
+      {
+        "t": 6.13,
+        "name": "use_items",
+        "insanity": 53,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 6.13,
+        "name": "shadow_word_madness",
+        "insanity": 53,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 6.88,
+        "name": "mind_blast",
+        "insanity": 11.5,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 7.64,
+        "name": "mind_flay_insanity",
+        "insanity": 18,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 8.39,
+        "name": "tentacle_slam",
+        "insanity": 28.900000000000002,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 9.15,
+        "name": "void_volley",
+        "insanity": 37.4,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 9.9,
+        "name": "shadow_word_madness",
+        "insanity": 57.4,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 10.66,
+        "name": "mind_flay_insanity",
+        "insanity": 17.900000000000002,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 11.41,
+        "name": "void_volley",
+        "insanity": 32.3,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 12.17,
+        "name": "mind_blast",
+        "insanity": 44.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 12.92,
+        "name": "shadow_word_madness",
+        "insanity": 54.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 13.68,
+        "name": "tentacle_slam",
+        "insanity": 13.8,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 14.43,
+        "name": "mind_flay_insanity",
+        "insanity": 26.3,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 15.19,
+        "name": "void_volley",
+        "insanity": 39.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 15.94,
+        "name": "shadow_word_madness",
+        "insanity": 49.7,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 16.7,
+        "name": "void_volley",
+        "insanity": 11.700000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 17.45,
+        "name": "mind_blast",
+        "insanity": 24.2,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 18.21,
+        "name": "void_volley",
+        "insanity": 35.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 18.96,
+        "name": "shadow_word_madness",
+        "insanity": 47.7,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 19.71,
+        "name": "mind_flay_insanity",
+        "insanity": 15.200000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 20.47,
+        "name": "mind_flay",
+        "insanity": 26.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 21.22,
+        "name": "mind_flay",
+        "insanity": 34.4,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 22.01,
+        "name": "mind_flay",
+        "insanity": 44.2,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 22.82,
+        "name": "shadow_word_madness",
+        "insanity": 54,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 23.62,
+        "name": "mind_blast",
+        "insanity": 14,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 24.42,
+        "name": "tentacle_slam",
+        "insanity": 20.5,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 25.22,
+        "name": "void_volley",
+        "insanity": 27.5,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 26.02,
+        "name": "mind_flay",
+        "insanity": 39.5,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 26.83,
+        "name": "shadow_word_madness",
+        "insanity": 49.800000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 27.63,
+        "name": "mind_flay",
+        "insanity": 11.3,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 28.43,
+        "name": "mind_flay",
+        "insanity": 21.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 29.23,
+        "name": "mind_blast",
+        "insanity": 35.4,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 30.03,
+        "name": "mind_flay",
+        "insanity": 42.9,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 30.84,
+        "name": "shadow_word_madness",
+        "insanity": 53.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 31.64,
+        "name": "mind_flay",
+        "insanity": 13.200000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 32.44,
+        "name": "mind_flay",
+        "insanity": 21,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 33.24,
+        "name": "mind_flay",
+        "insanity": 30.8,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 34.05,
+        "name": "mind_flay",
+        "insanity": 38.6,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 34.85,
+        "name": "shadow_word_madness",
+        "insanity": 48.4,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 35.65,
+        "name": "mind_blast",
+        "insanity": 6.9,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 36.46,
+        "name": "tentacle_slam",
+        "insanity": 13.9,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 37.26,
+        "name": "void_volley",
+        "insanity": 21.400000000000002,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 38.06,
+        "name": "mind_flay",
+        "insanity": 34.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 38.85,
+        "name": "mind_flay",
+        "insanity": 46.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 39.65,
+        "name": "mind_flay",
+        "insanity": 58.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 40.46,
+        "name": "shadow_word_madness",
+        "insanity": 69.3,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 41.51,
+        "name": "mind_blast",
+        "insanity": 27.3,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 42.67,
+        "name": "mind_flay",
+        "insanity": 34.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 43.75,
+        "name": "mind_flay",
+        "insanity": 43.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 44.81,
+        "name": "shadow_word_madness",
+        "insanity": 51.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 45.89,
+        "name": "mind_flay",
+        "insanity": 7.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 46.98,
+        "name": "mind_flay",
+        "insanity": 15.700000000000001,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 48.07,
+        "name": "tentacle_slam",
+        "insanity": 23.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 49.18,
+        "name": "mind_blast",
+        "insanity": 33.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 50.29,
+        "name": "mind_flay",
+        "insanity": 41.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 51.39,
+        "name": "shadow_word_madness",
+        "insanity": 52.800000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 52.5,
+        "name": "mind_flay",
+        "insanity": 12.3,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 53.61,
+        "name": "mind_flay",
+        "insanity": 22.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 54.71,
+        "name": "mind_flay",
+        "insanity": 31.900000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 55.82,
+        "name": "mind_flay",
+        "insanity": 40.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 56.95,
+        "name": "shadow_word_madness",
+        "insanity": 50.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 58.08,
+        "name": "mind_blast",
+        "insanity": 6.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 59.21,
+        "name": "mind_flay",
+        "insanity": 14,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 60.35,
+        "name": "tentacle_slam",
+        "insanity": 24.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 61.48,
+        "name": "mind_flay",
+        "insanity": 32.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 62.51,
+        "name": "mind_flay",
+        "insanity": 42.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 63.54,
+        "name": "shadow_word_madness",
+        "insanity": 50.4,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 64.56,
+        "name": "halo",
+        "insanity": 11.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 65.59,
+        "name": "mind_blast",
+        "insanity": 16.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 66.62,
+        "name": "mind_flay_insanity",
+        "insanity": 22.900000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 67.75,
+        "name": "void_volley",
+        "insanity": 34.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 68.89,
+        "name": "shadow_word_madness",
+        "insanity": 45.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 70.02,
+        "name": "void_volley",
+        "insanity": 1.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 71.15,
+        "name": "mind_flay_insanity",
+        "insanity": 19.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 72.3,
+        "name": "tentacle_slam",
+        "insanity": 32.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 73.44,
+        "name": "mind_blast",
+        "insanity": 41.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 74.48,
+        "name": "shadow_word_madness",
+        "insanity": 48.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 75.52,
+        "name": "void_volley",
+        "insanity": 5.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 76.56,
+        "name": "mind_flay_insanity",
+        "insanity": 23.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 77.62,
+        "name": "void_volley",
+        "insanity": 34.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 78.68,
+        "name": "mind_flay",
+        "insanity": 46.6,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 79.84,
+        "name": "shadow_word_madness",
+        "insanity": 54.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 81.01,
+        "name": "mind_blast",
+        "insanity": 16.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 82.24,
+        "name": "mind_flay_insanity",
+        "insanity": 24.900000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 83.39,
+        "name": "mind_flay",
+        "insanity": 36.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 84.51,
+        "name": "tentacle_slam",
+        "insanity": 45.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 85.64,
+        "name": "shadow_word_madness",
+        "insanity": 54.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 86.76,
+        "name": "void_volley",
+        "insanity": 17.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 87.88,
+        "name": "mind_flay",
+        "insanity": 35.6,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 88.99,
+        "name": "mind_blast",
+        "insanity": 49.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 90.1,
+        "name": "mind_flay",
+        "insanity": 56.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 91.2,
+        "name": "shadow_word_madness",
+        "insanity": 65.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 92.31,
+        "name": "mind_flay",
+        "insanity": 21.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 93.42,
+        "name": "mind_flay",
+        "insanity": 30.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 94.52,
+        "name": "mind_flay",
+        "insanity": 38.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 95.63,
+        "name": "mind_flay",
+        "insanity": 47.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 96.74,
+        "name": "shadow_word_madness",
+        "insanity": 54.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 97.84,
+        "name": "mind_blast",
+        "insanity": 10.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 98.95,
+        "name": "tentacle_slam",
+        "insanity": 17.900000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 100.06,
+        "name": "void_volley",
+        "insanity": 24.400000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 101.16,
+        "name": "mind_flay",
+        "insanity": 35.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 102.27,
+        "name": "shadow_word_madness",
+        "insanity": 46.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 103.38,
+        "name": "mind_flay",
+        "insanity": 5.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 104.48,
+        "name": "mind_flay",
+        "insanity": 14.5,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 105.59,
+        "name": "mind_blast",
+        "insanity": 24.3,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 106.7,
+        "name": "mind_flay",
+        "insanity": 31.3,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 107.8,
+        "name": "shadow_word_pain",
+        "insanity": 40.6,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 108.91,
+        "name": "shadow_word_madness",
+        "insanity": 45.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 110.02,
+        "name": "shadow_word_pain",
+        "insanity": 4.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 111.12,
+        "name": "shadow_word_pain",
+        "insanity": 11.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 112.24,
+        "name": "tentacle_slam",
+        "insanity": 16.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 113.37,
+        "name": "mind_blast",
+        "insanity": 25.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 114.52,
+        "name": "void_volley",
+        "insanity": 32.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 115.67,
+        "name": "mind_flay",
+        "insanity": 43.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 116.82,
+        "name": "shadow_word_madness",
+        "insanity": 54.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 117.97,
+        "name": "mind_flay",
+        "insanity": 9.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 119.12,
+        "name": "mind_flay",
+        "insanity": 19.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 120.27,
+        "name": "tentacle_slam",
+        "insanity": 27.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 121.42,
+        "name": "mind_blast",
+        "insanity": 35.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 122.57,
+        "name": "void_volley",
+        "insanity": 43.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 123.7,
+        "name": "shadow_word_madness",
+        "insanity": 55.5,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 124.83,
+        "name": "mind_flay",
+        "insanity": 17.5,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 125.97,
+        "name": "halo",
+        "insanity": 25.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 127.1,
+        "name": "voidform",
+        "insanity": 31.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 128.23,
+        "name": "power_infusion",
+        "insanity": 42.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "none"
+      },
+      {
+        "t": 128.23,
+        "name": "use_items",
+        "insanity": 42.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 128.23,
+        "name": "mind_flay_insanity",
+        "insanity": 42.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 129.17,
+        "name": "shadow_word_madness",
+        "insanity": 52.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 130.13,
+        "name": "mind_blast",
+        "insanity": 12.700000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 131.07,
+        "name": "void_volley",
+        "insanity": 20.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 132.01,
+        "name": "tentacle_slam",
+        "insanity": 33.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 132.96,
+        "name": "shadow_word_madness",
+        "insanity": 48.7,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 133.91,
+        "name": "mind_flay_insanity",
+        "insanity": 8.700000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 134.85,
+        "name": "void_volley",
+        "insanity": 24.1,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 135.78,
+        "name": "void_volley",
+        "insanity": 36.1,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 136.71,
+        "name": "shadow_word_madness",
+        "insanity": 53.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 137.65,
+        "name": "mind_blast",
+        "insanity": 19.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 138.56,
+        "name": "mind_flay_insanity",
+        "insanity": 29.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 139.45,
+        "name": "void_volley",
+        "insanity": 41,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 140.34,
+        "name": "shadow_word_madness",
+        "insanity": 54,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 141.24,
+        "name": "mind_flay",
+        "insanity": 16.5,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 142.1,
+        "name": "mind_flay_insanity",
+        "insanity": 31.8,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 142.97,
+        "name": "shadow_word_madness",
+        "insanity": 45.2,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 143.83,
+        "name": "mind_blast",
+        "insanity": 5.7,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 144.89,
+        "name": "tentacle_slam",
+        "insanity": 13.700000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 145.89,
+        "name": "void_volley",
+        "insanity": 20.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 146.81,
+        "name": "mind_flay",
+        "insanity": 33.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 147.73,
+        "name": "mind_flay",
+        "insanity": 43,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 148.65,
+        "name": "shadow_word_madness",
+        "insanity": 52.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 149.56,
+        "name": "mind_flay",
+        "insanity": 13.3,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 150.48,
+        "name": "mind_blast",
+        "insanity": 21.6,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 151.51,
+        "name": "mind_flay",
+        "insanity": 30.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 152.54,
+        "name": "mind_flay",
+        "insanity": 40.4,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 153.57,
+        "name": "shadow_word_madness",
+        "insanity": 48.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 154.6,
+        "name": "mind_flay",
+        "insanity": 7.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 155.63,
+        "name": "mind_flay",
+        "insanity": 19.5,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 156.66,
+        "name": "tentacle_slam",
+        "insanity": 29.3,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 157.69,
+        "name": "mind_blast",
+        "insanity": 37.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 158.72,
+        "name": "void_volley",
+        "insanity": 44.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 159.75,
+        "name": "shadow_word_madness",
+        "insanity": 57.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 160.78,
+        "name": "mind_flay",
+        "insanity": 15.3,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 161.81,
+        "name": "mind_flay",
+        "insanity": 27.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 162.84,
+        "name": "mind_flay",
+        "insanity": 35.9,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 163.87,
+        "name": "mind_flay",
+        "insanity": 44.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 164.9,
+        "name": "shadow_word_madness",
+        "insanity": 52.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 165.94,
+        "name": "mind_blast",
+        "insanity": 10.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 166.99,
+        "name": "mind_flay",
+        "insanity": 16.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 168.05,
+        "name": "tentacle_slam",
+        "insanity": 24.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 169.12,
+        "name": "mind_flay",
+        "insanity": 33.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 170.2,
+        "name": "mind_flay",
+        "insanity": 44.1,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 171.28,
+        "name": "shadow_word_madness",
+        "insanity": 54.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 172.36,
+        "name": "mind_flay",
+        "insanity": 15.4,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 173.45,
+        "name": "mind_blast",
+        "insanity": 27.2,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 174.54,
+        "name": "mind_flay",
+        "insanity": 36.2,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 175.65,
+        "name": "shadow_word_madness",
+        "insanity": 48,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 176.77,
+        "name": "mind_flay",
+        "insanity": 4,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 177.89,
+        "name": "mind_flay",
+        "insanity": 11.8,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 179.02,
+        "name": "mind_flay",
+        "insanity": 20.6,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 180.14,
+        "name": "tentacle_slam",
+        "insanity": 30.400000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 181.26,
+        "name": "mind_blast",
+        "insanity": 37.4,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 182.38,
+        "name": "mind_flay",
+        "insanity": 44.4,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 183.51,
+        "name": "shadow_word_madness",
+        "insanity": 52.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 184.63,
+        "name": "mind_flay",
+        "insanity": 12.200000000000001,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 185.75,
+        "name": "mind_flay",
+        "insanity": 20,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 186.87,
+        "name": "halo",
+        "insanity": 27.8,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 188.22,
+        "name": "mind_flay_insanity",
+        "insanity": 34.800000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 189.34,
+        "name": "shadow_word_madness",
+        "insanity": 46.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 190.47,
+        "name": "mind_blast",
+        "insanity": 1.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 191.59,
+        "name": "shadow_word_pain",
+        "insanity": 7.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 192.71,
+        "name": "tentacle_slam",
+        "insanity": 11.200000000000001,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 193.83,
+        "name": "mind_flay_insanity",
+        "insanity": 24.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 194.96,
+        "name": "shadow_word_pain",
+        "insanity": 38.6,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 196.09,
+        "name": "shadow_word_madness",
+        "insanity": 45.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 197.26,
+        "name": "void_volley",
+        "insanity": 6.1000000000000005,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 198.4,
+        "name": "mind_blast",
+        "insanity": 23.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 199.55,
+        "name": "mind_flay_insanity",
+        "insanity": 32.6,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 200.69,
+        "name": "void_volley",
+        "insanity": 45,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 201.84,
+        "name": "shadow_word_madness",
+        "insanity": 56,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 202.98,
+        "name": "void_volley",
+        "insanity": 12,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 204.12,
+        "name": "mind_flay_insanity",
+        "insanity": 29,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 205.27,
+        "name": "tentacle_slam",
+        "insanity": 40.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 206.41,
+        "name": "shadow_word_madness",
+        "insanity": 48.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 207.56,
+        "name": "shadow_word_pain",
+        "insanity": 5.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_2"
+      },
+      {
+        "t": 208.69,
+        "name": "mind_blast",
+        "insanity": 12.4,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 209.82,
+        "name": "void_volley",
+        "insanity": 20.900000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 210.96,
+        "name": "void_volley",
+        "insanity": 31.900000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 212.09,
+        "name": "mind_flay",
+        "insanity": 41.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 213.22,
+        "name": "shadow_word_madness",
+        "insanity": 50.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 214.35,
+        "name": "mind_flay",
+        "insanity": 7.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 215.48,
+        "name": "mind_flay",
+        "insanity": 17.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 216.61,
+        "name": "mind_blast",
+        "insanity": 29.3,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 217.75,
+        "name": "tentacle_slam",
+        "insanity": 37.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 218.88,
+        "name": "void_volley",
+        "insanity": 43.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 220.01,
+        "name": "shadow_word_madness",
+        "insanity": 54.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 221.16,
+        "name": "mind_flay",
+        "insanity": 12.8,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 222.31,
+        "name": "mind_flay",
+        "insanity": 25.6,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 223.46,
+        "name": "mind_flay",
+        "insanity": 36.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 224.61,
+        "name": "shadow_word_madness",
+        "insanity": 47.7,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 225.76,
+        "name": "mind_blast",
+        "insanity": 3.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 226.92,
+        "name": "mind_flay",
+        "insanity": 11.200000000000001,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 228.07,
+        "name": "tentacle_slam",
+        "insanity": 20.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 229.22,
+        "name": "void_volley",
+        "insanity": 29.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 230.37,
+        "name": "mind_flay",
+        "insanity": 44.5,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 231.49,
+        "name": "shadow_word_madness",
+        "insanity": 56.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 232.61,
+        "name": "mind_flay",
+        "insanity": 15.8,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 233.74,
+        "name": "mind_blast",
+        "insanity": 25.6,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 234.86,
+        "name": "mind_flay",
+        "insanity": 32.6,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 235.98,
+        "name": "mind_flay",
+        "insanity": 41.4,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 237.11,
+        "name": "shadow_word_madness",
+        "insanity": 50.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 238.23,
+        "name": "mind_flay",
+        "insanity": 5.2,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 239.35,
+        "name": "mind_flay",
+        "insanity": 14,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 240.47,
+        "name": "tentacle_slam",
+        "insanity": 21.8,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 241.59,
+        "name": "mind_blast",
+        "insanity": 29.8,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 242.72,
+        "name": "shadow_word_death",
+        "insanity": 36.800000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 243.84,
+        "name": "void_volley",
+        "insanity": 42.800000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 244.96,
+        "name": "shadow_word_madness",
+        "insanity": 58.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 246.09,
+        "name": "mind_flay",
+        "insanity": 15.3,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 247.24,
+        "name": "mind_flay",
+        "insanity": 26.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 248.39,
+        "name": "halo",
+        "insanity": 35.4,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 249.54,
+        "name": "voidform",
+        "insanity": 43.4,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 250.7,
+        "name": "power_infusion",
+        "insanity": 54.4,
+        "max": 100,
+        "vf": true,
+        "target": "none"
+      },
+      {
+        "t": 250.7,
+        "name": "use_items",
+        "insanity": 54.4,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 250.7,
+        "name": "shadow_word_madness",
+        "insanity": 54.4,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 251.67,
+        "name": "mind_blast",
+        "insanity": 14.4,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 252.62,
+        "name": "mind_flay_insanity",
+        "insanity": 22.400000000000002,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 253.57,
+        "name": "tentacle_slam",
+        "insanity": 34.800000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 254.52,
+        "name": "shadow_word_madness",
+        "insanity": 45.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 255.48,
+        "name": "mind_flay_insanity",
+        "insanity": 7.8,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 256.41,
+        "name": "shadow_word_death",
+        "insanity": 21.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 257.34,
+        "name": "void_volley",
+        "insanity": 25.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 258.27,
+        "name": "mind_blast",
+        "insanity": 41.7,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 259.21,
+        "name": "shadow_word_madness",
+        "insanity": 49.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 260.14,
+        "name": "mind_flay_insanity",
+        "insanity": 13.200000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 261.06,
+        "name": "void_volley",
+        "insanity": 27.1,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 261.95,
+        "name": "void_volley",
+        "insanity": 37.1,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 262.83,
+        "name": "shadow_word_madness",
+        "insanity": 49.6,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 263.72,
+        "name": "void_volley",
+        "insanity": 10.6,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 264.59,
+        "name": "mind_blast",
+        "insanity": 29.6,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 265.45,
+        "name": "mind_flay_insanity",
+        "insanity": 38.6,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 266.32,
+        "name": "shadow_word_madness",
+        "insanity": 51.5,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 267.36,
+        "name": "tentacle_slam",
+        "insanity": 12,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 268.37,
+        "name": "shadow_word_death",
+        "insanity": 22,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 269.38,
+        "name": "void_volley",
+        "insanity": 29,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 270.38,
+        "name": "mind_flay",
+        "insanity": 41,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 271.39,
+        "name": "shadow_word_madness",
+        "insanity": 50.300000000000004,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 272.41,
+        "name": "mind_blast",
+        "insanity": 12.8,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 273.43,
+        "name": "mind_flay",
+        "insanity": 18.8,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 274.45,
+        "name": "mind_flay",
+        "insanity": 27.6,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 275.47,
+        "name": "mind_flay",
+        "insanity": 36.4,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 276.49,
+        "name": "shadow_word_madness",
+        "insanity": 45.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 277.51,
+        "name": "tentacle_slam",
+        "insanity": 4.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 278.53,
+        "name": "shadow_word_death",
+        "insanity": 13.700000000000001,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 279.56,
+        "name": "mind_blast",
+        "insanity": 19.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 280.58,
+        "name": "void_volley",
+        "insanity": 30.7,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 281.6,
+        "name": "mind_flay",
+        "insanity": 41.2,
+        "max": 100,
+        "vf": true,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 282.63,
+        "name": "shadow_word_madness",
+        "insanity": 52.5,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 283.66,
+        "name": "mind_flay",
+        "insanity": 11,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 284.68,
+        "name": "mind_flay",
+        "insanity": 22.3,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 285.69,
+        "name": "mind_flay",
+        "insanity": 32.1,
+        "max": 100,
+        "vf": true,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 286.71,
+        "name": "mind_blast",
+        "insanity": 42.9,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 287.72,
+        "name": "shadow_word_madness",
+        "insanity": 48.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 288.75,
+        "name": "tentacle_slam",
+        "insanity": 4.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 289.78,
+        "name": "shadow_word_death",
+        "insanity": 13.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 290.73,
+        "name": "void_volley",
+        "insanity": 19.400000000000002,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 291.69,
+        "name": "void_volley",
+        "insanity": 33.4,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 292.66,
+        "name": "mind_flay",
+        "insanity": 44.9,
+        "max": 100,
+        "vf": false,
+        "target": "Fluffy_Pillow"
+      },
+      {
+        "t": 293.64,
+        "name": "shadow_word_madness",
+        "insanity": 56.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 294.62,
+        "name": "mind_blast",
+        "insanity": 11.700000000000001,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 295.7,
+        "name": "mind_flay",
+        "insanity": 18.7,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 296.8,
+        "name": "mind_flay",
+        "insanity": 27.5,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 297.91,
+        "name": "mind_flay",
+        "insanity": 36.300000000000004,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      },
+      {
+        "t": 299.01,
+        "name": "mind_flay",
+        "insanity": 44.1,
+        "max": 100,
+        "vf": false,
+        "target": "Dummy_Enemy_1"
+      }
+    ]
+  },
+  "spec": "Shadow Priest",
+  "level": 90,
+  "talentsHash": "CIQAAAAAAAAA",
+  "elapsedMs": 7635,
+  "generatedAt": "2026-10-25T09:18:10.273Z"
+}

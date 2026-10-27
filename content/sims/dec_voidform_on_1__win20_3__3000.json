@@ -1,0 +1,25 @@
+{
+  "runId": "dec_voidform_on_1__win20_3__3000",
+  "layer": "A",
+  "kind": "adds-window",
+  "hero": "archon",
+  "scenarioId": "win20_3",
+  "scenarioLabel": "窗口 20s · 3 目标（2 只小怪）",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 20,
+  "iterations": 3000,
+  "dps": {
+    "mean": 761828.24,
+    "ci95": 1490.17,
+    "ci95Pct": 0.2,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T10:34:49.544Z",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc"
+}

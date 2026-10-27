@@ -1,0 +1,213 @@
+{
+ "topic": "Archon（执政官）暗牧输出优先级交叉核对",
+ "generatedAt": "2026-10-26",
+ "baseline": "SimC 1210.01 / WoW 12.1.5 / MID2",
+ "sources": [
+  {
+   "id": "method",
+   "name": "Method.gg",
+   "url": "https://method.gg/guides/shadow-priest/playstyle-and-rotation",
+   "version": "Midnight 12.1",
+   "hero": "Archon",
+   "type": "有序列表（13 步）",
+   "capture": "content/guides/sources/method-archon.md"
+  },
+  {
+   "id": "maxroll",
+   "name": "Maxroll",
+   "url": "https://maxroll.gg/wow/class-guides/shadow-priest-mythic-plus-guide",
+   "version": "Patch 12.1",
+   "hero": "Archon",
+   "type": "有序列表（10 步）",
+   "capture": "content/guides/sources/maxroll-archon.md"
+  },
+  {
+   "id": "icyveins",
+   "name": "Icy Veins",
+   "url": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-rotation-cooldowns-abilities",
+   "version": "12.1",
+   "hero": "Archon / Voidweaver",
+   "type": "循环目标（8 条）+ AoE 判据",
+   "capture": "content/guides/sources/icyveins-archon.md"
+  },
+  {
+   "id": "nga",
+   "name": "NGA（萌面人 搬运 Maxroll）",
+   "url": "https://bbs.nga.cn/read.php?tid=46398013",
+   "version": "12.0",
+   "hero": "Archon / Voidweaver",
+   "type": "有序列表（9 步，中文）",
+   "capture": "content/guides/sources/nga-maxroll-12.0.md"
+  }
+ ],
+ "sequences": {
+  "method": [
+   "dot_upkeep",
+   "halo",
+   "void_eruption",
+   "power_infusion",
+   "shadow_word_madness",
+   "tentacle_slam",
+   "mind_blast",
+   "mind_flay_insanity",
+   "shadow_word_death",
+   "void_volley",
+   "mind_flay"
+  ],
+  "maxroll": [
+   "dot_upkeep",
+   "halo",
+   "void_eruption",
+   "power_infusion",
+   "shadow_word_madness",
+   "void_volley",
+   "shadow_word_death",
+   "mind_blast",
+   "mind_flay_insanity",
+   "mind_flay"
+  ],
+  "nga": [
+   "dot_upkeep",
+   "halo",
+   "void_eruption",
+   "power_infusion",
+   "shadow_word_madness",
+   "void_volley",
+   "shadow_word_death",
+   "mind_blast",
+   "mind_flay"
+  ]
+ },
+ "agreements": [
+  {
+   "point": "DoT 常驻排第一",
+   "sources": [
+    "method",
+    "maxroll",
+    "nga",
+    "icyveins"
+   ],
+   "detail": "吸血鬼之触 + 暗言术：痛，可用触须猛击补，捕风捉影延长"
+  },
+  {
+   "point": "光晕在爆发窗口之前",
+   "sources": [
+    "method",
+    "maxroll",
+    "nga"
+   ],
+   "detail": "三份有序列表都是 Halo → Void Eruption；IV 把光晕列为不必挤掉短冷却的长冷却"
+  },
+  {
+   "point": "能量灌注在爆发之内（爆发后立刻）",
+   "sources": [
+    "method",
+    "maxroll",
+    "nga",
+    "icyveins"
+   ],
+   "detail": "起手都是先进虚空形态，再开 PI / 饰品 / 药水"
+  },
+  {
+   "point": "暗言术：癫要维持、别溢出狂乱值",
+   "sources": [
+    "method",
+    "maxroll",
+    "nga",
+    "icyveins"
+   ]
+  },
+  {
+   "point": "精神鞭笞只做填充，可提前打断",
+   "sources": [
+    "method",
+    "icyveins"
+   ]
+  },
+  {
+   "point": "暗言术：灭只在目标 <20%（或有吸收盾）",
+   "sources": [
+    "method",
+    "maxroll",
+    "nga",
+    "icyveins"
+   ]
+  }
+ ],
+ "divergences": [
+  {
+   "id": "vv_position",
+   "point": "虚空齐射的位置",
+   "method": "第 12 位（灭之后、填充之前）",
+   "maxroll": "第 6 位（癫之后、灭之前）",
+   "nga": "第 6 位",
+   "apl": "两条独立条件：① cooldown.voidform.up 时用；② 无共振能量 / 虚空形态就绪<60s / 虚空形态中 / 有共振能量增益 / 碎虚≥4 层 时用",
+   "verdict": "不是真矛盾：人类列表把它压成一行，APL 按条件分裂。以 APL 为准，教学写法用「爆发窗口内优先」表述。",
+   "status": "resolved_by_apl"
+  },
+  {
+   "id": "ts_position",
+   "point": "触须猛击的位置",
+   "method": "第 2 与第 7 位（跟着 DoT、且怕溢出充能）",
+   "maxroll": "并入 DoT 维护那一行",
+   "nga": "并入 DoT 维护那一行",
+   "apl": "三处：补 DoT、可刷新时补、距下次加怪>30/20 时泄充能",
+   "verdict": "一致：都是在「补 DoT」与「别溢出充能」之间权衡；Method 写得细，Maxroll 压成一行。",
+   "status": "consistent"
+  },
+  {
+   "id": "swd_position",
+   "point": "暗言术：灭的位置",
+   "method": "第 11 位（精神鞭笞：狂之后）",
+   "maxroll": "第 7 位（心灵震爆之前）",
+   "nga": "第 7 位",
+   "verdict": "相对顺序有差，但触发条件一致（<20%、有吸收盾）。灭是条件技能，位置差异在实战里由条件决定，不影响结论。",
+   "status": "low_impact"
+  },
+  {
+   "id": "naming",
+   "point": "术语差异",
+   "detail": "Method 写 Voidform，Maxroll/NGA 写 Void Eruption（虚空爆发）。两者指同一次爆发：Void Eruption 是让角色进入 Voidform 的那一下。",
+   "verdict": "教学文案统一用「虚空形态（Voidform）」，并注明起手是按 Void Eruption。",
+   "status": "naming"
+  },
+  {
+   "id": "tier_set",
+   "point": "套装描述不完全一致",
+   "detail": "Method 说 4 件套给免费虚空齐射；Maxroll 说 2 件套＝触须猛击冷却 -3s／伤害 +100%，4 件套＝触须猛击给免费虚空齐射。",
+   "verdict": "Method 只写了 4 件套，Maxroll 写全了两件；以 Maxroll 为准，并按 SimC profile 复核。",
+   "status": "needs_sim_check"
+  }
+ ],
+ "chineseNames": {
+  "halo": "光晕",
+  "void_eruption": "虚空爆发",
+  "voidform": "虚空形态",
+  "power_infusion": "能量灌注",
+  "shadow_word_madness": "暗言术：癫",
+  "void_volley": "虚空齐射",
+  "shadow_word_death": "暗言术：灭",
+  "mind_blast": "心灵震爆",
+  "mind_flay": "精神鞭笞",
+  "mind_flay_insanity": "精神鞭笞：狂",
+  "tentacle_slam": "触须猛击",
+  "vampiric_touch": "吸血鬼之触",
+  "shadow_word_pain": "暗言术：痛",
+  "psychic_link": "心智联接",
+  "twist_of_fate": "命运多舛",
+  "phantom_reach": "幻影延展",
+  "desperate_prayer": "绝望祷言",
+  "dispersion": "消散",
+  "invoked_nightmare": "被唤起的梦魇",
+  "misery": "哀难",
+  "haunting_shadows": "捕风捉影",
+  "void_torrent": "虚空洪流",
+  "void_blast": "虚空冲击"
+ },
+ "chineseNameSource": "NGA 搬运 Maxroll 12.0（正文用语）；仅作对照，未经国服客户端逐条核对",
+ "todo": [
+  "用 SimC 跑 A/B：光晕在虚空形态前 vs 后，看是否有量级差异",
+  "核对 2 件套描述（profile 里的套装 id）",
+  "国服客户端核对中文名后把 verified 置 true"
+ ]
+}

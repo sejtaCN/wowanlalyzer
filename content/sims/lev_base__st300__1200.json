@@ -1,0 +1,21 @@
+{
+  "runId": "lev_base__st300__1200",
+  "layer": "A",
+  "kind": "leverage-baseline",
+  "hero": "archon",
+  "scenarioId": "st300",
+  "scenarioLabel": "单体 300s",
+  "durationSec": 300,
+  "targets": 1,
+  "dps": {
+    "mean": 231325.99,
+    "ci95": 265.44,
+    "ci95Pct": 0.11,
+    "samples": 1199
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:35:56.203Z"
+}

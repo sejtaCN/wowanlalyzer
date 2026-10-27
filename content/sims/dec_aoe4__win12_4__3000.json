@@ -1,0 +1,28 @@
+{
+  "runId": "dec_aoe4__win12_4__3000",
+  "layer": "A",
+  "kind": "adds-window",
+  "hero": "archon",
+  "scenarioId": "win12_4",
+  "scenarioLabel": "窗口 12s · 4 目标（3 只小怪）",
+  "fightStyle": "Patchwerk",
+  "targets": 4,
+  "durationSec": 12,
+  "iterations": 3000,
+  "dps": {
+    "mean": 723890.19,
+    "ci95": 1704.29,
+    "ci95Pct": 0.24,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "edit": {
+    "note": "把 AoE 切换条件从 active_enemies>2 改成 >4（4 目标时不切 AoE）"
+  },
+  "generatedAt": "2026-10-26T10:34:50.233Z",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc"
+}

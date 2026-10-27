@@ -1,0 +1,400 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-26",
+  "description": "每章五段的图契约。ready 只表示该段已有可展示的真图/表，不表示四约束已补齐；missing 必须写待补原因与下一批。",
+  "kinds": [
+    "budget-chart",
+    "burst-bars",
+    "cast-chart",
+    "decision-flow",
+    "log-stats",
+    "mechanic-cost",
+    "phase-chart",
+    "priority-map",
+    "priority-table",
+    "resource-chart",
+    "route-examples",
+    "route-map",
+    "route-strip",
+    "scope",
+    "selected-wave",
+    "skill-cards",
+    "target-band",
+    "wave-table",
+    "play-budget",
+    "cooldown-window"
+  ],
+  "chapters": {
+    "l0-01-what-shadow-does": [
+      {
+        "section": 1,
+        "kind": "scope",
+        "status": "ready",
+        "source": "chapter.level",
+        "note": "L0 的适用范围，不是波次模型。"
+      },
+      {
+        "section": 2,
+        "kind": "log-stats",
+        "status": "ready",
+        "source": "xiaohuasheng-events"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "scope",
+        "status": "not-applicable",
+        "source": "chapter.level"
+      },
+      {
+        "section": 5,
+        "kind": "cast-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-events#topCasts",
+        "note": "整场施法次数；被动触发单独列，不与手动技能混排。"
+      }
+    ],
+    "l0-02-skill-list": [
+      {
+        "section": 1,
+        "kind": "scope",
+        "status": "ready",
+        "source": "chapter.level",
+        "note": "L0 的适用范围，不是波次模型。"
+      },
+      {
+        "section": 2,
+        "kind": "skill-cards",
+        "status": "ready",
+        "source": "priority-table.json"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "scope",
+        "status": "not-applicable",
+        "source": "chapter.level"
+      },
+      {
+        "section": 5,
+        "kind": "cast-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-events#topCasts",
+        "note": "整场施法次数；被动触发单独列，不与手动技能混排。"
+      }
+    ],
+    "l0-03-priority-table": [
+      {
+        "section": 1,
+        "kind": "scope",
+        "status": "ready",
+        "source": "chapter.level",
+        "note": "L0 的适用范围，不是波次模型。"
+      },
+      {
+        "section": 2,
+        "kind": "priority-table",
+        "status": "ready",
+        "source": "priority-table.json"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "scope",
+        "status": "not-applicable",
+        "source": "chapter.level"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "missing",
+        "source": "需要带 Fights 或 UNIT_DIED 的导出",
+        "next": "E"
+      }
+    ],
+    "l0-04-cooldowns": [
+      {
+        "section": 1,
+        "kind": "scope",
+        "status": "ready",
+        "source": "chapter.level",
+        "note": "L0 的适用范围，不是波次模型。"
+      },
+      {
+        "section": 2,
+        "kind": "burst-bars",
+        "status": "ready",
+        "source": "chapter.chart.runIds"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "scope",
+        "status": "not-applicable",
+        "source": "chapter.level"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-phases"
+      }
+    ],
+    "l1-01-mid": [
+      {
+        "section": 1,
+        "kind": "play-budget",
+        "status": "ready",
+        "source": "trace_archon__w30_5__5000",
+        "note": "目标数轴 + 代表迭代动作预算；DPS 是全部迭代，动作与狂乱是 1 次。"
+      },
+      {
+        "section": 2,
+        "kind": "burst-bars",
+        "status": "ready",
+        "source": "chapter.chart.runIds"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "route-examples",
+        "status": "ready",
+        "source": "waves-altar-of-fangs.json + WaveDiagram",
+        "note": "只借真实路线说明模型，不标无坐标位置。"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "missing",
+        "source": "需要带 Fights 或 UNIT_DIED 的导出",
+        "next": "E"
+      }
+    ],
+    "l1-02-large": [
+      {
+        "section": 1,
+        "kind": "play-budget",
+        "status": "ready",
+        "source": "trace_archon__w30_8__5000",
+        "note": "目标数轴 + 代表迭代动作预算；DPS 是全部迭代，动作与狂乱是 1 次。"
+      },
+      {
+        "section": 2,
+        "kind": "burst-bars",
+        "status": "ready",
+        "source": "chapter.chart.runIds"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "route-examples",
+        "status": "ready",
+        "source": "waves-altar-of-fangs.json + WaveDiagram"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-phases"
+      }
+    ],
+    "l1-03-small": [
+      {
+        "section": 1,
+        "kind": "play-budget",
+        "status": "ready",
+        "source": "trace_archon__w30_2__5000",
+        "note": "目标数轴 + 代表迭代动作预算；DPS 是全部迭代，动作与狂乱是 1 次。"
+      },
+      {
+        "section": 2,
+        "kind": "burst-bars",
+        "status": "ready",
+        "source": "chapter.chart.runIds"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "route-examples",
+        "status": "ready",
+        "source": "waves-altar-of-fangs.json + WaveDiagram",
+        "note": "只借真实路线说明模型，不标无坐标位置。"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-phases"
+      }
+    ],
+    "l1-04-boss": [
+      {
+        "section": 1,
+        "kind": "play-budget",
+        "status": "ready",
+        "source": "trace_archon__w90_1b__5000",
+        "note": "目标数轴 + 代表迭代动作预算；DPS 是全部迭代，动作与狂乱是 1 次。"
+      },
+      {
+        "section": 2,
+        "kind": "burst-bars",
+        "status": "ready",
+        "source": "chapter.chart.runIds"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "route-examples",
+        "status": "ready",
+        "source": "waves-altar-of-fangs.json + WaveDiagram(BOSS)",
+        "note": "两条 BOSS 波；地图仍不标坐标。"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-phases"
+      }
+    ],
+    "l1-05-rhythm": [
+      {
+        "section": 1,
+        "kind": "cooldown-window",
+        "status": "ready",
+        "source": "content/analysis/cooldown-window-archon.json",
+        "note": "C 层算术：观测冷却 + A/B 收益 + 日志爆发节奏；不是两波连打模拟。"
+      },
+      {
+        "section": 2,
+        "kind": "burst-bars",
+        "status": "ready",
+        "source": "chapter.chart.runIds"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "route-examples",
+        "status": "ready",
+        "source": "waves-altar-of-fangs.json + WaveDiagram(非相邻两档)",
+        "note": "这条路线没有相邻大→小，只给两个档位示例。"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-phases"
+      }
+    ],
+    "l1-06-adds": [
+      {
+        "section": 1,
+        "kind": "play-budget",
+        "status": "ready",
+        "source": "trace_archon__win12_4__5000",
+        "note": "加怪窗口动作预算；模型是 4 目标 12 秒近似，动作与狂乱为 1 次代表迭代。"
+      },
+      {
+        "section": 2,
+        "kind": "burst-bars",
+        "status": "ready",
+        "source": "chapter.chart.runIds"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "chapter.priorityDiff + priority-table.json"
+      },
+      {
+        "section": 4,
+        "kind": "scope",
+        "status": "not-applicable",
+        "source": "chapter.map"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-phases"
+      }
+    ],
+    "l2-01-altar-of-fangs": [
+      {
+        "section": 1,
+        "kind": "route-strip",
+        "status": "ready",
+        "source": "waves-altar-of-fangs.json"
+      },
+      {
+        "section": 2,
+        "kind": "selected-wave",
+        "status": "ready",
+        "source": "Teaching/rules.ts → 配对 runId"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "selected wave → L1-0x priorityDiff",
+        "note": "按当前波目标档映射 L1，不是该波专属。"
+      },
+      {
+        "section": 4,
+        "kind": "route-map",
+        "status": "ready",
+        "source": "waves-altar-of-fangs.json + keystone.guru 地形图"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "ready",
+        "source": "xiaohuasheng-phases"
+      }
+    ]
+  }
+}

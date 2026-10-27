@@ -1,0 +1,117 @@
+{
+ "note": "中文名分两档：verified=true 的是已核对过的（4 个 DoT + 常用物品）；verified=false 的是有来源但未逐条核对的（zhSource 记录来源），界面上会同时显示英文键名。",
+ "skills": {
+  "vampiric_touch": {
+   "zh": "吸血鬼之触",
+   "verified": true
+  },
+  "shadow_word_pain": {
+   "zh": "暗言术：痛",
+   "verified": true
+  },
+  "devouring_plague": {
+   "zh": "噬灭疫病",
+   "verified": true
+  },
+  "voidform": {
+   "zh": "虚空形态",
+   "verified": true
+  },
+  "shadow_word_madness": {
+   "zh": "暗言术：癫",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "tentacle_slam": {
+   "zh": "触须猛击",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "void_torrent": {
+   "zh": "虚空洪流",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "void_volley": {
+   "zh": "虚空齐射",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "void_blast": {
+   "zh": "虚空冲击",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "mind_blast": {
+   "zh": "心灵震爆",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "mind_flay": {
+   "zh": "精神鞭笞",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "mind_flay_insanity": {
+   "zh": "精神鞭笞：狂",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "shadow_word_death": {
+   "zh": "暗言术：灭",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "shadowform": {
+   "zh": null,
+   "verified": false
+  },
+  "power_infusion": {
+   "zh": "能量灌注",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "halo": {
+   "zh": "光晕",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "desperate_prayer": {
+   "zh": "绝望祷言",
+   "verified": false,
+   "zhSource": "NGA 搬运 Maxroll 12.0（2026-10-26）"
+  },
+  "arcane_torrent": {
+   "zh": null,
+   "verified": false
+  },
+  "use_item": {
+   "zh": "饰品",
+   "verified": true
+  },
+  "potion": {
+   "zh": "药水",
+   "verified": true
+  },
+  "blood_fury": {
+   "zh": "血性狂怒",
+   "verified": true
+  },
+  "berserking": {
+   "zh": "狂暴",
+   "verified": true
+  },
+  "fireblood": {
+   "zh": "烈焰之血",
+   "verified": true
+  },
+  "ancestral_call": {
+   "zh": "先祖召唤",
+   "verified": true
+  },
+  "invoke_external_buff": {
+   "zh": "外部增益",
+   "verified": true
+  }
+ }
+}

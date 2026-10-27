@@ -1,0 +1,32 @@
+{
+  "runId": "lev_mind_flay_insanity__st300__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "mind_flay_insanity",
+  "scenarioId": "st300",
+  "scenarioLabel": "单体 300s",
+  "durationSec": 300,
+  "targets": 1,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 178662.66,
+    "ci95": 139.24,
+    "ci95Pct": 0.08,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+  },
+  "deltaPct": -22.74,
+  "deltaCiPct": 0.15,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:17.261Z"
+}

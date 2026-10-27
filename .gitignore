@@ -1,0 +1,17 @@
+node_modules/
+dist/
+data/
+shots/
+*.log
+.DS_Store
+Thumbs.db
+.vite/
+.workbuddy/
+.screenshots/
+.trae/
+
+# SimC 二进制与临时文件（本地产物，不入库）
+.tools/
+
+# one-off audit scripts
+scripts/_tmp-*

@@ -1,0 +1,32 @@
+{
+  "runId": "lev_halo__w30_5__1200",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "halo",
+  "scenarioId": "w30_5",
+  "scenarioLabel": "5 目标 30s",
+  "durationSec": 30,
+  "targets": 5,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 862944.93,
+    "ci95": 2217.68,
+    "ci95Pct": 0.26,
+    "samples": 1199
+  },
+  "baselineDps": {
+    "mean": 1045073.22,
+    "ci95": 2666.96,
+    "ci95Pct": 0.26,
+    "samples": 1199
+  },
+  "deltaPct": -17.43,
+  "deltaCiPct": 0.52,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:35:57.562Z"
+}

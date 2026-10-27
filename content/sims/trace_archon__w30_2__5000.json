@@ -1,0 +1,283 @@
+{
+  "runId": "trace_archon__w30_2__5000",
+  "kind": "action-trace",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "w30_2",
+  "scenarioLabel": "2 目标 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 2,
+  "durationSec": 30,
+  "iterations": 5000,
+  "dps": {
+    "mean": 579090.36,
+    "ci95": 792.58,
+    "ci95Pct": 0.14,
+    "samples": 4999
+  },
+  "actions": {
+    "total": 42,
+    "series": [
+      {
+        "t": 0,
+        "name": "tentacle_slam",
+        "insanity": 6,
+        "max": 100
+      },
+      {
+        "t": 0.873,
+        "name": "potion",
+        "insanity": 12,
+        "max": 100
+      },
+      {
+        "t": 0.873,
+        "name": "halo",
+        "insanity": 12,
+        "max": 100
+      },
+      {
+        "t": 1.745,
+        "name": "shadow_word_pain",
+        "insanity": 17,
+        "max": 100
+      },
+      {
+        "t": 2.617,
+        "name": "shadow_word_pain",
+        "insanity": 21,
+        "max": 100
+      },
+      {
+        "t": 3.487,
+        "name": "void_volley",
+        "insanity": 24,
+        "max": 100
+      },
+      {
+        "t": 4.339,
+        "name": "voidform",
+        "insanity": 37,
+        "max": 100
+      },
+      {
+        "t": 5.191,
+        "name": "power_infusion",
+        "insanity": 48,
+        "max": 100
+      },
+      {
+        "t": 5.191,
+        "name": "use_items",
+        "insanity": 48,
+        "max": 100
+      },
+      {
+        "t": 5.191,
+        "name": "shadow_word_madness",
+        "insanity": 48,
+        "max": 100
+      },
+      {
+        "t": 5.944,
+        "name": "mind_blast",
+        "insanity": 5.5,
+        "max": 100
+      },
+      {
+        "t": 6.698,
+        "name": "mind_flay_insanity",
+        "insanity": 14,
+        "max": 100
+      },
+      {
+        "t": 7.452,
+        "name": "mind_flay_insanity",
+        "insanity": 30.900000000000002,
+        "max": 100
+      },
+      {
+        "t": 8.206,
+        "name": "tentacle_slam",
+        "insanity": 41.800000000000004,
+        "max": 100
+      },
+      {
+        "t": 8.961,
+        "name": "shadow_word_madness",
+        "insanity": 51.300000000000004,
+        "max": 100
+      },
+      {
+        "t": 9.715,
+        "name": "void_volley",
+        "insanity": 10.3,
+        "max": 100
+      },
+      {
+        "t": 10.469,
+        "name": "void_volley",
+        "insanity": 24.8,
+        "max": 100
+      },
+      {
+        "t": 11.224,
+        "name": "mind_blast",
+        "insanity": 38.300000000000004,
+        "max": 100
+      },
+      {
+        "t": 11.979,
+        "name": "shadow_word_madness",
+        "insanity": 51.800000000000004,
+        "max": 100
+      },
+      {
+        "t": 12.733,
+        "name": "mind_flay_insanity",
+        "insanity": 12.8,
+        "max": 100
+      },
+      {
+        "t": 13.487,
+        "name": "tentacle_slam",
+        "insanity": 23.7,
+        "max": 100
+      },
+      {
+        "t": 14.242,
+        "name": "void_volley",
+        "insanity": 29.7,
+        "max": 100
+      },
+      {
+        "t": 14.996,
+        "name": "void_volley",
+        "insanity": 44.2,
+        "max": 100
+      },
+      {
+        "t": 15.751,
+        "name": "shadow_word_madness",
+        "insanity": 58.2,
+        "max": 100
+      },
+      {
+        "t": 16.506,
+        "name": "mind_blast",
+        "insanity": 18.7,
+        "max": 100
+      },
+      {
+        "t": 17.26,
+        "name": "mind_flay_insanity",
+        "insanity": 33.7,
+        "max": 100
+      },
+      {
+        "t": 18.014,
+        "name": "shadow_word_madness",
+        "insanity": 48.1,
+        "max": 100
+      },
+      {
+        "t": 18.77,
+        "name": "void_volley",
+        "insanity": 5.6000000000000005,
+        "max": 100
+      },
+      {
+        "t": 19.524,
+        "name": "mind_flay",
+        "insanity": 17.1,
+        "max": 100
+      },
+      {
+        "t": 20.278,
+        "name": "mind_flay",
+        "insanity": 26.400000000000002,
+        "max": 100
+      },
+      {
+        "t": 21.055,
+        "name": "mind_blast",
+        "insanity": 36.2,
+        "max": 100
+      },
+      {
+        "t": 21.975,
+        "name": "mind_flay",
+        "insanity": 44.2,
+        "max": 100
+      },
+      {
+        "t": 22.751,
+        "name": "shadow_word_madness",
+        "insanity": 54,
+        "max": 100
+      },
+      {
+        "t": 23.53,
+        "name": "mind_flay",
+        "insanity": 11.5,
+        "max": 100
+      },
+      {
+        "t": 24.305,
+        "name": "tentacle_slam",
+        "insanity": 21.3,
+        "max": 100
+      },
+      {
+        "t": 25.08,
+        "name": "shadow_word_death",
+        "insanity": 27.3,
+        "max": 100
+      },
+      {
+        "t": 25.873,
+        "name": "void_volley",
+        "insanity": 34.300000000000004,
+        "max": 100
+      },
+      {
+        "t": 26.676,
+        "name": "shadow_word_madness",
+        "insanity": 49.300000000000004,
+        "max": 100
+      },
+      {
+        "t": 27.482,
+        "name": "mind_blast",
+        "insanity": 9.8,
+        "max": 100
+      },
+      {
+        "t": 28.286,
+        "name": "mind_flay",
+        "insanity": 17.3,
+        "max": 100
+      },
+      {
+        "t": 29.094,
+        "name": "mind_flay",
+        "insanity": 28.6,
+        "max": 100
+      },
+      {
+        "t": 29.901,
+        "name": "mind_flay",
+        "insanity": 37.9,
+        "max": 100
+      }
+    ]
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T10:59:36.330Z"
+}

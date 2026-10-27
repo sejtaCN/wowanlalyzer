@@ -1,0 +1,30 @@
+{
+  "runId": "gear_weapon_oil__t3__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "weapon_oil",
+  "variantLabel": "武器油（临时附魔）",
+  "variantKind": "consumable",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 413228.95,
+    "ci95": 294.76,
+    "ci95Pct": 0.07,
+    "stdDev": 150.39,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:40:02.775Z"
+}

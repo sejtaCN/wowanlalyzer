@@ -1,0 +1,41 @@
+{
+  "runId": "dec_voidform_on_1__w20_5__5000",
+  "layer": "A",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "decisionId": "voidform_on",
+  "decisionLabel": "这一波开不开爆发（Voidform）",
+  "value": 1,
+  "baseValue": 1,
+  "scenarioId": "w20_5",
+  "scenarioLabel": "5 目标 20s",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 20,
+  "iterations": 5007,
+  "dps": {
+    "mean": 1063835.07,
+    "ci95": 1624,
+    "ci95Pct": 0.15,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "lines": [
+      {
+        "before": "actions.cds+=/voidform,if=active_dot.shadow_word_pain>=active_dot.vampiric_touch",
+        "after": "actions.cds+=/voidform,if=active_dot.shadow_word_pain>=active_dot.vampiric_touch"
+      }
+    ],
+    "pattern": ",if=.*$",
+    "appliedValue": 1
+  },
+  "generatedAt": "2026-10-26T10:34:22.559Z",
+  "kind": "decision-ab"
+}

@@ -1,0 +1,733 @@
+{
+ "hero": "archon",
+ "profile": "content/profiles/MID2_shadow_archon.simc",
+ "logId": "xiaohuasheng-events",
+ "method": "APL 边＝条件依赖（可复现）；日志边＝真实施法统计（applies=DoT 条带开始前 1s 的施法；cast_in_burst=施法瞬间是否在虚空形态；opener=爆发窗口前 3s 的施法）",
+ "counts": {
+  "apl": 55,
+  "applies": 4,
+  "burst": 12,
+  "opener": 8
+ },
+ "nodes": [
+  {
+   "id": "shadowform",
+   "kind": "skill",
+   "zh": null,
+   "en": "shadowform"
+  },
+  {
+   "id": "variable",
+   "kind": "skill",
+   "zh": null,
+   "en": "variable"
+  },
+  {
+   "id": "arcane_torrent",
+   "kind": "skill",
+   "zh": null,
+   "en": "arcane_torrent"
+  },
+  {
+   "id": "mind_blast",
+   "kind": "skill",
+   "zh": "心灵震爆",
+   "en": "mind_blast"
+  },
+  {
+   "id": "tentacle_slam",
+   "kind": "skill",
+   "zh": "触须猛击",
+   "en": "tentacle_slam"
+  },
+  {
+   "id": "run_action_list",
+   "kind": "skill",
+   "zh": null,
+   "en": "run_action_list"
+  },
+  {
+   "id": "fireblood",
+   "kind": "skill",
+   "zh": "烈焰之血",
+   "en": "fireblood"
+  },
+  {
+   "id": "berserking",
+   "kind": "skill",
+   "zh": "狂暴",
+   "en": "berserking"
+  },
+  {
+   "id": "blood_fury",
+   "kind": "skill",
+   "zh": "血性狂怒",
+   "en": "blood_fury"
+  },
+  {
+   "id": "ancestral_call",
+   "kind": "skill",
+   "zh": "先祖召唤",
+   "en": "ancestral_call"
+  },
+  {
+   "id": "invoke_external_buff",
+   "kind": "skill",
+   "zh": "外部增益",
+   "en": "invoke_external_buff"
+  },
+  {
+   "id": "power_infusion",
+   "kind": "skill",
+   "zh": "能量灌注",
+   "en": "power_infusion"
+  },
+  {
+   "id": "halo",
+   "kind": "skill",
+   "zh": "光晕",
+   "en": "halo"
+  },
+  {
+   "id": "voidform",
+   "kind": "buff",
+   "zh": "虚空形态",
+   "en": "voidform"
+  },
+  {
+   "id": "shadow_word_death",
+   "kind": "skill",
+   "zh": "暗言术：灭",
+   "en": "shadow_word_death"
+  },
+  {
+   "id": "vampiric_touch",
+   "kind": "dot",
+   "zh": "吸血鬼之触",
+   "en": "vampiric_touch"
+  },
+  {
+   "id": "shadow_word_madness",
+   "kind": "dot",
+   "zh": "暗言术：癫",
+   "en": "shadow_word_madness"
+  },
+  {
+   "id": "void_torrent",
+   "kind": "skill",
+   "zh": "虚空洪流",
+   "en": "void_torrent"
+  },
+  {
+   "id": "shadow_word_pain",
+   "kind": "dot",
+   "zh": "暗言术：痛",
+   "en": "shadow_word_pain"
+  },
+  {
+   "id": "void_volley",
+   "kind": "skill",
+   "zh": "虚空齐射",
+   "en": "void_volley"
+  },
+  {
+   "id": "void_blast",
+   "kind": "skill",
+   "zh": "虚空冲击",
+   "en": "void_blast"
+  },
+  {
+   "id": "mind_flay_insanity",
+   "kind": "skill",
+   "zh": "精神鞭笞：狂",
+   "en": "mind_flay_insanity"
+  },
+  {
+   "id": "mind_flay",
+   "kind": "skill",
+   "zh": "精神鞭笞",
+   "en": "mind_flay"
+  },
+  {
+   "id": "mind_devourer",
+   "kind": "buff",
+   "zh": null,
+   "en": "mind_devourer"
+  },
+  {
+   "id": "entropic_rift",
+   "kind": "buff",
+   "zh": null,
+   "en": "entropic_rift"
+  },
+  {
+   "id": "resonant_energy_damage",
+   "kind": "buff",
+   "zh": null,
+   "en": "resonant_energy_damage"
+  },
+  {
+   "id": "crushing_void",
+   "kind": "buff",
+   "zh": null,
+   "en": "crushing_void"
+  },
+  {
+   "id": "shadowy_apparition",
+   "kind": "skill",
+   "zh": null,
+   "en": "shadowy_apparition"
+  },
+  {
+   "id": "fade",
+   "kind": "skill",
+   "zh": null,
+   "en": "fade"
+  },
+  {
+   "id": "angelic_feather",
+   "kind": "skill",
+   "zh": null,
+   "en": "angelic_feather"
+  },
+  {
+   "id": "vampiric_embrace",
+   "kind": "skill",
+   "zh": null,
+   "en": "vampiric_embrace"
+  },
+  {
+   "id": "hex_lord_s_doom",
+   "kind": "skill",
+   "zh": null,
+   "en": "hex_lord_s_doom"
+  }
+ ],
+ "edges": [
+  {
+   "from": "variable",
+   "to": "vampiric_touch",
+   "kind": "requires_dot",
+   "label": "需要 vampiric_touch refreshable",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.aoe_variables+=/variable,name=is_vt_possible,op=set,value=1,target_if=max:(target.time_to_die*dot.vampiric_touch.refreshable),if=target.time_to_die>=18"
+   }
+  },
+  {
+   "from": "variable",
+   "to": "shadow_word_pain",
+   "kind": "requires_dot",
+   "label": "按 shadow_word_pain 的覆盖目标数判断",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.aoe_variables+=/variable,name=dots_up,op=set,value=(active_dot.vampiric_touch>=variable.max_vts|!variable.is_vt_possible)&(active_dot.shadow_word_pain>=active_dot.vampiric_touch)"
+   }
+  },
+  {
+   "from": "fireblood",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/fireblood,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=8"
+   }
+  },
+  {
+   "from": "fireblood",
+   "to": "power_infusion",
+   "kind": "requires_buff",
+   "label": "需要 power_infusion 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/fireblood,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=8"
+   }
+  },
+  {
+   "from": "berserking",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/berserking,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=12"
+   }
+  },
+  {
+   "from": "berserking",
+   "to": "power_infusion",
+   "kind": "requires_buff",
+   "label": "需要 power_infusion 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/berserking,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=12"
+   }
+  },
+  {
+   "from": "blood_fury",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/blood_fury,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=15"
+   }
+  },
+  {
+   "from": "blood_fury",
+   "to": "power_infusion",
+   "kind": "requires_buff",
+   "label": "需要 power_infusion 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/blood_fury,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=15"
+   }
+  },
+  {
+   "from": "ancestral_call",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/ancestral_call,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=15"
+   }
+  },
+  {
+   "from": "ancestral_call",
+   "to": "power_infusion",
+   "kind": "requires_buff",
+   "label": "需要 power_infusion 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/ancestral_call,if=((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=15"
+   }
+  },
+  {
+   "from": "invoke_external_buff",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/invoke_external_buff,name=power_infusion,if=(buff.voidform.up|!talent.voidform)&!buff.power_infusion.up"
+   }
+  },
+  {
+   "from": "invoke_external_buff",
+   "to": "power_infusion",
+   "kind": "requires_buff",
+   "label": "需要 power_infusion 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/invoke_external_buff,name=power_infusion,if=(buff.voidform.up|!talent.voidform)&!buff.power_infusion.up"
+   }
+  },
+  {
+   "from": "power_infusion",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/power_infusion,if=(buff.voidform.up|!talent.voidform)&!buff.power_infusion.up"
+   }
+  },
+  {
+   "from": "voidform",
+   "to": "shadow_word_pain",
+   "kind": "requires_dot",
+   "label": "按 shadow_word_pain 的覆盖目标数判断",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/voidform,if=active_dot.shadow_word_pain>=active_dot.vampiric_touch"
+   }
+  },
+  {
+   "from": "voidform",
+   "to": "vampiric_touch",
+   "kind": "requires_dot",
+   "label": "按 vampiric_touch 的覆盖目标数判断",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.cds+=/voidform,if=active_dot.shadow_word_pain>=active_dot.vampiric_touch"
+   }
+  },
+  {
+   "from": "shadow_word_death",
+   "to": "shadow_word_madness",
+   "kind": "requires_dot",
+   "label": "需要 shadow_word_madness ticking",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/shadow_word_death,target_if=max:(target.health.pct<=20)*100+dot.shadow_word_madness.ticking,if=(priest.force_devour_matter|target.has_absorb)&talent.devour_matter"
+   }
+  },
+  {
+   "from": "tentacle_slam",
+   "to": "vampiric_touch",
+   "kind": "requires_dot",
+   "label": "需要 vampiric_touch remains",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+   }
+  },
+  {
+   "from": "shadow_word_madness",
+   "to": "mind_devourer",
+   "kind": "procs_on",
+   "label": "等 mind_devourer 触发",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/shadow_word_madness,target_if=max:target.time_to_die*(dot.shadow_word_madness.remains<=gcd.max*2|variable.dr_force_prio|!talent.distorted_reality&variable.me_force_prio),if=active_dot.shadow_word_madness<=1&dot.shadow_word_madness.remains<=gcd.max|insanity.deficit<=35&(cooldown.voidform.remains>25|target.time_to_die<25|active_enemies>1|insanity.deficit<=5)|buff.mind_devourer.react|!raid_event.adds.exists&target.time_to_die<=10|buff.entropic_rift.up&(cooldown.voidform.remains>=75|!talent.ancient_madness)|buff.voidform.up"
+   }
+  },
+  {
+   "from": "shadow_word_madness",
+   "to": "entropic_rift",
+   "kind": "requires_buff",
+   "label": "需要 entropic_rift 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/shadow_word_madness,target_if=max:target.time_to_die*(dot.shadow_word_madness.remains<=gcd.max*2|variable.dr_force_prio|!talent.distorted_reality&variable.me_force_prio),if=active_dot.shadow_word_madness<=1&dot.shadow_word_madness.remains<=gcd.max|insanity.deficit<=35&(cooldown.voidform.remains>25|target.time_to_die<25|active_enemies>1|insanity.deficit<=5)|buff.mind_devourer.react|!raid_event.adds.exists&target.time_to_die<=10|buff.entropic_rift.up&(cooldown.voidform.remains>=75|!talent.ancient_madness)|buff.voidform.up"
+   }
+  },
+  {
+   "from": "shadow_word_madness",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/shadow_word_madness,target_if=max:target.time_to_die*(dot.shadow_word_madness.remains<=gcd.max*2|variable.dr_force_prio|!talent.distorted_reality&variable.me_force_prio),if=active_dot.shadow_word_madness<=1&dot.shadow_word_madness.remains<=gcd.max|insanity.deficit<=35&(cooldown.voidform.remains>25|target.time_to_die<25|active_enemies>1|insanity.deficit<=5)|buff.mind_devourer.react|!raid_event.adds.exists&target.time_to_die<=10|buff.entropic_rift.up&(cooldown.voidform.remains>=75|!talent.ancient_madness)|buff.voidform.up"
+   }
+  },
+  {
+   "from": "void_torrent",
+   "to": "shadow_word_madness",
+   "kind": "requires_dot",
+   "label": "需要 shadow_word_madness remains",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/void_torrent,target_if=max:(dot.shadow_word_madness.remains*1000+target.time_to_die),if=!variable.holding_tentacle_slam&variable.dots_up"
+   }
+  },
+  {
+   "from": "shadow_word_pain",
+   "to": "vampiric_touch",
+   "kind": "requires_dot",
+   "label": "需要 vampiric_touch ticking",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/shadow_word_pain,target_if=max:(refreshable*100000+target.time_to_die+dot.vampiric_touch.ticking*10000),if=talent.invoked_nightmare&refreshable&target.time_to_die>12&(dot.vampiric_touch.ticking|action.tentacle_slam.in_flight)"
+   }
+  },
+  {
+   "from": "void_blast",
+   "to": "shadow_word_madness",
+   "kind": "requires_dot",
+   "label": "需要 shadow_word_madness remains",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/void_blast,target_if=max:(dot.shadow_word_madness.remains*1000+target.time_to_die)"
+   }
+  },
+  {
+   "from": "mind_blast",
+   "to": "shadow_word_madness",
+   "kind": "requires_dot",
+   "label": "需要 shadow_word_madness remains",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/mind_blast,target_if=max:dot.shadow_word_madness.remains,if=(!buff.mind_devourer.react|!talent.mind_devourer)&(!talent.void_blast|!talent.thought_harvester|cooldown.void_torrent.remains>=gcd.max*2|variable.holding_tentacle_slam|!variable.dots_up)"
+   }
+  },
+  {
+   "from": "mind_blast",
+   "to": "mind_devourer",
+   "kind": "procs_on",
+   "label": "等 mind_devourer 触发",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/mind_blast,target_if=max:dot.shadow_word_madness.remains,if=(!buff.mind_devourer.react|!talent.mind_devourer)&(!talent.void_blast|!talent.thought_harvester|cooldown.void_torrent.remains>=gcd.max*2|variable.holding_tentacle_slam|!variable.dots_up)"
+   }
+  },
+  {
+   "from": "mind_flay_insanity",
+   "to": "shadow_word_madness",
+   "kind": "requires_dot",
+   "label": "需要 shadow_word_madness remains",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/mind_flay_insanity,target_if=max:dot.shadow_word_madness.remains"
+   }
+  },
+  {
+   "from": "void_volley",
+   "to": "voidform",
+   "kind": "requires_buff",
+   "label": "需要 voidform 存在",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/void_volley,if=!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45"
+   }
+  },
+  {
+   "from": "void_volley",
+   "to": "resonant_energy_damage",
+   "kind": "procs_on",
+   "label": "等 resonant_energy_damage 触发",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/void_volley,if=!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45"
+   }
+  },
+  {
+   "from": "void_volley",
+   "to": "crushing_void",
+   "kind": "procs_on",
+   "label": "等 crushing_void 触发",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/void_volley,if=!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45"
+   }
+  },
+  {
+   "from": "mind_flay",
+   "to": "shadow_word_madness",
+   "kind": "requires_dot",
+   "label": "需要 shadow_word_madness remains",
+   "evidence": {
+    "type": "apl",
+    "line": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+   }
+  },
+  {
+   "from": "tentacle_slam",
+   "to": "vampiric_touch",
+   "count": 1,
+   "kind": "applies_dot",
+   "label": "挂上 vampiric_touch：1 次",
+   "evidence": {
+    "type": "log",
+    "detail": "DoT 条带开始前 1.5s 内、命中同目标的施加技能（样本 600 条，未归因 568 条）"
+   }
+  },
+  {
+   "from": "tentacle_slam",
+   "to": "shadow_word_pain",
+   "count": 1,
+   "kind": "applies_dot",
+   "label": "挂上 shadow_word_pain：1 次",
+   "evidence": {
+    "type": "log",
+    "detail": "DoT 条带开始前 1.5s 内、命中同目标的施加技能（样本 600 条，未归因 568 条）"
+   }
+  },
+  {
+   "from": "power_infusion",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "82% 在爆发内（18/22）",
+   "weight": 0.8181818181818182,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "halo",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "50% 在爆发内（11/22）",
+   "weight": 0.5,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "mind_flay_insanity",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "50% 在爆发内（44/88）",
+   "weight": 0.5,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "void_volley",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "39% 在爆发内（69/179）",
+   "weight": 0.3854748603351955,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "shadow_word_madness",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "35% 在爆发内（81/229）",
+   "weight": 0.3537117903930131,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "shadowy_apparition",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "34% 在爆发内（393/1158）",
+   "weight": 0.3393782383419689,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "mind_blast",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "29% 在爆发内（47/163）",
+   "weight": 0.2883435582822086,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "tentacle_slam",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "28% 在爆发内（39/139）",
+   "weight": 0.2805755395683453,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "fade",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "18% 在爆发内（5/28）",
+   "weight": 0.17857142857142858,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "mind_flay",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "16% 在爆发内（38/242）",
+   "weight": 0.15702479338842976,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "shadow_word_death",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "14% 在爆发内（7/50）",
+   "weight": 0.14,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "angelic_feather",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "11% 在爆发内（5/44）",
+   "weight": 0.11363636363636363,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+   }
+  },
+  {
+   "from": "shadowy_apparition",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "18/11 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "power_infusion",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "10/11 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "halo",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "9/11 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "vampiric_embrace",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "7/11 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "hex_lord_s_doom",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "7/11 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "void_volley",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "4/11 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "shadow_word_madness",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "3/11 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  }
+ ],
+ "generatedAt": "2026-10-26T02:37:35.162Z"
+}

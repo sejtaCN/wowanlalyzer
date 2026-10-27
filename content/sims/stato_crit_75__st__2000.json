@@ -1,0 +1,36 @@
+{
+  "runId": "stato_crit_75__st__2000",
+  "layer": "S",
+  "kind": "stat-opt",
+  "profileId": "archon",
+  "scenarioId": "st",
+  "scenarioLabel": "单体 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 1,
+  "durationSec": 300,
+  "iterations": 2000,
+  "overrides": [
+    "gear_crit_rating=2407",
+    "gear_haste_rating=0",
+    "gear_mastery_rating=0",
+    "gear_versatility_rating=0"
+  ],
+  "ratings": {
+    "mastery": 0,
+    "vers": 0,
+    "crit": 2407,
+    "haste": 0
+  },
+  "dps": {
+    "mean": 175414.14,
+    "ci95": 153.63,
+    "ci95Pct": 0.09,
+    "samples": 1999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:49:11.665Z"
+}

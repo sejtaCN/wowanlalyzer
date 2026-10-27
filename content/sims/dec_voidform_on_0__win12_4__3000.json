@@ -1,0 +1,28 @@
+{
+  "runId": "dec_voidform_on_0__win12_4__3000",
+  "layer": "A",
+  "kind": "adds-window",
+  "hero": "archon",
+  "scenarioId": "win12_4",
+  "scenarioLabel": "窗口 12s · 4 目标（3 只小怪）",
+  "fightStyle": "Patchwerk",
+  "targets": 4,
+  "durationSec": 12,
+  "iterations": 3000,
+  "dps": {
+    "mean": 447553.22,
+    "ci95": 1553.27,
+    "ci95Pct": 0.35,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "edit": {
+    "note": "注释掉 actions.cds 的 voidform 行（整场不施放虚空形态）"
+  },
+  "generatedAt": "2026-10-26T10:34:49.121Z",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc"
+}

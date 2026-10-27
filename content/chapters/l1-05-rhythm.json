@@ -1,0 +1,80 @@
+{
+ "id": "l1-05-rhythm",
+ "level": "L1",
+ "order": 5,
+ "title": "节奏型：大波之后的小波",
+ "subtitle": "跨两波：先算间隔，再决定给谁",
+ "model": {
+  "targets": "10 → 2",
+  "durationSec": 60,
+  "movement": "0–3s",
+  "dangers": 2,
+  "frequency": "8 次 / 84 波",
+  "kind": "rhythm"
+ },
+ "claim": "大波后接小波，先算间隔：<122.4 秒只能给一波，给大波；≥122.4 秒两波都能开。这条路线没有相邻大→小，日志只能给爆发节奏，不能替具体两波判冷却。",
+ "chart": {
+  "kind": "burst-bars",
+  "title": "同样是 30 秒：大波 vs 小波",
+  "runIds": [
+   "dec_voidform_on_0__w30_8__5000",
+   "dec_voidform_on_1__w30_8__5000",
+   "dec_voidform_on_0__w30_2__5000",
+   "dec_voidform_on_1__w30_2__5000"
+  ]
+ },
+ "priorityDiff": {
+  "add": [
+   {
+    "skill": "voidform",
+    "reason": "间隔 <122.4 秒才二选一，给大波；≥122.4 秒两波都能开",
+    "evidence": "观测冷却 122.4s（archon__st / t3 动作序列）；w30_8 12.71M vs w30_2 4.93M"
+   },
+   {
+    "skill": "tentacle_slam",
+    "reason": "大波里覆盖多个目标，价值随目标数上升",
+    "evidence": "APL: active_dot.vampiric_touch<5 条件"
+   }
+  ],
+  "drop": [
+   {
+    "skill": "void_volley",
+    "reason": "小波别为它留资源，正常循环过渡",
+    "evidence": "模拟 w30_2 与 w45_1 的增量低于大波档"
+   }
+  ]
+ },
+ "map": {
+  "dungeon": "altar_of_fangs",
+  "routeKey": "xwt8Pza",
+  "pull": 1
+ },
+ "casePanel": {
+  "status": "phases",
+  "logId": "xiaohuasheng-phases",
+  "highlight": [
+   5,
+   7,
+   8
+  ],
+  "headline": "他没开爆发的三段：80 秒、60 秒、30 秒",
+  "reading": "金色三行是“他确实没开”的事实；这份导出没有死亡事件，既不能证明是冷却不够，也不能证明是主动保留。"
+ },
+ "evidence": {
+  "runIds": [
+   "dec_voidform_on_0__w30_8__5000",
+   "dec_voidform_on_1__w30_8__5000",
+   "dec_voidform_on_0__w30_2__5000",
+   "dec_voidform_on_1__w30_2__5000"
+  ],
+  "logs": [
+   "xiaohuasheng-events"
+  ],
+  "sources": [
+   "SimC 1210.01 (73a372b)",
+   "WCL 事件表 CSV",
+   "keystone.guru 6 条路线"
+  ],
+  "generatedAt": "2026-10-25T16:45:00Z"
+ }
+}

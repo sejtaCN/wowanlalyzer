@@ -1,0 +1,32 @@
+{
+  "runId": "lev_run_action_list__st300__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "run_action_list",
+  "scenarioId": "st300",
+  "scenarioLabel": "单体 300s",
+  "durationSec": 300,
+  "targets": 1,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 165.96,
+    "ci95": 2.89,
+    "ci95Pct": 1.74,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+  },
+  "deltaPct": -99.93,
+  "deltaCiPct": 1.81,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:23.183Z"
+}

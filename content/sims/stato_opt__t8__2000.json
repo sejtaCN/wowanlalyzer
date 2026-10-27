@@ -1,0 +1,36 @@
+{
+  "runId": "stato_opt__t8__2000",
+  "layer": "S",
+  "kind": "stat-opt",
+  "profileId": "archon",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标 300s（大波）",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 2000,
+  "overrides": [
+    "gear_crit_rating=800",
+    "gear_haste_rating=1300",
+    "gear_mastery_rating=1100",
+    "gear_versatility_rating=9"
+  ],
+  "ratings": {
+    "mastery": 1100,
+    "vers": 9,
+    "crit": 800,
+    "haste": 1300
+  },
+  "dps": {
+    "mean": 850675,
+    "ci95": 697.21,
+    "ci95Pct": 0.08,
+    "samples": 1999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:57:00.268Z"
+}

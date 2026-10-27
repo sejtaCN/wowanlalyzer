@@ -1,0 +1,32 @@
+{
+  "runId": "lev_mind_flay__st300__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "mind_flay",
+  "scenarioId": "st300",
+  "scenarioLabel": "单体 300s",
+  "durationSec": 300,
+  "targets": 1,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 197452.81,
+    "ci95": 171.35,
+    "ci95Pct": 0.09,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+  },
+  "deltaPct": -14.62,
+  "deltaCiPct": 0.16,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:13.674Z"
+}

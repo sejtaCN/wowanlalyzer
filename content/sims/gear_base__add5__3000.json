@@ -1,0 +1,38 @@
+{
+  "runId": "gear_base__add5__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "base",
+  "variantLabel": "基线（全装）",
+  "variantKind": "base",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s（ADD 窗口）",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "iterations": 3007,
+  "dps": {
+    "mean": 1044306.18,
+    "ci95": 1712.42,
+    "ci95Pct": 0.16,
+    "stdDev": 873.68,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "scaleFactors": {
+    "Int": 245.55700480469272,
+    "SP": 218.69700251535102,
+    "Crit": 189.00010259278488,
+    "Haste": 96.17893211605548,
+    "Mastery": 163.69214061321085,
+    "Vers": 180.41829103375665
+  },
+  "generatedAt": "2026-10-26T06:42:57.707Z"
+}

@@ -1,0 +1,30 @@
+{
+  "runId": "gear_control_main_hand__t8__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "control_main_hand",
+  "variantLabel": "阳性对照：整把主手武器",
+  "variantKind": "control",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t8",
+  "scenarioLabel": "8 目标 300s（大波）",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 670436.18,
+    "ci95": 484.2,
+    "ci95Pct": 0.07,
+    "stdDev": 247.04,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:42:47.876Z"
+}

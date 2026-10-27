@@ -1,0 +1,30 @@
+{
+  "runId": "gear_enchant_main_hand__t3__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "enchant_main_hand",
+  "variantLabel": "武器附魔",
+  "variantKind": "enchant",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 408326.32,
+    "ci95": 288.86,
+    "ci95Pct": 0.07,
+    "stdDev": 147.38,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:39:58.311Z"
+}

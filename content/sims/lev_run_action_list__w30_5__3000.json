@@ -1,0 +1,32 @@
+{
+  "runId": "lev_run_action_list__w30_5__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "run_action_list",
+  "scenarioId": "w30_5",
+  "scenarioLabel": "5 目标 30s",
+  "durationSec": 30,
+  "targets": 5,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 1683.11,
+    "ci95": 29.38,
+    "ci95Pct": 1.75,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "deltaPct": -99.84,
+  "deltaCiPct": 1.91,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:23.426Z"
+}

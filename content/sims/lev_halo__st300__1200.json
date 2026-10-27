@@ -1,0 +1,32 @@
+{
+  "runId": "lev_halo__st300__1200",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "halo",
+  "scenarioId": "st300",
+  "scenarioLabel": "单体 300s",
+  "durationSec": 300,
+  "targets": 1,
+  "disabledLines": 1,
+  "dps": {
+    "mean": 200015.38,
+    "ci95": 224.63,
+    "ci95Pct": 0.11,
+    "samples": 1199
+  },
+  "baselineDps": {
+    "mean": 231325.99,
+    "ci95": 265.44,
+    "ci95Pct": 0.11,
+    "samples": 1199
+  },
+  "deltaPct": -13.54,
+  "deltaCiPct": 0.22,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:35:57.213Z"
+}

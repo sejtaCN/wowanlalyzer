@@ -1,0 +1,49 @@
+{
+ "id": "l0-03-priority-table",
+ "level": "L0",
+ "order": 3,
+ "title": "优先级表怎么读",
+ "subtitle": "从上往下找第一个成立的，打完重来",
+ "model": null,
+ "claim": "读表只有一步：从上往下，第一个条件成立的技能就是下一个要打的，打完回到最上面。38 条里 22 条是主循环、11 条是冷却、5 条是开打前。",
+ "chart": {
+  "kind": "priority-table",
+  "title": "38 条优先级（来自 APL 原文）",
+  "filter": {
+   "sections": [
+    "actions.main",
+    "actions.cds",
+    "actions.precombat"
+   ]
+  }
+ },
+ "priorityDiff": {
+  "add": [
+   {
+    "skill": "shadow_word_death",
+    "reason": "最容易读错的一条：只在目标残血或有吸收盾时才轮得到",
+    "evidence": "APL: (priest.force_devour_matter|target.has_absorb)&talent.devour_matter"
+   },
+   {
+    "skill": "vampiric_touch",
+    "reason": "它的目标不是“当前目标”，是“缺口最大的那个”",
+    "evidence": "APL: targetSelect max:(target.health.pct<=20)*100+dot.shadow_word_madness.ticking"
+   }
+  ],
+  "drop": []
+ },
+ "map": null,
+ "casePanel": {
+  "status": "pending",
+  "reason": "读表是方法，不是数据；这一段的对照要等有战斗分段的日志。"
+ },
+ "evidence": {
+  "runIds": [],
+  "logs": [],
+  "sources": [
+   "content/guides/priority-table.json",
+   "APL: content/profiles/MID2_shadow_voidweaver.simc"
+  ],
+  "generatedAt": "2026-10-25T16:30:00Z"
+ }
+}

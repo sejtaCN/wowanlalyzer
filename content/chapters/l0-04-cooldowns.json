@@ -1,0 +1,64 @@
+{
+ "id": "l0-04-cooldowns",
+ "level": "L0",
+ "order": 4,
+ "title": "爆发与冷却",
+ "subtitle": "先看窗口再开，比开不开更重要",
+ "model": null,
+ "claim": "先看窗口再开爆发：8 目标 30 秒不开，整段掉 43.98%。他两轮间隔中位 155.6 秒——所以真正的问题是“这波开，还是留给下一波”。",
+ "chart": {
+  "kind": "burst-bars",
+  "title": "8 目标 30 秒：开爆发 vs 不开",
+  "runIds": [
+   "dec_voidform_on_0__w30_8__5000",
+   "dec_voidform_on_1__w30_8__5000"
+  ]
+ },
+ "priorityDiff": {
+  "add": [
+   {
+    "skill": "voidform",
+    "reason": "排在外部增益和饰品之后：先开增益，再进虚空形态",
+    "evidence": "priority-table: actions.cds 顺序 power_infusion → halo → use_item → voidform"
+   },
+   {
+    "skill": "power_infusion",
+    "reason": "和虚空形态绑一个宏，按一次开完",
+    "evidence": "priority-table: actions.cds 中 power_infusion 排在 voidform 前"
+   }
+  ],
+  "drop": [
+   {
+    "skill": "desperate_prayer",
+    "reason": "它是保命，别混进爆发序列",
+    "evidence": "priority-table: actions.cds 末位"
+   }
+  ]
+ },
+ "map": null,
+ "casePanel": {
+  "status": "phases",
+  "logId": "xiaohuasheng-phases",
+  "highlight": [
+   2,
+   9
+  ],
+  "headline": "他这场的爆发分布：2 / 2 / 1 / 2 / 0 / 2 / 0 / 0 / 2",
+  "reading": "看“爆发”这一列：有 3 个阶段一次都没开（80 秒、60 秒、30 秒），两个 BOSS 阶段各开 2 次。"
+ },
+ "evidence": {
+  "runIds": [
+   "dec_voidform_on_0__w30_8__5000",
+   "dec_voidform_on_1__w30_8__5000"
+  ],
+  "logs": [
+   "xiaohuasheng-events"
+  ],
+  "sources": [
+   "SimC 1210.01 (73a372b)",
+   "WCL 事件表 CSV",
+   "priority-table.json"
+  ],
+  "generatedAt": "2026-10-25T16:30:00Z"
+ }
+}

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-27T02:11:13.134Z",
+  "hero": "archon",
+  "level": "C",
+  "cooldown": {
+    "observedMedianSec": 122.08,
+    "observedMaxSec": 122.44,
+    "samples": [
+      122.29,
+      121.24,
+      121.86,
+      122.44
+    ],
+    "sourceRuns": [
+      "archon__st__5000",
+      "archon__t3__5000"
+    ],
+    "note": "相邻两次虚空形态施法起点的间隔；是动作序列观测值，不是技能说明里的理论冷却。"
+  },
+  "log": {
+    "runId": "xiaohuasheng-events",
+    "windows": 11,
+    "gaps": [
+      171.81,
+      222.06,
+      131.02,
+      158.15,
+      172.9,
+      146.73,
+      165.3,
+      153.24,
+      152.71,
+      125.75
+    ],
+    "medianSec": 155.7,
+    "minSec": 125.75,
+    "maxSec": 222.06,
+    "note": "11 个虚空形态窗口的起点间隔；不是任意两波的间隔。"
+  },
+  "returns": {
+    "big": {
+      "targets": 8,
+      "deltaDamage": 12712838.4,
+      "deltaPct": 43.98,
+      "runIds": [
+        "dec_voidform_on_0__w30_8__5000",
+        "dec_voidform_on_1__w30_8__5000"
+      ]
+    },
+    "small": {
+      "targets": 2,
+      "deltaDamage": 4926062.4,
+      "deltaPct": 39.64,
+      "runIds": [
+        "dec_voidform_on_0__w30_2__5000",
+        "dec_voidform_on_1__w30_2__5000"
+      ]
+    },
+    "sourceRuns": [
+      "dec_voidform_on_0__w30_8__5000",
+      "dec_voidform_on_1__w30_8__5000",
+      "dec_voidform_on_0__w30_2__5000",
+      "dec_voidform_on_1__w30_2__5000"
+    ]
+  },
+  "decision": {
+    "rule": "两波间隔 < 观测冷却上限时，只有一波能吃到爆发，给收益更大的大波；≥ 该间隔时两波都能开，不需要二选一。",
+    "observedCadenceExceedsCooldown": true,
+    "interpretation": "155.7 秒是爆发节奏，不是具体两波间隔；不能拿它给某一次小波贴“冷却没好”的标签。具体两波间隔需要 Fights 或 UNIT_DIED。"
+  },
+  "method": "算术推断（C 层）：冷却阈值取 300 秒单体/3 目标动作序列里相邻虚空形态起点的最大间隔；收益取 8 目标与 2 目标 30 秒 A/B 的绝对增量；日志只提供他的爆发节奏。没有跑「两波连续战斗」的配对模拟。",
+  "limitation": "冷却会受天赋/触发影响；这里用的是本 profile 的观测值。日志阶段没有死亡事件，不能把 155.7 秒当成具体两波的间隔，只能当爆发节奏。"
+}

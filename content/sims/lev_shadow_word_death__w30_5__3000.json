@@ -1,0 +1,32 @@
+{
+  "runId": "lev_shadow_word_death__w30_5__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "shadow_word_death",
+  "scenarioId": "w30_5",
+  "scenarioLabel": "5 目标 30s",
+  "durationSec": 30,
+  "targets": 5,
+  "disabledLines": 5,
+  "dps": {
+    "mean": 1042624.81,
+    "ci95": 1693.4,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 1044494.33,
+    "ci95": 1684.94,
+    "ci95Pct": 0.16,
+    "samples": 2999
+  },
+  "deltaPct": -0.18,
+  "deltaCiPct": 0.32,
+  "beyondCi": false,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:28.218Z"
+}

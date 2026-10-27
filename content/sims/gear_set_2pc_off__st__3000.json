@@ -1,0 +1,30 @@
+{
+  "runId": "gear_set_2pc_off__st__3000",
+  "layer": "G",
+  "kind": "gearing",
+  "variant": "set_2pc_off",
+  "variantLabel": "2 件套效果（关掉）",
+  "variantKind": "set",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "scenarioId": "st",
+  "scenarioLabel": "单体 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 1,
+  "durationSec": 300,
+  "iterations": 3007,
+  "dps": {
+    "mean": 220941.57,
+    "ci95": 164.13,
+    "ci95Pct": 0.07,
+    "stdDev": 83.74,
+    "samples": 2999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "generatedAt": "2026-10-26T06:39:22.394Z"
+}

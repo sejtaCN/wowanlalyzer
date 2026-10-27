@@ -1,0 +1,32 @@
+{
+  "runId": "lev_shadow_word_death__st300__3000",
+  "layer": "A",
+  "kind": "leverage",
+  "hero": "archon",
+  "skill": "shadow_word_death",
+  "scenarioId": "st300",
+  "scenarioLabel": "单体 300s",
+  "durationSec": 300,
+  "targets": 1,
+  "disabledLines": 5,
+  "dps": {
+    "mean": 230726.24,
+    "ci95": 169.76,
+    "ci95Pct": 0.07,
+    "samples": 2999
+  },
+  "baselineDps": {
+    "mean": 231255.54,
+    "ci95": 169.5,
+    "ci95Pct": 0.07,
+    "samples": 2999
+  },
+  "deltaPct": -0.23,
+  "deltaCiPct": 0.14,
+  "beyondCi": true,
+  "simc": {
+    "version": "1210-01",
+    "gitRevision": "73a372b"
+  },
+  "generatedAt": "2026-10-26T02:36:26.769Z"
+}

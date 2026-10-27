@@ -1,0 +1,77 @@
+{
+ "generatedAt": "2026-10-26",
+ "baseline": "SimC 1210.01 / WoW 12.1.5 / MID2（执政官）",
+ "note": "四份原文都是直取（NGA 走本地浏览器，直连 403）。要点是摘录，不改写结论；有分歧的地方在页面下半部分单独列，不在这里调和。",
+ "sources": [
+  {
+   "id": "method",
+   "name": "Method.gg",
+   "url": "https://method.gg/guides/shadow-priest/playstyle-and-rotation",
+   "version": "Midnight 12.1",
+   "type": "有序列表 13 步 + 两套起手",
+   "capture": "content/guides/sources/method-archon.md",
+   "points": [
+    "两个 DoT 常驻排第 1–2，触须猛击是补 DoT 的手段（也可用来泄充能）",
+    "光晕在第 3、虚空形态在第 4：先光晕再进爆发",
+    "能量灌注紧随虚空形态之后",
+    "暗言术：癫：没挂、快掉、或狂乱值将溢出时才打",
+    "虚空齐射排在第 12（最后一条实招，之后只剩填充）",
+    "精神鞭笞可以随时被打断"
+   ],
+   "feature": "唯一给了「有/无 4 件套」两套起手的来源；顺序写得最细。",
+   "limit": "用词是 Voidform 而不是 Void Eruption，起手步骤需要按上下文对齐到虚空爆发按钮。"
+  },
+  {
+   "id": "maxroll",
+   "name": "Maxroll",
+   "url": "https://maxroll.gg/wow/class-guides/shadow-priest-mythic-plus-guide",
+   "version": "Patch 12.1",
+   "type": "有序列表 10 步 + 套装 + 适用场景",
+   "capture": "content/guides/sources/maxroll-archon.md",
+   "points": [
+    "顺序：DoT → 光晕 → 虚空爆发 → 能量灌注 → 癫 → 虚空齐射 → 灭(<20%) → 心灵震爆 → 鞭笞：狂 → 鞭笞",
+    "虚空形态之后再开主动饰品、爆发药水、能量灌注、种族技能",
+    "套装写全两档：2 件套触须猛击冷却 −3s／伤害 +100%；4 件套让触须猛击 100% 给免费虚空齐射",
+    "AoE 主体是 DoT + 心智联接，所以单体循环就是 AoE 循环",
+    "低层大秘怪死太快时，虚空形态或光晕可能没转好，伤害会摊平"
+   ],
+   "feature": "套装描述最完整，也是唯一明确写「何时不该用这个天赋」的来源。",
+   "limit": "只给一套顺序，没写条件分裂（哪些招在什么条件下换位）。"
+  },
+  {
+   "id": "icyveins",
+   "name": "Icy Veins",
+   "url": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-rotation-cooldowns-abilities",
+   "version": "12.1",
+   "type": "循环目标 8 条 + AoE 判据",
+   "capture": "content/guides/sources/icyveins-archon.md",
+   "points": [
+    "DoT 常驻 → 维持癫不溢出 → 用短冷却生成狂乱 → 长冷却只在不会挤掉短冷却时用 → 鞭笞填充",
+    "长冷却（光晕/虚空洪流）的判据是「不挤掉短冷却」，不是固定位置",
+    "AoE 判据：DoT 大约维持到 12 个目标；触须猛击覆盖 6 个聚在一起的目标",
+    "活不到 18 秒的目标不要手动上 DoT",
+    "多目标时把癫灌给血量最高的主目标（大秘不推荐摊开）",
+    "鞭笞可提前打断；鞭笞：狂只有 1 个 GCD，不能提前断"
+   ],
+   "feature": "唯一给了可当判据用的数字门槛（12 目标 / 6 目标 / 18 秒）。",
+   "limit": "写成「循环目标」而不是步骤序，新手照着做需要自己排序。"
+  },
+  {
+   "id": "nga",
+   "name": "NGA（萌面人 搬运 Maxroll）",
+   "url": "https://bbs.nga.cn/read.php?tid=46398013",
+   "version": "12.0",
+   "type": "有序列表 9 步（中文）+ 英雄天赋说明",
+   "capture": "content/guides/sources/nga-maxroll-12.0.md",
+   "points": [
+    "顺序与 Maxroll 12.1 基本一致（DoT → 光晕 → 虚空爆发 → 能量灌注 → 癫 → 虚空齐射 → 灭 → 心灵震爆 → 鞭笞）",
+    "把执政官的三条英雄天赋翻成人话：具象之力（光晕送鞭笞：狂）、共振能量（光晕目标承伤提高）、持久效能（延长或储存虚空形态）",
+    "起手同样强调：先虚空形态，再饰品/药水/能量灌注/种族技能",
+    "提供成套中文技能名，是本站中文名的重要来源（未逐条核对，标 verified:false）"
+   ],
+   "feature": "唯一的中文来源，也是本站技能中文名的主要出处。",
+   "limit": "版本落后一档（12.0 vs 12.1），套装与数值细节需按 Maxroll/SimC 复核。"
+  }
+ ],
+ "howWeUse": "共识项直接进正文（如「光晕在爆发之前」「能量灌注在虚空形态之后再开」）；分歧项不挑权威，交给 APL 条件与 runId 数据裁决，裁决过程写在 docs/methods.md。原文里 Hero 天赋的机制描述（光晕送鞭笞：狂、共振能量增伤）本站未单独跑批验证，暂列为「原文说法」。"
+}
