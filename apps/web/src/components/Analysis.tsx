@@ -153,7 +153,7 @@ export function InteractionGraph() {
   const openerEdges = edges.filter((e) => e.kind === 'opener_before_burst' && pos.has(e.from)).slice(0, 5);
 
   const strokeOf = (k: string) =>
-    k === 'requires_dot' ? '#2b6b57' : k === 'requires_buff' || k === 'procs_on' ? '#6a5a93' : '#8c2f2f';
+    k === 'requires_dot' ? 'var(--dep-dot)' : k === 'requires_buff' || k === 'procs_on' ? 'var(--dep-buff)' : 'var(--dep-burst)';
 
   const labelOf = (id: string) => CN_LABEL[id] ?? nodes.find((n) => n.id === id)?.zh ?? skillName(id).text ?? id;
 
@@ -167,14 +167,14 @@ export function InteractionGraph() {
         <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto' }} role="img" aria-label="技能与 DoT、Buff 的联动关系">
           <defs>
             <marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M0,0 L8,4 L0,8 z" fill="#f87171" />
+              <path d="M0,0 L8,4 L0,8 z" fill="var(--down)" />
             </marker>
           </defs>
 
           {/* 列标题 */}
-          <text x={118} y={26} textAnchor="middle" fontSize={11} fill="#94a0af">DoT / Buff 来源</text>
-          <text x={452} y={26} textAnchor="middle" fontSize={11} fill="#94a0af">技能（括号＝该技能施法落在爆发窗口内的比例）</text>
-          <text x={800} y={26} textAnchor="middle" fontSize={11} fill="#94a0af">爆发窗口</text>
+          <text x={118} y={26} textAnchor="middle" fontSize={11} fill="var(--muted)">DoT / Buff 来源</text>
+          <text x={452} y={26} textAnchor="middle" fontSize={11} fill="var(--muted)">技能（括号＝该技能施法落在爆发窗口内的比例）</text>
+          <text x={800} y={26} textAnchor="middle" fontSize={11} fill="var(--muted)">爆发窗口</text>
 
           {/* 依赖边：技能 → 来源（左向） */}
           {depEdges.map((e, i) => {
@@ -203,7 +203,7 @@ export function InteractionGraph() {
               <path
                 key={`b-${e.from}-${i}`}
                 d={`M ${x1} ${a.y} C ${mx} ${a.y}, ${mx} ${b.y}, ${b.x - 54} ${b.y}`}
-                stroke="#8c2f2f" strokeWidth={0.8 + w * 4} fill="none" opacity={0.25 + w * 0.55}
+                stroke="var(--dep-burst)" strokeWidth={0.8 + w * 4} fill="none" opacity={0.25 + w * 0.55}
                 markerEnd="url(#arw)"
               >
                 <title>{`${labelOf(e.from)}：${Math.round(w * 100)}% 的施法在爆发窗口内`}</title>
@@ -219,7 +219,7 @@ export function InteractionGraph() {
               <path
                 key={`o-${e.from}-${i}`}
                 d={`M ${a.x + 74} ${a.y + 6} C ${a.x + 160} ${a.y + 26}, ${b.x - 120} ${b.y + 20}, ${b.x - 56} ${b.y + 10}`}
-                stroke="#c9a227" strokeWidth={1.6} strokeDasharray="5 4" fill="none" opacity={0.9}
+                stroke="var(--dep-opener)" strokeWidth={1.6} strokeDasharray="5 4" fill="none" opacity={0.9}
               >
                 <title>{`${labelOf(e.from)}：${e.label}`}</title>
               </path>
@@ -234,21 +234,21 @@ export function InteractionGraph() {
             const burst = edges.find((e) => e.from === id && e.kind === 'cast_in_burst')?.weight;
             const text = burst && !isVf && n?.kind === 'skill' ? `${label}（${Math.round(burst * 100)}%）` : label;
             const wpx = Math.min(200, 26 + text.length * 12);
-            const fill = n?.kind === 'dot' ? '#12241f' : n?.kind === 'buff' ? '#1d1a2b' : isVf ? '#2a1a1a' : '#0f1420';
-            const stroke = n?.kind === 'dot' ? '#2b6b57' : n?.kind === 'buff' ? '#6a5a93' : isVf ? '#8c2f2f' : '#c8d4da';
+            const fill = n?.kind === 'dot' ? 'var(--dep-node-dot)' : n?.kind === 'buff' ? 'var(--dep-node-buff)' : isVf ? 'var(--dep-node-vf)' : 'var(--dep-node-skill)';
+            const stroke = n?.kind === 'dot' ? 'var(--dep-dot)' : n?.kind === 'buff' ? 'var(--dep-buff)' : isVf ? 'var(--dep-burst)' : 'var(--dep-node-stroke)';
             return (
               <g key={id}>
                 <rect x={p.x - wpx / 2} y={p.y - 14} width={wpx} height={28} rx={14} fill={fill} stroke={stroke} strokeWidth={1.2} />
-                <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize={11.5} fill="#e8edf5">{text}</text>
+                <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize={11.5} fill="var(--dep-label)">{text}</text>
               </g>
             );
           })}
         </svg>
         <div className="legend" style={{ marginTop: 6 }}>
-          <span><i style={{ background: '#2b6b57' }} />依赖 DoT</span>
-          <span><i style={{ background: '#6a5a93' }} />依赖 Buff / 等触发</span>
-          <span><i style={{ background: '#8c2f2f' }} />爆发内占比：细线≈20%，粗线≈80%，箭头指向爆发</span>
-          <span><i style={{ background: '#c9a227' }} />爆发起手（虚线）</span>
+          <span><i style={{ background: 'var(--dep-dot)' }} />依赖 DoT</span>
+          <span><i style={{ background: 'var(--dep-buff)' }} />依赖 Buff / 等触发</span>
+          <span><i style={{ background: 'var(--dep-burst)' }} />爆发内占比：细线≈20%，粗线≈80%，箭头指向爆发</span>
+          <span><i style={{ background: 'var(--dep-opener)' }} />爆发起手（虚线）</span>
         </div>
         <div className="note" style={{ marginTop: 8 }}>
           中列只保留「有 DoT/Buff 依赖」或「爆发内占比 ≥20%」的技能，最多 10 个；括号里的百分比＝该技能施法落在虚空形态窗口内的比例。

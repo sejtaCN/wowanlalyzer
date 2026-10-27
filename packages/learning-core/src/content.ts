@@ -43,6 +43,11 @@ export interface PriorityShift {
   reason: string;
   /** 依据：APL 条件片段 / runId / 日志时间戳 */
   evidence: string;
+  /**
+   * 机器语法原文。正文一律写中文，APL 原文放折叠区备用——
+   * 依据一条不丢，但主阅读面不出现裸条件。
+   */
+  raw?: string;
 }
 
 /** 第④段：地图（没有素材时为 null，页面显示"暂无地图"而不是空框） */

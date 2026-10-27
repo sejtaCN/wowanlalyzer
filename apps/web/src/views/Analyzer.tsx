@@ -104,7 +104,7 @@ export default function Analyzer() {
         no="⑥"
         question="原始结果在哪"
         tag={`${runs.length} 个 runId`}
-        note="每一行都对应 content/sims 下的一个同名文件，里面带 SimC 版本、commit、迭代数和 95% CI。"
+        note="每一行都对应一份模拟文件，里面带 SimC 版本、commit、迭代数和 95% CI。"
       >
         <input
           className="filter"

@@ -9,10 +9,10 @@ import type { StatOptDoc } from '../data/content';
  */
 
 const COLORS: Record<string, string> = {
-  crit: '#f5c451',
-  haste: '#4ade80',
-  mastery: '#a78bfa',
-  vers: '#60a5fa',
+  crit: 'var(--gold)',
+  haste: 'var(--up)',
+  mastery: 'var(--curve-a)',
+  vers: 'var(--curve-b)',
 };
 
 const W = 660;
@@ -50,28 +50,28 @@ export default function StatCurves({ doc }: { doc: StatOptDoc }) {
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${sc.label} 下四个次级属性的收益曲线`}>
-        <line x1={PAD.l} y1={y(data.currentDps)} x2={W - PAD.r} y2={y(data.currentDps)} stroke="#46505f" strokeDasharray="4 3" strokeWidth={1} />
-        <text x={W - PAD.r} y={y(data.currentDps) - 4} textAnchor="end" fontSize={9} fill="#7d8896">
+        <line x1={PAD.l} y1={y(data.currentDps)} x2={W - PAD.r} y2={y(data.currentDps)} stroke="var(--data-off)" strokeDasharray="4 3" strokeWidth={1} />
+        <text x={W - PAD.r} y={y(data.currentDps) - 4} textAnchor="end" fontSize={9} fill="var(--curve-down-soft)">
           现装备 {Math.round(data.currentDps).toLocaleString('en-US')}
         </text>
 
         {[0, 0.25, 0.5, 0.75, 1].map((f) => (
           <g key={f}>
-            <line x1={x(f * B)} y1={PAD.t} x2={x(f * B)} y2={H - PAD.b} stroke="#1f2733" strokeWidth={1} />
-            <text x={x(f * B)} y={H - PAD.b + 12} textAnchor="middle" fontSize={9} fill="#7d8896">
+            <line x1={x(f * B)} y1={PAD.t} x2={x(f * B)} y2={H - PAD.b} stroke="var(--curve-fill)" strokeWidth={1} />
+            <text x={x(f * B)} y={H - PAD.b + 12} textAnchor="middle" fontSize={9} fill="var(--curve-down-soft)">
               {Math.round(f * B)}
             </text>
           </g>
         ))}
         {[lo, (lo + hi) / 2, hi].map((v) => (
-          <text key={v} x={PAD.l - 6} y={y(v) + 3} textAnchor="end" fontSize={9} fill="#7d8896">
+          <text key={v} x={PAD.l - 6} y={y(v) + 3} textAnchor="end" fontSize={9} fill="var(--curve-down-soft)">
             {Math.round(v / 1000)}k
           </text>
         ))}
-        <text x={PAD.l} y={H - 4} fontSize={9} fill="#7d8896">
+        <text x={PAD.l} y={H - 4} fontSize={9} fill="var(--curve-down-soft)">
           横轴：评级（把全部预算压给这一个属性，其余三项为 0）
         </text>
-        <text x={PAD.l - 34} y={PAD.t + 6} fontSize={9} fill="#7d8896">
+        <text x={PAD.l - 34} y={PAD.t + 6} fontSize={9} fill="var(--curve-down-soft)">
           DPS
         </text>
 

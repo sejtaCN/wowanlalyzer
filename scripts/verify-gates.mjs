@@ -1,11 +1,14 @@
 /**
- * 门禁自检：证明 validate:content 和 check:ui 真会变红。
+ * 门禁自检：证明 validate:content、check:ui、check:design 真会变红。
  *
  * 只读仓库内容；坏样本放在系统临时目录。
  *   1. valid negative: 图契约减一段 → validate 必须失败并点名「图契约必须有 5 段」
  *   2. valid positive: 原图契约 → validate 必须通过
  *   3. UI negative: 构建产物把 play-budget 类型改坏 → check:ui 必须失败并点名有图段未渲染
  *   4. UI positive: 原构建产物 → check:ui 必须通过
+ *   5. design negative: ui.css 注入离阶间距 + 中文标签正字距 + token 块外色值
+ *      → check:design 必须失败并逐条点名（改完必须还原）
+ *   6. design positive: 还原后的 ui.css → check:design 必须通过
  *
  * 用法：npm run verify:gates
  */
@@ -64,6 +67,35 @@ try {
     `--dist=${index}`,
     `--shots=${shotsBad}`,
   ], false, 'DOM 未渲染对应图');
+
+  // ---- check:design ----
+  // 它跑源码，负样本必须临时改 ui.css，用完必须还原。
+  const cssPath = join(ROOT, 'apps', 'web', 'src', 'ui.css');
+  const cssOriginal = readFileSync(cssPath, 'utf8');
+  try {
+    const anchor = '.model-grid { display: grid;';
+    if (!cssOriginal.includes(anchor)) throw new Error('ui.css 里找不到注入锚点，无法做设计负样本');
+    const injected = cssOriginal.replace(
+      anchor,
+      [
+        '.probe-gap { gap: 11px; }',
+        '.probe-ls { letter-spacing: 0.1em; }',
+        '.probe-uc { text-transform: uppercase; }',
+        '.probe-color { color: #ff0000; }',
+        anchor,
+      ].join('\n'),
+    );
+    writeFileSync(cssPath, injected);
+
+    run('design 负样本：离阶间距 + 正字距 + uppercase + token 块外色值', process.execPath, [
+      'scripts/check-design.mjs',
+    ], false, '不在间距阶');
+  } finally {
+    writeFileSync(cssPath, cssOriginal);
+  }
+  run('design 正样本：还原后的 ui.css', process.execPath, [
+    'scripts/check-design.mjs',
+  ], true, '设计门禁：0 条错误');
 } finally {
   rmSync(temp, { recursive: true, force: true });
 }

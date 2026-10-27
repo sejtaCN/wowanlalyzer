@@ -129,7 +129,7 @@ export default function Gearing({ doc }: { doc: GearingDoc }) {
       <div className="note" style={{ marginTop: 10 }}>
         方法：{doc.method.secondary} {doc.method.effects}
       </div>
-      <div className="note" style={{ marginTop: 4, color: '#f0e0b8' }}>
+      <div className="note" style={{ marginTop: 4, color: 'var(--ink-on-gold-soft)' }}>
         口径限制：{doc.method.caveat}
       </div>
       <div className="note" style={{ marginTop: 4 }}>

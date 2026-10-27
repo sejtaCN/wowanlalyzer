@@ -15,7 +15,7 @@
  "claim": "小怪一出现就开爆发：同样 12 秒窗口，加 3 只怪让爆发增量从 1.52M 变成 3.30M，放大 2.18 倍。",
  "chart": {
   "kind": "burst-bars",
-  "title": "12 秒窗口：单体 vs 加 3 只怪",
+  "title": "12 秒窗口：单体和加 3 只怪的差",
   "runIds": [
    "dec_voidform_on_0__win12_1__3000",
    "dec_voidform_on_1__win12_1__3000",
@@ -27,20 +27,23 @@
   "add": [
    {
     "skill": "tentacle_slam",
-    "reason": "加怪前别把两层充能放空——APL 就是拿“还有多久加怪”来判断要不要留",
-    "evidence": "APL: tentacle_slam,if=raid_event.adds.in>30 | raid_event.adds.in>5&full_recharge_time<=gcd.max*2"
+    "reason": "加怪前别把两层充能用光。APL 就是拿「还有多久加怪」判断要不要留",
+    "evidence": "APL 条件：触须猛击的留充能条件——距下次加怪 >30 秒，或距下次加怪 >5 秒且充满时间 ≤2 个 GCD",
+    "raw": "tentacle_slam,if=raid_event.adds.in>30 | raid_event.adds.in>5&full_recharge_time<=gcd.max*2"
    },
    {
     "skill": "vampiric_touch",
-    "reason": "小怪落地先补它，别先打伤害技能：DoT 铺得越早，整个窗口吃得越满",
-    "evidence": "APL: 主循环里 vampiric_touch 排在填充之前"
+    "reason": "小怪落地先补它，别急着打伤害技能。持续伤害铺得越早，整个窗口吃得越满",
+    "evidence": "APL 条件：主循环里，吸血鬼之触排在填充之前",
+    "raw": "主循环里 vampiric_touch 排在填充之前"
    }
   ],
   "drop": [
    {
     "skill": "shadow_word_death",
-    "reason": "加怪窗口里目标满血，灭轮不上；把 GCD 让给 DoT",
-    "evidence": "APL: 灭的两个条件都要目标残血或有吸收盾"
+    "reason": "加怪窗口里目标满血，暗言术：灭轮不上。把 GCD 让给持续伤害",
+    "evidence": "APL 条件：暗言术：灭的两个条件都要目标残血或有吸收盾",
+    "raw": "灭的两个条件都要目标残血或有吸收盾"
    }
   ]
  },
@@ -54,7 +57,7 @@
    6
   ],
   "headline": "他这场里多目标最密集的三段：入口祭坛、盘绕回廊、上层平台",
-  "reading": "三段都在 3 分钟以上、各开了 2 次爆发。加怪型战斗的收益不在单次爆发，而在“别在加怪前把冷却用掉”。"
+  "reading": "三段都在 3 分钟以上，各开了 2 次爆发。加怪型战斗的收益不在单次爆发，而在「别在加怪前把冷却用掉」。"
  },
  "evidence": {
   "runIds": [

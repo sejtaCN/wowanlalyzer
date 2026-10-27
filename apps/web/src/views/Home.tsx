@@ -149,8 +149,8 @@ export default function Home({
               <div className="chap" style={{ color: 'var(--muted)', cursor: 'default' }}>
                 <span className="dot" aria-hidden />
                 <span className="t">
-                  还没写
-                  <small>按 B3 顺序补：暗牧在做什么 → 技能清单 → 优先级表 → 爆发与冷却</small>
+                  这一层还没有章节
+                  <small>写完就会出现在这里</small>
                 </span>
               </div>
             )}

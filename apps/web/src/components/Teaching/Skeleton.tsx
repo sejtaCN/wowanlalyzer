@@ -25,7 +25,7 @@ export function Pipeline({ steps }: { steps: PipelineStep[] }) {
     <svg viewBox={`0 0 ${W} 122`} style={{ width: '100%', height: 'auto' }} role="img" aria-label="数据接入流程：配置 → 模拟 → 分析 → 章节稿 → 页面">
       <defs>
         <marker id="pl-arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0,0 L8,4 L0,8 z" fill="#5b6674" />
+          <path d="M0,0 L8,4 L0,8 z" fill="var(--skel-base)" />
         </marker>
       </defs>
       {steps.map((p, i) => {
@@ -38,21 +38,21 @@ export function Pipeline({ steps }: { steps: PipelineStep[] }) {
               width={boxW}
               height={64}
               rx={12}
-              fill={p.ready ? 'rgba(74,222,128,0.10)' : '#141a26'}
-              stroke={p.ready ? '#4ade80' : '#2b3444'}
+              fill={p.ready ? 'rgba(74,222,128,0.10)' : 'var(--card-2)'}
+              stroke={p.ready ? 'var(--up)' : 'var(--track)'}
               strokeWidth={1.2}
             />
-            <text x={x + boxW / 2} y={40} textAnchor="middle" fontSize={12} fontWeight={700} fill={p.ready ? '#8ef0b4' : '#b8c2d0'}>
+            <text x={x + boxW / 2} y={40} textAnchor="middle" fontSize={12} fontWeight={700} fill={p.ready ? 'var(--curve-up-soft)' : 'var(--sub)'}>
               {p.label}
             </text>
-            <text x={x + boxW / 2} y={58} textAnchor="middle" fontSize={11} fill="#7d8896">
+            <text x={x + boxW / 2} y={58} textAnchor="middle" fontSize={11} fill="var(--curve-down-soft)">
               {p.sub}
             </text>
-            <text x={x + boxW / 2} y={96} textAnchor="middle" fontSize={11} fill={p.ready ? '#4ade80' : '#94a0af'}>
+            <text x={x + boxW / 2} y={96} textAnchor="middle" fontSize={11} fill={p.ready ? 'var(--up)' : 'var(--muted)'}>
               {p.ready ? '●' : '○'} {p.status}
             </text>
             {i < n - 1 ? (
-              <path d={`M ${x + boxW + 1} 46 L ${x + boxW + gap - 1} 46`} stroke="#3a4350" strokeWidth={1.4} markerEnd="url(#pl-arw)" />
+              <path d={`M ${x + boxW + 1} 46 L ${x + boxW + gap - 1} 46`} stroke="var(--data-unused)" strokeWidth={1.4} markerEnd="url(#pl-arw)" />
             ) : null}
           </g>
         );

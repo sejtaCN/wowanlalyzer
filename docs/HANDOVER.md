@@ -1,7 +1,8 @@
 # 更新指南（接手就用这份）
 
 > 面向"隔一段时间回来继续做"的场景：先看 §1 现状，再按 §3 找对应任务的步骤。
-> 详细原理见 `docs/workflow.md`；写作规范见 `docs/writing-style.md`。
+> 详细原理见 `docs/workflow.md`；写正文查 `docs/guide-content-rules.md`（文案与内容结构的唯一规范源）；
+> 改样式查 `docs/design-rules.md`（间距阶 / 颜色 token / 中文排版 / 无障碍底线）。
 
 ---
 
@@ -42,6 +43,11 @@ content/
 
 scripts/                 数据生产线（全部可重跑）
 docs/                    产品 / UI / 教学 / 流程 / 规范
+  guide-content-rules.md  **文案与内容结构规范源**：四类内容表达规范 / 写作流程 / AI 味清单
+  design-rules.md         **设计规范适配层**：间距阶 / 颜色 token / 中文排版 / 无障碍底线
+  nga-copy-spec.md        NGA 风格改写的施工记录 + 已落盘正文快照
+  ui-blueprint.md        **UI 设计源**：模块划分 / 参考模板 / 设计语言 / 逐页详细设计
+  ui-refresh-plan.md     文案与可读性优化方案（改写对照表 + 排版设定 + 验收）
 apps/web/src/            三屏 + 解析台
   components/Teaching/   教学图组件（顶图带 / 波次图 / 爆发时间轴 / 判断流程 / 灰模库）
 packages/learning-core/  内容模型 + 进度（纯逻辑）
@@ -138,6 +144,8 @@ npm run build              # 单文件产出
 | 7 | 解析台加"相邻两行交换" A/B | 比"禁用技能"更贴近优先级本身 |
 | 8 | 联动图补"谁挂上了 DoT"的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） |
 | 9 | 教练卡按"你哪条没做到"高亮 | 依赖日志分段 |
+| 10 | **读者可见文案中文化 + 排版 6 档字号** | 28 条 evidence 含裸 APL、14 个技能并列显示英文键、证据条外露 runId；`12px` 一人干五活、段间距 = 段内图间距 = 14px（无节奏）；正文 720px ÷ 14px = 51 全角字过宽 | `docs/ui-blueprint.md` §3–§4、`docs/ui-refresh-plan.md` §2–§5 |
+| 11 | **UI 设计文档（已出稿）** | 已有 `docs/ui-blueprint.md`：功能模块盘点、10 个真实参考站来源、设计语言、逐页详细设计、响应式断点、验收门禁 | 同上；§0 有 7 条待确认（Q1 评论/账号是否本轮新建、Q2 亮色主题、Q3 粘性目录侧栏） |
 
 ---
 

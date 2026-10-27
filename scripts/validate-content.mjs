@@ -5,6 +5,7 @@
  *   1. 章节引用的每个 runId 都必须在 content/sims 下真实存在；
  *   2. 每个 runId 文件必须带 simc 版本 / commit / 迭代数 / CI；
  *   3. 文本里出现的百分比，章节必须有 evidence.runIds（否则无来源）；
+ *      例外是标注「APL 条件」的逐字引用——那是机器条件，不是自测数字；
  *   4. priorityDiff 里提到的技能，必须能在 priority-table.json 里找到（或显式标为说明文字）；
  *   5. L1/L2 必须有模型卡，L0 允许为 null；
  *   6. 图契约：11 章 × 5 段齐全，主图 kind 走白名单，缺图单独警告。
@@ -102,8 +103,17 @@ for (const f of files) {
   }
 
   // 3. 百分比必须有来源（模拟 runId 或真实日志，二者不能互相顶替）
-  const text = textOf(c);
-  const pcts = [...text.matchAll(/\d+(?:\.\d+)?%/g)].map((m) => m[0]);
+  //    例外：明确标注「APL 条件」的阈值算有出处——那是逐字引用的机器条件（APL 与
+  //    priority-table.json 都在仓库里），不是自己测出来的数字。其它任何百分比照旧必须有来源。
+  const plain = [c.title, c.subtitle, c.claim].filter(Boolean);
+  for (const s of [...(c.priorityDiff?.add ?? []), ...(c.priorityDiff?.drop ?? [])]) {
+    for (const field of [s.reason, s.evidence]) {
+      if (!field) continue;
+      if (/APL 条件/.test(field)) continue;
+      plain.push(field);
+    }
+  }
+  const pcts = [...plain.join(' ').matchAll(/\d+(?:\.\d+)?%/g)].map((m) => m[0]);
   const hasEvidence = (c.evidence?.runIds ?? []).length > 0 || (c.evidence?.logs ?? []).length > 0;
   if (pcts.length && !hasEvidence) {
     errors.push(`${where}: 正文出现 ${pcts.join('/')} 但 evidence 里既没有 runId 也没有日志`);

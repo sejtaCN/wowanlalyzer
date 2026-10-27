@@ -3,7 +3,8 @@
 > 目标：把网站从「能用的数据站」推到「读得下去的教学站」。
 > 范围：只动**文案与排版层**，不碰底层内核与业务逻辑。
 > 诊断日期：2026-10-27。诊断方式：读代码 + `npm run build` + Puppeteer 逐屏截图（`.tools/tmp/audit/`）。
-> 配套文档：`docs/writing-style.md`（写什么）、`docs/ui-design.md`（长什么样）、`docs/HANDOVER.md` §5（待办）。
+> 配套文档：`docs/guide-content-rules.md`（**文案规范源**，本方案的 §2 §3 已上移过去）、
+> `docs/writing-style.md`（页面级精简版）、`docs/ui-design.md`（长什么样）、`docs/HANDOVER.md` §5（待办）。
 
 ---
 
@@ -61,6 +62,9 @@
 
 ## §2 文案改写原则
 
+> 本节是**改写对照的原始出处**（12 条前后对照 + 六条原则）。可复用的规范版在
+> `docs/guide-content-rules.md` §4（通用语言规范）与 §5（AI 味十二条）。
+
 ### 2.1 六条原则
 
 **P1 · 一句话只做一件事。**
@@ -108,6 +112,8 @@
 ---
 
 ## §3 中英文内容处理规范
+
+> 术语三分类的规范版在 `docs/guide-content-rules.md` §4.2；本节保留完整清单与逐条处理记录。
 
 ### 3.1 三级术语分类
 

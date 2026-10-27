@@ -105,7 +105,7 @@ export default function ComingSoon({ onBack }: { onBack: () => void }) {
               <tr>
                 <td className="n dim">4</td>
                 <td>过校验并上线</td>
-                <td>无来源的数字会被拦下；通过后状态改成 active</td>
+                <td>无来源的数字会被拦下；通过后状态变成「已上线」</td>
                 <td className="mono dim">validate:content<br />content/specs.json</td>
               </tr>
             </tbody>

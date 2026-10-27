@@ -3,12 +3,12 @@
  "level": "L0",
  "order": 3,
  "title": "优先级表怎么读",
- "subtitle": "从上往下找第一个成立的，打完重来",
+ "subtitle": "从上往下找第一条成立的，打完回到表头",
  "model": null,
- "claim": "读表只有一步：从上往下，第一个条件成立的技能就是下一个要打的，打完回到最上面。38 条里 22 条是主循环、11 条是冷却、5 条是开打前。",
+ "claim": "读表只有一步：从上往下，第一条条件成立的技能就是下一个要打的，打完回到表头。38 条里 22 条主循环、11 条冷却、5 条开打前。",
  "chart": {
   "kind": "priority-table",
-  "title": "38 条优先级（来自 APL 原文）",
+  "title": "38 条优先级，顺序直接来自 APL 原文",
   "filter": {
    "sections": [
     "actions.main",
@@ -21,13 +21,15 @@
   "add": [
    {
     "skill": "shadow_word_death",
-    "reason": "最容易读错的一条：只在目标残血或有吸收盾时才轮得到",
-    "evidence": "APL: (priest.force_devour_matter|target.has_absorb)&talent.devour_matter"
+    "reason": "最容易读错的一条：只有目标残血或有吸收盾时才轮得到",
+    "evidence": "APL 条件：目标有吸收盾，或触发了强制吞噬；并且点过「devour_matter」天赋",
+    "raw": "(priest.force_devour_matter|target.has_absorb)&talent.devour_matter"
    },
    {
     "skill": "vampiric_touch",
-    "reason": "它的目标不是“当前目标”，是“缺口最大的那个”",
-    "evidence": "APL: targetSelect max:(target.health.pct<=20)*100+dot.shadow_word_madness.ticking"
+    "reason": "它的目标不是「当前目标」，是「缺口最大的那个」",
+    "evidence": "APL 条件：「targetSelect」用「目标血量≤20% 加权 + 暗言术：癫正在跳」挑缺口最大的那个",
+    "raw": "targetSelect max:(target.health.pct<=20)*100+dot.shadow_word_madness.ticking"
    }
   ],
   "drop": []
@@ -35,7 +37,7 @@
  "map": null,
  "casePanel": {
   "status": "pending",
-  "reason": "读表是方法，不是数据；这一段的对照要等有战斗分段的日志。"
+  "reason": "读表是方法，不是数据。这里暂时没有对照：要说清「他这一波怎么打的」，得有一份带战斗分段的日志。"
  },
  "evidence": {
   "runIds": [],

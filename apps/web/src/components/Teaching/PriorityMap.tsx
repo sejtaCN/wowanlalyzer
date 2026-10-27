@@ -39,7 +39,7 @@ export default function PriorityMap({
       <div className="pm-legend">
         <span><i className="pm-key add" />{up}</span>
         <span><i className="pm-key drop" />{down}</span>
-        <span>序号 = 38 条 APL 表中的执行位置；没有独立行的写“循环入口”</span>
+        <span>序号 = 38 条 APL 表中的执行位置；没有独立行的写「循环入口」</span>
         <span>位置点与下方卡片的 # 号一一对应</span>
       </div>
       <div className="pm-overview" aria-hidden>
@@ -65,6 +65,12 @@ export default function PriorityMap({
                 </div>
                 <div className="pm-reason"><Gloss text={item.reason} /></div>
                 <div className="pm-evidence">{item.evidence}</div>
+                {item.raw ? (
+                  <details className="pm-raw">
+                    <summary>APL 原始写法</summary>
+                    <code>{item.raw}</code>
+                  </details>
+                ) : null}
                 {item.order != null ? (
                   <div className="pm-pos" aria-hidden><i style={{ left: `${(item.order / maxOrder) * 100}%` }} /></div>
                 ) : null}

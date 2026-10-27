@@ -3,36 +3,36 @@
  "level": "L0",
  "order": 2,
  "title": "技能清单",
- "subtitle": "先认出现最多的两个，其余可以晚点认",
+ "subtitle": "先认出现最多的两个，其余往后放",
  "model": null,
- "claim": "先记住触须猛击和暗言术：灭，各占 5 条规则。24 个技能里其余的多半只在一种条件下出现，认错代价小。",
+ "claim": "先记触须猛击和暗言术：灭，各占 5 条规则。24 个技能里其余的大多只在一个条件下出现，认错代价不大。",
  "chart": {
   "kind": "skill-cards",
-  "title": "每个技能在优先级表里出现几次"
+  "title": "每个技能在优先级表里出现几次（多的先认）"
  },
  "priorityDiff": {
   "add": [
    {
     "skill": "tentacle_slam",
-    "reason": "先认它：5 条规则都在判断它，而且它会替你续吸血鬼之触",
-    "evidence": "priority-table: actions.main 中 5 处出现"
+    "reason": "先认它：5 条规则都在判断它，而且它顺手替你续吸血鬼之触",
+    "evidence": "优先级表：「actions.main」里出现 5 处"
    },
    {
     "skill": "shadow_word_death",
-    "reason": "第二个先认：5 条规则，但只在残血或有吸收盾时才轮得到",
-    "evidence": "priority-table: actions.main 中 5 处出现"
+    "reason": "第二个先认：也是 5 条规则，但只在残血或有吸收盾时才轮得到",
+    "evidence": "优先级表：「actions.main」里出现 5 处"
    }
   ],
   "drop": [
    {
     "skill": "potion",
-    "reason": "开打前用一次，先不用背条件",
-    "evidence": "priority-table: actions.precombat 段"
+    "reason": "开打前用一次就行，先不用记条件",
+    "evidence": "优先级表：「actions.precombat」段"
    },
    {
     "skill": "arcane_torrent",
-    "reason": "回资源用，等循环稳了再看",
-    "evidence": "priority-table: actions.precombat 段"
+    "reason": "用来回资源，循环稳了再记",
+    "evidence": "优先级表：「actions.precombat」段"
    }
   ]
  },
@@ -40,12 +40,12 @@
  "casePanel": {
   "status": "log",
   "logId": "xiaohuasheng-events",
-  "headline": "他这一场：被动比手动多，手动榜首不是 DoT",
+  "headline": "他这场：被动比手动多，手动榜首还不是 DoT",
   "points": [
    "被动触发的暗影幻灵比所有手动技能都多；它不是按键循环。",
    "手动榜首是精神鞭笞；DoT 不靠手动刷屏，触须猛击会替你续。"
   ],
-  "evidence": "来源：同一份事件表 CSV 的施法统计（整场）。"
+  "evidence": "来源：同一份事件表 CSV 的施法统计，整场。"
  },
  "evidence": {
   "runIds": [],

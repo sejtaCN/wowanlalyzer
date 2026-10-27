@@ -43,19 +43,19 @@ export default function BurstTimeline({ logId, highlight }: { logId: string; hig
                 width={w}
                 height={32}
                 rx={0}
-                fill={p.kind === 'boss' ? '#6b5630' : mark ? '#3a4a63' : '#26303e'}
-                stroke={mark ? '#f5c451' : 'none'}
+                fill={p.kind === 'boss' ? 'var(--data-boss)' : mark ? 'var(--track-2)' : 'var(--track-2)'}
+                stroke={mark ? 'var(--gold)' : 'none'}
                 strokeWidth={mark ? 1.4 : 0}
               >
                 <title>{`第 ${p.index} 段 · ${p.label} · ${p.durationSec}s · 爆发 ${p.bursts} 次`}</title>
               </rect>
               {w > 54 ? (
-                <text x={x0 + w / 2} y={36} textAnchor="middle" fontSize={9.5} fill={p.kind === 'boss' ? '#f0e0b8' : '#c3ccd8'}>
+                <text x={x0 + w / 2} y={36} textAnchor="middle" fontSize={9.5} fill={p.kind === 'boss' ? 'var(--ink-on-gold-soft)' : 'var(--curve-label)'}>
                   {p.kind === 'boss' ? '★ ' : ''}
                   {p.label}
                 </text>
               ) : null}
-              <text x={x0 + w / 2} y={12} textAnchor="middle" fontSize={9.5} fill={p.bursts === 0 ? '#6f7b8a' : '#f5c451'} fontWeight={700}>
+              <text x={x0 + w / 2} y={12} textAnchor="middle" fontSize={9.5} fill={p.bursts === 0 ? 'var(--curve-down-soft)' : 'var(--gold)'} fontWeight={700}>
                 {`×${p.bursts}`}
               </text>
             </g>
@@ -71,7 +71,7 @@ export default function BurstTimeline({ logId, highlight }: { logId: string; hig
             width={Math.max(2, x(w.end) - x(w.start))}
             height={16}
             rx={0}
-            fill="#4ade80"
+            fill="var(--up)"
             opacity={0.75}
           >
             <title>{`爆发窗口 ${mm(w.start)}–${mm(w.end)}（${(w.end - w.start).toFixed(0)}s）`}</title>
@@ -79,24 +79,24 @@ export default function BurstTimeline({ logId, highlight }: { logId: string; hig
         ))}
 
         {/* 轴：每 5 分钟一个刻度 */}
-        <line x1={PAD} y1={80} x2={W - PAD} y2={80} stroke="#333b4a" strokeWidth={1} />
+        <line x1={PAD} y1={80} x2={W - PAD} y2={80} stroke="var(--line-2)" strokeWidth={1} />
         {Array.from({ length: Math.floor(total / 300) + 1 }, (_, i) => i * 300).map((t) => (
           <g key={t}>
-            <line x1={x(t)} y1={80} x2={x(t)} y2={85} stroke="#333b4a" strokeWidth={1} />
-            <text x={x(t)} y={96} fontSize={9} fill="#7d8896" textAnchor={t === 0 ? 'start' : 'middle'}>
+            <line x1={x(t)} y1={80} x2={x(t)} y2={85} stroke="var(--line-2)" strokeWidth={1} />
+            <text x={x(t)} y={96} fontSize={9} fill="var(--curve-down-soft)" textAnchor={t === 0 ? 'start' : 'middle'}>
               {Math.round(t / 60)}min
             </text>
           </g>
         ))}
-        <text x={W - PAD} y={96} fontSize={9} fill="#7d8896" textAnchor="end">
+        <text x={W - PAD} y={96} fontSize={9} fill="var(--curve-down-soft)" textAnchor="end">
           整场 {mm(total)}
         </text>
       </svg>
 
       <div className="btl-legend">
-        <span><i style={{ background: '#26303e' }} />区域段</span>
-        <span><i style={{ background: '#6b5630' }} />BOSS 段</span>
-        <span><i style={{ background: '#4ade80' }} />爆发窗口（真实起止）</span>
+        <span><i style={{ background: 'var(--track-2)' }} />区域段</span>
+        <span><i style={{ background: 'var(--data-boss)' }} />BOSS 段</span>
+        <span><i style={{ background: 'var(--up)' }} />爆发窗口（真实起止）</span>
         <span>带上的 ×N = 这一段开了几次爆发，合计 {totalBursts} 次</span>
       </div>
     </div>

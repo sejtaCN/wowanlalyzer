@@ -15,7 +15,7 @@
  "claim": "BOSS 的爆发低于大波：单体 90 秒只换 5.15M，是大波的 41%；但它比 2 只小波（4.93M）高，所以「不开」的前提是下一波更大。",
  "chart": {
   "kind": "burst-bars",
-  "title": "单体 90 秒 / 45 秒：开爆发 vs 不开",
+  "title": "单体 90 秒 / 45 秒：开爆发和不开的差",
   "runIds": [
    "dec_voidform_on_0__w90_1b__5000",
    "dec_voidform_on_1__w90_1b__5000",
@@ -27,20 +27,23 @@
   "add": [
    {
     "skill": "vampiric_touch",
-    "reason": "单目标时覆盖率决定剩下一切，断了立刻补",
-    "evidence": "APL: actions.main 中 vampiric_touch 条件含 active_dot 判断"
+    "reason": "单目标时覆盖率决定一切，断了立刻补",
+    "evidence": "APL 条件：「actions.main」里，吸血鬼之触的条件含「active_dot」判断",
+    "raw": "actions.main 中 vampiric_touch 条件含 active_dot 判断"
    },
    {
     "skill": "shadow_word_pain",
-    "reason": "第二个持续伤害，单目标也要一直挂着",
-    "evidence": "APL: active_dot.shadow_word_pain>=active_dot.vampiric_touch 触发补充"
+    "reason": "第二个持续伤害，单目标也得一直挂着",
+    "evidence": "APL 条件：已挂暗言术：痛的目标数 ≥ 已挂吸血鬼之触的目标数，用来触发补充",
+    "raw": "active_dot.shadow_word_pain>=active_dot.vampiric_touch 触发补充"
    }
   ],
   "drop": [
    {
     "skill": "aoe_loop",
     "reason": "单目标不进多目标循环",
-    "evidence": "APL: aoe 段条件 active_enemies>2"
+    "evidence": "APL 条件：多目标段的条件是目标数 > 2",
+    "raw": "aoe 段条件 active_enemies>2"
    }
   ]
  },
@@ -57,7 +60,7 @@
    9
   ],
   "headline": "两个 BOSS 阶段：Rav’i 260 秒 2 次，Zul’jan 250 秒 2 次",
-  "reading": "两个 BOSS 阶段各开 2 次：长战斗能吃到第二次冷却。单体增量低于大波，但如果后面没有更大一波，仍比 2 只小波高。"
+  "reading": "两个 BOSS 阶段各开 2 次：战斗够长才吃得到第二次冷却。单体增量低于大波，但如果后面没有更大一波，仍然比 2 只小波高。"
  },
  "evidence": {
   "runIds": [

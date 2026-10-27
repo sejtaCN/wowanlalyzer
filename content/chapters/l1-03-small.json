@@ -14,7 +14,7 @@
  "claim": "4 只以下不开爆发。一次只换 4.93M，不到大波的 39%——把冷却留给下一波。",
  "chart": {
   "kind": "burst-bars",
-  "title": "2 目标 30 秒：开爆发 vs 不开",
+  "title": "2 目标 30 秒：开爆发和不开的差",
   "runIds": [
    "dec_voidform_on_0__w30_2__5000",
    "dec_voidform_on_1__w30_2__5000"
@@ -24,20 +24,23 @@
   "add": [
    {
     "skill": "mind_flay",
-    "reason": "目标 ≤2 时 AoE 循环不开启，填充重新有位置",
-    "evidence": "APL: aoe 段条件 active_enemies>2，2 只时不成立"
+    "reason": "目标 ≤2 时 AoE 循环不启动，填充技能重新有用武之地",
+    "evidence": "APL 条件：多目标段的条件是目标数 > 2，2 只时不成立",
+    "raw": "aoe 段条件 active_enemies>2，2 只时不成立"
    },
    {
     "skill": "vampiric_touch",
-    "reason": "目标少，但当前目标身上仍要挂满",
-    "evidence": "APL: actions.main 中 vampiric_touch 排在填充之前"
+    "reason": "目标少，但当前目标身上照样挂满",
+    "evidence": "APL 条件：「actions.main」里，吸血鬼之触排在填充之前",
+    "raw": "actions.main 中 vampiric_touch 排在填充之前"
    }
   ],
   "drop": [
    {
     "skill": "aoe_loop",
     "reason": "目标数没到阈值，整段 AoE 不执行",
-    "evidence": "模拟 w30_2：AoE 开与不开都在 CI 内"
+    "evidence": "模拟「w30_2」：AoE 开不开的差落在 CI 内",
+    "raw": "模拟 w30_2：AoE 开与不开都在 CI 内"
    }
   ]
  },
@@ -55,7 +58,7 @@
    8
   ],
   "headline": "三段零爆发：80 秒、60 秒、30 秒",
-  "reading": "三段加起来 170 秒，只够一次冷却。他没有在这些短段里花掉爆发。"
+  "reading": "三段加起来 170 秒，只够一次冷却。他没在这些短段里花掉爆发。"
  },
  "evidence": {
   "runIds": [

@@ -13,5 +13,8 @@ Thumbs.db
 # SimC 二进制与临时文件（本地产物，不入库）
 .tools/
 
+# 外部设计规则书的本地镜像（只读参考，用 git clone 取回，不入库）
+.refs/
+
 # one-off audit scripts
 scripts/_tmp-*

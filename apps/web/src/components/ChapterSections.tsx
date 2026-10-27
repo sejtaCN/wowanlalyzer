@@ -133,7 +133,7 @@ export function BurstChart({ runIds, title, showScale = false }: { runIds: strin
       </div>
       <div className="legend">
         <span><i style={{ background: 'var(--up)' }} />开爆发 DPS</span>
-        <span><i style={{ background: '#46505f' }} />不开 DPS</span>
+        <span><i style={{ background: 'var(--data-off)' }} />不开 DPS</span>
         <span>±{(pairs[0]?.ciPct ?? 0).toFixed(2)}% (95% CI, n={pairs[0]?.on.samples ?? '—'})</span>
       </div>
       {showScale && scale.length ? (
@@ -172,11 +172,21 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
                 return (
                   <tr key={`${sec.key}-${r.order}-${r.skill}`}>
                     <td className="n dim">{r.order}</td>
-                    <td>
-                      {s.text}
-                      {s.verified ? null : <div className="note mono" style={{ fontSize: 12 }}>{r.skill}</div>}
+                    <td title={r.skill}>{s.text}</td>
+                    <td style={{ fontSize: 12 }}>
+                      {r.conditionGroups?.length ? (
+                        <div className="cond-groups">
+                          {r.conditionGroups.map((g, gi) => (
+                            <div className="cond-line" key={gi}>
+                              {gi > 0 ? <span className="cond-or">或</span> : null}
+                              <span>{g}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="dim">{r.conditionZh || '无条件（按顺序直接用）'}</span>
+                      )}
                     </td>
-                    <td style={{ fontSize: 12 }}>{r.conditionZh || '无条件（按顺序直接用）'}</td>
                     <td className="dim" style={{ fontSize: 12 }}>{r.targetSelectZh || '当前目标'}</td>
                   </tr>
                 );
@@ -185,7 +195,7 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
           </table>
         </div>
       ))}
-      <div className="note">表格来自 APL 原文，条件只做词替换，不改写逻辑。</div>
+      <div className="note">表格顺序来自 APL 原文。条件翻成了人话，逻辑一个字没改。</div>
     </>
   );
 }
@@ -201,9 +211,8 @@ export function SkillCards() {
           const s = skillName(u.skill);
           return (
             <div className="sk" key={u.skill}>
-              <div className="nm">
+              <div className="nm" title={u.skill}>
                 {s.text}
-                {s.verified ? null : <span className="note mono" style={{ fontSize: 12 }}> {u.skill}</span>}
               </div>
               <div className="meta">
                 <span className="cnt">{u.count} 条规则</span>
@@ -215,7 +224,7 @@ export function SkillCards() {
       </div>
       <div className="note" style={{ marginTop: 10 }}>
         {usage.length} 个技能，共 {usage.reduce((n, u) => n + u.count, 0)} 条优先级规则。
-        按出现次数排序：次数多说明它在更多情况下要判断。
+        按出现次数排：次数越多，出现的场合越多，先认它。
       </div>
     </>
   );
@@ -425,9 +434,9 @@ export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: Re
           标「重点」的行是这一章要读者看的阶段。
         </div>
         <div className="note" style={{ marginTop: 4 }}>
-          「路线匹配」读法：`≈第N波 · X%` = 这一阶段的怪物组成与路线第 N 波的**重合度**（Jaccard），不是“打到第几波”。只列最高的一波；低于 40% 说明他走的是另一条顺序。
+          「路线匹配」读法：`≈第N波 · X%` = 这一阶段的怪物组成与路线第 N 波的<b>重合度</b>（Jaccard），不是“打到第几波”。只列最高的一波；低于 40% 说明他走的是另一条顺序。
         </div>
-        <div className="note" style={{ marginTop: 4, color: '#f0e0b8' }}>
+        <div className="note" style={{ marginTop: 4, color: 'var(--ink-on-gold-soft)' }}>
           限制：{doc.limitation}
         </div>
       </>
@@ -443,7 +452,7 @@ export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: Re
             <li key={p}>{p}</li>
           ))}
         </ul>
-        <div className="note" style={{ marginTop: 8, color: '#f0e0b8' }}>{block.evidence}</div>
+        <div className="note" style={{ marginTop: 8, color: 'var(--ink-on-gold-soft)' }}>{block.evidence}</div>
       </div>
     </>
   );
@@ -494,14 +503,14 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         tag={isRoute ? `${ALTAR_WAVES.pulls} 波` : model?.frequency ?? '全局'}
         note={
           isRoute
-            ? '柱高 = 该波实际怪数；点任意一波，整页的结论、数值和地图注记一起切换。'
+            ? '柱高就是这一波的实际怪数。点任意一波，上面的结论、下面的数值、地图注记会一起换。'
             : isRhythm
-              ? '这是把模拟冷却、A/B 收益与日志节奏放到同一把秒尺上的算术推断，不是两波连打模拟。'
+              ? '这是把模拟冷却、A/B 收益和日志节奏放在同一把秒尺上算出来的，不是两波连打的模拟。'
               : budget
-                ? `目标是 ${budget.durationSec} 秒木桩满 uptime；移动 ${model?.movement}、危险点 ${model?.dangers} 个还没折算成可用 GCD。`
+                ? `目标：${budget.durationSec} 秒木桩，全程 uptime。移动 ${model?.movement}、危险点 ${model?.dangers} 个都还没折算成可用 GCD。`
                 : model
-                  ? `目标数轴只回答“够不够大”；时长 ${model.durationSec}s 是模型假设。移动 ${model.movement}、危险点 ${model.dangers} 个尚未折算成 DPS 代价。`
-                  : '范围卡只回答这套规则用在哪，不提供波次参数。'
+                  ? `目标数轴只回答“够不够大”。${model.durationSec}s 是模型假设；移动 ${model.movement}、危险点 ${model.dangers} 个还没折算成 DPS 代价。`
+                  : '范围卡只说明这套规则用在哪，不给波次参数。'
         }
       >
         {isRoute ? (
@@ -527,10 +536,10 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         note={
           isRoute && routeWave
             ? routeWave.mobCount > 8
-              ? `这一波 ${routeWave.mobCount} 只，模拟按 8 只档计，读作保守下限；建议只决定“开 / 看冷却 / 不开”。`
-              : '两行各自是真实 DPS 与 95% CI；不是把增量叠在原条上。'
+              ? `这一波 ${routeWave.mobCount} 只，模拟按 8 只档算，读作保守下限。够用来决定“开 / 看冷却 / 不开”。`
+              : '两行各自是真实 DPS 和 95% CI。增量没有叠在原条上。'
             : top
-              ? `开与不开的差：+${top.deltaPct.toFixed(1)}%，一次爆发多 ${(top.deltaDamage / 1e6).toFixed(1)}M；误差带 ±${top.ciPct.toFixed(2)}%。`
+              ? `开与不开差 ${top.deltaPct.toFixed(1)}%，一次爆发多换 ${(top.deltaDamage / 1e6).toFixed(1)}M。误差带 ±${top.ciPct.toFixed(2)}%，别把它当收益。`
               : chapter.chart.title
         }
       >
@@ -559,8 +568,8 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         tag={isRoute ? '按目标档套用 L1' : '相对 L0 优先级表'}
         note={
           isRoute && routeGuide
-            ? `当前第 ${routeWave?.pull} 波有 ${routeWave?.mobCount} 只，套用「${routeGuide.title}」的同档调整；这是规则映射，不是这一波专属数据。`
-            : `这一波要加 ${chapter.priorityDiff.add.length} 条、要降 ${chapter.priorityDiff.drop.length} 条；序号来自 APL 表，理由各自挂证据。`
+            ? `当前第 ${routeWave?.pull} 波有 ${routeWave?.mobCount} 只，套用「${routeGuide.title}」的同档调整。这是规则映射，不是这一波专属数据。`
+            : `这一波加 ${chapter.priorityDiff.add.length} 条、降 ${chapter.priorityDiff.drop.length} 条。序号是 APL 表里的真实位置，每条都挂着理由。`
         }
       >
         {isRoute && routeGuide ? (
@@ -578,10 +587,10 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         tag={chapter.map ? (isRoute ? '地形图 · 不标波次坐标' : '路线示例') : '不绑定地图'}
         note={
           isRoute
-            ? '选波看第①段；这一段只核对地形，不给不存在的波次坐标。'
+            ? '选波看第①段。这一段只核对地形：路线没有每波坐标，不给不存在的点位。'
             : chapter.map
-              ? '这里只借真实路线说明模型；没有坐标就不往地图上标位置。'
-              : '这一章不绑定具体副本，套用路线见 L2。'
+              ? '借这条真实路线说明模型。路线没有每波坐标，不往图上标位置。'
+              : '这一章不绑副本。套到具体路线看 L2。'
         }
       >
         <MapPanel map={chapter.map} level={chapter.level} targets={model?.targets} kind={model?.kind} selectedPull={isRoute ? selectedPull : undefined} />
@@ -593,7 +602,7 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         figureStatus={figure(5)?.status}
         question="真人怎么打"
         tag={chapter.casePanel.status === 'pending' ? '待补' : '真实日志'}
-        note="整场日志推断出的阶段，不是单波：这份导出没有死亡事件，切不出「第 N 波几时开始」。"
+        note="整场日志推出的阶段，不是单波。这份导出没有死亡事件，切不出「第 N 波几时开始」。"
       >
         <CasePanel
           block={chapter.casePanel}

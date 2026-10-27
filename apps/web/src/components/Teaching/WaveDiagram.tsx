@@ -10,7 +10,14 @@ import { burstValueFor, parseTargets } from './rules';
  */
 
 /** 同族同色：名称哈希到一组低饱和色，保证同一只怪在每张图里颜色一致 */
-const FAMILY_COLORS = ['#3f5f7a', '#5b4a6e', '#4a6b52', '#6e5a44', '#4a5a6b', '#6b4a4a'];
+const FAMILY_COLORS = [
+  'var(--family-1)',
+  'var(--family-2)',
+  'var(--family-3)',
+  'var(--family-4)',
+  'var(--family-5)',
+  'var(--family-6)',
+];
 function familyColor(name: string): string {
   let h = 0;
   for (let i = 0; i < name.length; i += 1) h = (h * 31 + name.charCodeAt(i)) % 997;

@@ -87,7 +87,7 @@ function Shell() {
       </header>
 
       {note ? (
-        <div style={{ background: 'rgba(245,196,81,0.08)', borderBottom: '1px solid rgba(245,196,81,0.2)', padding: '7px 24px', fontSize: 12, color: '#f0e0b8' }}>
+        <div style={{ background: 'rgba(245,196,81,0.08)', borderBottom: '1px solid rgba(245,196,81,0.2)', padding: '7px 24px', fontSize: 12, color: 'var(--ink-on-gold-soft)' }}>
           {note}
         </div>
       ) : null}

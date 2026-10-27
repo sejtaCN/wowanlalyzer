@@ -1,8 +1,8 @@
 {
   "source": "content/profiles/MID2_shadow_voidweaver.simc",
   "gameVersion": "MID2",
-  "generatedAt": "2026-10-25T15:09:34.417Z",
-  "note": "直接从 APL 抽取，条件原文与人话并列；人话只做词替换，不改写逻辑，也不补\"为什么\"",
+  "generatedAt": "2026-10-27T03:53:30.668Z",
+  "note": "直接从 APL 抽取，条件原文与人话并列；人话只改写法，不改逻辑，也不补\"为什么\"。有出处的名字用中文，没出处的用「」标成标识符。",
   "sections": [
     {
       "key": "actions.main",
@@ -14,9 +14,12 @@
           "order": 1,
           "skill": "shadow_word_death",
           "conditionRaw": "(priest.force_devour_matter|target.has_absorb)&talent.devour_matter",
-          "conditionZh": "(priest.force_devour_matter 或 target.has_absorb) 且 天赋 devour_matter",
+          "conditionZh": "（「priest.force_devour_matter」 或 目标有吸收盾） 且 「devour_matter」天赋",
+          "conditionGroups": [
+            "（「priest.force_devour_matter」 或 目标有吸收盾） 且 「devour_matter」天赋"
+          ],
           "targetSelectRaw": "max:(target.health.pct<=20)*100+dot.shadow_word_madness.ticking",
-          "targetSelectZh": "max:(目标血量%≤20)*100+shadow_word_madness 正在跳",
+          "targetSelectZh": "取最大：（目标血量% ≤ 20）×100 + 暗言术：癫在跳",
           "enabled": true
         },
         {
@@ -25,9 +28,12 @@
           "order": 2,
           "skill": "tentacle_slam",
           "conditionRaw": "!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5",
-          "conditionZh": "!vampiric_touch 正在跳 且 目标剩余存活≥10 且 已挂着 vampiric_touch 的目标数<5",
+          "conditionZh": "吸血鬼之触没在跳 且 目标剩余存活 ≥ 10 且 已挂吸血鬼之触的目标数 < 5",
+          "conditionGroups": [
+            "吸血鬼之触没在跳 且 目标剩余存活 ≥ 10 且 已挂吸血鬼之触的目标数 < 5"
+          ],
           "targetSelectRaw": "min:dot.vampiric_touch.remains",
-          "targetSelectZh": "min:vampiric_touch 剩余时间",
+          "targetSelectZh": "取最小：吸血鬼之触剩余时间",
           "enabled": true
         },
         {
@@ -36,9 +42,12 @@
           "order": 3,
           "skill": "vampiric_touch",
           "conditionRaw": "!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5",
-          "conditionZh": "!vampiric_touch 正在跳 且 目标剩余存活≥10 且 已挂着 vampiric_touch 的目标数<5",
+          "conditionZh": "吸血鬼之触没在跳 且 目标剩余存活 ≥ 10 且 已挂吸血鬼之触的目标数 < 5",
+          "conditionGroups": [
+            "吸血鬼之触没在跳 且 目标剩余存活 ≥ 10 且 已挂吸血鬼之触的目标数 < 5"
+          ],
           "targetSelectRaw": "min:dot.vampiric_touch.remains",
-          "targetSelectZh": "min:vampiric_touch 剩余时间",
+          "targetSelectZh": "取最小：吸血鬼之触剩余时间",
           "enabled": true
         },
         {
@@ -47,9 +56,17 @@
           "order": 4,
           "skill": "shadow_word_madness",
           "conditionRaw": "active_dot.shadow_word_madness<=1&dot.shadow_word_madness.remains<=gcd.max|insanity.deficit<=35&(cooldown.voidform.remains>25|target.time_to_die<25|active_enemies>1|insanity.deficit<=5)|buff.mind_devourer.react|!raid_event.adds.exists&target.time_to_die<=10|buff.entropic_rift.up&(cooldown.voidform.remains>=75|!talent.ancient_madness)|buff.voidform.up",
-          "conditionZh": "已挂着 shadow_word_madness 的目标数≤1 且 shadow_word_madness 剩余时间≤一个 GCD 或 疯狂值缺口≤35 且 (voidform 冷却剩余>25 或 目标剩余存活<25 或 目标数>1 或 疯狂值缺口≤5) 或 mind_devourer 触发 或 !有加怪事件 且 目标剩余存活≤10 或 有 entropic_rift buff 且 (voidform 冷却剩余≥75 或 !天赋 ancient_madness) 或 有 voidform buff",
+          "conditionZh": "已挂暗言术：癫的目标数 ≤ 1 且 暗言术：癫剩余时间 ≤ 一个 GCD 或 疯狂值缺口 ≤ 35 且 （虚空形态冷却剩余 > 25 或 目标剩余存活 < 25 或 目标数 > 1 或 疯狂值缺口 ≤ 5） 或 「mind_devourer」触发 或 没有加怪事件 且 目标剩余存活 ≤ 10 或 有「entropic_rift」增益 且 （虚空形态冷却剩余 ≥ 75 或 没点「ancient_madness」天赋） 或 有虚空形态增益",
+          "conditionGroups": [
+            "已挂暗言术：癫的目标数 ≤ 1 且 暗言术：癫剩余时间 ≤ 一个 GCD",
+            "疯狂值缺口 ≤ 35 且 （虚空形态冷却剩余 > 25 或 目标剩余存活 < 25 或 目标数 > 1 或 疯狂值缺口 ≤ 5）",
+            "「mind_devourer」触发",
+            "没有加怪事件 且 目标剩余存活 ≤ 10",
+            "有「entropic_rift」增益 且 （虚空形态冷却剩余 ≥ 75 或 没点「ancient_madness」天赋）",
+            "有虚空形态增益"
+          ],
           "targetSelectRaw": "max:target.time_to_die*(dot.shadow_word_madness.remains<=gcd.max*2|variable.dr_force_prio|!talent.distorted_reality&variable.me_force_prio)",
-          "targetSelectZh": "max:目标剩余存活*(shadow_word_madness 剩余时间≤一个 GCD*2 或 variable.dr_force_prio 或 !天赋 distorted_reality 且 variable.me_force_prio)",
+          "targetSelectZh": "取最大：目标剩余存活×（暗言术：癫剩余时间 ≤ 一个 GCD×2 或 「dr_force_prio」标记 或 没点「distorted_reality」天赋 且 「me_force_prio」标记）",
           "enabled": true
         },
         {
@@ -58,9 +75,13 @@
           "order": 5,
           "skill": "tentacle_slam",
           "conditionRaw": "dot.vampiric_touch.refreshable&(!in_flight|active_dot.vampiric_touch+6<active_enemies)|cooldown.tentacle_slam.full_recharge_time<=gcd.max*2",
-          "conditionZh": "vampiric_touch 可刷新 且 (!技能在弹道中 或 已挂着 vampiric_touch 的目标数+6<目标数) 或 tentacle_slam 充满时间≤一个 GCD*2",
+          "conditionZh": "吸血鬼之触可刷新 且 （技能不在弹道中 或 已挂吸血鬼之触的目标数 + 6 < 目标数） 或 触须猛击充满时间 ≤ 一个 GCD×2",
+          "conditionGroups": [
+            "吸血鬼之触可刷新 且 （技能不在弹道中 或 已挂吸血鬼之触的目标数 + 6 < 目标数）",
+            "触须猛击充满时间 ≤ 一个 GCD×2"
+          ],
           "targetSelectRaw": "min:dot.vampiric_touch.remains",
-          "targetSelectZh": "min:vampiric_touch 剩余时间",
+          "targetSelectZh": "取最小：吸血鬼之触剩余时间",
           "enabled": true
         },
         {
@@ -69,9 +90,12 @@
           "order": 6,
           "skill": "void_torrent",
           "conditionRaw": "!variable.holding_tentacle_slam&variable.dots_up",
-          "conditionZh": "!variable.holding_tentacle_slam 且 variable.dots_up",
+          "conditionZh": "「holding_tentacle_slam」没置位 且 「dots_up」标记",
+          "conditionGroups": [
+            "「holding_tentacle_slam」没置位 且 「dots_up」标记"
+          ],
           "targetSelectRaw": "max:(dot.shadow_word_madness.remains*1000+target.time_to_die)",
-          "targetSelectZh": "max:(shadow_word_madness 剩余时间*1000+目标剩余存活)",
+          "targetSelectZh": "取最大：（暗言术：癫剩余时间×1000 + 目标剩余存活）",
           "enabled": true
         },
         {
@@ -80,9 +104,12 @@
           "order": 7,
           "skill": "shadow_word_pain",
           "conditionRaw": "talent.invoked_nightmare&refreshable&target.time_to_die>12&(dot.vampiric_touch.ticking|action.tentacle_slam.in_flight)",
-          "conditionZh": "天赋 invoked_nightmare 且 refreshable 且 目标剩余存活>12 且 (vampiric_touch 正在跳 或 action.tentacle_slam.技能在弹道中)",
+          "conditionZh": "被唤起的梦魇天赋 且 可刷新 且 目标剩余存活 > 12 且 （吸血鬼之触在跳 或 触须猛击在弹道中）",
+          "conditionGroups": [
+            "被唤起的梦魇天赋 且 可刷新 且 目标剩余存活 > 12 且 （吸血鬼之触在跳 或 触须猛击在弹道中）"
+          ],
           "targetSelectRaw": "max:(refreshable*100000+target.time_to_die+dot.vampiric_touch.ticking*10000)",
-          "targetSelectZh": "max:(refreshable*100000+目标剩余存活+vampiric_touch 正在跳*10000)",
+          "targetSelectZh": "取最大：（可刷新×100000 + 目标剩余存活 + 吸血鬼之触在跳×10000）",
           "enabled": true
         },
         {
@@ -91,7 +118,10 @@
           "order": 8,
           "skill": "void_volley",
           "conditionRaw": "cooldown.voidform.up",
-          "conditionZh": "cooldown.voidform.up",
+          "conditionZh": "虚空形态冷却好了",
+          "conditionGroups": [
+            "虚空形态冷却好了"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -103,8 +133,9 @@
           "skill": "void_blast",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "max:(dot.shadow_word_madness.remains*1000+target.time_to_die)",
-          "targetSelectZh": "max:(shadow_word_madness 剩余时间*1000+目标剩余存活)",
+          "targetSelectZh": "取最大：（暗言术：癫剩余时间×1000 + 目标剩余存活）",
           "enabled": true
         },
         {
@@ -113,9 +144,12 @@
           "order": 10,
           "skill": "mind_blast",
           "conditionRaw": "(!buff.mind_devourer.react|!talent.mind_devourer)&(!talent.void_blast|!talent.thought_harvester|cooldown.void_torrent.remains>=gcd.max*2|variable.holding_tentacle_slam|!variable.dots_up)",
-          "conditionZh": "(!mind_devourer 触发 或 !天赋 mind_devourer) 且 (!天赋 void_blast 或 !天赋 thought_harvester 或 void_torrent 冷却剩余≥一个 GCD*2 或 variable.holding_tentacle_slam 或 !variable.dots_up)",
+          "conditionZh": "（「mind_devourer」没触发 或 没点「mind_devourer」天赋） 且 （没点虚空冲击天赋 或 没点「thought_harvester」天赋 或 虚空洪流冷却剩余 ≥ 一个 GCD×2 或 「holding_tentacle_slam」标记 或 「dots_up」没置位）",
+          "conditionGroups": [
+            "（「mind_devourer」没触发 或 没点「mind_devourer」天赋） 且 （没点虚空冲击天赋 或 没点「thought_harvester」天赋 或 虚空洪流冷却剩余 ≥ 一个 GCD×2 或 「holding_tentacle_slam」标记 或 「dots_up」没置位）"
+          ],
           "targetSelectRaw": "max:dot.shadow_word_madness.remains",
-          "targetSelectZh": "max:shadow_word_madness 剩余时间",
+          "targetSelectZh": "取最大：暗言术：癫剩余时间",
           "enabled": true
         },
         {
@@ -125,8 +159,9 @@
           "skill": "mind_flay_insanity",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "max:dot.shadow_word_madness.remains",
-          "targetSelectZh": "max:shadow_word_madness 剩余时间",
+          "targetSelectZh": "取最大：暗言术：癫剩余时间",
           "enabled": true
         },
         {
@@ -135,9 +170,12 @@
           "order": 12,
           "skill": "tentacle_slam",
           "conditionRaw": "(talent.void_apparitions|talent.maddening_tentacles)&(raid_event.adds.in>30|raid_event.adds.in>5&cooldown.tentacle_slam.full_recharge_time<=gcd.max*2)",
-          "conditionZh": "(天赋 void_apparitions 或 天赋 maddening_tentacles) 且 (距下次加怪>30 或 距下次加怪>5 且 tentacle_slam 充满时间≤一个 GCD*2)",
+          "conditionZh": "（「void_apparitions」天赋 或 「maddening_tentacles」天赋） 且 （距下次加怪 > 30 或 距下次加怪 > 5 且 触须猛击充满时间 ≤ 一个 GCD×2）",
+          "conditionGroups": [
+            "（「void_apparitions」天赋 或 「maddening_tentacles」天赋） 且 （距下次加怪 > 30 或 距下次加怪 > 5 且 触须猛击充满时间 ≤ 一个 GCD×2）"
+          ],
           "targetSelectRaw": "min:dot.vampiric_touch.remains",
-          "targetSelectZh": "min:vampiric_touch 剩余时间",
+          "targetSelectZh": "取最小：吸血鬼之触剩余时间",
           "enabled": true
         },
         {
@@ -146,9 +184,12 @@
           "order": 13,
           "skill": "vampiric_touch",
           "conditionRaw": "refreshable&target.time_to_die>12&(dot.vampiric_touch.ticking|!variable.dots_up)&(variable.max_vts>0|active_enemies=1)&(action.tentacle_slam.usable_in>=dot.vampiric_touch.remains|variable.holding_tentacle_slam|!action.tentacle_slam.enabled)",
-          "conditionZh": "refreshable 且 目标剩余存活>12 且 (vampiric_touch 正在跳 或 !variable.dots_up) 且 (variable.max_vts>0 或 目标数=1) 且 (action.tentacle_slam.usable_in≥vampiric_touch 剩余时间 或 variable.holding_tentacle_slam 或 !action.tentacle_slam.enabled)",
+          "conditionZh": "可刷新 且 目标剩余存活 > 12 且 （吸血鬼之触在跳 或 「dots_up」没置位） 且 （「max_vts」标记 > 0 或 目标数 = 1） 且 （触须猛击可用倒计时 ≥ 吸血鬼之触剩余时间 或 「holding_tentacle_slam」标记 或 触须猛击未启用）",
+          "conditionGroups": [
+            "可刷新 且 目标剩余存活 > 12 且 （吸血鬼之触在跳 或 「dots_up」没置位） 且 （「max_vts」标记 > 0 或 目标数 = 1） 且 （触须猛击可用倒计时 ≥ 吸血鬼之触剩余时间 或 「holding_tentacle_slam」标记 或 触须猛击未启用）"
+          ],
           "targetSelectRaw": "max:(refreshable*10000+target.time_to_die)*(dot.vampiric_touch.ticking|!variable.dots_up)",
-          "targetSelectZh": "max:(refreshable*10000+目标剩余存活)*(vampiric_touch 正在跳 或 !variable.dots_up)",
+          "targetSelectZh": "取最大：（可刷新×10000 + 目标剩余存活）×（吸血鬼之触在跳 或 「dots_up」没置位）",
           "enabled": true
         },
         {
@@ -157,9 +198,12 @@
           "order": 14,
           "skill": "vampiric_touch",
           "conditionRaw": "refreshable&target.time_to_die>12",
-          "conditionZh": "refreshable 且 目标剩余存活>12",
+          "conditionZh": "可刷新 且 目标剩余存活 > 12",
+          "conditionGroups": [
+            "可刷新 且 目标剩余存活 > 12"
+          ],
           "targetSelectRaw": "max:(refreshable*10000+target.time_to_die)",
-          "targetSelectZh": "max:(refreshable*10000+目标剩余存活)",
+          "targetSelectZh": "取最大：（可刷新×10000 + 目标剩余存活）",
           "enabled": true
         },
         {
@@ -168,9 +212,13 @@
           "order": 15,
           "skill": "shadow_word_death",
           "conditionRaw": "(pet.mindbender.active|pet.voidwraith.active|pet.shadowfiend.active)&talent.inescapable_torment|target.health.pct<(20+15*talent.deathspeaker)&talent.shadowfiend&talent.idol_of_yshaarj",
-          "conditionZh": "(pet.mindbender.active 或 pet.voidwraith.active 或 pet.shadowfiend.active) 且 天赋 inescapable_torment 或 目标血量%<(20+15×天赋 deathspeaker) 且 天赋 shadowfiend 且 天赋 idol_of_yshaarj",
+          "conditionZh": "（「mindbender」在场 或 「voidwraith」在场 或 「shadowfiend」在场） 且 「inescapable_torment」天赋 或 目标血量% < 20 + 15×「deathspeaker」天赋 且 「shadowfiend」天赋 且 「idol_of_yshaarj」天赋",
+          "conditionGroups": [
+            "（「mindbender」在场 或 「voidwraith」在场 或 「shadowfiend」在场） 且 「inescapable_torment」天赋",
+            "目标血量% < 20 + 15×「deathspeaker」天赋 且 「shadowfiend」天赋 且 「idol_of_yshaarj」天赋"
+          ],
           "targetSelectRaw": "min:target.health.pct",
-          "targetSelectZh": "min:目标血量%",
+          "targetSelectZh": "取最小：目标血量%",
           "enabled": true
         },
         {
@@ -179,9 +227,12 @@
           "order": 16,
           "skill": "shadow_word_death",
           "conditionRaw": "(target.health.pct<(20+15*talent.deathspeaker))",
-          "conditionZh": "(目标血量%<(20+15×天赋 deathspeaker))",
+          "conditionZh": "目标血量% < 20 + 15×「deathspeaker」天赋",
+          "conditionGroups": [
+            "目标血量% < 20 + 15×「deathspeaker」天赋"
+          ],
           "targetSelectRaw": "min:target.health.pct",
-          "targetSelectZh": "min:目标血量%",
+          "targetSelectZh": "取最小：目标血量%",
           "enabled": true
         },
         {
@@ -190,7 +241,15 @@
           "order": 17,
           "skill": "void_volley",
           "conditionRaw": "!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45",
-          "conditionZh": "!天赋 resonant_energy 或 voidform 冷却剩余<60 或 有 voidform buff 或 resonant_energy_damage 触发 或 buff.crushing_void.stack≥4 或 战斗剩余时间<45",
+          "conditionZh": "没点共振能量天赋 或 虚空形态冷却剩余 < 60 或 有虚空形态增益 或 「resonant_energy_damage」触发 或 「crushing_void」层数 ≥ 4 或 战斗剩余时间 < 45",
+          "conditionGroups": [
+            "没点共振能量天赋",
+            "虚空形态冷却剩余 < 60",
+            "有虚空形态增益",
+            "「resonant_energy_damage」触发",
+            "「crushing_void」层数 ≥ 4",
+            "战斗剩余时间 < 45"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -202,8 +261,9 @@
           "skill": "mind_flay",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1",
-          "targetSelectZh": "max:shadow_word_madness 剩余时间,chain=1,interrupt_immediate=1,interrupt_if=ticks≥2,interrupt_global=1",
+          "targetSelectZh": "取最大：暗言术：癫剩余时间",
           "enabled": true
         },
         {
@@ -212,7 +272,10 @@
           "order": 19,
           "skill": "tentacle_slam",
           "conditionRaw": "raid_event.adds.in>20",
-          "conditionZh": "距下次加怪>20",
+          "conditionZh": "距下次加怪 > 20",
+          "conditionGroups": [
+            "距下次加怪 > 20"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -224,6 +287,7 @@
           "skill": "shadow_word_death",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "target.health.pct<20",
           "targetSelectZh": "目标血量%<20",
           "enabled": true
@@ -235,8 +299,9 @@
           "skill": "shadow_word_death",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "max:dot.shadow_word_madness.remains",
-          "targetSelectZh": "max:shadow_word_madness 剩余时间",
+          "targetSelectZh": "取最大：暗言术：癫剩余时间",
           "enabled": true
         },
         {
@@ -246,8 +311,9 @@
           "skill": "shadow_word_pain",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "min:remains",
-          "targetSelectZh": "min:remains",
+          "targetSelectZh": "取最小：「remains」",
           "enabled": true
         }
       ]
@@ -262,7 +328,11 @@
           "order": 1,
           "skill": "fireblood",
           "conditionRaw": "((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=8",
-          "conditionZh": "((有 voidform buff 或 !天赋 voidform) 且 有 power_infusion buff) 或 战斗剩余时间≤8",
+          "conditionZh": "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益 或 战斗剩余时间 ≤ 8",
+          "conditionGroups": [
+            "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益",
+            "战斗剩余时间 ≤ 8"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -273,7 +343,11 @@
           "order": 2,
           "skill": "berserking",
           "conditionRaw": "((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=12",
-          "conditionZh": "((有 voidform buff 或 !天赋 voidform) 且 有 power_infusion buff) 或 战斗剩余时间≤12",
+          "conditionZh": "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益 或 战斗剩余时间 ≤ 12",
+          "conditionGroups": [
+            "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益",
+            "战斗剩余时间 ≤ 12"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -284,7 +358,11 @@
           "order": 3,
           "skill": "blood_fury",
           "conditionRaw": "((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=15",
-          "conditionZh": "((有 voidform buff 或 !天赋 voidform) 且 有 power_infusion buff) 或 战斗剩余时间≤15",
+          "conditionZh": "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益 或 战斗剩余时间 ≤ 15",
+          "conditionGroups": [
+            "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益",
+            "战斗剩余时间 ≤ 15"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -295,7 +373,11 @@
           "order": 4,
           "skill": "ancestral_call",
           "conditionRaw": "((buff.voidform.up|!talent.voidform)&buff.power_infusion.up)|fight_remains<=15",
-          "conditionZh": "((有 voidform buff 或 !天赋 voidform) 且 有 power_infusion buff) 或 战斗剩余时间≤15",
+          "conditionZh": "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益 或 战斗剩余时间 ≤ 15",
+          "conditionGroups": [
+            "（有虚空形态增益 或 没点虚空形态天赋） 且 有能量灌注增益",
+            "战斗剩余时间 ≤ 15"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -306,7 +388,10 @@
           "order": 5,
           "skill": "invoke_external_buff",
           "conditionRaw": "(buff.voidform.up|!talent.voidform)&!buff.power_infusion.up",
-          "conditionZh": "(有 voidform buff 或 !天赋 voidform) 且 !有 power_infusion buff",
+          "conditionZh": "（有虚空形态增益 或 没点虚空形态天赋） 且 没有能量灌注增益",
+          "conditionGroups": [
+            "（有虚空形态增益 或 没点虚空形态天赋） 且 没有能量灌注增益"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -317,7 +402,11 @@
           "order": 6,
           "skill": "invoke_external_buff",
           "conditionRaw": "buff.power_infusion.up&fight_remains<120|fight_remains<=40",
-          "conditionZh": "有 power_infusion buff 且 战斗剩余时间<120 或 战斗剩余时间≤40",
+          "conditionZh": "有能量灌注增益 且 战斗剩余时间 < 120 或 战斗剩余时间 ≤ 40",
+          "conditionGroups": [
+            "有能量灌注增益 且 战斗剩余时间 < 120",
+            "战斗剩余时间 ≤ 40"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -328,7 +417,10 @@
           "order": 7,
           "skill": "power_infusion",
           "conditionRaw": "(buff.voidform.up|!talent.voidform)&!buff.power_infusion.up",
-          "conditionZh": "(有 voidform buff 或 !天赋 voidform) 且 !有 power_infusion buff",
+          "conditionZh": "（有虚空形态增益 或 没点虚空形态天赋） 且 没有能量灌注增益",
+          "conditionGroups": [
+            "（有虚空形态增益 或 没点虚空形态天赋） 且 没有能量灌注增益"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -340,6 +432,7 @@
           "skill": "halo",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -350,7 +443,10 @@
           "order": 9,
           "skill": "use_item",
           "conditionRaw": "cooldown.voidform.remains<=2&active_dot.shadow_word_pain>=active_dot.vampiric_touch&!buff.crushing_void.up",
-          "conditionZh": "voidform 冷却剩余≤2 且 已挂着 shadow_word_pain 的目标数≥已挂着 vampiric_touch 的目标数 且 !有 crushing_void buff",
+          "conditionZh": "虚空形态冷却剩余 ≤ 2 且 已挂暗言术：痛的目标数 ≥ 已挂吸血鬼之触的目标数 且 没有「crushing_void」增益",
+          "conditionGroups": [
+            "虚空形态冷却剩余 ≤ 2 且 已挂暗言术：痛的目标数 ≥ 已挂吸血鬼之触的目标数 且 没有「crushing_void」增益"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -361,7 +457,10 @@
           "order": 10,
           "skill": "voidform",
           "conditionRaw": "active_dot.shadow_word_pain>=active_dot.vampiric_touch",
-          "conditionZh": "已挂着 shadow_word_pain 的目标数≥已挂着 vampiric_touch 的目标数",
+          "conditionZh": "已挂暗言术：痛的目标数 ≥ 已挂吸血鬼之触的目标数",
+          "conditionGroups": [
+            "已挂暗言术：痛的目标数 ≥ 已挂吸血鬼之触的目标数"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -372,7 +471,10 @@
           "order": 11,
           "skill": "desperate_prayer",
           "conditionRaw": "health.pct<=75",
-          "conditionZh": "health.pct≤75",
+          "conditionZh": "血量% ≤ 75",
+          "conditionGroups": [
+            "血量% ≤ 75"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -389,7 +491,10 @@
           "order": 1,
           "skill": "shadowform",
           "conditionRaw": "!buff.shadowform.up",
-          "conditionZh": "!有 shadowform buff",
+          "conditionZh": "没有「shadowform」增益",
+          "conditionGroups": [
+            "没有「shadowform」增益"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -401,6 +506,7 @@
           "skill": "arcane_torrent",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -411,7 +517,10 @@
           "order": 3,
           "skill": "potion",
           "conditionRaw": "potion.liquid_luster",
-          "conditionZh": "药水 liquid_luster",
+          "conditionZh": "药水「liquid_luster」",
+          "conditionGroups": [
+            "药水「liquid_luster」"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -422,7 +531,10 @@
           "order": 4,
           "skill": "mind_blast",
           "conditionRaw": "set_bonus.mid2_4pc",
-          "conditionZh": "set_bonus.mid2_4pc",
+          "conditionZh": "「mid2_4pc」套装效果",
+          "conditionGroups": [
+            "「mid2_4pc」套装效果"
+          ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true
@@ -434,6 +546,7 @@
           "skill": "tentacle_slam",
           "conditionRaw": "",
           "conditionZh": "无条件（排到就打）",
+          "conditionGroups": [],
           "targetSelectRaw": "",
           "targetSelectZh": "",
           "enabled": true

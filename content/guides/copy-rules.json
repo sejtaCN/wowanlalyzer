@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-27",
+  "title": "攻略正文改写设定",
+  "styleSource": {
+    "primary": "NGA《[攻略套娃]职业攻略撰写心得》（逻辑篇 / 排版篇 / 措辞篇 / 其他与后记，2022-06-05）",
+    "primaryUrl": "https://bbs.nga.cn/read.php?tid=32191378",
+    "secondary": "NGA 魔兽世界板块精华攻略帖（如 tid=46398013 萌面人搬运 Maxroll 12.0）",
+    "localMirror": "content/guides/sources/nga-maxroll-12.0.md"
+  },
+  "principles": [
+    "结论前置：先给该做什么，再给为什么，最后给数据。",
+    "删掉分析过程与设问，只留结论。",
+    "书面化：正文不写「我们 / 接下来 / 我觉得」。",
+    "并列用列表，机器级细节折叠。",
+    "有出处的名字用中文，没出处的保留标识符并用「」框住，绝不自造官方译名。"
+  ],
+  "bannedWords": {
+    "error": [
+      "按 B[0-9]",
+      "还没写",
+      "下一批",
+      "门禁",
+      "批次",
+      "content/",
+      "scripts/",
+      ".mjs",
+      ".simc",
+      "validate:content",
+      "sims-run",
+      "leverage.mjs",
+      "**",
+      "APL 原文："
+    ],
+    "warn": [
+      "我觉得",
+      "我们",
+      "接下来",
+      "首先",
+      "其次",
+      "综上所述",
+      "总而言之",
+      "众所周知",
+      "值得注意的是",
+      "由此可见",
+      "换句话说",
+      "也就是说",
+      "其实",
+      "说白了",
+      "总的来说"
+    ]
+  },
+  "latinPolicy": {
+    "comment": "正文里的拉丁字符只有两类允许：① 公认术语 ② 用「」框住的机器标识符。其余一律中文化。机器条件的中文翻译用「APL 条件：」前缀，原始写法放折叠区。",
+    "allowed": [
+      "APL",
+      "GCD",
+      "DoT",
+      "AoE",
+      "DPS",
+      "CI",
+      "WCL",
+      "NGA",
+      "SimC",
+      "Jaccard",
+      "uptime",
+      "keystone.guru",
+      "Altar of Fangs",
+      "Rav’i",
+      "Zul’jan",
+      "Buff",
+      "Fights",
+      "UNIT",
+      "DIED",
+      "Maxroll",
+      "A/B"
+    ],
+    "mustWrapInBrackets": [
+      "actions.main",
+      "actions.cds",
+      "actions.precombat",
+      "actions.aoe",
+      "active_enemies",
+      "active_dot",
+      "targetSelect",
+      "targetSelectRaw",
+      "conditionRaw",
+      "devour_matter",
+      "mind_devourer",
+      "thought_harvester",
+      "deathspeaker",
+      "void_apparitions",
+      "maddening_tentacles",
+      "ancient_madness",
+      "distorted_reality",
+      "entropic_rift",
+      "crushing_void",
+      "resonant_energy_damage",
+      "shadowform",
+      "holding_tentacle_slam",
+      "dots_up",
+      "dr_force_prio",
+      "me_force_prio",
+      "max_vts",
+      "archon__st",
+      "w30_2",
+      "w30_5",
+      "w30_8",
+      "w45_1",
+      "w90_1b",
+      "win12_1",
+      "win12_4"
+    ]
+  },
+  "contentTypes": {
+    "chart": {
+      "name": "图表与数据描述",
+      "fields": [
+        "claim",
+        "chart.title",
+        "②段导读",
+        "casePanel.points"
+      ],
+      "rules": [
+        "一句话说清这张图要回答的问题，标题写「读者看完要知道什么」，不写「这是什么图」。",
+        "先给动作结论（做什么），再给数值（多少），最后给阈值（什么时候变）。",
+        "数值保留原始精度，不做二次四舍五入。",
+        "导读句必须指出看哪里：哪根柱、哪一列、哪一行。",
+        "误差带要写明是误差，不要让读者把它当成收益。"
+      ]
+    },
+    "skill": {
+      "name": "技能介绍",
+      "fields": [
+        "skills.json 的 zh",
+        "L0-02 技能清单",
+        "优先级卡的条件行"
+      ],
+      "rules": [
+        "技能名只写中文；英文键放悬停提示，不占正文行。",
+        "每个技能四件事说清：定位（干什么）、机制要点（什么条件触发）、适用场景（什么时候用）、收益（值多少）。",
+        "没有官方中文名的天赋 / buff / 变量，用「」框成标识符，不自造译名。",
+        "同一技能的四种说法不重复堆叠，一条只讲一件事。"
+      ]
+    },
+    "priority": {
+      "name": "技能优先级",
+      "fields": [
+        "priorityDiff.reason",
+        "priorityDiff.evidence",
+        "priorityDiff.raw",
+        "priority-table 的条件列"
+      ],
+      "rules": [
+        "分级只有两档：这一波要加 / 这一波要降。序号用 APL 表里的真实执行位置。",
+        "排序理由一条一句，句式：条件 → 结论。",
+        "条件分支必须写清触发阈值（目标数、剩余血量%、冷却秒数）。",
+        "人话条件与 APL 原文并列：正文写中文，APL 原文收进折叠区，信息一条不丢。",
+        "不写「为什么不能反着来」这类反问，只写结论。"
+      ]
+    },
+    "visual": {
+      "name": "可视化部分",
+      "fields": [
+        "①段导读",
+        "④段导读",
+        "chart.kind",
+        "map"
+      ],
+      "rules": [
+        "先说这张图看什么，再说怎么读（柱高、位置、颜色各代表什么）。",
+        "流程 / 路线按顺序编号，用箭头连接，不写成一段散文。",
+        "界面指引写清「点哪里会看到什么」。",
+        "没有坐标就不标坐标；没有分段就不假装有分段。"
+      ]
+    }
+  },
+  "sentencePatterns": {
+    "结论句": "句号收尾；动词开头；不出现主语「我们」。",
+    "数值句": "数字 + 单位紧连（30 秒 / 12.7M / 43.98%），数值前后不加解释性从句。",
+    "并列句": "用「、」或「；」分隔并列项，不用逗号连成长串。",
+    "条件句": "「如果 X，就 Y」或「X 时 Y」；阈值写成「≥ 5 只」这种紧贴形式。",
+    "收尾句": "一句话给限制或边界（数据缺口、适用边界），不写免责套话。"
+  },
+  "lengthBudget": {
+    "subtitle": {
+      "max": 25,
+      "unit": "字符"
+    },
+    "claim": {
+      "max": 120,
+      "unit": "字符"
+    },
+    "priorityDiff.reason": {
+      "max": 60,
+      "unit": "字符"
+    },
+    "priorityDiff.evidence": {
+      "max": 80,
+      "unit": "字符"
+    },
+    "sectionNote": {
+      "max": 90,
+      "unit": "字符"
+    },
+    "casePanel.points[].max": {
+      "max": 70,
+      "unit": "字符"
+    }
+  }
+}

@@ -3,7 +3,7 @@
  "level": "L1",
  "order": 2,
  "title": "大波（≥10 只）",
- "subtitle": "价值最高的一档，唯一需要抢冷却的一档",
+ "subtitle": "价值最高的一档，也是唯一要抢冷却的一档",
  "model": {
   "targets": "10–22",
   "durationSec": 30,
@@ -14,7 +14,7 @@
  "claim": "10 只以上直接开，别留。一次换 12.7M（模拟上限按 8 只算），是 BOSS 波的 2.5 倍；冷却只够覆盖一部分大波，所以要挑更大的那一波。",
  "chart": {
   "kind": "burst-bars",
-  "title": "8 目标开爆发 vs 不开",
+  "title": "8 目标：开爆发和不开的差",
   "runIds": [
    "dec_voidform_on_0__w30_8__5000",
    "dec_voidform_on_1__w30_8__5000"
@@ -25,24 +25,28 @@
    {
     "skill": "aoe_loop",
     "reason": "全程走多目标表，别切回单体",
-    "evidence": "APL: active_enemies>2"
+    "evidence": "APL 条件：目标数 > 2",
+    "raw": "active_enemies>2"
    },
    {
     "skill": "void_volley",
-    "reason": "多目标时覆盖目标最多，冷却到就用",
-    "evidence": "APL: actions.main+=/void_volley 排在前段；模拟 w30_8 增益稳定"
+    "reason": "多目标时它覆盖的目标最多，冷却好了就用",
+    "evidence": "APL 条件：「actions.main」里，虚空齐射排在前段；模拟「w30_8」增益稳定",
+    "raw": "actions.main+=/void_volley 排在前段；模拟 w30_8 增益稳定"
    }
   ],
   "drop": [
    {
     "skill": "mind_flay",
-    "reason": "大波里它占比很低，别为它打断 DoT",
-    "evidence": "模拟 w30_8 的动作构成（mind_flay 占比下降）"
+    "reason": "大波里它占比很低，别为它打断持续伤害",
+    "evidence": "模拟「w30_8」的动作构成：精神鞭笞的占比下降",
+    "raw": "模拟 w30_8 的动作构成（mind_flay 占比下降）"
    },
    {
     "skill": "shadow_word_pain",
-    "reason": "最多挂 4 个目标，超过就摊薄",
-    "evidence": "APL: active_dot.shadow_word_pain>=active_dot.vampiric_touch"
+    "reason": "最多挂 4 个目标，再多就摊薄",
+    "evidence": "APL 条件：已挂暗言术：痛的目标数 ≥ 已挂吸血鬼之触的目标数",
+    "raw": "active_dot.shadow_word_pain>=active_dot.vampiric_touch"
    }
   ]
  },
@@ -60,7 +64,7 @@
    6
   ],
   "headline": "爆发次数最多的三个阶段（各 2 次）：入口祭坛、盘绕回廊、上层平台",
-  "reading": "这三段都是持续 3 分钟以上的多目标区。大波值钱，但真正的条件是“这一段够长、能吃到第二次冷却”。"
+  "reading": "这三段都是 3 分钟以上的多目标区。大波值钱，但真正的条件是：这段够长，能吃到第二次冷却。"
  },
  "evidence": {
   "runIds": [
