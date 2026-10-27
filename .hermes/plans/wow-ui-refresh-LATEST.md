@@ -2,9 +2,9 @@
 
 - 当前版本：`v1.1.0`
 - 更新时间：`2026-10-27T19:25:00+08:00`
-- 应用基线：`master ee48676` + `codex/restore-build-baseline` 基础修复
+- 应用基线：`8f896a5`（包含 `ee48676` 的可构建数据层与跨平台门禁修复）
 - 主文件：`.hermes/plans/2026-10-27_192500-wow-ui-refresh-v1.1.0.md`
-- Git blob：`328f52c7c03fd0d2009e8f7848fee4afa7c20f2d`
+- Git blob：`d9867648f7266179a51b0e0b68a7f7cb98319f3a`
 - 已恢复：可构建数据层、11 章 UI 门禁、Windows 浏览器发现、LF / CRLF 文档解析
 
 子代理必须先读本指针，再核对主文件头部版本并运行：
