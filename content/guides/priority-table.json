@@ -1,7 +1,8 @@
 {
-  "source": "content/profiles/MID2_shadow_voidweaver.simc",
+  "source": "content/profiles/MID2_shadow_archon.simc",
+  "hero": "archon",
   "gameVersion": "MID2",
-  "generatedAt": "2026-10-27T03:53:30.668Z",
+  "generatedAt": "2026-10-27T17:29:18.630Z",
   "note": "直接从 APL 抽取，条件原文与人话并列；人话只改写法，不改逻辑，也不补\"为什么\"。有出处的名字用中文，没出处的用「」标成标识符。",
   "sections": [
     {

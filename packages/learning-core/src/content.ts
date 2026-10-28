@@ -63,6 +63,13 @@ export interface MapRef {
 /** 第⑤段：高手对照 */
 export type CaseBlock =
   | { status: 'pending'; reason: string }
+  | {
+      status: 'simulation';
+      timelineKey: string;
+      headline: string;
+      reading: string;
+      evidence: string;
+    }
   | { status: 'log'; logId: string; headline: string; points: string[]; evidence: string }
   | {
       status: 'phases';

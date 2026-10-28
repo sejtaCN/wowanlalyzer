@@ -33,6 +33,7 @@ import altarWavesJson from '../../../../content/routes/waves-altar-of-fangs.json
 import eventsJson from '../../../../content/logs/xiaohuasheng-events.json';
 import phasesJson from '../../../../content/logs/xiaohuasheng-phases.json';
 import numericSummaryJson from '../../../../content/sims/numeric-summary.json';
+import simulatedTimelinesJson from '../../../../content/analysis/simulated-timelines-archon.json';
 
 export interface SimcRef {
   version: string;
@@ -51,6 +52,8 @@ export interface SimRun {
   targets: number | null;
   kind: string | null;
   hero: string | null;
+  profileId: string | null;
+  profileFile: string | null;
   simc: SimcRef | null;
 }
 
@@ -89,6 +92,7 @@ export interface PrioritySection {
 
 interface PriorityTableDoc {
   source: string;
+  hero: string;
   gameVersion: string;
   generatedAt: string;
   note: string;
@@ -129,6 +133,8 @@ interface FiguresDoc {
 export interface RouteMob {
   name: string;
   count: number;
+  npcIds?: number[];
+  unitForces?: number[];
 }
 
 export interface RouteWave {
@@ -140,15 +146,21 @@ export interface RouteWave {
   skippable: number;
   forces: number;
   forcesPct: number;
-  scenarioId: string;
+  scenarioId: string | null;
   isBoss: boolean;
+  trashMobCount?: number;
+  classification?: 'boss' | 'trash';
+  phase?: string;
+  encounter?: string | null;
+  enemyIds?: number[];
+  enemyPositions?: Array<{ id: number; x: number; y: number }>;
   burst: {
     deltaPct: number;
     deltaDamage: number;
     dur: number;
     targets: number;
-  };
-  sourcePull: number;
+  } | null;
+  sourcePull?: number;
 }
 
 export interface RouteDoc {
@@ -159,6 +171,19 @@ export interface RouteDoc {
   fetchedAt: string;
   pulls: number;
   totalMobs: number;
+  totalForces?: number;
+  requiredForces?: number;
+  routePublicKey?: string | null;
+  mappingVersion?: number;
+  mdtMappingHash?: string | null;
+  mdtAddonVersion?: number | null;
+  statExamples?: Array<{
+    scenario: string;
+    targets: number;
+    stat: string;
+    rating: number;
+    gainPct: number;
+  }>;
   waves: RouteWave[];
 }
 
@@ -560,6 +585,40 @@ export interface PhasesDoc {
   >;
 }
 
+export interface SimulatedTimelinePhase {
+  index: number;
+  label: string;
+  from: number;
+  to: number;
+  actions: number;
+  dot: number;
+  filler: number;
+  burst: number;
+  item: number;
+  byAction: Array<{ t: number; name: string }>;
+}
+
+export interface SimulatedTimeline {
+  key: string;
+  label: string;
+  scenarioId: string;
+  runId: string;
+  durationSec: number;
+  phases: SimulatedTimelinePhase[];
+  decision: string;
+  evidence: string;
+}
+
+export interface SimulatedTimelinesDoc {
+  schemaVersion: number;
+  generatedAt: string;
+  hero: string;
+  profile: string;
+  source: string;
+  method: string;
+  timelines: SimulatedTimeline[];
+}
+
 const rawChapters = [l001, l002, l003, l004, l101, l102, l103, l104, l105, l106, l201];
 const numericSummary = numericSummaryJson as NumericSummary;
 const skills = (skillsJson as SkillsDoc).skills;
@@ -579,19 +638,32 @@ export const STAT_OPT = statOptJson as unknown as StatOptDoc;
 export const COOLDOWN_WINDOW = cooldownWindowJson as unknown as CooldownWindowDoc;
 export const SOURCES_SUMMARY = sourcesSummaryJson as SourcesSummary;
 export const CROSSCHECK = crosscheckJson as unknown as CrosscheckDoc;
+const simulatedTimelines = simulatedTimelinesJson as unknown as SimulatedTimelinesDoc;
+const TIMELINES = new Map(simulatedTimelines.timelines.map((timeline) => [timeline.key, timeline]));
 
 const RUNS = Object.values(numericSummary.runs);
 const RUN_BY_ID = new Map(RUNS.map((run) => [run.runId, run]));
 const LOGS = new Map<string, LogDoc>([[events.runId, events]]);
 const PHASES = new Map<string, PhasesDoc>([[phases.runId, phases]]);
 
-export function allRuns(specId?: string): SimRun[] {
-  if (!specId || specId === 'shadow-priest') return RUNS;
+export const ARCHON_PROFILE_ID = 'archon';
+
+/** 当前站点只开放 Archon；旧记录只有 hero 时仍可识别，两者都没有则拒绝猜测。 */
+function isArchonRun(run: SimRun): boolean {
+  return run.profileId === ARCHON_PROFILE_ID ||
+    (!run.profileId && run.hero === ARCHON_PROFILE_ID);
+}
+
+export function allRuns(specId = 'shadow-priest', heroId = ARCHON_PROFILE_ID): SimRun[] {
+  if (specId === 'shadow-priest' && heroId === ARCHON_PROFILE_ID) {
+    return RUNS.filter(isArchonRun);
+  }
   return [];
 }
 
-export function getRun(runId: string | null | undefined): SimRun | null {
-  return runId ? RUN_BY_ID.get(runId) ?? null : null;
+export function getRun(runId: string | null | undefined, heroId = ARCHON_PROFILE_ID): SimRun | null {
+  const run = runId ? RUN_BY_ID.get(runId) ?? null : null;
+  return run && heroId === ARCHON_PROFILE_ID && isArchonRun(run) ? run : null;
 }
 
 export function getLog(logId: string): LogDoc | null {
@@ -602,8 +674,12 @@ export function getPhases(logId: string): PhasesDoc | null {
   return PHASES.get(logId) ?? null;
 }
 
-export function chaptersFor(specId: string): Chapter[] {
-  return specId === 'shadow-priest' ? CHAPTERS : [];
+export function getSimulatedTimeline(key: string): SimulatedTimeline | null {
+  return TIMELINES.get(key) ?? null;
+}
+
+export function chaptersFor(specId: string, heroId = ARCHON_PROFILE_ID): Chapter[] {
+  return specId === 'shadow-priest' && heroId === ARCHON_PROFILE_ID ? CHAPTERS : [];
 }
 
 /**

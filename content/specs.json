@@ -8,11 +8,11 @@
       "short": "暗牧",
       "status": "active",
       "heroTrees": [
-        { "id": "archon", "name": "执政官" },
-        { "id": "voidweaver", "name": "虚空编织者" }
+        { "id": "archon", "name": "执政官", "status": "active", "note": "当前唯一实装" },
+        { "id": "voidweaver", "name": "虚空编织者", "status": "planned", "note": "该天赋数据待补" }
       ],
       "baseline": "Midnight 12.1.5 · MID2",
-      "note": "当前唯一实装"
+      "note": "当前只做执政官；虚空编织者保留为后续待办"
     },
     {
       "id": "devourer",
@@ -21,7 +21,7 @@
       "short": "噬灭",
       "status": "planned",
       "heroTrees": [
-        { "id": "annihilator", "name": "歼灭者" }
+        { "id": "annihilator", "name": "歼灭者", "status": "planned", "note": "待接入" }
       ],
       "baseline": "待接入",
       "note": "界面已准备好，等数据：需要 profile、APL、模拟跑批"

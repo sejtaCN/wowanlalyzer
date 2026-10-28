@@ -17,6 +17,7 @@ export function burstValueFor(
   isBoss = false,
   readRun: (id: string) => { dps: number; durationSec: number | null; ci95Pct: number | null } | null,
 ) {
+  // BOSS pull 若带 10+ 小怪，不能复用 8 目标或单体木桩来代替；调用方会显示待补。
   const pair = burstRunPair(targets, isBoss);
   const on = readRun(pair.onRunId);
   const off = readRun(pair.offRunId);

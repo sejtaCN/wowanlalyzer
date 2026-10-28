@@ -19,7 +19,7 @@ const W = 660;
 const H = 214;
 const PAD = { l: 48, r: 14, t: 14, b: 34 };
 
-export default function StatCurves({ doc }: { doc: StatOptDoc }) {
+export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: string }) {
   const [sid, setSid] = useState(doc.scenarios[0]?.id ?? 'st');
   const sc = doc.scenarios.find((s) => s.id === sid) ?? doc.scenarios[0];
   const data = doc.perScenario[sc.id];
@@ -35,9 +35,39 @@ export default function StatCurves({ doc }: { doc: StatOptDoc }) {
   const x = (rating: number) => PAD.l + (rating / B) * (W - PAD.l - PAD.r);
   const y = (dps: number) => PAD.t + (1 - (dps - lo) / (hi - lo || 1)) * (H - PAD.t - PAD.b);
   const o = data.optimum;
+  const scenarioRows = doc.scenarios
+    .map((scenario) => ({ scenario, data: doc.perScenario[scenario.id] }))
+    .filter(
+      (entry): entry is {
+        scenario: (typeof doc.scenarios)[number];
+        data: NonNullable<typeof entry.data>;
+      } => Boolean(entry.data),
+    );
+  const maxCurveGain = Math.max(
+    ...scenarioRows.flatMap(({ data: row }) =>
+      doc.stats.flatMap((stat) => {
+        const points = row.curves[stat.key] ?? [];
+        const last = points[points.length - 1];
+        return last ? [last.dps / row.zeroDps - 1] : [];
+      }),
+    ),
+    0.01,
+  );
+  const bestGainByScenario = new Map(
+    scenarioRows.map(({ scenario, data: row }) => [
+      scenario.id,
+      Math.max(
+        ...doc.stats.map((stat) => {
+          const points = row.curves[stat.key] ?? [];
+          const last = points[points.length - 1];
+          return last ? (last.dps / row.zeroDps - 1) * 100 : 0;
+        }),
+      ),
+    ]),
+  );
 
   return (
-    <div className="statopt">
+    <div className="statopt" data-hero={hero}>
       <div className="so-chips">
         {doc.scenarios.map((s) => (
           <button key={s.id} className={`mini${s.id === sid ? ' on' : ''}`} onClick={() => setSid(s.id)}>
@@ -151,6 +181,86 @@ export default function StatCurves({ doc }: { doc: StatOptDoc }) {
       <div className="note" style={{ marginTop: 4 }}>
         复现校核：用当前评级作为绝对值重跑，与现装备的差 {data.reproduced.gapPct}%{data.reproduced.ok ? '（通过，覆盖语义吃透了）' : '（未通过，别用这组数）'}。
       </div>
+      <h3 style={{ marginTop: 18 }}>四个输出模型的属性分配，哪里必须改</h3>
+      <p className="statopt-lead">
+        每一行是一套固定预算内的最优评级。四项合计都是 3209；全能 9 占比太小，条上以细线标出，完整数值见每行说明。
+      </p>
+      <div className="stat-alloc" role="list" aria-label="四个输出模型的属性最优配比">
+        {scenarioRows.map(({ scenario, data: row }) => (
+          <div className={`stat-alloc-row${scenario.id === sid ? ' on' : ''}`} role="listitem" key={scenario.id}>
+            <div className="stat-alloc-hd">
+              <b>{scenario.label}</b>
+              <span>本模型内 +{row.optimum.gainVsCurrentPct.toFixed(2)}%</span>
+            </div>
+            <div className="stat-alloc-bar">
+              {doc.stats.map((stat) => {
+                const rating = row.optimum.ratings[stat.key] ?? 0;
+                return rating > 0 ? (
+                  <i
+                    className={`stat-alloc-seg ${stat.key}${rating / row.budget < 0.015 ? ' tiny' : ''}`}
+                    key={stat.key}
+                    style={rating / row.budget < 0.015 ? { flex: '0 0 7px' } : { flex: rating }}
+                    title={`${stat.label} ${rating} 评级`}
+                  >
+                    <span>{rating / row.budget < 0.015 ? '' : rating}</span>
+                  </i>
+                ) : null;
+              })}
+            </div>
+            <div className="stat-alloc-detail">
+              {doc.stats.map((stat) => (
+                <span key={stat.key}>
+                  <i className={`stat-dot ${stat.key}`} />
+                  {stat.label} {row.optimum.ratings[stat.key] ?? 0}
+                  {(row.optimum.ratings[stat.key] ?? 0) / row.budget < 0.015 ? <small>（图中以细线表示）</small> : null}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3 style={{ marginTop: 18 }}>各模型内部，哪个属性满预算收益最高</h3>
+      <p className="statopt-lead">
+        数字是“把全部预算都给这一项”相对全零基准的 DPS 增益。只比同一列内的四项；色阶是列内相对值，不用于跨模型比较。
+      </p>
+      <div className="stat-heat" role="table" aria-label="四个输出模型下各属性的满预算收益">
+        <div className="stat-heat-row stat-heat-head" role="row">
+          <span role="columnheader">属性</span>
+          {scenarioRows.map(({ scenario }) => (
+            <span role="columnheader" key={scenario.id} aria-current={scenario.id === sid ? 'true' : undefined}>
+              {scenario.label}
+              {scenario.id === sid ? <em>当前模型</em> : null}
+            </span>
+          ))}
+        </div>
+        {doc.stats.map((stat) => (
+          <div className="stat-heat-row" role="row" key={stat.key}>
+            <span role="rowheader"><i className={`stat-dot ${stat.key}`} />{stat.label}</span>
+            {scenarioRows.map(({ data: row, scenario }) => {
+              const points = row.curves[stat.key] ?? [];
+              const last = points[points.length - 1];
+              const gain = last ? (last.dps / row.zeroDps - 1) * 100 : null;
+              const intensity = gain == null ? 0 : Math.min(1, gain / (maxCurveGain * 100));
+              const isBest = gain != null && Math.abs(gain - (bestGainByScenario.get(scenario.id) ?? 0)) < 0.05;
+              return (
+                <span
+                  key={scenario.id}
+                  role="cell"
+                  className={`stat-heat-cell${scenario.id === sid ? ' on' : ''}${isBest ? ' best' : ''}`}
+                  style={{ background: `rgba(245, 196, 81, ${0.08 + intensity * 0.38})` }}
+                  title={last ? `${stat.label} · ${scenario.label}：${Math.round(last.rating)} 评级 → ${Math.round(last.dps).toLocaleString('zh-CN')} DPS${isBest ? '（本模型最高）' : ''}` : undefined}
+                >
+                  {gain == null ? '—' : <>{isBest ? <b aria-label="本模型最高">▲ </b> : null}+{gain.toFixed(1)}%</>}
+                </span>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      <p className="stat-heat-key">
+        <i /> 深色 = 同一列内更高收益 · 当前模型列带「当前」标签
+      </p>
       <div className="note" style={{ marginTop: 4 }}>
         方法：{doc.method.curves} {doc.method.optimize} {doc.method.validate}
       </div>

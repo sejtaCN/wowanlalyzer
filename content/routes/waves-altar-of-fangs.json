@@ -1,10 +1,10 @@
 {
  "dungeon": "Altar of Fangs",
- "route": "Skandar Tank +10 to +16",
+ "route": "Skandar Tank - Altar of Fangs (+10 to +16 Keys)",
  "source": "keystone.guru",
  "sourceUrl": "https://keystone.guru/route/altar-of-fangs/xwt8Pza/skandar-tank-altar-of-fangs-10-to-16-keys",
- "fetchedAt": "2026-10-25",
- "pulls": 14,
+ "fetchedAt": "2026-10-28",
+ "pulls": 15,
  "totalMobs": 108,
  "waves": [
   {
@@ -12,35 +12,140 @@
    "killZoneId": 18548776,
    "mobs": [
     {
-     "name": "Ravenous Descendant",
-     "count": 7
-    },
-    {
-     "name": "Venom Leech",
-     "count": 3
-    },
-    {
      "name": "Primal Serpent",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261560
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Ravenous Descendant",
+     "count": 7,
+     "npcIds": [
+      261553
+     ],
+     "unitForces": [
+      5
+     ]
     },
     {
      "name": "Twinfang Harrower",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      261554
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Venom Leech",
+     "count": 3,
+     "npcIds": [
+      261550
+     ],
+     "unitForces": [
+      1
+     ]
     }
    ],
    "mobCount": 13,
+   "forces": 77,
+   "isBoss": false,
+   "trashMobCount": 13,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "sacrificial-approach",
+   "enemyIds": [
+    150620,
+    150621,
+    150635,
+    150636,
+    150654,
+    150630,
+    150631,
+    150632,
+    150633,
+    150675,
+    150676,
+    150677,
+    150634
+   ],
+   "enemyPositions": [
+    {
+     "id": 150620,
+     "x": -92.587671875,
+     "y": 54.61243359375
+    },
+    {
+     "id": 150621,
+     "x": -92.5686171875,
+     "y": 66.95034374999999
+    },
+    {
+     "id": 150635,
+     "x": -97.45614453124999,
+     "y": 57.642128906249994
+    },
+    {
+     "id": 150636,
+     "x": -97.6752734375,
+     "y": 64.08261328124998
+    },
+    {
+     "id": 150654,
+     "x": -91.89217578125,
+     "y": 60.85284374999996
+    },
+    {
+     "id": 150630,
+     "x": -108.9937578125,
+     "y": 45.580511718749975
+    },
+    {
+     "id": 150631,
+     "x": -109.5272890625,
+     "y": 49.26759374999999
+    },
+    {
+     "id": 150632,
+     "x": -109.46059765625,
+     "y": 52.62121874999998
+    },
+    {
+     "id": 150633,
+     "x": -105.8687890625,
+     "y": 51.51604687499999
+    },
+    {
+     "id": 150675,
+     "x": -105.6401328125,
+     "y": 44.39912109375
+    },
+    {
+     "id": 150676,
+     "x": -103.57269921875,
+     "y": 49.59152343749999
+    },
+    {
+     "id": 150677,
+     "x": -106.3261015625,
+     "y": 54.61243359375
+    },
+    {
+     "id": 150634,
+     "x": -105.99264453125001,
+     "y": 47.81943750000001
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 77,
-   "forcesPct": 9.3,
+   "forcesPct": 9.4,
    "scenarioId": "w30_8",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.55,
-    "deltaDamage": 10171103,
-    "dur": 30,
-    "targets": 8
-   },
+   "burst": null,
    "sourcePull": 1
   },
   {
@@ -49,30 +154,87 @@
    "mobs": [
     {
      "name": "Primal Serpent",
-     "count": 3
+     "count": 3,
+     "npcIds": [
+      261560
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Ravenous Descendant",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261553
+     ],
+     "unitForces": [
+      5
+     ]
     },
     {
      "name": "Ritual Chieftain",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      270306
+     ],
+     "unitForces": [
+      25
+     ]
     }
    ],
    "mobCount": 6,
+   "forces": 56,
+   "isBoss": false,
+   "trashMobCount": 6,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "sacrificial-approach",
+   "enemyIds": [
+    150617,
+    150616,
+    150622,
+    150637,
+    150638,
+    150562
+   ],
+   "enemyPositions": [
+    {
+     "id": 150617,
+     "x": -82.46010546875,
+     "y": 49.97261718749998
+    },
+    {
+     "id": 150616,
+     "x": -82.67923437500001,
+     "y": 45.609093749999985
+    },
+    {
+     "id": 150622,
+     "x": -93.89291796875,
+     "y": 26.783062499999986
+    },
+    {
+     "id": 150637,
+     "x": -90.23441796875,
+     "y": 30.079523437499986
+    },
+    {
+     "id": 150638,
+     "x": -96.8749765625,
+     "y": 30.022359374999994
+    },
+    {
+     "id": 150562,
+     "x": -94.04535546875,
+     "y": 29.9651953125
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 56,
-   "forcesPct": 16.1,
+   "forcesPct": 16.3,
    "scenarioId": "w30_6",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.02,
-    "deltaDamage": 8515496,
-    "dur": 30,
-    "targets": 6
-   },
+   "burst": null,
    "sourcePull": 2
   },
   {
@@ -80,35 +242,116 @@
    "killZoneId": 18548778,
    "mobs": [
     {
-     "name": "Primal Serpent",
-     "count": 3
+     "name": "Ritual Chieftain",
+     "count": 1,
+     "npcIds": [
+      270306
+     ],
+     "unitForces": [
+      25
+     ]
     },
     {
-     "name": "Venom Leech",
-     "count": 3
+     "name": "Primal Serpent",
+     "count": 3,
+     "npcIds": [
+      261560
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Ravenous Descendant",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261553
+     ],
+     "unitForces": [
+      5
+     ]
     },
     {
-     "name": "Ritual Chieftain",
-     "count": 1
+     "name": "Venom Leech",
+     "count": 3,
+     "npcIds": [
+      261550
+     ],
+     "unitForces": [
+      1
+     ]
     }
    ],
    "mobCount": 9,
+   "forces": 59,
+   "isBoss": false,
+   "trashMobCount": 9,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "sacrificial-approach",
+   "enemyIds": [
+    150563,
+    150618,
+    150619,
+    150623,
+    150648,
+    150639,
+    150678,
+    150679,
+    150680
+   ],
+   "enemyPositions": [
+    {
+     "id": 150563,
+     "x": -93.75000781249999,
+     "y": 92.04536718749999
+    },
+    {
+     "id": 150618,
+     "x": -103.75371874999999,
+     "y": 76.32525
+    },
+    {
+     "id": 150619,
+     "x": -103.70608203124999,
+     "y": 73.05737109374998
+    },
+    {
+     "id": 150623,
+     "x": -90.08198046875,
+     "y": 92.216859375
+    },
+    {
+     "id": 150648,
+     "x": -97.04646875,
+     "y": 92.10253124999998
+    },
+    {
+     "id": 150639,
+     "x": -93.68331640625,
+     "y": 94.72255078124998
+    },
+    {
+     "id": 150678,
+     "x": -106.96443359375,
+     "y": 78.16402734374999
+    },
+    {
+     "id": 150679,
+     "x": -107.04065234375,
+     "y": 71.44724999999998
+    },
+    {
+     "id": 150680,
+     "x": -107.04065234375,
+     "y": 74.67701953125
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 59,
-   "forcesPct": 23.3,
+   "forcesPct": 23.5,
    "scenarioId": "w30_8",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.55,
-    "deltaDamage": 10171103,
-    "dur": 30,
-    "targets": 8
-   },
+   "burst": null,
    "sourcePull": 3
   },
   {
@@ -117,30 +360,105 @@
    "mobs": [
     {
      "name": "Ravenous Descendant",
-     "count": 6
+     "count": 6,
+     "npcIds": [
+      261553
+     ],
+     "unitForces": [
+      5
+     ]
     },
     {
      "name": "Primal Serpent",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261560
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Ritual Chieftain",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      270306
+     ],
+     "unitForces": [
+      25
+     ]
     }
    ],
    "mobCount": 9,
+   "forces": 69,
+   "isBoss": false,
+   "trashMobCount": 9,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "sacrificial-approach",
+   "enemyIds": [
+    150640,
+    150641,
+    150644,
+    150645,
+    150626,
+    150627,
+    150646,
+    150647,
+    150565
+   ],
+   "enemyPositions": [
+    {
+     "id": 150640,
+     "x": -117.29207421875,
+     "y": 58.57580859374998
+    },
+    {
+     "id": 150641,
+     "x": -117.282546875,
+     "y": 63.51097265624999
+    },
+    {
+     "id": 150644,
+     "x": -128.49623046875,
+     "y": 58.556753906249966
+    },
+    {
+     "id": 150645,
+     "x": -128.58197656250002,
+     "y": 63.167988281249976
+    },
+    {
+     "id": 150626,
+     "x": -138.84292578125002,
+     "y": 72.02841796874999
+    },
+    {
+     "id": 150627,
+     "x": -138.73812499999997,
+     "y": 76.83019921875
+    },
+    {
+     "id": 150646,
+     "x": -134.43176562500003,
+     "y": 79.85989453124999
+    },
+    {
+     "id": 150647,
+     "x": -135.1367890625,
+     "y": 68.18889843749999
+    },
+    {
+     "id": 150565,
+     "x": -132.48818749999998,
+     "y": 73.71475781249997
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 69,
-   "forcesPct": 31.6,
+   "forcesPct": 31.9,
    "scenarioId": "w30_8",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.55,
-    "deltaDamage": 10171103,
-    "dur": 30,
-    "targets": 8
-   },
+   "burst": null,
    "sourcePull": 4
   },
   {
@@ -148,31 +466,82 @@
    "killZoneId": 18548780,
    "mobs": [
     {
+     "name": "Ritual Chieftain",
+     "count": 1,
+     "npcIds": [
+      270306
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
      "name": "Primal Serpent",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261560
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Ravenous Descendant",
-     "count": 2
-    },
-    {
-     "name": "Ritual Chieftain",
-     "count": 1
+     "count": 2,
+     "npcIds": [
+      261553
+     ],
+     "unitForces": [
+      5
+     ]
     }
    ],
    "mobCount": 5,
+   "forces": 49,
+   "isBoss": false,
+   "trashMobCount": 5,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "sacrificial-approach",
+   "enemyIds": [
+    150564,
+    150624,
+    150625,
+    150642,
+    150643
+   ],
+   "enemyPositions": [
+    {
+     "id": 150564,
+     "x": -133.5361953125,
+     "y": 45.21847265624997
+    },
+    {
+     "id": 150624,
+     "x": -139.62416796875,
+     "y": 42.417433593749976
+    },
+    {
+     "id": 150625,
+     "x": -139.614640625,
+     "y": 47.52408984374999
+    },
+    {
+     "id": 150642,
+     "x": -135.00340625,
+     "y": 39.7211953125
+    },
+    {
+     "id": 150643,
+     "x": -135.6703203125,
+     "y": 50.80149609375
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 49,
-   "forcesPct": 37.6,
+   "forcesPct": 37.9,
    "scenarioId": "w30_5",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.0,
-    "deltaDamage": 7553046,
-    "dur": 30,
-    "targets": 5
-   },
+   "burst": null,
    "sourcePull": 5
   },
   {
@@ -181,22 +550,43 @@
    "mobs": [
     {
      "name": "Twinfang Harrower",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261554
+     ],
+     "unitForces": [
+      25
+     ]
     }
    ],
    "mobCount": 2,
+   "forces": 50,
+   "isBoss": false,
+   "trashMobCount": 2,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "sacrificial-approach",
+   "enemyIds": [
+    150656,
+    150655
+   ],
+   "enemyPositions": [
+    {
+     "id": 150656,
+     "x": -153.60078125,
+     "y": 64.87338281249997
+    },
+    {
+     "id": 150655,
+     "x": -153.41023437500002,
+     "y": 57.88031249999999
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 50,
-   "forcesPct": 43.6,
+   "forcesPct": 44.1,
    "scenarioId": "w30_2",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 30.37,
-    "deltaDamage": 3709145,
-    "dur": 30,
-    "targets": 2
-   },
+   "burst": null,
    "sourcePull": 6
   },
   {
@@ -205,22 +595,37 @@
    "mobs": [
     {
      "name": "Rav'i",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      259445
+     ],
+     "unitForces": [
+      0
+     ]
     }
    ],
    "mobCount": 1,
+   "forces": 0,
+   "isBoss": true,
+   "trashMobCount": 0,
+   "classification": "boss",
+   "encounter": "Rav'i",
+   "phase": "before-first-boss",
+   "enemyIds": [
+    150712
+   ],
+   "enemyPositions": [
+    {
+     "id": 150712,
+     "x": -196.5119375,
+     "y": 61.672195312499994
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 0,
-   "forcesPct": 43.6,
+   "forcesPct": 44.1,
    "scenarioId": "w90_1b",
-   "isBoss": true,
-   "burst": {
-    "deltaPct": 20.87,
-    "deltaDamage": 4005257,
-    "dur": 90,
-    "targets": 1
-   },
+   "burst": null,
    "sourcePull": 7
   },
   {
@@ -229,30 +634,93 @@
    "mobs": [
     {
      "name": "Bloodletter",
-     "count": 4
+     "count": 4,
+     "npcIds": [
+      261552
+     ],
+     "unitForces": [
+      5
+     ]
     },
     {
      "name": "High Evolutionist",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261557
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Rattling Writhe",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      262011
+     ],
+     "unitForces": [
+      25
+     ]
     }
    ],
    "mobCount": 7,
+   "forces": 59,
+   "isBoss": false,
+   "trashMobCount": 7,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "mutation-chambers",
+   "enemyIds": [
+    150581,
+    150582,
+    150583,
+    150584,
+    150688,
+    150575,
+    150587
+   ],
+   "enemyPositions": [
+    {
+     "id": 150581,
+     "x": -104.07927343749999,
+     "y": 133.832
+    },
+    {
+     "id": 150582,
+     "x": -102.72716406249998,
+     "y": 138.429171875
+    },
+    {
+     "id": 150583,
+     "x": -108.180671875,
+     "y": 137.0770625
+    },
+    {
+     "id": 150584,
+     "x": -118.59003613281249,
+     "y": 148.32999277343748
+    },
+    {
+     "id": 150688,
+     "x": -115.2899878515625,
+     "y": 152.89997222656248
+    },
+    {
+     "id": 150575,
+     "x": -110.23888281249998,
+     "y": 168.80656249999998
+    },
+    {
+     "id": 150587,
+     "x": -107.09147265624999,
+     "y": 165.892015625
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 59,
-   "forcesPct": 50.8,
+   "forcesPct": 51.3,
    "scenarioId": "w30_7",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.82,
-    "deltaDamage": 9442374,
-    "dur": 30,
-    "targets": 7
-   },
+   "burst": null,
    "sourcePull": 8
   },
   {
@@ -261,30 +729,111 @@
    "mobs": [
     {
      "name": "Bloodletter",
-     "count": 7
+     "count": 7,
+     "npcIds": [
+      261552
+     ],
+     "unitForces": [
+      5
+     ]
     },
     {
      "name": "High Evolutionist",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261557
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Rattling Writhe",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      262011
+     ],
+     "unitForces": [
+      25
+     ]
     }
    ],
    "mobCount": 10,
+   "forces": 74,
+   "isBoss": false,
+   "trashMobCount": 10,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "mutation-chambers",
+   "enemyIds": [
+    150568,
+    150569,
+    150571,
+    150572,
+    150573,
+    150574,
+    150586,
+    150689,
+    150585,
+    150570
+   ],
+   "enemyPositions": [
+    {
+     "id": 150568,
+     "x": -125.29987890625,
+     "y": 161.24977343749998
+    },
+    {
+     "id": 150569,
+     "x": -125.65292968749999,
+     "y": 157.08828125
+    },
+    {
+     "id": 150571,
+     "x": -135.1176953125,
+     "y": 147.60098046874998
+    },
+    {
+     "id": 150572,
+     "x": -138.70829687499997,
+     "y": 151.55965625
+    },
+    {
+     "id": 150573,
+     "x": -132.84915625,
+     "y": 178.391515625
+    },
+    {
+     "id": 150574,
+     "x": -139.60970312499998,
+     "y": 172.45725781250002
+    },
+    {
+     "id": 150586,
+     "x": -133.56276953124998,
+     "y": 152.33336328125
+    },
+    {
+     "id": 150689,
+     "x": -134.02098437499998,
+     "y": 173.23096484375
+    },
+    {
+     "id": 150585,
+     "x": -118.396609375,
+     "y": 136.22823828125
+    },
+    {
+     "id": 150570,
+     "x": -122.2876796875,
+     "y": 138.45921875
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 74,
-   "forcesPct": 59.8,
+   "forcesPct": 60.3,
    "scenarioId": "w30_8",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.55,
-    "deltaDamage": 10171103,
-    "dur": 30,
-    "targets": 8
-   },
+   "burst": null,
    "sourcePull": 9
   },
   {
@@ -292,39 +841,139 @@
    "killZoneId": 18548785,
    "mobs": [
     {
-     "name": "Uncoiled Writhe",
-     "count": 4
-    },
-    {
      "name": "Bloodletter",
-     "count": 3
+     "count": 3,
+     "npcIds": [
+      261552
+     ],
+     "unitForces": [
+      5
+     ]
     },
     {
      "name": "High Evolutionist",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261557
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Rattling Writhe",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      262011
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Uncoiled Writhe",
+     "count": 4,
+     "npcIds": [
+      262398,
+      270417
+     ],
+     "unitForces": [
+      0
+     ]
     },
     {
      "name": "The Writhing Coil",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      259446
+     ],
+     "unitForces": [
+      0
+     ]
     }
    ],
    "mobCount": 11,
+   "forces": 54,
+   "isBoss": true,
+   "trashMobCount": 10,
+   "classification": "boss",
+   "encounter": "The Writhing Coil",
+   "phase": "before-second-boss",
+   "enemyIds": [
+    150578,
+    150579,
+    150580,
+    150589,
+    150590,
+    150690,
+    150715,
+    150716,
+    150720,
+    150721,
+    150713
+   ],
+   "enemyPositions": [
+    {
+     "id": 150578,
+     "x": -170.24249218749998,
+     "y": 217.15198437499998
+    },
+    {
+     "id": 150579,
+     "x": -166.7871015625,
+     "y": 220.05901953125
+    },
+    {
+     "id": 150580,
+     "x": -173.682859375,
+     "y": 214.35011328125003
+    },
+    {
+     "id": 150589,
+     "x": -169.70916015625,
+     "y": 213.05809765625
+    },
+    {
+     "id": 150590,
+     "x": -165.39743359375,
+     "y": 216.27311328125003
+    },
+    {
+     "id": 150690,
+     "x": -164.5035390625,
+     "y": 211.21021484375
+    },
+    {
+     "id": 150715,
+     "x": -186.09221875,
+     "y": 229.19326953125002
+    },
+    {
+     "id": 150716,
+     "x": -184.53729296874997,
+     "y": 233.73785937500003
+    },
+    {
+     "id": 150720,
+     "x": -175.89881640624998,
+     "y": 236.56226562500004
+    },
+    {
+     "id": 150721,
+     "x": -180.3081953125,
+     "y": 236.47212500000003
+    },
+    {
+     "id": 150713,
+     "x": -178.27251953125,
+     "y": 229.23833984375003
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 54,
-   "forcesPct": 66.3,
-   "scenarioId": "w30_8",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.55,
-    "deltaDamage": 10171103,
-    "dur": 30,
-    "targets": 8
-   },
+   "forcesPct": 67,
+   "scenarioId": null,
+   "burst": null,
    "sourcePull": 10
   },
   {
@@ -332,136 +981,582 @@
    "killZoneId": 18548786,
    "mobs": [
     {
-     "name": "Blade of the Altar",
-     "count": 5
-    },
-    {
      "name": "High Evolutionist",
-     "count": 4
+     "count": 4,
+     "npcIds": [
+      261557
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Ascendant Serpent",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      261573
+     ],
+     "unitForces": [
+      30
+     ]
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 5,
+     "npcIds": [
+      271453
+     ],
+     "unitForces": [
+      5
+     ]
     }
    ],
    "mobCount": 10,
+   "forces": 83,
+   "isBoss": false,
+   "trashMobCount": 10,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "inner-altar",
+   "enemyIds": [
+    150591,
+    150592,
+    150593,
+    150594,
+    150653,
+    150691,
+    150692,
+    150693,
+    150695,
+    150694
+   ],
+   "enemyPositions": [
+    {
+     "id": 150591,
+     "x": -175.5228515625,
+     "y": 355.65263671875005
+    },
+    {
+     "id": 150592,
+     "x": -193.7314453125,
+     "y": 356.66125
+    },
+    {
+     "id": 150593,
+     "x": -193.07093749999999,
+     "y": 338.14025390625
+    },
+    {
+     "id": 150594,
+     "x": -175.37111328125002,
+     "y": 338.40802734374995
+    },
+    {
+     "id": 150653,
+     "x": -184.43078125,
+     "y": 347.17314453125005
+    },
+    {
+     "id": 150691,
+     "x": -179.58408203125,
+     "y": 336.53361328125
+    },
+    {
+     "id": 150692,
+     "x": -182.83306640625,
+     "y": 359.49072265625
+    },
+    {
+     "id": 150693,
+     "x": -186.965703125,
+     "y": 359.49072265625
+    },
+    {
+     "id": 150695,
+     "x": -203.36236328125,
+     "y": 339.68441406249997
+    },
+    {
+     "id": 150694,
+     "x": -198.99765625,
+     "y": 339.65763671875
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 83,
-   "forcesPct": 76.4,
+   "forcesPct": 77.1,
    "scenarioId": "w30_8",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.55,
-    "deltaDamage": 10171103,
-    "dur": 30,
-    "targets": 8
-   },
+   "burst": null,
    "sourcePull": 11
   },
   {
    "pull": 12,
+   "killZoneId": 18548787,
+   "mobs": [],
+   "mobCount": 0,
+   "forces": 0,
+   "isBoss": false,
+   "trashMobCount": 0,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "inner-altar",
+   "enemyIds": [],
+   "enemyPositions": [],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 77.1,
+   "scenarioId": "w30_2",
+   "burst": null,
+   "sourcePull": 12
+  },
+  {
+   "pull": 13,
    "killZoneId": 18548788,
    "mobs": [
     {
      "name": "Living Venom",
-     "count": 6
-    },
-    {
-     "name": "Blade of the Altar",
-     "count": 4
+     "count": 6,
+     "npcIds": [
+      263112
+     ],
+     "unitForces": [
+      1
+     ]
     },
     {
      "name": "Ula'tek's Chosen",
-     "count": 1
+     "count": 1,
+     "npcIds": [
+      263109
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 4,
+     "npcIds": [
+      271453
+     ],
+     "unitForces": [
+      5
+     ]
     }
    ],
    "mobCount": 11,
+   "forces": 51,
+   "isBoss": false,
+   "trashMobCount": 11,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "inner-altar",
+   "enemyIds": [
+    150608,
+    150609,
+    150610,
+    150611,
+    150612,
+    150613,
+    150650,
+    150700,
+    150701,
+    150705,
+    150704
+   ],
+   "enemyPositions": [
+    {
+     "id": 150608,
+     "x": -159.15296874999999,
+     "y": 301.97298828124997
+    },
+    {
+     "id": 150609,
+     "x": -169.4533203125,
+     "y": 302.29431640625
+    },
+    {
+     "id": 150610,
+     "x": -161.75929687500002,
+     "y": 306.28414062499996
+    },
+    {
+     "id": 150611,
+     "x": -167.00765625,
+     "y": 306.105625
+    },
+    {
+     "id": 150612,
+     "x": -161.509375,
+     "y": 297.74216796875
+    },
+    {
+     "id": 150613,
+     "x": -167.3111328125,
+     "y": 297.99208984375
+    },
+    {
+     "id": 150650,
+     "x": -164.3120703125,
+     "y": 301.91943359375
+    },
+    {
+     "id": 150700,
+     "x": -177.67396484374999,
+     "y": 304.09732421875
+    },
+    {
+     "id": 150701,
+     "x": -183.00265625,
+     "y": 304.391875
+    },
+    {
+     "id": 150705,
+     "x": -147.5673046875,
+     "y": 303.59748046874995
+    },
+    {
+     "id": 150704,
+     "x": -143.32755859375,
+     "y": 303.4457421875
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
-   "forces": 51,
-   "forcesPct": 82.5,
+   "forcesPct": 83.4,
    "scenarioId": "w30_8",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.55,
-    "deltaDamage": 10171103,
-    "dur": 30,
-    "targets": 8
-   },
+   "burst": null,
    "sourcePull": 13
   },
   {
-   "pull": 13,
+   "pull": 14,
    "killZoneId": 18548789,
    "mobs": [
     {
-     "name": "Blade of the Altar",
-     "count": 4
-    },
-    {
      "name": "Primal Serpent",
-     "count": 2
+     "count": 2,
+     "npcIds": [
+      261560
+     ],
+     "unitForces": [
+      7
+     ]
     },
     {
      "name": "Twinfang Harrower",
-     "count": 1
-    }
-   ],
-   "mobCount": 7,
-   "dangerous": [],
-   "skippable": 0,
-   "forces": 59,
-   "forcesPct": 89.7,
-   "scenarioId": "w30_7",
-   "isBoss": false,
-   "burst": {
-    "deltaPct": 34.82,
-    "deltaDamage": 9442374,
-    "dur": 30,
-    "targets": 7
-   },
-   "sourcePull": 14
-  },
-  {
-   "pull": 14,
-   "killZoneId": 18548790,
-   "mobs": [
-    {
-     "name": "Ritual Chieftain",
-     "count": 2
+     "count": 1,
+     "npcIds": [
+      261554
+     ],
+     "unitForces": [
+      25
+     ]
     },
     {
      "name": "Blade of the Altar",
-     "count": 2
-    },
-    {
-     "name": "Ula'tek's Chosen",
-     "count": 1
-    },
-    {
-     "name": "Zul'jan",
-     "count": 1
-    },
-    {
-     "name": "Ritual Snake",
-     "count": 1
+     "count": 4,
+     "npcIds": [
+      271453
+     ],
+     "unitForces": [
+      5
+     ]
     }
    ],
    "mobCount": 7,
+   "forces": 59,
+   "isBoss": false,
+   "trashMobCount": 7,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "inner-altar",
+   "enemyIds": [
+    150628,
+    150629,
+    150659,
+    150706,
+    150707,
+    150708,
+    150709
+   ],
+   "enemyPositions": [
+    {
+     "id": 150628,
+     "x": -129.90318359375,
+     "y": 287.504296875
+    },
+    {
+     "id": 150629,
+     "x": -129.95673828125,
+     "y": 297.79572265624995
+    },
+    {
+     "id": 150659,
+     "x": -128.25191406250002,
+     "y": 293.08291015625
+    },
+    {
+     "id": 150706,
+     "x": -144.7110546875,
+     "y": 280.42615234375
+    },
+    {
+     "id": 150707,
+     "x": -148.97757812499998,
+     "y": 280.28333984375
+    },
+    {
+     "id": 150708,
+     "x": -134.08044921875,
+     "y": 290.1641796875
+    },
+    {
+     "id": 150709,
+     "x": -134.14292968750001,
+     "y": 296.03734375
+    }
+   ],
    "dangerous": [],
    "skippable": 0,
+   "forcesPct": 90.6,
+   "scenarioId": "w30_7",
+   "burst": null,
+   "sourcePull": 14
+  },
+  {
+   "pull": 15,
+   "killZoneId": 18548790,
+   "mobs": [
+    {
+     "name": "Ritual Snake",
+     "count": 1,
+     "npcIds": [
+      268358
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "Zul'jan",
+     "count": 1,
+     "npcIds": [
+      259447
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "Ritual Chieftain",
+     "count": 2,
+     "npcIds": [
+      270306
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Ula'tek's Chosen",
+     "count": 1,
+     "npcIds": [
+      263109
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Blade of the Altar",
+     "count": 2,
+     "npcIds": [
+      271453
+     ],
+     "unitForces": [
+      5
+     ]
+    }
+   ],
+   "mobCount": 7,
    "forces": 85,
-   "forcesPct": 100.0,
-   "scenarioId": "w90_1b",
    "isBoss": true,
-   "burst": {
-    "deltaPct": 20.87,
-    "deltaDamage": 4005257,
-    "dur": 90,
-    "targets": 1
-   },
+   "trashMobCount": 6,
+   "classification": "boss",
+   "encounter": "Zul'jan",
+   "phase": "before-final-boss",
+   "enemyIds": [
+    150718,
+    150714,
+    150566,
+    150652,
+    150710,
+    150711,
+    150567
+   ],
+   "enemyPositions": [
+    {
+     "id": 150718,
+     "x": -50.847539062500005,
+     "y": 292.716953125
+    },
+    {
+     "id": 150714,
+     "x": -60.889042968750005,
+     "y": 292.66339843749995
+    },
+    {
+     "id": 150566,
+     "x": -76.65197265625,
+     "y": 290.18203125
+    },
+    {
+     "id": 150652,
+     "x": -82.284140625,
+     "y": 293.47564453124994
+    },
+    {
+     "id": 150710,
+     "x": -82.03421875000001,
+     "y": 288.15587890625
+    },
+    {
+     "id": 150711,
+     "x": -82.16810546875,
+     "y": 298.74185546875
+    },
+    {
+     "id": 150567,
+     "x": -76.4823828125,
+     "y": 297.0191796875
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 101,
+   "scenarioId": null,
+   "burst": null,
    "sourcePull": 15
+  }
+ ],
+ "routePublicKey": "xwt8Pza",
+ "mappingVersion": 1085,
+ "mdtMappingHash": "a00c75314d73a26f49dda31b77ddc219",
+ "mdtAddonVersion": 6220,
+ "totalForces": 825,
+ "requiredForces": 817,
+ "statExamples": [
+  {
+   "scenario": "单体",
+   "targets": 1,
+   "stat": "暴击",
+   "rating": 1605,
+   "gainPct": 51.4
+  },
+  {
+   "scenario": "单体",
+   "targets": 1,
+   "stat": "急速",
+   "rating": 1605,
+   "gainPct": 55.9
+  },
+  {
+   "scenario": "单体",
+   "targets": 1,
+   "stat": "精通",
+   "rating": 1605,
+   "gainPct": 66.5
+  },
+  {
+   "scenario": "单体",
+   "targets": 1,
+   "stat": "全能",
+   "rating": 1605,
+   "gainPct": 51.4
+  },
+  {
+   "scenario": "3 目标",
+   "targets": 3,
+   "stat": "暴击",
+   "rating": 1605,
+   "gainPct": 54.8
+  },
+  {
+   "scenario": "3 目标",
+   "targets": 3,
+   "stat": "急速",
+   "rating": 1605,
+   "gainPct": 55.7
+  },
+  {
+   "scenario": "3 目标",
+   "targets": 3,
+   "stat": "精通",
+   "rating": 1605,
+   "gainPct": 63.6
+  },
+  {
+   "scenario": "3 目标",
+   "targets": 3,
+   "stat": "全能",
+   "rating": 1605,
+   "gainPct": 51.2
+  },
+  {
+   "scenario": "8 目标",
+   "targets": 8,
+   "stat": "暴击",
+   "rating": 1605,
+   "gainPct": 57.5
+  },
+  {
+   "scenario": "8 目标",
+   "targets": 8,
+   "stat": "急速",
+   "rating": 1605,
+   "gainPct": 60.3
+  },
+  {
+   "scenario": "8 目标",
+   "targets": 8,
+   "stat": "精通",
+   "rating": 1605,
+   "gainPct": 61.4
+  },
+  {
+   "scenario": "8 目标",
+   "targets": 8,
+   "stat": "全能",
+   "rating": 1605,
+   "gainPct": 51.3
+  },
+  {
+   "scenario": "5 小怪",
+   "targets": 5,
+   "stat": "暴击",
+   "rating": 1605,
+   "gainPct": 51.3
+  },
+  {
+   "scenario": "5 小怪",
+   "targets": 5,
+   "stat": "急速",
+   "rating": 1605,
+   "gainPct": 39.5
+  },
+  {
+   "scenario": "5 小怪",
+   "targets": 5,
+   "stat": "精通",
+   "rating": 1605,
+   "gainPct": 67.2
+  },
+  {
+   "scenario": "5 小怪",
+   "targets": 5,
+   "stat": "全能",
+   "rating": 1605,
+   "gainPct": 51.7
   }
  ]
 }

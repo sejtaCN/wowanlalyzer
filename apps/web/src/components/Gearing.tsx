@@ -18,7 +18,7 @@ function tone(v: number | null | undefined) {
   return v > 0 ? 'pos' : 'neg';
 }
 
-export default function Gearing({ doc }: { doc: GearingDoc }) {
+export default function Gearing({ doc, hero }: { doc: GearingDoc; hero: string }) {
   const scs = doc.scenarios;
 
   // 每个属性里最高的那个模型，标出来——"同一属性换模型就更值钱"是这一页的主张
@@ -34,7 +34,7 @@ export default function Gearing({ doc }: { doc: GearingDoc }) {
   }
 
   return (
-    <div className="gear">
+    <div className="gear" data-hero={hero}>
       <h3>次级属性：每 700 点（约一颗宝石当量）换来多少</h3>
       <div className="tblwrap">
         <table className="tbl">

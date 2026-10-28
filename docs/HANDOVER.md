@@ -10,12 +10,12 @@
 
 | 项 | 数量 | 位置 |
 | --- | --- | --- |
-| 实装专精 | 1（暗影牧师，执政官 / 虚空编织者） | `content/specs.json` |
+| 实装范围 | 暗影牧师 · 仅执政官（Archon）；虚空编织者待补 | `content/specs.json` |
 | 占位专精 | 1（恶魔猎手·噬灭·歼灭者） | 同上，`status: planned` |
 | 章节 | 11（L0×4 / L1×6 / L2×1） | `content/chapters/` |
 | 教练建议 | 7 条 | `content/coaching/general.json` |
-| 模拟 runId | 246 个有效 | `content/sims/` + 汇总 `numeric-summary.json` |
-| 图契约 | 11 章 × 5 段；48 有图 / 2 缺图 / 5 不适用 | `content/figures/chapters.json` |
+| 模拟 runId | 原始 248 个；前端仅查明确归属 Archon 的记录 | `content/sims/` + 汇总 `numeric-summary.json` |
+| 图契约 | 11 章 × 5 段；50 有图 / 0 缺图 / 5 不适用；L0-03 / L1-01 第五段为模拟时间线 | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 | `content/analysis/`、`content/logs/` |
 | 代码量 | 约 4,050 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
@@ -128,7 +128,7 @@ npm run build              # 单文件产出
 
 | # | 待办 | 为什么 | 入口 |
 | --- | --- | --- | --- |
-| 1 | **英雄天赋切换**（执政官 / 虚空编织者） | 杠杆和优先级表本来就是分天赋跑的，现在只展示执政官；切换后同一套界面能看两份结论 | `content/profiles/*archon*`、`*voidweaver*`；UI 加一个 hero-tree 选择器（复用 spec 选择器的模式） |
+| 1 | **虚空编织者数据待补** | 当前决定只做执政官。Voidweaver 只有 7 个基础模拟，缺杠杆、伤害构成、配装、属性优化、章节和独立优先级；补齐前不展示，也不回退 Archon 数据 | `content/profiles/*voidweaver*`；后续按 Archon 同一数据契约补齐 |
 | 2 | **正文硬编码数字与 runId 脱钩** | 现在 claim 里的数字是手写，换版本后要人工核对；爆发增量已改为从 runId 计算，claim 仍待处理 | 续做 `claimTemplate` + 占位符（`{{delta}}`），渲染时从 runId 取 |
 
 ### P1 · 内容缺口

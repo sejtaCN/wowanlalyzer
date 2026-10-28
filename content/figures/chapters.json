@@ -122,9 +122,9 @@
       {
         "section": 5,
         "kind": "phase-chart",
-        "status": "missing",
-        "source": "需要带 Fights 或 UNIT_DIED 的导出",
-        "next": "E"
+        "status": "ready",
+        "source": "content/analysis/simulated-timelines-archon.json # single-target-priority",
+        "note": "模拟代表迭代三段动作构成，不是真人日志阶段。"
       }
     ],
     "l0-04-cooldowns": [
@@ -190,9 +190,9 @@
       {
         "section": 5,
         "kind": "phase-chart",
-        "status": "missing",
-        "source": "需要带 Fights 或 UNIT_DIED 的导出",
-        "next": "E"
+        "status": "ready",
+        "source": "content/analysis/simulated-timelines-archon.json # mid-wave",
+        "note": "模拟代表迭代三段动作构成，不是真人日志阶段。"
       }
     ],
     "l1-02-large": [

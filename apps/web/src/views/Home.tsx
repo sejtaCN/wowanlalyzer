@@ -169,7 +169,7 @@ export default function Home({
 
       <div className="statusline">
         <span>SimC {simc?.version ?? '—'} ({simc?.commit?.slice(0, 7) ?? '—'})</span>
-        <span>runId {runs.length} 个</span>
+        <span>执政官 runId {runs.length} 个</span>
         <span>章节 {chapters.length} 篇</span>
         <span>路线 {ALTAR_WAVES.pulls} 波 / {ALTAR_WAVES.totalMobs} 只</span>
         <span>日志 1 场 · 阶段推断 9 段</span>

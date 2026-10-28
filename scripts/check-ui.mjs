@@ -75,7 +75,7 @@ const VISUALS = {
   'route-map': '[data-figure-kind="route-map"] img, [data-figure-kind="route-map"] .map-current',
   'selected-wave': '[data-figure-kind="selected-wave"] .sw-bars',
   'wave-table': 'table.tbl',
-  'phase-chart': '.tbl-ph, .btl svg',
+  'phase-chart': '.tbl-ph, .btl svg, .simtl-track',
   'cast-chart': '[data-figure-kind="cast-chart"]',
   'budget-chart': '[data-figure-kind="budget-chart"]',
   'resource-chart': '[data-figure-kind="resource-chart"]',
@@ -406,6 +406,10 @@ for (const chapter of chapters) {
   }
 
   await page.screenshot({ path: `${SHOTS}/chapter-${chapter.id}.png` });
+    if (chapter.casePanel?.status === 'simulation') {
+      const secs = await page.$$('.sec');
+      if (secs[4]) await secs[4].screenshot({ path: `${SHOTS}/chapter-${chapter.id}-timeline.png` });
+    }
 }
 
 // L0 不应出现波次方块图
@@ -483,6 +487,32 @@ check(an.sections === 6, `解析台应有 6 段，实际 ${an.sections}`);
 check(an.figures >= 6, `解析台每段都应有图/表，实际 ${an.figures}`);
 const anWeights = await fontWeightsIn('.page');
 anWeights.forEach((weight) => check(weight === '400' || weight === '500', `解析台出现了 400/500 之外的字重：${weight}`));
+const archonOnly = await page.evaluate(() => {
+  const pageText = document.querySelector('.page')?.textContent ?? '';
+  const allRunIds = [...document.querySelectorAll('tbody tr td:last-child')]
+    .map((cell) => cell.textContent?.trim() ?? '')
+    .filter((text) => /^[a-z][a-z0-9_]*(?:__[a-z0-9_]+)+$/i.test(text));
+  return {
+    voidRows: allRunIds.filter((runId) => runId.startsWith('voidweaver')).length,
+    visibleRunIds: allRunIds.length,
+    statesBothHeroes: /执政官 runId \d+ 个/.test(pageText) && pageText.includes('虚空编织者数据待补'),
+    sections: [...document.querySelectorAll('.statopt, .gear, [data-hero]')].map((node) => node.getAttribute('data-hero')),
+  };
+});
+check(archonOnly.voidRows === 0, `解析台混入 ${archonOnly.voidRows} 条 Voidweaver run`);
+check(archonOnly.visibleRunIds > 0, '解析台原始结果没有任何 runId');
+check(archonOnly.statesBothHeroes, '解析台未明确显示「执政官可用 / 虚空编织者待补」');
+check(archonOnly.sections.every((hero) => hero === 'archon'), '解析台存在未绑定 Archon 的分析区块');
+const statModels = await page.evaluate(() => ({
+  allocations: document.querySelectorAll('.stat-alloc-row').length,
+  allocationLabels: [...document.querySelectorAll('.stat-alloc-hd b')].map((node) => node.textContent?.trim()),
+  heatColumns: document.querySelectorAll('.stat-heat-head > span').length,
+  heatRows: document.querySelectorAll('.stat-heat-row:not(.stat-heat-head)').length,
+}));
+check(statModels.allocations === 4, `属性配比应显示 4 个模型，实际 ${statModels.allocations}`);
+check(statModels.allocationLabels[0] === '单体 300s', `属性配比首个模型应为单体 300s，实际 ${statModels.allocationLabels[0]}`);
+check(statModels.heatColumns === 5, `属性热矩阵应为属性列 + 4 模型列，实际 ${statModels.heatColumns}`);
+check(statModels.heatRows === 4, `属性热矩阵应有 4 行属性，实际 ${statModels.heatRows}`);
 await page.screenshot({ path: `${SHOTS}/analyzer.png` });
 const anSecs = await page.$$('.sec');
 if (anSecs[3]) await anSecs[3].screenshot({ path: `${SHOTS}/analyzer-gearing.png` });

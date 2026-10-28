@@ -20,13 +20,20 @@ export default function Analyzer() {
     );
     const map = new Map<string, typeof runs>();
     for (const r of filtered) {
-      const key = r.runId.startsWith('arc')
-        ? 'Archon'
-        : r.runId.startsWith('void')
-          ? 'Voidweaver'
-          : r.runId.startsWith('lev_')
-            ? '杠杆（禁用技能）'
-            : '决策 A/B';
+      const key =
+        r.kind === 'leverage' || r.kind === 'leverage-baseline'
+          ? '杠杆（禁用技能）'
+          : r.kind === 'decision-ab'
+            ? '决策 A/B'
+            : r.kind === 'gearing'
+              ? '配装'
+              : r.kind === 'stat-opt'
+                ? '属性优化'
+                : r.kind === 'action-trace'
+                  ? '动作轨迹'
+                  : r.kind === 'adds-window'
+                    ? '加怪窗口'
+                    : '基础场景';
       const arr = map.get(key) ?? [];
       arr.push(r);
       map.set(key, arr);
@@ -42,12 +49,12 @@ export default function Analyzer() {
     <div className="page">
       <h1>解析台</h1>
       <p className="page-sub">
-        学习页给的每个数字都在这里能查到出处。从上往下读：结构 → 数量 → 构成 → 配装 → 参考资料 → 原始结果。
+        当前只展示执政官（Archon）。学习页给的每个数字都在这里能查到出处。从上往下读：结构 → 数量 → 构成 → 配装 → 参考资料 → 原始结果。
       </p>
 
       <div className="statusline" style={{ marginTop: 0, borderTop: 0, paddingTop: 0 }}>
         <span>SimC {simc?.version ?? '—'} ({simc?.commit?.slice(0, 7) ?? '—'})</span>
-        <span>runId {runs.length} 个</span>
+        <span>执政官 runId {runs.length} 个</span>
         <span>杠杆 {LEVERAGE.scenarios.length} 场景 × {LEVERAGE.rows.length} 技能</span>
         <span>联动边 {INTERACTIONS.counts.apl + INTERACTIONS.counts.applies + INTERACTIONS.counts.burst + INTERACTIONS.counts.opener} 条</span>
         <span>配装 {GEARING.effects.length} 项 × {GEARING.scenarios.length} 模型</span>
@@ -60,7 +67,7 @@ export default function Analyzer() {
         tag="APL 条件 + 日志窗口"
         note={`${INTERACTIONS.counts.apl} 条来自 APL 的 dot/buff 条件（可复现），${INTERACTIONS.counts.burst} 条来自爆发窗口内的施法占比（真实日志）。线越粗，占比越高。`}
       >
-        <InteractionGraph />
+        <InteractionGraph hero="archon" />
       </Section>
 
       <Section
@@ -69,7 +76,7 @@ export default function Analyzer() {
         tag={`${LEVERAGE.iterations} 迭代`}
         note={`把技能在 APL 里的动作行全部注释掉再重跑：${LEVERAGE.rows.length} 条里有 ${levReal} 条超出误差带（真的在起作用）。误差带内的不算结论。`}
       >
-        <LeverageChart />
+        <LeverageChart hero="archon" />
       </Section>
 
       <Section
@@ -78,7 +85,7 @@ export default function Analyzer() {
         tag={`${shareScenarios} 个场景`}
         note="占比高不等于重要：光晕占 1.5% 伤害，禁掉却掉 13.5%——两条一起看才知道该保哪个。"
       >
-        <ShareTable />
+        <ShareTable hero="archon" />
       </Section>
 
       <Section
@@ -87,8 +94,8 @@ export default function Analyzer() {
         tag={`${GEARING.effects.length} 项 · ${GEARING.scenarios.length} 个模型`}
         note={`属性不是常数：同一行四个模型数字不同，说明「堆什么」取决于你在打什么。预算固定 ${STAT_OPT.budget} 评点时，最优配比在四个模型里各不相同（见下表）。阳性对照（整把武器拿掉 ${GEARING.control.perScenario[GEARING.scenarios[0].id]?.deltaPct?.toFixed(0) ?? '—'}%）${GEARING.control.passed ? '通过，读数可信' : '没通过，别信这次读数'}。`}
       >
-        <StatCurves doc={STAT_OPT} />
-        <Gearing doc={GEARING} />
+        <StatCurves doc={STAT_OPT} hero="archon" />
+        <Gearing doc={GEARING} hero="archon" />
       </Section>
 
       <Section
@@ -103,8 +110,8 @@ export default function Analyzer() {
       <Section
         no="⑥"
         question="原始结果在哪"
-        tag={`${runs.length} 个 runId`}
-        note="每一行都对应一份模拟文件，里面带 SimC 版本、commit、迭代数和 95% CI。"
+        tag={`执政官 · ${runs.length} 个 runId`}
+        note="只列出明确归属执政官的模拟文件；每一行都带 SimC 版本、commit、迭代数和 95% CI。虚空编织者数据待补，不在此混列。"
       >
         <input
           className="filter"

@@ -7,7 +7,7 @@ const zh = (id: string) => {
 };
 
 /* ---------------- 杠杆：禁用某技能后掉多少 ---------------- */
-export function LeverageChart() {
+export function LeverageChart({ hero }: { hero: string }) {
   const [scenarioId, setScenarioId] = useState(LEVERAGE.scenarios[0]?.id ?? 'st300');
   const rows = useMemo(
     () => LEVERAGE.rows.filter((r) => r.scenarioId === scenarioId).slice().sort((a, b) => a.deltaPct - b.deltaPct),
@@ -29,7 +29,7 @@ export function LeverageChart() {
     <div className="card">
       <div className="hd">
         杠杆：禁用一个技能之后掉多少
-        <span className="sec-tag">{LEVERAGE.hero} · {LEVERAGE.iterations} 迭代</span>
+        <span className="sec-tag">{hero === LEVERAGE.hero ? '执政官' : LEVERAGE.hero} · {LEVERAGE.iterations} 迭代</span>
         <span style={{ marginLeft: 'auto', display: 'flex', gap: 4 }}>
           {LEVERAGE.scenarios.map((s) => (
             <button key={s.id} className={`mini${scenarioId === s.id ? ' on' : ''}`} onClick={() => setScenarioId(s.id)}>
@@ -114,7 +114,7 @@ const CN_LABEL: Record<string, string> = {
   mind_flay_insanity: '精神鞭笞：狂',
 };
 
-export function InteractionGraph() {
+export function InteractionGraph({ hero }: { hero: string }) {
   const nodes = INTERACTIONS.nodes;
   const edges = INTERACTIONS.edges;
 
@@ -159,7 +159,7 @@ export function InteractionGraph() {
 
   return (
     <div className="card">
-      <div className="hd">
+      <div className="hd" data-hero={hero}>
         联动：谁依赖谁、谁在爆发里
         <span className="sec-tag">APL 依赖 {INTERACTIONS.counts.apl} 条 · 爆发内占比来自日志</span>
       </div>
@@ -260,14 +260,14 @@ export function InteractionGraph() {
 }
 
 /* ---------------- 伤害占比（基线画像） ---------------- */
-export function ShareTable() {
+export function ShareTable({ hero }: { hero: string }) {
   const [scenarioId, setScenarioId] = useState(Object.keys(SHARE.scenarios)[0]);
   const sc = SHARE.scenarios[scenarioId];
   const rows = sc?.rows.slice(0, 14) ?? [];
   const max = Math.max(...rows.map((r) => r.sharePct), 1);
   return (
     <div className="card">
-      <div className="hd">
+      <div className="hd" data-hero={hero}>
         基线伤害构成
         <span className="sec-tag">一次模拟 · {SHARE.iterations} 迭代</span>
         <span style={{ marginLeft: 'auto', display: 'flex', gap: 4 }}>

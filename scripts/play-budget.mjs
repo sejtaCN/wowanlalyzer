@@ -16,7 +16,7 @@ const SIMS = join(ROOT, 'content', 'sims');
 const OUT = join(ROOT, 'content', 'analysis', 'play-budget-archon.json');
 const HERO = 'archon';
 const ITERS = 5000;
-const IDS = ['w30_2', 'w30_5', 'w30_8', 'win12_4', 'w90_1b'];
+const IDS = ['w30_2', 'w30_5', 'w30_6', 'w30_7', 'w30_8', 'win12_4', 'w90_1b'];
 
 const ROLES = [
   {

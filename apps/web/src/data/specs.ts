@@ -3,6 +3,8 @@ import rawSpecs from '../../../../content/specs.json';
 export interface HeroTree {
   id: string;
   name: string;
+  status: 'active' | 'planned';
+  note?: string;
 }
 
 export interface SpecEntry {

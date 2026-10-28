@@ -60,8 +60,11 @@
   "pull": 2
  },
  "casePanel": {
-  "status": "pending",
-  "reason": "现有日志切不出波次边界。要说清「他这一波怎么打的」，得有一份带 Fights 的导出。"
+  "status": "simulation",
+  "timelineKey": "mid-wave",
+  "headline": "模拟里的 5 目标中波：先铺 DoT，再进爆发",
+  "reading": "起手阶段 15 个动作主要铺 DoT 与开增益；进入爆发后补多目标 DoT 和直伤；收尾继续续 DoT、按优先级填空，不切回单体连招。",
+  "evidence": "来源：Archon 动作序列 trace_archon__w30_5__5000，代表迭代 42 个动作；阶段是对 30 秒模拟时间的三等分。"
  },
  "evidence": {
   "runIds": [
@@ -75,7 +78,8 @@
   ],
   "sources": [
    "SimC 1210.01 (73a372b)",
-   "keystone.guru xwt8Pza / 6 条路线统计"
+   "keystone.guru xwt8Pza / 6 条路线统计",
+   "content/analysis/simulated-timelines-archon.json"
   ],
   "generatedAt": "2026-10-25T16:00:00Z"
  },

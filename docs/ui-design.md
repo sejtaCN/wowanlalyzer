@@ -110,7 +110,7 @@
 | `missing` | 标出下一批与需要的数据，不装成已完成 | 两道门禁逐条警告，不阻塞 |
 | `not-applicable` | 这一段本来就不该有图（如 L0 不绑定副本） | 不要求图 |
 
-当前 55 段：48 有图 / 2 缺图 / 5 不适用。`check:ui` 从首页逐章点开 11 章，而不是只查 L1-02；`npm run verify:gates` 用坏样本证明门禁会真红。详见 `docs/figure-contract.md`。
+当前 55 段：50 有图 / 0 缺图 / 5 不适用；L0-03 与 L1-01 的第五段使用模拟动作时间线，明确不冒充真人日志阶段。`check:ui` 从首页逐章点开 11 章，而不是只查 L1-02；`npm run verify:gates` 用坏样本证明门禁会真红。详见 `docs/figure-contract.md`。
 
 ### 4.3 状态
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSpec } from '../state/spec';
-import { allRuns, chaptersFor } from '../data/content';
+import { allRuns, ARCHON_PROFILE_ID, chaptersFor } from '../data/content';
 import { ChapterWireframe, LeverageWireframe, Pipeline, WaveWireframe, WireCard, type PipelineStep } from '../components/Teaching/Skeleton';
 
 /**
@@ -19,10 +19,10 @@ const PIPELINE: PipelineStep[] = [
 
 export default function ComingSoon({ onBack }: { onBack: () => void }) {
   const { spec, setSpec } = useSpec();
-  const hero = spec.heroTrees.map((h) => h.name).join(' / ');
+  const hero = spec.heroTrees.map((h) => (h.status === 'active' ? h.name : `${h.name}（待补）`)).join(' / ');
   const done = PIPELINE.filter((p) => p.ready).length;
-  const filledChapters = chaptersFor('shadow-priest').length;
-  const filledRuns = allRuns('shadow-priest').length;
+  const filledChapters = chaptersFor('shadow-priest', ARCHON_PROFILE_ID).length;
+  const filledRuns = allRuns('shadow-priest', ARCHON_PROFILE_ID).length;
 
   return (
     <div className="page">
@@ -114,7 +114,7 @@ export default function ComingSoon({ onBack }: { onBack: () => void }) {
       </section>
 
       <p className="note" style={{ marginTop: 6 }}>
-        想看填满的样子：切回暗影牧师——{filledChapters} 篇章节、{filledRuns} 个 runId、9 段真实日志阶段。
+        想看填满的样子：切回暗影牧师——{filledChapters} 篇章节、{filledRuns} 个执政官 runId、9 段真实日志阶段。虚空编织者待补。
       </p>
     </div>
   );

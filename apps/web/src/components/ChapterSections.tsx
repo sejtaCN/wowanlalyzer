@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { CaseBlock, Chapter, EvidenceRef, MapRef, PriorityShift, WaveModelCard } from '@learn';
-import { ALTAR_WAVES, CHAPTERS, FIGURES, budgetFor, burstPairs, getLog, getPhases, getRun, prioritySections, skillName, skillUsage, type BurstPair } from '../data/content';
+import { ALTAR_WAVES, CHAPTERS, FIGURES, budgetFor, burstPairs, getLog, getPhases, getRun, getSimulatedTimeline, prioritySections, skillName, skillUsage, type BurstPair } from '../data/content';
 import { Gloss } from './Gloss';
 import TopBand from './Teaching/TopBand';
 import WaveDiagram from './Teaching/WaveDiagram';
@@ -13,6 +13,7 @@ import { RouteExplorer, SelectedWavePanel } from './Teaching/RouteExplorer';
 import ActionBudget from './Teaching/ActionBudget';
 import CooldownWindow from './Teaching/CooldownWindow';
 import CastChart from './Teaching/CastChart';
+import SimulatedTimelineFigure from './Teaching/SimulatedTimeline';
 import { useReaderRefresh } from '../state/reader-refresh';
 
 /** 段外壳：编号 + 一句话（这一段回答什么）→ 图 → 一句说明 */
@@ -476,6 +477,9 @@ export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: Re
       </>
     );
   }
+  if (block.status === 'simulation') {
+    return timeline ?? <div className="figempty">找不到模拟时间线（{block.timelineKey}）。</div>;
+  }
   return (
     <>
       <CastChart logId={block.logId} />
@@ -497,7 +501,9 @@ export function EvidenceBar({ evidence }: { evidence: EvidenceRef }) {
   const readerRefresh = useReaderRefresh();
   const commits = [...new Set(evidence.runIds.map((id) => id.split('__')[0]))];
   if (readerRefresh) {
-    const runs = evidence.runIds.map(getRun).filter((run): run is NonNullable<typeof run> => Boolean(run));
+    const runs = evidence.runIds
+      .map((runId) => getRun(runId))
+      .filter((run): run is NonNullable<typeof run> => Boolean(run));
     const pairs = burstPairs(evidence.runIds);
     const primary = pairs[0]?.on ?? runs[0] ?? null;
     const traceCount = runs.filter((run) => run.kind === 'action-trace').length;
@@ -667,11 +673,13 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         figureKind={chapter.casePanel.status === 'log' ? 'cast-chart' : figure(5)?.kind}
         figureStatus={figure(5)?.status}
         question="真人怎么打"
-        tag={chapter.casePanel.status === 'pending' ? '待补' : '真实日志'}
+        tag={chapter.casePanel.status === 'pending' ? '待补' : chapter.casePanel.status === 'simulation' ? '模拟执行时间线' : '真实日志'}
         note={
           chapter.id === 'l1-02-large'
             ? '「≈第N波」是这段的怪物组成和路线第 N 波有多像（重合度 %），不是“他现在打到了第几波”。只列最高的一波；低于 40% 说明他走的是另一条顺序。'
-            : '整场日志推出的阶段，不是单波。这份导出没有死亡事件，切不出「第 N 波几时开始」。'
+            : chapter.casePanel.status === 'simulation'
+              ? '按模拟代表迭代划分三段：显示动作按职责落在哪里，不是真人日志阶段，也不代表多迭代平均。'
+              : '整场日志推出的阶段，不是单波。这份导出没有死亡事件，切不出「第 N 波几时开始」。'
         }
       >
         <CasePanel
@@ -679,6 +687,8 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
           timeline={
             chapter.casePanel.status === 'phases' ? (
               <BurstTimeline logId={chapter.casePanel.logId} highlight={chapter.casePanel.highlight} />
+            ) : chapter.casePanel.status === 'simulation' ? (
+              <SimulatedTimelineFigure timeline={getSimulatedTimeline(chapter.casePanel.timelineKey)!} />
             ) : null
           }
         />

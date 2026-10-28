@@ -32,6 +32,7 @@ for (const f of readdirSync(SIMS)) {
     skipped += 1;
     continue;
   }
+  const profileId = d.profileId ?? null;
   runs[d.runId] = {
     runId: d.runId,
     scenarioId: d.scenarioId ?? null,
@@ -42,7 +43,10 @@ for (const f of readdirSync(SIMS)) {
     durationSec: d.durationSec ?? null,
     targets: d.targets ?? null,
     kind: d.kind ?? null,
-    hero: d.hero ?? null,
+    // hero 与 profileId 都保留。旧跑批可能只有其中一个字段，查询层必须显式判定。
+    hero: d.hero ?? profileId,
+    profileId,
+    profileFile: d.profileFile ?? null,
     simc: { version: d.simc?.version ?? null, commit: d.simc?.gitRevision ?? d.simc?.commit ?? null },
   };
 }

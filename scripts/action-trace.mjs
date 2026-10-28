@@ -32,6 +32,8 @@ const PROFILE_ABS = join(ROOT, PROFILE);
 const SCENARIOS = [
   { id: 'w30_2', label: '2 目标 30s', targets: 2, maxTime: 30 },
   { id: 'w30_5', label: '5 目标 30s', targets: 5, maxTime: 30 },
+  { id: 'w30_6', label: '6 目标 30s', targets: 6, maxTime: 30 },
+  { id: 'w30_7', label: '7 目标 30s', targets: 7, maxTime: 30 },
   { id: 'w30_8', label: '8 目标 30s', targets: 8, maxTime: 30 },
   { id: 'win12_4', label: '4 目标 12s（加怪窗口）', targets: 4, maxTime: 12 },
   { id: 'w90_1b', label: 'BOSS 单体 90s', targets: 1, maxTime: 90 },

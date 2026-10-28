@@ -7,7 +7,7 @@ import Home, { findChapter } from './views/Home';
 import ChapterView from './views/ChapterView';
 import Analyzer from './views/Analyzer';
 import ComingSoon from './views/ComingSoon';
-import { chaptersFor } from './data/content';
+import { ARCHON_PROFILE_ID, chaptersFor } from './data/content';
 
 type Screen = { name: 'home' } | { name: 'chapter'; id: string } | { name: 'analyzer' };
 
@@ -15,12 +15,13 @@ type Screen = { name: 'home' } | { name: 'chapter'; id: string } | { name: 'anal
 function SpecSwitcher() {
   const { spec, setSpec } = useSpec();
   const [open, setOpen] = useState(false);
+  const activeHero = spec.heroTrees.find((hero) => hero.status === 'active');
   return (
     <div className="specsw-wrap">
       <button className="specsw" aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
         <span className={`statusdot ${spec.status}`} aria-hidden />
         <span className="specsw-name">{spec.name}</span>
-        <span className="specsw-class">{spec.className}</span>
+        <span className="specsw-class">{spec.className} · {activeHero?.name ?? '—'}</span>
         <span className="caret" aria-hidden>
           ▾
         </span>
@@ -45,13 +46,13 @@ function SpecSwitcher() {
                 <span className="specitem-main">
                   <b>{s.name}</b>
                   <small>
-                    {s.className} · {s.heroTrees.map((h) => h.name).join(' / ') || '—'}
+                    {s.className} · {s.heroTrees.map((h) => h.status === 'active' ? h.name : `${h.name}（待补）`).join(' / ') || '—'}
                   </small>
                 </span>
                 {s.status === 'planned' ? <span className="specitem-tag">筹备中</span> : null}
               </button>
             ))}
-            <div className="specmenu-ft">接上新专精只需要数据，不需要改界面</div>
+            <div className="specmenu-ft">当前只开放执政官；虚空编织者数据待补</div>
           </div>
         </>
       ) : null}
@@ -68,7 +69,7 @@ function Shell() {
     window.scrollTo({ top: 0 });
   }, [screen.name, spec.id]);
 
-  const chapters = chaptersFor(spec.id);
+  const chapters = chaptersFor(spec.id, ARCHON_PROFILE_ID);
   const chapter = screen.name === 'chapter' ? findChapter(chapters, screen.id) : null;
 
   return (

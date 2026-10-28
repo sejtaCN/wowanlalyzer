@@ -1,0 +1,674 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-28T00:54:12.945Z",
+  "hero": "archon",
+  "profile": "content/profiles/MID2_shadow_archon.simc",
+  "source": "content/analysis/play-budget-archon.json",
+  "method": "由 action-trace 代表迭代的动作时间、技能职责与狂乱采样推导；阶段按战斗时间均分为三段。不是日志阶段，也不代表多迭代平均。",
+  "timelines": [
+    {
+      "key": "single-target-priority",
+      "label": "单体 APL 裁决",
+      "scenarioId": "w90_1b",
+      "runId": "trace_archon__w90_1b__5000",
+      "durationSec": 90,
+      "phases": [
+        {
+          "index": 1,
+          "label": "起手阶段",
+          "from": 0,
+          "to": 30,
+          "actions": 42,
+          "dot": 12,
+          "filler": 25,
+          "burst": 3,
+          "item": 2,
+          "byAction": [
+            {
+              "t": 0,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 0.871,
+              "name": "shadow_word_pain"
+            },
+            {
+              "t": 1.743,
+              "name": "halo"
+            },
+            {
+              "t": 2.614,
+              "name": "void_volley"
+            },
+            {
+              "t": 3.497,
+              "name": "voidform"
+            },
+            {
+              "t": 4.379,
+              "name": "power_infusion"
+            },
+            {
+              "t": 4.379,
+              "name": "potion"
+            },
+            {
+              "t": 4.379,
+              "name": "use_items"
+            },
+            {
+              "t": 4.379,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 5.133,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 5.888,
+              "name": "mind_blast"
+            },
+            {
+              "t": 6.643,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 7.399,
+              "name": "void_volley"
+            },
+            {
+              "t": 8.153,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 8.907,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 9.662,
+              "name": "void_volley"
+            },
+            {
+              "t": 10.416,
+              "name": "void_volley"
+            },
+            {
+              "t": 11.17,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 11.924,
+              "name": "mind_blast"
+            },
+            {
+              "t": 12.679,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 13.434,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 14.189,
+              "name": "void_volley"
+            },
+            {
+              "t": 14.943,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 15.698,
+              "name": "void_volley"
+            },
+            {
+              "t": 16.452,
+              "name": "mind_flay"
+            },
+            {
+              "t": 17.209,
+              "name": "mind_blast"
+            },
+            {
+              "t": 17.965,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 18.719,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 19.474,
+              "name": "mind_flay"
+            },
+            {
+              "t": 20.262,
+              "name": "mind_flay"
+            },
+            {
+              "t": 21.049,
+              "name": "mind_flay"
+            },
+            {
+              "t": 21.836,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 22.63,
+              "name": "mind_blast"
+            },
+            {
+              "t": 23.426,
+              "name": "mind_flay"
+            },
+            {
+              "t": 24.22,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 25.014,
+              "name": "void_volley"
+            },
+            {
+              "t": 25.808,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 26.603,
+              "name": "mind_flay"
+            },
+            {
+              "t": 27.397,
+              "name": "mind_flay"
+            },
+            {
+              "t": 28.192,
+              "name": "mind_blast"
+            },
+            {
+              "t": 28.989,
+              "name": "mind_flay"
+            },
+            {
+              "t": 29.785,
+              "name": "mind_flay"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "持续循环",
+          "from": 30,
+          "to": 60,
+          "actions": 30,
+          "dot": 8,
+          "filler": 22,
+          "burst": 0,
+          "item": 0,
+          "byAction": [
+            {
+              "t": 30.567,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 31.347,
+              "name": "mind_flay"
+            },
+            {
+              "t": 32.131,
+              "name": "mind_flay"
+            },
+            {
+              "t": 32.915,
+              "name": "mind_flay"
+            },
+            {
+              "t": 33.698,
+              "name": "mind_blast"
+            },
+            {
+              "t": 34.472,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 35.247,
+              "name": "mind_flay"
+            },
+            {
+              "t": 36.026,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 36.809,
+              "name": "mind_flay"
+            },
+            {
+              "t": 37.592,
+              "name": "mind_flay"
+            },
+            {
+              "t": 38.383,
+              "name": "mind_flay"
+            },
+            {
+              "t": 39.214,
+              "name": "mind_blast"
+            },
+            {
+              "t": 40.052,
+              "name": "mind_flay"
+            },
+            {
+              "t": 41.149,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 42.256,
+              "name": "mind_flay"
+            },
+            {
+              "t": 43.374,
+              "name": "mind_flay"
+            },
+            {
+              "t": 44.504,
+              "name": "mind_flay"
+            },
+            {
+              "t": 45.645,
+              "name": "void_volley"
+            },
+            {
+              "t": 46.796,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 47.96,
+              "name": "mind_blast"
+            },
+            {
+              "t": 49.126,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 50.288,
+              "name": "void_volley"
+            },
+            {
+              "t": 51.451,
+              "name": "void_volley"
+            },
+            {
+              "t": 52.612,
+              "name": "mind_flay"
+            },
+            {
+              "t": 53.775,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 54.939,
+              "name": "mind_flay"
+            },
+            {
+              "t": 56.102,
+              "name": "mind_blast"
+            },
+            {
+              "t": 57.263,
+              "name": "mind_flay"
+            },
+            {
+              "t": 58.428,
+              "name": "mind_flay"
+            },
+            {
+              "t": 59.561,
+              "name": "shadow_word_madness"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "label": "收尾阶段",
+          "from": 60,
+          "to": 90,
+          "actions": 27,
+          "dot": 8,
+          "filler": 18,
+          "burst": 1,
+          "item": 0,
+          "byAction": [
+            {
+              "t": 60.695,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 61.83,
+              "name": "void_volley"
+            },
+            {
+              "t": 62.949,
+              "name": "halo"
+            },
+            {
+              "t": 64.067,
+              "name": "mind_blast"
+            },
+            {
+              "t": 65.187,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 66.306,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 67.424,
+              "name": "mind_flay"
+            },
+            {
+              "t": 68.543,
+              "name": "mind_flay"
+            },
+            {
+              "t": 69.661,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 70.78,
+              "name": "mind_flay"
+            },
+            {
+              "t": 71.899,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 73.016,
+              "name": "mind_blast"
+            },
+            {
+              "t": 74.133,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 75.251,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 76.368,
+              "name": "shadow_word_death"
+            },
+            {
+              "t": 77.476,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 78.583,
+              "name": "void_volley"
+            },
+            {
+              "t": 79.691,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 80.798,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 81.903,
+              "name": "mind_blast"
+            },
+            {
+              "t": 83.009,
+              "name": "mind_flay"
+            },
+            {
+              "t": 84.132,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 85.254,
+              "name": "void_volley"
+            },
+            {
+              "t": 86.377,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 87.5,
+              "name": "shadow_word_death"
+            },
+            {
+              "t": 88.621,
+              "name": "mind_flay"
+            },
+            {
+              "t": 89.772,
+              "name": "mind_blast"
+            }
+          ]
+        }
+      ],
+      "decision": "前段先铺 DoT，再进爆发；中段按条件续 DoT、打高优先直伤；后段继续按表头逐条检查，而不是把技能名顺序当固定连招。",
+      "evidence": "代表迭代共 99 个动作、96 个 GCD 起手点；三个阶段分别 42 / 30 / 27 个动作。"
+    },
+    {
+      "key": "mid-wave",
+      "label": "5 目标中波",
+      "scenarioId": "w30_5",
+      "runId": "trace_archon__w30_5__5000",
+      "durationSec": 30,
+      "phases": [
+        {
+          "index": 1,
+          "label": "起手阶段",
+          "from": 0,
+          "to": 10,
+          "actions": 15,
+          "dot": 7,
+          "filler": 3,
+          "burst": 3,
+          "item": 2,
+          "byAction": [
+            {
+              "t": 0,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 0.873,
+              "name": "potion"
+            },
+            {
+              "t": 0.873,
+              "name": "halo"
+            },
+            {
+              "t": 1.745,
+              "name": "shadow_word_pain"
+            },
+            {
+              "t": 2.619,
+              "name": "shadow_word_pain"
+            },
+            {
+              "t": 3.489,
+              "name": "shadow_word_pain"
+            },
+            {
+              "t": 4.36,
+              "name": "shadow_word_pain"
+            },
+            {
+              "t": 5.213,
+              "name": "shadow_word_pain"
+            },
+            {
+              "t": 6.066,
+              "name": "void_volley"
+            },
+            {
+              "t": 6.917,
+              "name": "voidform"
+            },
+            {
+              "t": 7.769,
+              "name": "power_infusion"
+            },
+            {
+              "t": 7.769,
+              "name": "use_items"
+            },
+            {
+              "t": 7.769,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 8.523,
+              "name": "mind_blast"
+            },
+            {
+              "t": 9.278,
+              "name": "mind_flay_insanity"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "持续循环",
+          "from": 10,
+          "to": 20,
+          "actions": 14,
+          "dot": 6,
+          "filler": 8,
+          "burst": 0,
+          "item": 0,
+          "byAction": [
+            {
+              "t": 10.031,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 10.785,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 11.539,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 12.295,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 13.05,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 13.804,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 14.559,
+              "name": "mind_blast"
+            },
+            {
+              "t": 15.315,
+              "name": "void_volley"
+            },
+            {
+              "t": 16.07,
+              "name": "void_volley"
+            },
+            {
+              "t": 16.824,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 17.58,
+              "name": "mind_flay_insanity"
+            },
+            {
+              "t": 18.332,
+              "name": "void_volley"
+            },
+            {
+              "t": 19.086,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 19.841,
+              "name": "mind_blast"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "label": "收尾阶段",
+          "from": 20,
+          "to": 30,
+          "actions": 13,
+          "dot": 3,
+          "filler": 10,
+          "burst": 0,
+          "item": 0,
+          "byAction": [
+            {
+              "t": 20.597,
+              "name": "void_volley"
+            },
+            {
+              "t": 21.353,
+              "name": "void_volley"
+            },
+            {
+              "t": 22.108,
+              "name": "mind_flay"
+            },
+            {
+              "t": 22.863,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 23.64,
+              "name": "mind_flay"
+            },
+            {
+              "t": 24.416,
+              "name": "mind_blast"
+            },
+            {
+              "t": 25.43,
+              "name": "tentacle_slam"
+            },
+            {
+              "t": 26.213,
+              "name": "shadow_word_death"
+            },
+            {
+              "t": 26.968,
+              "name": "void_volley"
+            },
+            {
+              "t": 27.723,
+              "name": "shadow_word_madness"
+            },
+            {
+              "t": 28.476,
+              "name": "mind_flay"
+            },
+            {
+              "t": 29.23,
+              "name": "mind_flay"
+            },
+            {
+              "t": 29.985,
+              "name": "mind_blast"
+            }
+          ]
+        }
+      ],
+      "decision": "先铺多目标 DoT，再开爆发；爆发里仍按条件补 DoT，不用单体填充硬顶。",
+      "evidence": "代表迭代共 42 个动作、39 个 GCD 起手点；三个阶段分别 15 / 14 / 13 个动作。"
+    }
+  ]
+}

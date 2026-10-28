@@ -20,6 +20,8 @@ profile/APL  →  sims / A-B / adds  →  联动·杠杆·构成  →  章节 JS
 2. **数据先于文案**：先跑出数，再写结论；写不出数的结论不写。
 3. **每步都可重跑**：所有产出都是脚本生成的文件，不手改。
 
+所有外部来源还必须满足 §1.1 的引用契约。没有版本、抓取时间、原始定位与交叉核验记录的链接，只能当线索，不能当数据依据。
+
 ---
 
 ## 1. 数据源（一次准备，长期复用）
@@ -31,8 +33,96 @@ profile/APL  →  sims / A-B / adds  →  联动·杠杆·构成  →  章节 JS
 | 优先级表 | `content/guides/priority-table.json` | `npm run guide:apl` | 从 APL 生成，含条件人话 |
 | 中文技能名 | `content/guides/skills.json` | 手工核对 + NGA 对照 | `verified` 分两档 |
 | 日志 | `content/logs/*.json` | WCL 事件表 CSV 导入 | 整场，无战斗分段 |
-| 路线 | `content/routes/*.json` | keystone.guru 抓取 | 波次构成与顺序 |
+| 路线 | `content/routes/*.json` | `node scripts/import-altar-route.mjs` 导入 Keystone 路线 | 波次构成、forces、敌人实例；不是战斗日志 |
 | 专精注册表 | `content/specs.json` | 手工 | `active` 才有内容 |
+
+### 1.1 外部数据来源引用契约
+
+外部网页、插件仓库、路线导出与攻略只负责提供**候选事实**。进入 `content/` 前，必须留下足够的信息让别人重新找到同一条事实，并判断它是否仍然适用于当前版本。
+
+最低字段：
+
+| 字段 | 要求 | 反例 |
+| --- | --- | --- |
+| `source` | 来源名称 | 只写“网上” |
+| `sourceUrl` | 可直接打开的完整 URL | 失效短链、搜索页、首页 |
+| `fetchedAt` | 实际抓取日期 | 用今天日期冒充页面发布日期 |
+| `version` | 游戏版本、页面更新版或插件版本 | 把 12.0 与 12.1.5 混用 |
+| `locator` | 可复现的定位：章节 / NPC id / enemy id / killZone id / route public key / mapping hash | 只说“页面里有” |
+| `rawCaptured` | 原始 HTML / JSON / Lua / MDT 串在哪里 | 只留整理后的结论 |
+| `transform` | 哪个脚本或命令把原始材料变成站内数据 | 手工抄进 JSON 却无法重跑 |
+| `checks` | 用什么独立事实核验（计数、版本、另一个实现） | 只有单一来源自证 |
+| `limitations` | 来源不能证明什么 | 把路线备注当战斗日志 |
+
+引用纪律：
+
+1. **完整 URL 优先于短链**。短链失效时回到来源页重新找相同 public key；找不到就标 `[待核验]`，不能沿用旧快照假装仍在线。
+2. **实例 ID 与显示名称分开存**。名称可能翻译或改名，enemy id、NPC id、killZone id 才是重放键。
+3. **版本必须和映射哈希一起留**。Keystone 的 mapping version / MDT hash / MDT 插件版本三者要能相互对应；版本变了就重导，不能只改日期。
+4. **外部攻略与本站模拟分开引用**。攻略给方向或范围，模拟给当前 profile 的实测点；两者不一致时并列保留分歧，不拼成一条“综合结论”。
+5. **单一数字至少两项核验**：内部能算术复算（合计、forces、CI）或外部有独立实现（如 Keystone 与 MDT）才能晋级为可用数据。
+6. **来源页面不能证明的事实要降级**。Raider.IO 的 BOSS 时间不是 pull 边界；Keystone 的路线备注不是战斗日志；页面上的百分比不是模拟 runId。
+7. **不复制受版权保护的正文**。只记录结构化事实、短引用和出处；原文链接供读者自行核对。
+
+### 1.2 本次实例：Altar of Fangs 波次
+
+完整核对报告：`docs/research/altar-of-fangs-routes.md`。
+
+| 项 | 当前值 |
+| --- | --- |
+| 路线来源 | Keystone.guru `xwt8Pza` |
+| 完整 URL | `https://keystone.guru/route/altar-of-fangs/xwt8Pza/skandar-tank-altar-of-fangs-10-to-16-keys` |
+| 抓取日期 | 2026-10-28 |
+| mapping / hash | `1085` / `a00c75314d73a26f49dda31b77ddc219` |
+| MDT 版本 | `6.2.20`（页面字段）；GitHub master 当前登记为后续版本时，仍以 mapping hash 为准 |
+| 原始路线对象 | 页面内嵌 `killZones`、`enemyIds`；`.tools/tmp/kg-xwt8Pza.html` |
+| 原始地图数据 | `kg-altar-facade.js`、`kg-altar-data.js`；均为 `.tools/tmp/` 本地抓取缓存 |
+| 转换脚本 | `node scripts/import-altar-route.mjs` |
+| 站内产物 | `content/routes/waves-altar-of-fangs.json` |
+| 结构核验 | 15 pull；108 只怪；825 forces；817 门槛 |
+| 独立实现 | MDT `Midnight/AltarOfFangs.lua`：817 门槛、同套 NPC / 坐标 / 敌人组 |
+| 不能证明 | 真人战斗的 pull 起止时刻；BOSS pull 的具体时长；路线是否适合任意队伍 |
+
+重跑方式：
+
+```bash
+node scripts/import-altar-route.mjs \
+  --route=.tools/tmp/kg-xwt8Pza.html \
+  --mapping=.tools/tmp/kg-altar-facade.js \
+  --dungeon=.tools/tmp/kg-altar-data.js
+```
+
+导入器必须继续执行这三道检查，任何一道失败都停止写入：
+
+1. enemy 实例必须在同版本 mapping 存在；
+2. 每个 NPC 必须能查到名称与单体 forces；
+3. 15 个 pull 的 forces 合计必须等于路线页声明的 `enemyForces`。
+
+### 1.3 本次实例：属性结论的交叉印证
+
+| 来源 | 能支持的结论 | 不能替代什么 |
+| --- | --- | --- |
+| Icy Veins 12.1.5 | Archon 的 Haste / Mastery 为主；ST 与 AoE 推荐范围不同 | 不能替代本 profile 的固定预算最优解 |
+| Method 12.1 | Archon ST 偏 Mastery，AoE 偏 Haste | 版本早于 Icy Veins 的 12.1.5，细节不可直接覆盖 |
+| `stat-opt-archon.json` | 本 profile、3209 点评级预算下的实测曲线与最优点 | 不是泛化到任何装备或任何目标数的通则 |
+
+写作时必须把两类信息分开：
+
+- **方向核验**：Mastery + Haste 是主属性，Crit / Vers 次之；Method、Icy Veins 与本站模拟方向一致。
+- **数值裁决**：具体评级点只引用 `stat-opt-archon.json`；每个点必须有 runId，最优解必须有复现校核与实测误差。
+- **分歧保留**：Icy Veins 的 ST Haste 推荐区间高于本站固定预算最优点；这是不同约束，不是同一张图上的两个高低值。
+
+### 1.4 3D 属性图的数据契约
+
+属性 3D 图只允许使用已经落盘的实测点，不允许用平滑曲面或插值把稀疏数据“画满”：
+
+- 三个维度固定为 **目标场景 × 属性 × 满预算 DPS 增益**；轴名直接写在图内。
+- 每个点必须能追溯到 `stat-opt-archon.json` 的具体 runId 与评级值；若点是派生值（如 `末点 DPS / 全零 DPS - 1`），派生公式也要写清楚。
+- 跨模型只能比较收益方向，不能把各模型的绝对 DPS 混在同一数值轴；3D 图的竖轴统一用**相对全零基准的百分比**。
+- 图例颜色必须与控件、数据点、属性轴标签一致；选中态同时保留文字与透明度，不只靠颜色。
+- 每个数据点到属性轴和场景轴的投影位置必须可见；竖线与底面的交叉辅助线不能省。
+- 3D 定位只用于看三维关系；具体读数靠 hover/focus 的数值标签与底表，不能让人凭透视高度估数。
+- 无实测点的格子必须留空或标 `待补`，不得插值成“看起来完整”的曲面。
 
 ---
 

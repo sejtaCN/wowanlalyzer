@@ -36,15 +36,19 @@
  },
  "map": null,
  "casePanel": {
-  "status": "pending",
-  "reason": "读表是方法，不是数据。这里暂时没有对照：要说清「他这一波怎么打的」，得有一份带战斗分段的日志。"
+  "status": "simulation",
+  "timelineKey": "single-target-priority",
+  "headline": "模拟里的读表节奏：起手 42 动作，中段 30，收尾 27",
+  "reading": "前三段不是固定连招：起手先铺 DoT 与开启爆发，中段按条件补 DoT、打高优先直伤，收尾继续从表头往下找第一条成立规则。",
+  "evidence": "来源：Archon 动作序列 trace_archon__w90_1b__5000，代表迭代 99 个动作；阶段是对模拟时间的三等分。"
  },
  "evidence": {
   "runIds": [],
   "logs": [],
   "sources": [
    "content/guides/priority-table.json",
-   "APL: content/profiles/MID2_shadow_voidweaver.simc"
+   "APL: content/profiles/MID2_shadow_archon.simc",
+   "content/analysis/simulated-timelines-archon.json"
   ],
   "generatedAt": "2026-10-25T16:30:00Z"
  }

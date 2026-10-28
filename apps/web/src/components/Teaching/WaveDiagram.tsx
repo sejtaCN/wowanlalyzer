@@ -41,7 +41,7 @@ export default function WaveDiagram({ targets, highlightPull, limit = 3, kind = 
   if (kind === 'boss') {
     waves = ALTAR_WAVES.waves.filter((w) => w.isBoss);
   } else if (kind === 'rhythm') {
-    const big = ALTAR_WAVES.waves.find((w) => !w.isBoss && w.mobCount >= 10);
+    const big = ALTAR_WAVES.waves.find((w) => w.phase === 'inner-altar' && w.mobCount >= 10);
     const small = ALTAR_WAVES.waves.find((w) => !w.isBoss && w.mobCount <= 4);
     waves = [big, small].filter(Boolean) as typeof ALTAR_WAVES.waves;
   } else {
@@ -77,7 +77,7 @@ export default function WaveDiagram({ targets, highlightPull, limit = 3, kind = 
         return (
           <div className={`wd-row${isHi ? ' hi' : ''}`} key={w.pull}>
             <div className="wd-k">
-              第 {w.pull} 波{w.isBoss ? ' · BOSS' : ''}
+              第 {w.pull} 波{w.isBoss ? ` · BOSS${w.encounter ? ` · ${w.encounter}` : ''}` : ''}
               <b>{w.mobCount} 只</b>
             </div>
             <div className="wd-mobs" aria-hidden={false}>
@@ -93,8 +93,9 @@ export default function WaveDiagram({ targets, highlightPull, limit = 3, kind = 
               )}
             </div>
             <div className="wd-v">
-              一次爆发{' '}
+              按目标档模拟{' '}
               {(() => {
+                if (w.isBoss && (w.trashMobCount ?? w.mobCount) > 0) return <b>待补</b>;
                 const v = burstValueFor(w.mobCount, w.isBoss, getRun);
                 return v.deltaDamage == null ? <b>待补</b> : <b>{(v.deltaDamage / 1e6).toFixed(1)}M</b>;
               })()}
@@ -104,7 +105,7 @@ export default function WaveDiagram({ targets, highlightPull, limit = 3, kind = 
       })}
       <div className="wd-legend">
         <span><i className="wd-key" />一个方块 = 一只怪 · 同色 = 同一种怪</span>
-        <span>数值 = 对应目标数档位的模拟增量（&gt;8 只按 8 只计）</span>
+        <span>数值 = 按当前波目标数匹配的模拟档位（&gt;8 只按 8 只计）。BOSS pull 若混有小怪，不拿普通单体木桩冒充。</span>
         {hidden > 0 ? <span>另有 {hidden} 波同档未显示</span> : null}
       </div>
       {shown.some((w) => w.mobs.length) ? (

@@ -2,7 +2,7 @@ import React from 'react';
 import type { RouteWave } from '../../data/content';
 import { ALTAR_WAVES, getRun } from '../../data/content';
 import { useReaderRefresh } from '../../state/reader-refresh';
-import { burstAdvice, burstValueFor } from './rules';
+import { burstAdvice, burstRunPair, burstValueFor } from './rules';
 
 const TYPE = (w: RouteWave) => (w.isBoss ? 'BOSS' : w.mobCount >= 10 ? '大波' : w.mobCount >= 5 ? '中波' : '小波');
 
@@ -52,7 +52,9 @@ export function RouteExplorer({
 /** 当前波的细节：只显示组成、目标档与一次爆发的开/不开两行。 */
 export function SelectedWavePanel({ wave }: { wave: RouteWave }) {
   const readerRefresh = useReaderRefresh();
-  const value = burstValueFor(wave.mobCount, wave.isBoss, getRun);
+  const value = wave.isBoss && (wave.trashMobCount ?? wave.mobCount) > 0
+    ? { ...burstRunPair(wave.mobCount, true), deltaDamage: null, deltaPct: null, ciPct: null }
+    : burstValueFor(wave.mobCount, wave.isBoss, getRun);
   const on = getRun(value.onRunId);
   const off = getRun(value.offRunId);
   const adv = burstAdvice(wave);
@@ -60,7 +62,7 @@ export function SelectedWavePanel({ wave }: { wave: RouteWave }) {
   return (
     <div className="selected-wave" data-figure-kind="selected-wave">
       <div className="sw-top">
-        <span className="sw-pull">第 {wave.pull} 波</span>
+        <span className="sw-pull">第 {wave.pull} 波{wave.encounter ? ` · ${wave.encounter}` : ''}</span>
         <span className="sw-kind">{TYPE(wave)} · {wave.mobCount} 只</span>
         <span className={`adv ${adv.tone}`}>{adv.text}</span>
       </div>
@@ -106,7 +108,9 @@ export function SelectedWavePanel({ wave }: { wave: RouteWave }) {
         </>
       ) : (
         <div className="figempty">
-          {readerRefresh ? '这一波的配对模拟缺失，数值待补。' : '这一波的配对 runId 缺失，数值待补。'}
+          {wave.isBoss
+            ? '这一波是 BOSS 波，当前的单体模拟不能直接当作这场 BOSS 的增量；这里不补假数。'
+            : '这一波的配对模拟缺失，数值待补。'}
         </div>
       )}
     </div>

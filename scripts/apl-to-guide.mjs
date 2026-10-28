@@ -9,11 +9,13 @@
  *   [{ section, order, skill, conditionRaw, conditionZh, enabled }]
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
+import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const PROFILE = process.env.APL_FILE ?? join(ROOT, 'content', 'profiles', 'MID2_shadow_voidweaver.simc');
+const PROFILE = resolve(process.env.APL_FILE ?? join(ROOT, 'content', 'profiles', 'MID2_shadow_archon.simc'));
+const PROFILE_SOURCE = relative(ROOT, PROFILE).split(sep).join('/');
+const HERO = basename(PROFILE).match(/shadow_([a-z]+)\.simc$/i)?.[1]?.toLowerCase() ?? null;
 const OUT_DIR = join(ROOT, 'content', 'guides');
 
 /**
@@ -286,7 +288,8 @@ for (const line of lines) {
 
 mkdirSync(OUT_DIR, { recursive: true });
 const out = {
-  source: 'content/profiles/MID2_shadow_voidweaver.simc',
+  source: PROFILE_SOURCE,
+  hero: HERO,
   gameVersion: 'MID2',
   generatedAt: new Date().toISOString(),
   note:

@@ -64,8 +64,45 @@ const priorityPath = SRC('content/guides/priority-table.json');
 const priority = existsSync(priorityPath) ? JSON.parse(readFileSync(priorityPath, 'utf8')) : { sections: [] };
 const skillKeys = new Set(priority.sections.flatMap((s) => s.rows.map((r) => r.skill)));
 
+// ---- 外部路线来源：引用与可复现字段必须齐全 ----
+const routePath = SRC('content/routes/waves-altar-of-fangs.json');
+if (existsSync(routePath)) {
+  const route = JSON.parse(readFileSync(routePath, 'utf8'));
+  if (!route.sourceUrl?.startsWith('https://keystone.guru/route/')) {
+    errors.push('路线来源必须是 Keystone 完整路线 URL，不能是短链或搜索页');
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(route.fetchedAt ?? '')) {
+    errors.push('路线缺少 YYYY-MM-DD 格式的 fetchedAt');
+  }
+  if (!route.mappingVersion || !route.mdtMappingHash) {
+    errors.push('路线缺少 mappingVersion / mdtMappingHash');
+  }
+  if (!Array.isArray(route.waves) || route.waves.length !== route.pulls) {
+    errors.push('路线 pulls 与 waves 数量不一致');
+  }
+  let forceSum = 0;
+  for (const wave of route.waves ?? []) {
+    if (!Array.isArray(wave.enemyIds) || wave.enemyIds.length !== wave.mobCount) {
+      errors.push(`路线第 ${wave.pull} pull 的 enemyIds 与 mobCount 不一致`);
+    }
+    if (wave.enemyPositions?.length !== wave.enemyIds?.length) {
+      errors.push(`路线第 ${wave.pull} pull 缺少敌人坐标`);
+    }
+    forceSum += wave.forces ?? 0;
+  }
+  if (route.totalForces != null && forceSum !== route.totalForces) {
+    errors.push(`路线 forces 不一致：声明 ${route.totalForces} / 逐波合计 ${forceSum}`);
+  }
+  if (route.requiredForces == null) errors.push('路线缺少 requiredForces');
+}
+
 const CHART_KINDS = new Set(['burst-bars', 'priority-table', 'skill-cards', 'log-stats', 'wave-table']);
 const FIGURE_STATUS = new Set(['ready', 'missing', 'not-applicable']);
+const ARCHON_PROFILE_ID = 'archon';
+const activeHero = priority.hero ?? null;
+if (activeHero && activeHero !== ARCHON_PROFILE_ID) {
+  errors.push(`优先级表归属 ${activeHero}，当前站点只开放 ${ARCHON_PROFILE_ID}`);
+}
 const figureDoc = existsSync(FIGURES) ? JSON.parse(readFileSync(FIGURES, 'utf8')) : null;
 const figureKinds = new Set(figureDoc?.kinds ?? []);
 const missingFigures = [];
@@ -88,6 +125,15 @@ for (const f of files) {
   // 1. runId 存在性
   const ids = new Set([...(c.evidence?.runIds ?? []), ...(c.chart?.runIds ?? [])]);
   for (const id of ids) if (!runs.has(id)) errors.push(`${where}: 引用了不存在的 runId ${id}`);
+  for (const id of ids) {
+    const run = runs.get(id);
+    if (!run) continue;
+    const owner = run.profileId ?? run.hero ?? null;
+    if (!owner) errors.push(`${where}: runId ${id} 没有 hero/profileId，当前无法安全归属`);
+    else if (owner !== ARCHON_PROFILE_ID) {
+      errors.push(`${where}: runId ${id} 属于 ${owner}，当前 Archon-only 不允许引用`);
+    }
+  }
 
   // 1b. 日志存在性
   const logIds = new Set([...(c.evidence?.logs ?? []), ...(c.chart?.logId ? [c.chart.logId] : [])]);
@@ -162,7 +208,7 @@ for (const id of Object.keys(figureDoc?.chapters ?? {})) {
 console.log(`图契约：${Object.keys(figureDoc?.chapters ?? {}).length} 章；缺图警告 ${missingFigures.length} 段`);
 for (const item of missingFigures) console.log(`  ⚠ 缺图 ${item}`);
 
-console.log(`检查 ${files.length} 个章节 / 可用 runId ${runs.size} 个 / 优先级技能 ${skillKeys.size} 个`);
+console.log(`检查 ${files.length} 个章节 / 原始 runId ${runs.size} 个 / 优先级技能 ${skillKeys.size} 个 / 当前英雄 ${activeHero ?? '未标注'}`);
 if (warnings.length) {
   console.log(`\n警告 ${warnings.length} 条：`);
   for (const w of warnings) console.log('  ⚠ ' + w);
