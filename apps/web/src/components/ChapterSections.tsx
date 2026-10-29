@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { CaseBlock, Chapter, EvidenceRef, MapRef, PriorityShift } from '@learn';
-import { ALTAR_WAVES, CHAPTERS, FIGURES, budgetFor, burstPairs, getLog, getPhases, getRun, getSimulatedTimeline, prioritySections, skillName, skillUsage, type BurstPair } from '../data/content';
+import { CHAPTERS, FIGURES, budgetFor, burstPairs, chapterRoute, getLog, getPhases, getRun, getSimulatedTimeline, prioritySections, skillName, skillUsage, type BurstPair, type RouteDoc } from '../data/content';
 import { Gloss } from './Gloss';
 import TopBand from './Teaching/TopBand';
 import WaveDiagram from './Teaching/WaveDiagram';
@@ -326,12 +326,14 @@ export function PriorityDiff({ add, drop, level }: { add: PriorityShift[]; drop:
 /* ④ 路线与地图；没有坐标就不在地图上标点。 */
 export function MapPanel({
   map,
+  route,
   level,
   targets,
   kind,
   selectedPull,
 }: {
   map: MapRef | null;
+  route: RouteDoc | null;
   level?: string;
   targets?: string | null;
   kind?: 'wave' | 'boss' | 'adds' | 'rhythm';
@@ -343,14 +345,17 @@ export function MapPanel({
     }
     return <div className="figempty" data-figure-kind="missing">这一章讲通用模型，没有独立路线与地图。</div>;
   }
-  const wave = ALTAR_WAVES.waves.find((w) => w.pull === (selectedPull ?? map.pull));
+  if (!route) {
+    return <div className="figempty" data-figure-kind="missing">待补：这条副本的路线数据还没导入，地形图与波次都不画。</div>;
+  }
+  const wave = route.waves.find((w) => w.pull === (selectedPull ?? map.pull));
   return (
     <div className="mapgrid" data-figure-kind={level === 'L2' ? 'route-map' : 'route-examples'}>
       <div className="mapviz">
         <img
           className="mapimg"
-          src="./maps/altar-of-fangs.webp"
-          alt="Altar of Fangs 地牢平面图（keystone.guru 瓦片拼接）"
+          src={`./maps/${(map.dungeon || '').replace(/_/g, '-')}.webp`}
+          alt={`${route.dungeon} 地牢平面图（keystone.guru 瓦片拼接）`}
         />
         <div className="note" style={{ marginTop: 6 }}>
           {level === 'L2'
@@ -371,9 +376,9 @@ export function MapPanel({
             <p className="note">平面图只回答“整张地牢长什么样”；波次顺序看上面的路线条。</p>
           </>
         ) : (
-          <WaveDiagram targets={targets ?? null} highlightPull={selectedPull ?? map.pull} kind={kind} />
+          <WaveDiagram route={route} targets={targets ?? null} highlightPull={selectedPull ?? map.pull} kind={kind} />
         )}
-        <p className="note">路线来源：<a href={ALTAR_WAVES.sourceUrl} target="_blank" rel="noreferrer">keystone.guru · {ALTAR_WAVES.route}</a></p>
+        <p className="note">路线来源：<a href={route.sourceUrl} target="_blank" rel="noreferrer">keystone.guru · {route.route}</a></p>
       </div>
     </div>
   );
@@ -515,8 +520,9 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
   const figure = (n: number) => figures[n - 1];
   const isRoute = chapter.level === 'L2';
   const isRhythm = model?.kind === 'rhythm';
-  const [selectedPull, setSelectedPull] = useState<number>(chapter.map?.pull ?? ALTAR_WAVES.waves[0]?.pull ?? 1);
-  const routeWave = isRoute ? ALTAR_WAVES.waves.find((w) => w.pull === selectedPull) ?? null : null;
+  const route = chapterRoute(chapter);
+  const [selectedPull, setSelectedPull] = useState<number>(chapter.map?.pull ?? route?.waves[0]?.pull ?? 1);
+  const routeWave = isRoute && route ? route.waves.find((w) => w.pull === selectedPull) ?? null : null;
   const routeGuide = isRoute && routeWave && routeWave.mobCount > 0
     ? CHAPTERS.find((c) => c.id === (routeWave.isBoss ? 'l1-04-boss' : routeWave.mobCount >= 10 ? 'l1-02-large' : routeWave.mobCount >= 5 ? 'l1-01-mid' : 'l1-03-small')) ?? null
     : null;
@@ -533,7 +539,7 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         figureKind={isRoute ? figure(1)?.kind : isRhythm ? 'cooldown-window' : budget ? 'play-budget' : model ? 'target-band' : figure(1)?.kind}
         figureStatus={figure(1)?.status}
         question={isRoute ? '这条路线怎么分波' : isRhythm ? '两波之间，冷却够不够' : budget ? '这一档有多大，时间怎么花' : model ? '这一档在目标数轴上在哪' : L0_OPENING[chapter.id].question}
-        tag={isRoute ? `${ALTAR_WAVES.pulls} 波` : model?.frequency ?? '全局'}
+        tag={isRoute ? (route ? `${route.pulls} 波` : '路线待补') : model?.frequency ?? '全局'}
         note={
           isRoute
             ? '柱高就是这一波的实际怪数。点任意一波，上面的结论、下面的数值、地图注记会一起换。'
@@ -547,7 +553,11 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         }
       >
         {isRoute ? (
-          <RouteExplorer selectedPull={selectedPull} onSelect={setSelectedPull} />
+          route ? (
+            <RouteExplorer route={route} selectedPull={selectedPull} onSelect={setSelectedPull} />
+          ) : (
+            <div className="figempty" data-figure-kind="missing">待补：这条副本的路线数据还没导入，路线条画不出来。</div>
+          )
         ) : isRhythm ? (
           <CooldownWindow />
         ) : model ? (
@@ -643,7 +653,7 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
               : '这一章不绑副本。套到具体路线看 L2。'
         }
       >
-        <MapPanel map={chapter.map} level={chapter.level} targets={model?.targets} kind={model?.kind} selectedPull={isRoute ? selectedPull : undefined} />
+        <MapPanel map={chapter.map} route={route} level={chapter.level} targets={model?.targets} kind={model?.kind} selectedPull={isRoute ? selectedPull : undefined} />
       </Section>
 
       <Section

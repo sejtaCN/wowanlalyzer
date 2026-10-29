@@ -6,13 +6,13 @@ import { describe, expect, it } from 'vitest';
 import {
   allRuns,
   ARCHON_PROFILE_ID,
-  ALTAR_WAVES,
   burstPairs,
   burstPairFromRuns,
   budgetFor,
   conservativeDeltaCiPct,
   CHAPTERS,
   chaptersFor,
+  chapterRoute,
   FIGURES,
   getPhases,
   getRun,
@@ -20,12 +20,18 @@ import {
   isComparableRunPair,
   LEVERAGE,
   prioritySections,
+  ROUTE_DUNGEONS,
+  ROUTE_SUMMARY,
+  routeFor,
   skillUsage,
 } from '../apps/web/src/data/content';
 import { DEFAULT_SPEC, findSpec, hasContent, SPECS } from '../apps/web/src/data/specs';
 import { burstValueFor } from '../apps/web/src/components/Teaching/rules';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+
+/** 祭牙祭坛是当前唯一登记的路线；换副本时这里跟着换 slug。 */
+const ALTAR = routeFor('altar_of_fangs')!;
 
 describe('前端数据适配层', () => {
   it('数据模块存在且不再被 .gitignore 屏蔽', () => {
@@ -83,21 +89,45 @@ describe('前端数据适配层', () => {
     expect(priority.sections.flatMap((section: { rows: unknown[] }) => section.rows)).toHaveLength(38);
   });
 
+  it('路线按副本取，缺数据时不拿别的副本顶', () => {
+    expect(ROUTE_DUNGEONS).toEqual(['altar_of_fangs']);
+    expect(routeFor('altar_of_fangs')?.routePublicKey).toBe('xwt8Pza');
+    // 未登记的副本返回 null，不静默回落到已有路线。
+    expect(routeFor('ruby_life_pools')).toBeNull();
+    expect(routeFor(undefined)).toBeNull();
+
+    // L2 只认自己副本：章节声明哪个副本就必须拿到哪个副本的路线。
+    const l2 = CHAPTERS.filter((chapter) => chapter.level === 'L2');
+    expect(l2.length).toBeGreaterThan(0);
+    for (const chapter of l2) {
+      const route = chapterRoute(chapter);
+      expect(route?.routePublicKey).toBe(routeFor(chapter.map?.dungeon)?.routePublicKey ?? null);
+    }
+
+    // L1 有绑定的用绑定，没绑定的借示例路线；两者都必须拿到可展示的波次。
+    for (const chapter of CHAPTERS.filter((item) => item.level === 'L1')) {
+      expect(chapterRoute(chapter)?.waves.length ?? 0).toBeGreaterThan(0);
+    }
+
+    // 汇总与注册表一致，首页状态条读的就是它。
+    expect(ROUTE_SUMMARY).toEqual({ routes: 1, pulls: 15, mobs: 108 });
+  });
+
   it('保留图契约、路线、日志和优先级数据', () => {
     const figures = Object.values(FIGURES).flat();
     expect(figures.filter((figure) => figure.status === 'ready')).toHaveLength(50);
     expect(figures.filter((figure) => figure.status === 'missing')).toHaveLength(0);
     expect(figures.filter((figure) => figure.status === 'not-applicable')).toHaveLength(5);
 
-    expect(ALTAR_WAVES.pulls).toBe(15);
-    expect(ALTAR_WAVES.waves).toHaveLength(15);
-    expect(ALTAR_WAVES.totalForces).toBe(825);
-    expect(ALTAR_WAVES.requiredForces).toBe(817);
-    expect(ALTAR_WAVES.routePublicKey).toBe('xwt8Pza');
-    expect(ALTAR_WAVES.waves.every((wave) => wave.enemyIds?.length === wave.mobCount)).toBe(true);
-    expect(ALTAR_WAVES.waves.reduce((sum, wave) => sum + wave.forces, 0)).toBe(825);
+    expect(ALTAR.pulls).toBe(15);
+    expect(ALTAR.waves).toHaveLength(15);
+    expect(ALTAR.totalForces).toBe(825);
+    expect(ALTAR.requiredForces).toBe(817);
+    expect(ALTAR.routePublicKey).toBe('xwt8Pza');
+    expect(ALTAR.waves.every((wave) => wave.enemyIds?.length === wave.mobCount)).toBe(true);
+    expect(ALTAR.waves.reduce((sum, wave) => sum + wave.forces, 0)).toBe(825);
     // 空波次：既没有场景，也不出任何数值。
-    const emptyWave = ALTAR_WAVES.waves.find((item) => item.pull === 12)!;
+    const emptyWave = ALTAR.waves.find((item) => item.pull === 12)!;
     expect(emptyWave.mobCount).toBe(0);
     expect(emptyWave.scenarioId).toBeNull();
     const emptyValue = burstValueFor(emptyWave, getRun);
@@ -107,7 +137,7 @@ describe('前端数据适配层', () => {
 
     // BOSS 混小怪：按全场目标数近似，必须带 approximation 标记，数值来自真实配对 runId。
     for (const [pull, scenarioId, simulatedTargets] of [[10, 'w30_8', 8], [15, 'w30_7', 7]] as const) {
-      const wave = ALTAR_WAVES.waves.find((item) => item.pull === pull)!;
+      const wave = ALTAR.waves.find((item) => item.pull === pull)!;
       expect(wave.scenarioId).toBe(scenarioId);
       expect(wave.approximation?.kind).toBe('desired-targets');
       expect(wave.approximation?.actualMobs).toBe(wave.mobCount);
@@ -124,7 +154,7 @@ describe('前端数据适配层', () => {
     const bareMixed = { mobCount: 9, isBoss: true, trashMobCount: 8, scenarioId: null, approximation: null };
     expect(burstValueFor(bareMixed, getRun).reason).toBe('mixed-boss');
     expect(burstValueFor(bareMixed, getRun).deltaPct).toBeNull();
-    expect(ALTAR_WAVES.waves.find((wave) => wave.pull === 12)?.mobCount).toBe(0);
+    expect(ALTAR.waves.find((wave) => wave.pull === 12)?.mobCount).toBe(0);
     expect(getPhases('xiaohuasheng-phases')?.phases).toHaveLength(9);
 
     const priorityRows = prioritySections().flatMap((section) => section.rows);

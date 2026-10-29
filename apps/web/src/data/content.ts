@@ -639,7 +639,37 @@ const phases = phasesJson as unknown as PhasesDoc;
 
 export const CHAPTERS = rawChapters as unknown as Chapter[];
 export const FIGURES = (figuresJson as unknown as FiguresDoc).chapters;
-export const ALTAR_WAVES = altarWavesJson as unknown as RouteDoc;
+/**
+ * 路线注册表：新增副本 = 往 content/routes/ 放 `waves-<slug>.json`，再在这里加一行。
+ * key 用章节 `map.dungeon` 的 slug（如 `altar_of_fangs`），不要用路线文件里的显示名。
+ */
+const ROUTE_DOCS: Record<string, RouteDoc> = {
+  altar_of_fangs: altarWavesJson as unknown as RouteDoc,
+};
+
+/** L1 通用模型借路线举例时的默认副本；换样本只改这一处。 */
+const EXAMPLE_DUNGEON = 'altar_of_fangs';
+
+export const ROUTE_DUNGEONS = Object.keys(ROUTE_DOCS).sort();
+
+export function routeFor(dungeon: string | null | undefined): RouteDoc | null {
+  return dungeon ? ROUTE_DOCS[dungeon] ?? null : null;
+}
+
+/**
+ * 章节绑定的路线。L2 只认自己副本，缺数据返回 null——绝不拿别的副本来顶，
+ * 否则第二个副本的页面会显示祭牙的波次、怪数和来源链接。
+ */
+export function chapterRoute(chapter: Chapter): RouteDoc | null {
+  if (chapter.level === 'L2') return routeFor(chapter.map?.dungeon);
+  return routeFor(chapter.map?.dungeon) ?? routeFor(EXAMPLE_DUNGEON);
+}
+
+/** 首页状态条用：已登记路线的条数、波数与怪数合计。 */
+export const ROUTE_SUMMARY = Object.values(ROUTE_DOCS).reduce(
+  (acc, route) => ({ routes: acc.routes + 1, pulls: acc.pulls + route.pulls, mobs: acc.mobs + route.totalMobs }),
+  { routes: 0, pulls: 0, mobs: 0 },
+);
 export const INTERACTIONS = interactionsJson as unknown as InteractionsDoc;
 const RAW_LEVERAGE = leverageJson as unknown as LeverageDoc;
 export const SHARE = shareJson as unknown as ShareDoc;

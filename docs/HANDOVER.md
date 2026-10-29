@@ -17,9 +17,9 @@
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
 | 图契约 | 11 章 × 5 段；50 有图 / 0 缺图 / 5 不适用；L0-03 / L1-01 第五段为模拟时间线 | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 5,292 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 代码量 | 约 5,372 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 792,012 字节（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
+| 单文件产物 | 794,351 字节（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -97,7 +97,12 @@ node <抓取脚本或手工存 content/routes/>
 # 写章节：chart.kind = "wave-table"，map 指向该副本
 ```
 
-写完把 `ALTAR_WAVES` 换成按副本读取（现在 `data/content.ts` 里只写死了一张图）。
+写完两处收口（`chapterRoute` 已按副本读取，新副本只差这两步）：
+
+1. `content/routes/waves-<slug>.json`：文件名里的 `<slug>` 必须与章节 `map.dungeon` 一致（如 `altar_of_fangs`）。
+2. `apps/web/src/data/content.ts` 的 `ROUTE_DOCS` 加一行 `slug: wavesJson as unknown as RouteDoc`。
+
+地图底图按同一 slug 放 `dist/maps/<slug 用连字符>.webp`（如 `altar-of-fangs.webp`），没有底图时该段会显示「待补」，不会用别的地牢的图顶。L2 章节的路线只认自己副本：`routeFor(slug)` 找不到就返回 `null`，不使用 L1 的示例路线。
 
 ### 3.4 加一个专精
 
@@ -110,7 +115,7 @@ node <抓取脚本或手工存 content/routes/>
 ```bash
 npm run validate:content   # 数字来源 + 结构完整性 + 55 段图契约
 npm run typecheck          # 类型
-npx vitest run             # 26 条，含结构、数据层、相邻交换与分析门禁回归
+npx vitest run             # 27 条，含结构、数据层、相邻交换、分析门禁与路线按副本读取
 npm run check:copy         # 可见文案：禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追
 npm run check:design       # 间距阶 / 颜色 token / 中文排版 / 无障碍
 npm run check:doc:selftest  # 文档解析器 LF / CRLF 自测
@@ -142,7 +147,7 @@ npm run build              # 单文件产出
 | # | 待办 | 说明 |
 | --- | --- | --- |
 | 3 | ~~图契约中 2 段缺图~~ 已补齐 | L0-03 与 L1-01 第⑤段改用模拟动作时间线（`content/analysis/simulated-timelines-archon.json`，契约里 kind 仍为 `phase-chart`），状态由 `missing` 改为 `ready`；当前 55 段为 50 有图 / 0 缺图 / 5 不适用 | `content/figures/chapters.json` |
-| 4 | 第二个副本的 L2 页 | 需要路线数据 + 波次归一化；`data/content.ts` 里 `ALTAR_WAVES` 要改成按副本读取 |
+| 4 | 第二个副本的 L2 页 | 只剩数据：路线抓取归一化 + 章节 JSON（`chapterRoute` 已按副本读取，见 §3.3）。缺路线时页面显示「待补」，不拿祭牙数据顶 |
 | 5 | 高手对照做到单波级 | 需要带 `Fights` 或 `UNIT_DIED` 的导出；现在的 9 段是阶段级 |
 | 6 | ~~BOSS 带小怪改用真加怪模型~~ 已按近似方案落地 | 毒牙祭坛 p10（11 只含 BOSS）与 p15（7 只含 BOSS）改为按全场目标数近似（`w30_8` / `w30_7`，BOSS 计入目标数），波次上带 `approximation` 标记，页面顶部与当前波都标注「近似 · 按 N 目标档」，p12 空波次仍不出数。真加怪仍不可得：`raid_events+=/adds` 被静默忽略（41.4 万 → 41.6 万，±0.6% 内），`fight_style=DungeonSlice` 是合成副本。换到支持 raid_events 的构建后应改回真模型 |
 

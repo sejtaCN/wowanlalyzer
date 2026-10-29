@@ -1,23 +1,25 @@
 import React from 'react';
-import type { RouteWave } from '../../data/content';
-import { ALTAR_WAVES, getRun } from '../../data/content';
+import type { RouteDoc, RouteWave } from '../../data/content';
+import { getRun } from '../../data/content';
 import { burstAdvice, burstValueFor } from './rules';
 
 const TYPE = (w: RouteWave) => (w.mobCount <= 0 ? '空波次' : w.isBoss ? 'BOSS' : w.mobCount >= 10 ? '大波' : w.mobCount >= 5 ? '中波' : '小波');
 
 /** 路线总览：真实波次，柱高 = 怪数，色 = 建议；点柱切当前波，不标地图坐标。 */
 export function RouteExplorer({
+  route,
   selectedPull,
   onSelect,
 }: {
+  route: RouteDoc;
   selectedPull: number;
   onSelect: (pull: number) => void;
 }) {
-  const waves = ALTAR_WAVES.waves;
+  const waves = route.waves;
   const max = Math.max(...waves.map((w) => w.mobCount));
   return (
     <div className="route-explorer" data-figure-kind="route-strip">
-      <div className="route-strip" role="group" aria-label={`祭牙祭坛 ${ALTAR_WAVES.pulls} 波，选择一波查看`}>
+      <div className="route-strip" role="group" aria-label={`${route.pulls} 波，选择一波查看`}>
         {waves.map((w) => {
           const adv = burstAdvice(w);
           const active = w.pull === selectedPull;
@@ -42,7 +44,7 @@ export function RouteExplorer({
         <span><i className="pm-key add" />开</span>
         <span><i className="pm-key maybe" />看冷却</span>
         <span><i className="pm-key no" />不开</span>
-        <span>{ALTAR_WAVES.pulls} 波 · {ALTAR_WAVES.totalMobs} 只 · 点柱切换</span>
+        <span>{route.dungeon} · {route.pulls} 波 · {route.totalMobs} 只 · 点柱切换</span>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ALTAR_WAVES, getRun } from '../../data/content';
+import { getRun, type RouteDoc, type RouteWave } from '../../data/content';
 import { burstValueFor, parseTargets } from './rules';
 
 /**
@@ -25,6 +25,8 @@ function familyColor(name: string): string {
 }
 
 export interface WaveDiagramProps {
+  /** 这一章绑定的路线；缺数据时传 null，图上直接说明缺什么 */
+  route: RouteDoc | null;
   /** 章节模型卡里的目标数区间，如 "10–22" */
   targets: string | null;
   /** 要高亮的波次（章节地图里绑定的那一波） */
@@ -35,17 +37,21 @@ export interface WaveDiagramProps {
   kind?: 'wave' | 'boss' | 'adds' | 'rhythm';
 }
 
-export default function WaveDiagram({ targets, highlightPull, limit = 3, kind = 'wave' }: WaveDiagramProps) {
+export default function WaveDiagram({ route, targets, highlightPull, limit = 3, kind = 'wave' }: WaveDiagramProps) {
   const range = parseTargets(targets);
-  let waves;
+  if (!route) {
+    return <div className="figempty">缺这条副本的路线数据，波次构成暂时画不出来。</div>;
+  }
+  const allWaves = route.waves;
+  let waves: RouteWave[];
   if (kind === 'boss') {
-    waves = ALTAR_WAVES.waves.filter((w) => w.isBoss);
+    waves = allWaves.filter((w) => w.isBoss);
   } else if (kind === 'rhythm') {
-    const big = ALTAR_WAVES.waves.find((w) => w.phase === 'inner-altar' && w.mobCount >= 10);
-    const small = ALTAR_WAVES.waves.find((w) => !w.isBoss && w.mobCount <= 4);
-    waves = [big, small].filter(Boolean) as typeof ALTAR_WAVES.waves;
+    const big = allWaves.find((w) => w.phase === 'inner-altar' && w.mobCount >= 10);
+    const small = allWaves.find((w) => !w.isBoss && w.mobCount <= 4);
+    waves = [big, small].filter(Boolean) as RouteWave[];
   } else {
-    waves = ALTAR_WAVES.waves.filter((w) => !w.isBoss && range && w.mobCount >= range[0] && w.mobCount <= range[1]);
+    waves = allWaves.filter((w) => !w.isBoss && range && w.mobCount >= range[0] && w.mobCount <= range[1]);
   }
 
   if (!range && kind !== 'boss' && kind !== 'rhythm') {

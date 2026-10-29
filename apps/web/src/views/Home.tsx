@@ -1,6 +1,6 @@
 import React from 'react';
 import { groupByLevel, nextChapter, type Chapter, type ChapterLevel } from '@learn';
-import { ALTAR_WAVES, allRuns, getRun } from '../data/content';
+import { ROUTE_SUMMARY, allRuns, getRun } from '../data/content';
 import { COACHING, CoachingCards } from '../components/Coaching';
 import { Section } from '../components/ChapterSections';
 import { parseTargets } from '../components/Teaching/rules';
@@ -171,7 +171,7 @@ export default function Home({
         <span>模拟器 {simc?.version ?? '—'}</span>
         <span>执政官 {runs.length} 组模拟</span>
         <span>章节 {chapters.length} 篇</span>
-        <span>路线 {ALTAR_WAVES.pulls} 波 / {ALTAR_WAVES.totalMobs} 只</span>
+        <span>路线 {ROUTE_SUMMARY.routes} 条 · {ROUTE_SUMMARY.pulls} 波 / {ROUTE_SUMMARY.mobs} 只</span>
         <span>日志 1 场 · 阶段推断 9 段</span>
       </div>
     </div>

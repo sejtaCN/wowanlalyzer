@@ -1,13 +1,14 @@
 import React from 'react';
 import type { Chapter } from '@learn';
-import { ALTAR_WAVES, burstPairs, getRun } from '../../data/content';
+import { burstPairs, chapterRoute, getRun, type RouteDoc } from '../../data/content';
 import { burstValueFor, chapterDecision } from './rules';
 
 /** 顶图带：当前场景、可核对的差值、主行动。三格都读取同一份规则与配对结果。 */
 
 /** 第一格的小图：整条路线的每一波，本档高亮 */
-function MiniRoute({ range, selectedPull }: { range: [number, number] | null; selectedPull?: number }) {
-  const waves = ALTAR_WAVES.waves;
+function MiniRoute({ route, range, selectedPull }: { route: RouteDoc | null; range: [number, number] | null; selectedPull?: number }) {
+  if (!route) return null;
+  const waves = route.waves;
   const max = Math.max(...waves.map((w) => w.mobCount));
   return (
     <div className="tb-mini" aria-hidden>
@@ -27,7 +28,8 @@ function MiniRoute({ range, selectedPull }: { range: [number, number] | null; se
 
 export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; selectedPull?: number }) {
   const isRoute = chapter.level === 'L2';
-  const routeWave = isRoute ? ALTAR_WAVES.waves.find((w) => w.pull === selectedPull) : null;
+  const route = chapterRoute(chapter);
+  const routeWave = isRoute && route ? route.waves.find((w) => w.pull === selectedPull) : null;
   const { modelKind, range, advice } = chapterDecision(chapter, routeWave);
   const pairs = chapter.chart.kind === 'burst-bars' ? burstPairs(chapter.chart.runIds ?? []) : [];
   const routeValue = routeWave ? burstValueFor(routeWave, getRun) : null;
@@ -51,12 +53,12 @@ export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; s
     <div className="topband reader-topband">
       <div className="tb-cell reader-situation">
         <div className="tb-k">{isRoute ? '当前选中的波' : '这一波长什么样'}</div>
-        <MiniRoute range={range} selectedPull={isRoute ? routeWave?.pull : undefined} />
+        <MiniRoute route={route} range={range} selectedPull={isRoute ? routeWave?.pull : undefined} />
         <div className="tb-v">
           {routeWave ? `第 ${routeWave.pull} 波 · ${routeWave.mobCount} 只 · ${routeType}` : chapter.model ? `${chapter.model.targets} 只` : '全局规则，不绑定波次'}
         </div>
         <div className="tb-sub">
-          {routeWave ? `整条路线 ${ALTAR_WAVES.pulls} 波 / ${ALTAR_WAVES.totalMobs} 只` : chapter.model?.frequency ? `路线频次 ${chapter.model.frequency}` : 'L0 讲的是所有波次共用的判断'}
+          {routeWave && route ? `整条路线 ${route.pulls} 波 / ${route.totalMobs} 只` : chapter.model?.frequency ? `路线频次 ${chapter.model.frequency}` : 'L0 讲的是所有波次共用的判断'}
         </div>
       </div>
 
