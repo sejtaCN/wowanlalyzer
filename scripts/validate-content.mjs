@@ -209,7 +209,9 @@ for (const f of files) {
       }
     }
     const main = figures[1];
-    if (main && main.kind !== c.chart.kind && !(c.id === 'l2-01-altar-of-fangs' && main.kind === 'selected-wave')) {
+    // L2 副本章的第②段固定是「选中的这一波值多少」（selected-wave），与主图声明无关，
+    // 所以按层级放行，不按章节 id 写死——新增副本不该再改一次校验脚本。
+    if (main && main.kind !== c.chart.kind && !(c.level === 'L2' && main.kind === 'selected-wave')) {
       errors.push(`${where}: 第②段契约 ${main.kind} 与主图 ${c.chart.kind} 不一致`);
     }
   }

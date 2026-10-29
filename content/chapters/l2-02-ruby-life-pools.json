@@ -1,0 +1,47 @@
+{
+ "id": "l2-02-ruby-life-pools",
+ "level": "L2",
+ "order": 2,
+ "title": "Ruby Life Pools（红玉新生池）",
+ "subtitle": "第二条真实路线：12 波，每波该不该花爆发",
+ "model": {
+  "targets": "1–11",
+  "durationSec": 30,
+  "movement": "按波次",
+  "frequency": "12 波 / 76 只怪"
+ },
+ "chart": {
+  "kind": "wave-table",
+  "title": "12 波，每波值多少爆发"
+ },
+ "priorityDiff": {
+  "add": [
+   {
+    "skill": "（副本页沿用 L1 的调整）",
+    "reason": "按每波的目标数，套用中波或大波的规则",
+    "evidence": "见「中波（5–9 只）」与「大波（≥10 只）」两章"
+   }
+  ],
+  "drop": []
+ },
+ "map": {
+  "dungeon": "ruby_life_pools",
+  "routeKey": "Xnxx3lT"
+ },
+ "casePanel": {
+  "status": "pending",
+  "reason": "这份副本还没有真人日志导出；要拿到带战斗分段的导出，才能对齐阶段与爆发时刻。"
+ },
+ "evidence": {
+  "runIds": [
+   "dec_voidform_on_1__w30_5__5000",
+   "dec_voidform_on_1__w30_6__5000",
+   "dec_voidform_on_1__w30_8__5000"
+  ],
+  "sources": [
+   "keystone.guru Xnxx3lT（12 波 / 76 只怪）",
+   "SimC 1210.01"
+  ],
+  "generatedAt": "2026-10-30T01:20:00Z"
+ }
+}

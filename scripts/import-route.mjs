@@ -1,28 +1,76 @@
 /**
- * 把 Keystone.guru 的 Altar of Fangs 路线 JSON 映射为本站波次文件。
+ * 把 Keystone.guru 的路线映射为本站波次文件（多副本）。
  *
  * 输入（脚本参数或默认 .tools/tmp）：
+ *   --dungeon=altar-of-fangs | ruby-life-pools
  *   --route=<keystone route html>
  *   --mapping=<keystone mapping version js>
- *   --dungeon=<keystone dungeon data js>
- * 输出：content/routes/waves-altar-of-fangs.json
+ *   --data=<keystone dungeon data js>
+ *   --out=<输出文件；已存在则合并，不存在则新建>
  *
  * 三重防线：
  *   1. 路线每个 enemy id 必须在同版本 mapping 数据中存在；
  *   2. 路线 forces 总和必须与页面 enemyForces 一致；
  *   3. NPC 单体 forces 由 mapping 的 npcEnemyForces 提供，缺失则失败。
+ * 外加两条硬断言：mapping 版本与 dungeon id 与注册表不一致就停，避免上游改版后静默错位。
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const argOf = (key, fallback) => argv.find((x) => x.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
+
+/**
+ * 副本注册表：换副本只改这里 + 抓三个输入文件。
+ *   slug          与 content/routes/waves-<slug>.json、章节 map.dungeon、dist/maps 同名
+ *   mappingVersionId / dungeonId   keystone 版本钉死，用来断言上游没换版
+ *   phase         阶段名：只用于波次上的 phase 字段（L1 节奏图读 inner-altar）
+ */
+const DUNGEONS = {
+  'altar-of-fangs': {
+    name: 'Altar of Fangs',
+    mappingVersionId: 1085,
+    dungeonId: 182,
+    sourceUrl: 'https://keystone.guru/route/altar-of-fangs/xwt8Pza/skandar-tank-altar-of-fangs-10-to-16-keys',
+    phase: ({ pull, encounter }) => encounter === "Rav'i"
+      ? 'before-first-boss'
+      : encounter === 'The Writhing Coil'
+        ? 'before-second-boss'
+        : encounter === "Zul'jan"
+          ? 'before-final-boss'
+          : pull <= 6
+            ? 'sacrificial-approach'
+            : pull <= 9
+              ? 'mutation-chambers'
+              : pull <= 14
+                ? 'inner-altar'
+                : 'final-platform',
+  },
+  'ruby-life-pools': {
+    name: 'Ruby Life Pools',
+    mappingVersionId: 1088,
+    dungeonId: 72,
+    sourceUrl: 'https://keystone.guru/route/ruby-life-pools/Xnxx3lT/skandar-tank-ruby-life-pools-10-to-16',
+    // 阶段按「遇到过几个 BOSS」推：门前 → 一号后 → 二号后 → 三号后。
+    phase: ({ bossSeen }) => bossSeen === 0
+      ? 'approach'
+      : bossSeen === 1
+        ? 'after-first-boss'
+        : bossSeen === 2
+          ? 'after-second-boss'
+          : 'after-final-boss',
+  },
+};
+
+const slug = argOf('dungeon', 'altar-of-fangs');
+const spec = DUNGEONS[slug];
+if (!spec) throw new Error(`未登记的副本：${slug}；先在 scripts/import-route.mjs 的 DUNGEONS 里加一条`);
 const ROUTE_FILE = resolve(ROOT, argOf('route', '.tools/tmp/kg-xwt8Pza.html'));
 const MAPPING_FILE = resolve(ROOT, argOf('mapping', '.tools/tmp/kg-altar-facade.js'));
-const DUNGEON_FILE = resolve(ROOT, argOf('dungeon', '.tools/tmp/kg-altar-data.js'));
-const OUT = resolve(ROOT, argOf('out', 'content/routes/waves-altar-of-fangs.json'));
+const DUNGEON_FILE = resolve(ROOT, argOf('data', '.tools/tmp/kg-altar-data.js'));
+const OUT = resolve(ROOT, argOf('out', `content/routes/waves-${slug}.json`));
 
 function parseContext(file) {
   const text = readFileSync(file, 'utf8');
@@ -43,46 +91,32 @@ if (!routeMatch) throw new Error('找不到路线 killZones');
 const killZones = JSON.parse(routeMatch[1]);
 const routeInfo = html.match(/"publicKey":"([^"]+)".*?"enemyForces":(\d+)/s);
 const routeForces = routeInfo ? Number(routeInfo[2]) : null;
-const routeTitle = html.match(/"title":"([^"]+)"/)?.[1] ?? 'Altar of Fangs';
+const routeTitle = html.match(/"title":"([^"]+)"/)?.[1] ?? spec.name;
 const mapping = parseContext(MAPPING_FILE);
 const dungeon = parseContext(DUNGEON_FILE);
 
-if (mapping.mappingVersion.id !== 1085) throw new Error(`mapping 版本变化：${mapping.mappingVersion.id}`);
-if (mapping.mappingVersion.dungeon_id !== 182) throw new Error(`dungeon id 变化：${mapping.mappingVersion.dungeon_id}`);
+if (mapping.mappingVersion.id !== spec.mappingVersionId) {
+  throw new Error(`mapping 版本变化：${mapping.mappingVersion.id}（注册表写的是 ${spec.mappingVersionId}）`);
+}
+if (mapping.mappingVersion.dungeon_id !== spec.dungeonId) {
+  throw new Error(`dungeon id 变化：${mapping.mappingVersion.dungeon_id}（注册表写的是 ${spec.dungeonId}）`);
+}
 
-// Keystone 的 mapping 版本数据在 HTML 的 mapContext 初始化里；facade 文件只提供 NPC forces。
-const mappingText = readFileSync(MAPPING_FILE, 'utf8');
 // facade.js 把 mapping 顶层字段打平成多个 JS 片段；instance 对象本身是独立 JSON。
-const enemyData = [...mappingText.matchAll(/\{"id":\d+,"mapping_version_id":1085,"enemy_pack_id":[^}]+\}/g)]
+const mappingText = readFileSync(MAPPING_FILE, 'utf8');
+const enemyData = [...mappingText.matchAll(new RegExp(`\\{"id":\\d+,"mapping_version_id":${spec.mappingVersionId},"enemy_pack_id":[^}]+\\}`, 'g'))]
   .map((match) => JSON.parse(match[0]));
 if (!enemyData.length) throw new Error('找不到 enemy 实例数据');
 const enemyById = new Map(enemyData.map((e) => [e.id, e]));
 const npcById = new Map(dungeon.dungeonNpcs.map((n) => [n.id, n]));
 const forcesByNpc = new Map(mapping.npcEnemyForces.map((x) => [x.id, x.enemy_forces?.enemy_forces ?? 0]));
 
-function nameOf(npcId) {
-  return npcById.get(npcId)?.name ?? `NPC ${npcId}`;
-}
-
 function npcClassificationOf(name) {
   return [...npcById.values()].find((npc) => npc.name === name)?.classification_id ?? null;
 }
 
 let accumulatedForces = 0;
-const encounterPhase = (pull, encounter) =>
-  encounter === "Rav'i"
-    ? 'before-first-boss'
-    : encounter === 'The Writhing Coil'
-      ? 'before-second-boss'
-      : encounter === "Zul'jan"
-        ? 'before-final-boss'
-        : pull <= 6
-          ? 'sacrificial-approach'
-          : pull <= 9
-            ? 'mutation-chambers'
-            : pull <= 14
-              ? 'inner-altar'
-              : 'final-platform';
+let bossSeen = 0;
 
 const waves = killZones.map((zone) => {
   const mobs = new Map();
@@ -105,6 +139,10 @@ const waves = killZones.map((zone) => {
   const trashMobCount = [...mobs.entries()]
     .filter(([name]) => npcClassificationOf(name) !== 3)
     .reduce((sum, [, entry]) => sum + entry.count, 0);
+  // 一波里有两个 BOSS（红玉 p11 Kyrakka + Erkhart Stormvein）时全写出来，不能只报第一个。
+  const encounter = bossNames.length ? bossNames.join(' / ') : null;
+  const phase = spec.phase({ pull: zone.index, encounter, bossSeen });
+  if (boss) bossSeen += 1;
   return {
     pull: zone.index,
     killZoneId: zone.id,
@@ -120,8 +158,8 @@ const waves = killZones.map((zone) => {
     trashMobCount,
     // Keystone 的示例路线把 boss 前的怪单独成 pull；这些怪本身不是 boss。
     classification: boss ? 'boss' : 'trash',
-    encounter: bossNames[0] ?? null,
-    phase: encounterPhase(zone.index, bossNames[0] ?? null),
+    encounter,
+    phase,
     enemyIds: zone.enemies,
     enemyPositions: zone.enemies.flatMap((id) => {
       const enemy = enemyById.get(id);
@@ -158,14 +196,14 @@ if (routeForces != null && totalForces !== routeForces) {
   throw new Error(`forces 不一致：路线 ${routeForces} / 映射合计 ${totalForces}`);
 }
 const totalMobs = waves.reduce((n, w) => n + w.mobCount, 0);
-const existing = JSON.parse(readFileSync(OUT, 'utf8'));
+const existing = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : {};
 const out = {
   ...existing,
-  dungeon: 'Altar of Fangs',
+  dungeon: spec.name,
   route: routeTitle,
   routePublicKey: routeInfo?.[1] ?? null,
   source: 'keystone.guru',
-  sourceUrl: 'https://keystone.guru/route/altar-of-fangs/xwt8Pza/skandar-tank-altar-of-fangs-10-to-16-keys',
+  sourceUrl: spec.sourceUrl,
   fetchedAt: new Date().toISOString().slice(0, 10),
   mappingVersion: mapping.mappingVersion.id,
   mdtMappingHash: mapping.mappingVersion.mdt_mapping_hash,
@@ -178,4 +216,6 @@ const out = {
 };
 writeFileSync(OUT, JSON.stringify(out, null, 1) + '\n');
 console.log(`写出 ${OUT}: ${waves.length} pulls / ${totalMobs} mobs / ${totalForces} forces`);
-for (const wave of waves) console.log(`  p${String(wave.pull).padStart(2)} ${wave.isBoss ? 'BOSS' : 'trash'} ${wave.mobCount} mobs ${wave.forces} forces ${wave.mobs.map((m) => `${m.name}×${m.count}`).join(', ')}`);
+for (const wave of waves) {
+  console.log(`  p${String(wave.pull).padStart(2)} ${wave.isBoss ? 'BOSS' : 'trash'} ${wave.mobCount} mobs ${wave.forces} forces ${wave.mobs.map((m) => `${m.name}×${m.count}`).join(', ')}`);
+}

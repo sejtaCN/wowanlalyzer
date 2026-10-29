@@ -110,7 +110,7 @@
 | `missing` | 标出下一批与需要的数据，不装成已完成 | 两道门禁逐条警告，不阻塞 |
 | `not-applicable` | 这一段本来就不该有图（如 L0 不绑定副本） | 不要求图 |
 
-当前 55 段：50 有图 / 0 缺图 / 5 不适用；L0-03 与 L1-01 的第五段使用模拟动作时间线，明确不冒充真人日志阶段。`check:ui` 从首页逐章点开 11 章，而不是只查 L1-02；`npm run verify:gates` 用坏样本证明门禁会真红。详见 `docs/figure-contract.md`。
+当前 60 段：54 有图 / 1 缺图 / 5 不适用（红玉第⑤段待日志）；L0-03 与 L1-01 的第五段使用模拟动作时间线，明确不冒充真人日志阶段。`check:ui` 从首页逐章点开 12 章，而不是只查 L1-02；`npm run verify:gates` 用坏样本证明门禁会真红。详见 `docs/figure-contract.md`。
 
 ### 4.3 状态
 
@@ -202,6 +202,6 @@
 | 配装 / 优化图 | `components/{Gearing,StatCurves}.tsx` | 已实现：收益曲线（SVG 多线）+ 最优配比表 + 摘除 A/B 表 |
 | 参考资料 | `components/Sources.tsx` | 已实现：四家要点卡 + 一致项 + 分歧裁决表（APL 条件单独成行） |
 | 术语 | `components/Gloss.tsx`（`<abbr>` 悬停） | 已实现 |
-| 界面门禁 | `scripts/check-ui.mjs`（`npm run check:ui`） | 已实现：先构建，再逐章检查 11 章字号 / 桌面栏宽（壳 1392、正文 1168）/ 五段 / 图契约真实 DOM / 解析台六段无 tab / 骨架页 / 无 JS 错误 |
+| 界面门禁 | `scripts/check-ui.mjs`（`npm run check:ui`） | 已实现：先构建，再逐章检查 12 章字号 / 桌面栏宽（壳 1392、正文 1168）/ 五段 / 图契约真实 DOM / 解析台六段无 tab / 骨架页 / 无 JS 错误 |
 
 旧文件（`views/Learn.tsx`、`LessonPlayer.tsx`、`LearnBits.tsx` 及全部旧 mockup）已删除，不保留兼容层。

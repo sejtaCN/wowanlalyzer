@@ -546,9 +546,9 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
             : isRhythm
               ? '这是把模拟冷却、A/B 收益和日志节奏放在同一把秒尺上算出来的，不是两波连打的模拟。'
               : budget
-                ? `目标：${budget.durationSec} 秒木桩，全程 uptime。移动 ${model?.movement}、危险点 ${model?.dangers} 个都还没折算成可用 GCD。`
+                ? `目标：${budget.durationSec} 秒木桩，全程 uptime。移动 ${model?.movement}、危险点 ${model?.dangers != null ? `${model.dangers} 个` : '未统计'}都还没折算成可用 GCD。`
                 : model
-                  ? `目标数轴只回答“够不够大”。${model.durationSec}s 是模型假设；移动 ${model.movement}、危险点 ${model.dangers} 个还没折算成 DPS 代价。`
+                  ? `目标数轴只回答“够不够大”。${model.durationSec}s 是模型假设；移动 ${model.movement}、危险点 ${model.dangers != null ? `${model.dangers} 个` : '未统计'}还没折算成 DPS 代价。`
                   : L0_OPENING[chapter.id].note
         }
       >

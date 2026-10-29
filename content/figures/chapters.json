@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-26",
+  "updatedAt": "2026-10-30",
   "description": "每章五段的图契约。ready 只表示该段已有可展示的真图/表，不表示四约束已补齐；missing 必须写待补原因与下一批。",
   "kinds": [
     "budget-chart",
@@ -393,6 +393,40 @@
         "kind": "phase-chart",
         "status": "ready",
         "source": "xiaohuasheng-phases"
+      }
+    ],
+    "l2-02-ruby-life-pools": [
+      {
+        "section": 1,
+        "kind": "route-strip",
+        "status": "ready",
+        "source": "waves-ruby-life-pools.json"
+      },
+      {
+        "section": 2,
+        "kind": "selected-wave",
+        "status": "ready",
+        "source": "Teaching/rules.ts → 配对 runId"
+      },
+      {
+        "section": 3,
+        "kind": "priority-map",
+        "status": "ready",
+        "source": "selected wave → L1-0x priorityDiff",
+        "note": "按当前波目标档映射 L1，不是该波专属。"
+      },
+      {
+        "section": 4,
+        "kind": "route-map",
+        "status": "ready",
+        "source": "waves-ruby-life-pools.json + keystone.guru 地形图"
+      },
+      {
+        "section": 5,
+        "kind": "phase-chart",
+        "status": "missing",
+        "source": "红玉新生池没有真人日志导出",
+        "next": "补一份带战斗分段的日志后再对齐阶段"
       }
     ]
   }

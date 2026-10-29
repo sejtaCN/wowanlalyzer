@@ -33,7 +33,7 @@ profile/APL  →  sims / A-B / adds  →  联动·杠杆·构成  →  章节 JS
 | 优先级表 | `content/guides/priority-table.json` | `npm run guide:apl` | 从 APL 生成，含条件人话 |
 | 中文技能名 | `content/guides/skills.json` | 手工核对 + NGA 对照 | `verified` 分两档 |
 | 日志 | `content/logs/*.json` | WCL 事件表 CSV 导入 | 整场，无战斗分段 |
-| 路线 | `content/routes/*.json` | `node scripts/import-altar-route.mjs` 导入 Keystone 路线 | 波次构成、forces、敌人实例；不是战斗日志 |
+| 路线 | `content/routes/*.json` | `node scripts/import-route.mjs --dungeon=<slug>` 导入 Keystone 路线 | 波次构成、forces、敌人实例；不是战斗日志 |
 | 专精注册表 | `content/specs.json` | 手工 | `active` 才有内容 |
 
 ### 1.1 外部数据来源引用契约
@@ -77,7 +77,7 @@ profile/APL  →  sims / A-B / adds  →  联动·杠杆·构成  →  章节 JS
 | MDT 版本 | `6.2.20`（页面字段）；GitHub master 当前登记为后续版本时，仍以 mapping hash 为准 |
 | 原始路线对象 | 页面内嵌 `killZones`、`enemyIds`；`.tools/tmp/kg-xwt8Pza.html` |
 | 原始地图数据 | `kg-altar-facade.js`、`kg-altar-data.js`；均为 `.tools/tmp/` 本地抓取缓存 |
-| 转换脚本 | `node scripts/import-altar-route.mjs` |
+| 转换脚本 | `node scripts/import-route.mjs --dungeon=<slug>` |
 | 站内产物 | `content/routes/waves-altar-of-fangs.json` |
 | 结构核验 | 15 pull；108 只怪；825 forces；817 门槛 |
 | 独立实现 | MDT `Midnight/AltarOfFangs.lua`：817 门槛、同套 NPC / 坐标 / 敌人组 |

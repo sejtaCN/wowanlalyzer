@@ -1,0 +1,1172 @@
+{
+ "dungeon": "Ruby Life Pools",
+ "route": "Skandar Tank - Ruby Life Pools (+10 to +16)",
+ "routePublicKey": "Xnxx3lT",
+ "source": "keystone.guru",
+ "sourceUrl": "https://keystone.guru/route/ruby-life-pools/Xnxx3lT/skandar-tank-ruby-life-pools-10-to-16",
+ "fetchedAt": "2026-10-29",
+ "mappingVersion": 1088,
+ "mdtMappingHash": "45061e8ddb3b3b2a623ac7f909fff24e",
+ "mdtAddonVersion": 6220,
+ "pulls": 12,
+ "totalMobs": 76,
+ "totalForces": 554,
+ "requiredForces": 551,
+ "waves": [
+  {
+   "pull": 1,
+   "killZoneId": 18542336,
+   "mobs": [
+    {
+     "name": "Primal Juggernaut",
+     "count": 1,
+     "npcIds": [
+      188244
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Deepstone Earthshaper",
+     "count": 4,
+     "npcIds": [
+      187969
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Earthbound Guardian",
+     "count": 2,
+     "npcIds": [
+      188011
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Flashfrost Chillweaver",
+     "count": 1,
+     "npcIds": [
+      188067
+     ],
+     "unitForces": [
+      7
+     ]
+    }
+   ],
+   "mobCount": 8,
+   "forces": 62,
+   "isBoss": false,
+   "trashMobCount": 8,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "approach",
+   "enemyIds": [
+    151133,
+    151135,
+    151136,
+    151137,
+    151142,
+    151144,
+    151148,
+    151150
+   ],
+   "enemyPositions": [
+    {
+     "id": 151133,
+     "x": -211.7707153287576,
+     "y": 46.123388494146226
+    },
+    {
+     "id": 151135,
+     "x": -167.49540812001086,
+     "y": 57.46387764921249
+    },
+    {
+     "id": 151136,
+     "x": -159.04991584212488,
+     "y": 47.76693848376916
+    },
+    {
+     "id": 151137,
+     "x": -154.97955559152,
+     "y": 53.61832471055529
+    },
+    {
+     "id": 151142,
+     "x": -218.79373088012122,
+     "y": 42.65177758892958
+    },
+    {
+     "id": 151144,
+     "x": -165.06487273877644,
+     "y": 60.58648584824567
+    },
+    {
+     "id": 151148,
+     "x": -218.63457119477746,
+     "y": 50.35594371128509
+    },
+    {
+     "id": 151150,
+     "x": -152.75809825533997,
+     "y": 46.943203163732335
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 11.3,
+   "scenarioId": "w30_8",
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 1
+  },
+  {
+   "pull": 2,
+   "killZoneId": 18542337,
+   "mobs": [
+    {
+     "name": "Primal Juggernaut",
+     "count": 1,
+     "npcIds": [
+      188244
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Earthbound Guardian",
+     "count": 2,
+     "npcIds": [
+      188011
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Flashfrost Chillweaver",
+     "count": 2,
+     "npcIds": [
+      188067
+     ],
+     "unitForces": [
+      7
+     ]
+    }
+   ],
+   "mobCount": 5,
+   "forces": 49,
+   "isBoss": false,
+   "trashMobCount": 5,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "approach",
+   "enemyIds": [
+    151134,
+    151146,
+    151147,
+    151151,
+    151152
+   ],
+   "enemyPositions": [
+    {
+     "id": 151134,
+     "x": -102.50998003709896,
+     "y": 49.04004569710943
+    },
+    {
+     "id": 151146,
+     "x": -118.49075915269702,
+     "y": 52.20465308023738
+    },
+    {
+     "id": 151147,
+     "x": -100.67479509318329,
+     "y": 58.94565054519002
+    },
+    {
+     "id": 151151,
+     "x": -122.10041280383507,
+     "y": 46.7679727692404
+    },
+    {
+     "id": 151152,
+     "x": -90.37584697908703,
+     "y": 51.73767442867311
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 20.1,
+   "scenarioId": "w30_5",
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 2
+  },
+  {
+   "pull": 3,
+   "killZoneId": 18542338,
+   "mobs": [
+    {
+     "name": "Deepstone Earthshaper",
+     "count": 2,
+     "npcIds": [
+      187969
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Earthbound Guardian",
+     "count": 1,
+     "npcIds": [
+      188011
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Flashfrost Chillweaver",
+     "count": 1,
+     "npcIds": [
+      188067
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Infused Whelp",
+     "count": 3,
+     "npcIds": [
+      187894
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "Defier Draghar",
+     "count": 1,
+     "npcIds": [
+      187897
+     ],
+     "unitForces": [
+      30
+     ]
+    }
+   ],
+   "mobCount": 8,
+   "forces": 52,
+   "isBoss": true,
+   "trashMobCount": 7,
+   "classification": "boss",
+   "encounter": "Defier Draghar",
+   "phase": "approach",
+   "enemyIds": [
+    151140,
+    151149,
+    151154,
+    151202,
+    151203,
+    151204,
+    151207,
+    151141
+   ],
+   "enemyPositions": [
+    {
+     "id": 151140,
+     "x": -58.90391716801898,
+     "y": 68.51538385229046
+    },
+    {
+     "id": 151149,
+     "x": -55.93487651232431,
+     "y": 71.33574140505877
+    },
+    {
+     "id": 151154,
+     "x": -59.168039208109505,
+     "y": 72.74991527780162
+    },
+    {
+     "id": 151202,
+     "x": -78.2520518932883,
+     "y": 96.8372966202073
+    },
+    {
+     "id": 151203,
+     "x": -74.38045886463385,
+     "y": 95.30709422392138
+    },
+    {
+     "id": 151204,
+     "x": -77.46302676605845,
+     "y": 92.99465588304128
+    },
+    {
+     "id": 151207,
+     "x": -87.91792062160718,
+     "y": 85.88865150442071
+    },
+    {
+     "id": 151141,
+     "x": -60.935525529182286,
+     "y": 87.14493618332469
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 29.6,
+   "scenarioId": "w30_8",
+   "approximation": {
+    "kind": "desired-targets",
+    "actualMobs": 8,
+    "bossCount": 1,
+    "trashMobCount": 7,
+    "simulatedTargets": 8
+   },
+   "burst": null,
+   "sourcePull": 3
+  },
+  {
+   "pull": 4,
+   "killZoneId": 18542339,
+   "mobs": [
+    {
+     "name": "Ashseer Flamelasher",
+     "count": 2,
+     "npcIds": [
+      190206
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Primalist Cinderweaver",
+     "count": 2,
+     "npcIds": [
+      190207
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Blazebound Destroyer",
+     "count": 1,
+     "npcIds": [
+      190034
+     ],
+     "unitForces": [
+      25
+     ]
+    }
+   ],
+   "mobCount": 5,
+   "forces": 53,
+   "isBoss": false,
+   "trashMobCount": 5,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "after-first-boss",
+   "enemyIds": [
+    151228,
+    151217,
+    151223,
+    151231,
+    151219
+   ],
+   "enemyPositions": [
+    {
+     "id": 151228,
+     "x": -99.67902681357178,
+     "y": 261.18652316893696
+    },
+    {
+     "id": 151217,
+     "x": -104.82491646467702,
+     "y": 260.93453662286714
+    },
+    {
+     "id": 151223,
+     "x": -92.08262840439849,
+     "y": 288.8170840759209
+    },
+    {
+     "id": 151231,
+     "x": -104.61325079710343,
+     "y": 313.59966089287065
+    },
+    {
+     "id": 151219,
+     "x": -101.42226929456797,
+     "y": 318.6528508180669
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 39.2,
+   "scenarioId": "w30_5",
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 4
+  },
+  {
+   "pull": 5,
+   "killZoneId": 18542340,
+   "mobs": [
+    {
+     "name": "Primalist Cinderweaver",
+     "count": 2,
+     "npcIds": [
+      190207
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Blazebound Destroyer",
+     "count": 1,
+     "npcIds": [
+      190034
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Ashseer Flamelasher",
+     "count": 2,
+     "npcIds": [
+      190206
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Flamegullet",
+     "count": 1,
+     "npcIds": [
+      197697
+     ],
+     "unitForces": [
+      40
+     ]
+    }
+   ],
+   "mobCount": 6,
+   "forces": 93,
+   "isBoss": true,
+   "trashMobCount": 5,
+   "classification": "boss",
+   "encounter": "Flamegullet",
+   "phase": "after-first-boss",
+   "enemyIds": [
+    151211,
+    151222,
+    151227,
+    151237,
+    151212,
+    151230
+   ],
+   "enemyPositions": [
+    {
+     "id": 151211,
+     "x": -126.03507778205669,
+     "y": 335.3146294109344
+    },
+    {
+     "id": 151222,
+     "x": -128.19958751808034,
+     "y": 328.7552954121625
+    },
+    {
+     "id": 151227,
+     "x": -131.6227400841589,
+     "y": 335.0672692663628
+    },
+    {
+     "id": 151237,
+     "x": -152.6979977684421,
+     "y": 342.2778132987312
+    },
+    {
+     "id": 151212,
+     "x": -175.39022900492466,
+     "y": 360.59613335046674
+    },
+    {
+     "id": 151230,
+     "x": -175.39195531985146,
+     "y": 355.02240831718393
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 56.1,
+   "scenarioId": "w30_6",
+   "approximation": {
+    "kind": "desired-targets",
+    "actualMobs": 6,
+    "bossCount": 1,
+    "trashMobCount": 5,
+    "simulatedTargets": 6
+   },
+   "burst": null,
+   "sourcePull": 5
+  },
+  {
+   "pull": 6,
+   "killZoneId": 18542341,
+   "mobs": [
+    {
+     "name": "Primalist Cinderweaver",
+     "count": 2,
+     "npcIds": [
+      190207
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Blazebound Destroyer",
+     "count": 1,
+     "npcIds": [
+      190034
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Ashseer Flamelasher",
+     "count": 2,
+     "npcIds": [
+      190206
+     ],
+     "unitForces": [
+      7
+     ]
+    }
+   ],
+   "mobCount": 5,
+   "forces": 53,
+   "isBoss": false,
+   "trashMobCount": 5,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "after-second-boss",
+   "enemyIds": [
+    151214,
+    151215,
+    151221,
+    151226,
+    151232
+   ],
+   "enemyPositions": [
+    {
+     "id": 151214,
+     "x": -215.34357322226418,
+     "y": 264.6182379919334
+    },
+    {
+     "id": 151215,
+     "x": -229.88098876462996,
+     "y": 301.14708294384707
+    },
+    {
+     "id": 151221,
+     "x": -208.69545913906495,
+     "y": 261.195307695034
+    },
+    {
+     "id": 151226,
+     "x": -215.11815882838943,
+     "y": 256.93498747356324
+    },
+    {
+     "id": 151232,
+     "x": -223.9195793961157,
+     "y": 300.3029694436326
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 65.7,
+   "scenarioId": "w30_5",
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 6
+  },
+  {
+   "pull": 7,
+   "killZoneId": 18542342,
+   "mobs": [
+    {
+     "name": "Primalist Cinderweaver",
+     "count": 2,
+     "npcIds": [
+      190207
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Blazebound Destroyer",
+     "count": 1,
+     "npcIds": [
+      190034
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Ashseer Flamelasher",
+     "count": 2,
+     "npcIds": [
+      190206
+     ],
+     "unitForces": [
+      7
+     ]
+    }
+   ],
+   "mobCount": 5,
+   "forces": 53,
+   "isBoss": false,
+   "trashMobCount": 5,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "after-second-boss",
+   "enemyIds": [
+    151216,
+    151220,
+    151213,
+    151225,
+    151224
+   ],
+   "enemyPositions": [
+    {
+     "id": 151216,
+     "x": -174.99399173474626,
+     "y": 216.69425005774963
+    },
+    {
+     "id": 151220,
+     "x": -176.07193456098605,
+     "y": 224.10320990528504
+    },
+    {
+     "id": 151213,
+     "x": -193.7491227678177,
+     "y": 228.01548924172752
+    },
+    {
+     "id": 151225,
+     "x": -194.884773241561,
+     "y": 233.15930419195746
+    },
+    {
+     "id": 151224,
+     "x": -198.4266095514062,
+     "y": 229.22000566793173
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 75.3,
+   "scenarioId": "w30_5",
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 7
+  },
+  {
+   "pull": 8,
+   "killZoneId": 18542343,
+   "mobs": [
+    {
+     "name": "Storm Warrior",
+     "count": 2,
+     "npcIds": [
+      197982
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Primal Thundercloud",
+     "count": 6,
+     "npcIds": [
+      197509
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "Tempest Channeler",
+     "count": 1,
+     "npcIds": [
+      198047
+     ],
+     "unitForces": [
+      25
+     ]
+    }
+   ],
+   "mobCount": 9,
+   "forces": 35,
+   "isBoss": false,
+   "trashMobCount": 9,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "after-second-boss",
+   "enemyIds": [
+    151240,
+    151248,
+    151239,
+    151249,
+    151250,
+    151251,
+    151253,
+    151270,
+    151252
+   ],
+   "enemyPositions": [
+    {
+     "id": 151240,
+     "x": -94.89497794615363,
+     "y": 198.76034652512178
+    },
+    {
+     "id": 151248,
+     "x": -89.56298707727376,
+     "y": 197.31107222820378
+    },
+    {
+     "id": 151239,
+     "x": -90.94274173197886,
+     "y": 202.9445796098654
+    },
+    {
+     "id": 151249,
+     "x": -82.91031714205081,
+     "y": 184.5871936215084
+    },
+    {
+     "id": 151250,
+     "x": -79.4642017673954,
+     "y": 188.04035848448572
+    },
+    {
+     "id": 151251,
+     "x": -76.9911460065077,
+     "y": 173.2191172703906
+    },
+    {
+     "id": 151253,
+     "x": -69.03252719806788,
+     "y": 181.34911273017457
+    },
+    {
+     "id": 151270,
+     "x": -72.50877099827159,
+     "y": 177.18255237463785
+    },
+    {
+     "id": 151252,
+     "x": -76.61596544382257,
+     "y": 180.91873563549382
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 81.7,
+   "scenarioId": "w30_8",
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 8
+  },
+  {
+   "pull": 9,
+   "killZoneId": 18542344,
+   "mobs": [
+    {
+     "name": "Storm Warrior",
+     "count": 5,
+     "npcIds": [
+      197982
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Primalist Cinderweaver",
+     "count": 1,
+     "npcIds": [
+      190207
+     ],
+     "unitForces": [
+      7
+     ]
+    },
+    {
+     "name": "Primal Thundercloud",
+     "count": 1,
+     "npcIds": [
+      197509
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "Tempest Channeler",
+     "count": 1,
+     "npcIds": [
+      198047
+     ],
+     "unitForces": [
+      25
+     ]
+    },
+    {
+     "name": "Ashseer Flamelasher",
+     "count": 1,
+     "npcIds": [
+      190206
+     ],
+     "unitForces": [
+      7
+     ]
+    }
+   ],
+   "mobCount": 9,
+   "forces": 64,
+   "isBoss": false,
+   "trashMobCount": 9,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "after-second-boss",
+   "enemyIds": [
+    151242,
+    151241,
+    151218,
+    151243,
+    151268,
+    151271,
+    151246,
+    151247,
+    151229
+   ],
+   "enemyPositions": [
+    {
+     "id": 151242,
+     "x": -61.22469161631845,
+     "y": 166.42668880557545
+    },
+    {
+     "id": 151241,
+     "x": -64.47729041971911,
+     "y": 163.06212733702134
+    },
+    {
+     "id": 151218,
+     "x": -39.24762776649703,
+     "y": 154.45995609388387
+    },
+    {
+     "id": 151243,
+     "x": -36.2588324979354,
+     "y": 149.9424728785928
+    },
+    {
+     "id": 151268,
+     "x": -38.84002430523917,
+     "y": 146.86542759561635
+    },
+    {
+     "id": 151271,
+     "x": -41.956448319730455,
+     "y": 150.0134690992238
+    },
+    {
+     "id": 151246,
+     "x": -53.581803793317945,
+     "y": 136.83526599278008
+    },
+    {
+     "id": 151247,
+     "x": -58.22732220481181,
+     "y": 140.01064946698392
+    },
+    {
+     "id": 151229,
+     "x": -53.3697185576856,
+     "y": 141.94230947941304
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 93.3,
+   "scenarioId": "w30_8",
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 9
+  },
+  {
+   "pull": 10,
+   "killZoneId": 18542345,
+   "mobs": [
+    {
+     "name": "Storm Warrior",
+     "count": 2,
+     "npcIds": [
+      197982
+     ],
+     "unitForces": [
+      5
+     ]
+    },
+    {
+     "name": "Primal Thundercloud",
+     "count": 8,
+     "npcIds": [
+      197509
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "High Channeler Ryvati",
+     "count": 1,
+     "npcIds": [
+      197535
+     ],
+     "unitForces": [
+      30
+     ]
+    }
+   ],
+   "mobCount": 11,
+   "forces": 40,
+   "isBoss": true,
+   "trashMobCount": 10,
+   "classification": "boss",
+   "encounter": "High Channeler Ryvati",
+   "phase": "after-second-boss",
+   "enemyIds": [
+    151244,
+    151245,
+    151258,
+    151259,
+    151260,
+    151267,
+    151272,
+    151254,
+    151255,
+    151256,
+    151257
+   ],
+   "enemyPositions": [
+    {
+     "id": 151244,
+     "x": -38.925028344164105,
+     "y": 131.17600435352986
+    },
+    {
+     "id": 151245,
+     "x": -35.22448835443544,
+     "y": 135.12496962191514
+    },
+    {
+     "id": 151258,
+     "x": -30.64331313740398,
+     "y": 135.54147250616109
+    },
+    {
+     "id": 151259,
+     "x": -38.238682003547396,
+     "y": 126.39941455437258
+    },
+    {
+     "id": 151260,
+     "x": -41.58800381783817,
+     "y": 127.86191186900336
+    },
+    {
+     "id": 151267,
+     "x": -32.329031519354885,
+     "y": 139.00306478643876
+    },
+    {
+     "id": 151272,
+     "x": -32.64911919354414,
+     "y": 128.99180525174881
+    },
+    {
+     "id": 151254,
+     "x": -46.67216753051858,
+     "y": 117.27746240673446
+    },
+    {
+     "id": 151255,
+     "x": -49.25092626287881,
+     "y": 115.51452619855678
+    },
+    {
+     "id": 151256,
+     "x": -44.875486062084605,
+     "y": 114.67569278959246
+    },
+    {
+     "id": 151257,
+     "x": -47.56443556549654,
+     "y": 113.20845793887386
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 100.5,
+   "scenarioId": "w30_8",
+   "approximation": {
+    "kind": "desired-targets",
+    "actualMobs": 11,
+    "bossCount": 1,
+    "trashMobCount": 10,
+    "simulatedTargets": 8
+   },
+   "burst": null,
+   "sourcePull": 10
+  },
+  {
+   "pull": 11,
+   "killZoneId": 18542346,
+   "mobs": [
+    {
+     "name": "Primal Thundercloud",
+     "count": 3,
+     "npcIds": [
+      197509
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "Kyrakka",
+     "count": 1,
+     "npcIds": [
+      190484
+     ],
+     "unitForces": [
+      0
+     ]
+    },
+    {
+     "name": "Erkhart Stormvein",
+     "count": 1,
+     "npcIds": [
+      190485
+     ],
+     "unitForces": [
+      0
+     ]
+    }
+   ],
+   "mobCount": 5,
+   "forces": 0,
+   "isBoss": true,
+   "trashMobCount": 3,
+   "classification": "boss",
+   "encounter": "Kyrakka / Erkhart Stormvein",
+   "phase": "after-final-boss",
+   "enemyIds": [
+    151265,
+    151266,
+    151263,
+    151274,
+    151273
+   ],
+   "enemyPositions": [
+    {
+     "id": 151265,
+     "x": -22.184381153677535,
+     "y": 148.1750694797114
+    },
+    {
+     "id": 151266,
+     "x": -19.594708858808644,
+     "y": 150.98013604408723
+    },
+    {
+     "id": 151263,
+     "x": -22.684744902199014,
+     "y": 151.2390709320092
+    },
+    {
+     "id": 151274,
+     "x": -22.526214782653966,
+     "y": 103.63401937363966
+    },
+    {
+     "id": 151273,
+     "x": -9.7799109284841,
+     "y": 116.75516852233176
+    }
+   ],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 100.5,
+   "scenarioId": "w30_5",
+   "approximation": {
+    "kind": "desired-targets",
+    "actualMobs": 5,
+    "bossCount": 2,
+    "trashMobCount": 3,
+    "simulatedTargets": 5
+   },
+   "burst": null,
+   "sourcePull": 11
+  },
+  {
+   "pull": 12,
+   "killZoneId": 18542347,
+   "mobs": [],
+   "mobCount": 0,
+   "forces": 0,
+   "isBoss": false,
+   "trashMobCount": 0,
+   "classification": "trash",
+   "encounter": null,
+   "phase": "after-final-boss",
+   "enemyIds": [],
+   "enemyPositions": [],
+   "dangerous": [],
+   "skippable": 0,
+   "forcesPct": 100.5,
+   "scenarioId": null,
+   "approximation": null,
+   "burst": null,
+   "sourcePull": 12
+  }
+ ]
+}

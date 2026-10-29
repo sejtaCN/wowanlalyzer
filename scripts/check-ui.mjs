@@ -454,7 +454,7 @@ const homeNarrative = await page.evaluate(() => ({
 }));
 check(homeNarrative.progressBars === 0, '首页还在用进度条');
 check(!homeNarrative.hasReadCopy, '首页还在显示「已读」完成率');
-check(homeNarrative.nodeCount === 11, `首页学习路径应列出 11 个章节节点，实际 ${homeNarrative.nodeCount}`);
+check(homeNarrative.nodeCount === chapters.length, `首页学习路径应列出 ${chapters.length} 个章节节点，实际 ${homeNarrative.nodeCount}`);
 check(homeNarrative.heroBtns === 1, `首页 hero 应只有一个主按钮，实际 ${homeNarrative.heroBtns}`);
 check(
   homeNarrative.groupColumns.length === 2

@@ -17,13 +17,15 @@
  *
  * 用法：npm run verify:gates
  */
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+// 章节数从磁盘数，不写死：加副本时门禁自检不该跟着改。
+const CHAPTER_COUNT = readdirSync(join(ROOT, 'content', 'chapters')).filter((f) => f.endsWith('.json')).length;
 const temp = mkdtempSync(join(tmpdir(), 'wowa-gate-'));
 const runs = [];
 
@@ -84,11 +86,11 @@ try {
   }
   writeFileSync(markdownIndex, markdownMutated);
 
-  run('UI 正样本：11 章 + 解析台 + 骨架页', process.execPath, [
+  run(`UI 正样本：${CHAPTER_COUNT} 章 + 解析台 + 骨架页`, process.execPath, [
     'scripts/check-ui.mjs',
     `--dist=${join(ROOT, 'dist', 'index.html')}`,
     `--shots=${join(temp, 'shots-ok')}`,
-  ], true, '11 章逐章检查');
+  ], true, `${CHAPTER_COUNT} 章逐章检查`);
   run('UI 负样本：有图段的动作预算被改坏', process.execPath, [
     'scripts/check-ui.mjs',
     `--dist=${index}`,

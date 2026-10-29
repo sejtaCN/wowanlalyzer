@@ -12,14 +12,14 @@
 | --- | --- | --- |
 | 实装范围 | 暗影牧师 · 仅执政官（Archon）；虚空编织者待补 | `content/specs.json` |
 | 占位专精 | 1（恶魔猎手·噬灭·歼灭者） | 同上，`status: planned` |
-| 章节 | 11（L0×4 / L1×6 / L2×1） | `content/chapters/` |
+| 章节 | 12（L0×4 / L1×6 / L2×2：毒牙祭坛 / 红玉新生池） | `content/chapters/` |
 | 教练建议 | 7 条 | `content/coaching/general.json` |
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
-| 图契约 | 11 章 × 5 段；50 有图 / 0 缺图 / 5 不适用；L0-03 / L1-01 第五段为模拟时间线 | `content/figures/chapters.json` |
+| 图契约 | 12 章 × 5 段；54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段（没有真人日志）；L0-03 / L1-01 第五段为模拟时间线 | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 5,372 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 代码量 | 约 5,390 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 794,351 字节（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
+| 单文件产物 | 807,533 字节（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -41,7 +41,8 @@ content/
   sims/numeric-summary.json  前端只读这一张汇总
   analysis/*.json            联动 / 杠杆 / 伤害构成 / 加怪 / 配装 / 属性最优化
   logs/*.json                日志导入结果 + 阶段推断
-  routes/*.json              keystone 路线（波次构成）
+  routes/*.json              keystone 路线（波次构成；一条路线一个文件）
+  maps/*.webp                地牢地形图（瓦片拼接产物，入库；构建时复制到 dist/maps）
 
 scripts/                 数据生产线（全部可重跑）
 docs/                    产品 / UI / 教学 / 流程 / 规范
@@ -97,7 +98,19 @@ node <抓取脚本或手工存 content/routes/>
 # 写章节：chart.kind = "wave-table"，map 指向该副本
 ```
 
-写完两处收口（`chapterRoute` 已按副本读取，新副本只差这两步）：
+```bash
+# 抓三个上游输入（版本号写在资产路径里，改版会 404）
+curl -sL -o .tools/tmp/kg-<key>.html "https://keystone.guru/route/<slug>/<publicKey>/<title>/<keylevel>"
+curl -s  -o .tools/tmp/kg-<slug>-facade.js "https://assets.keystone.guru/compiled/v16.2.2/mapcontext/data/<slug>/<mappingVersion>/facade.js"
+curl -s  -o .tools/tmp/kg-<slug>-data.js   "https://assets.keystone.guru/compiled/v16.2.2/mapcontext/data/<slug>/en_US.js"
+
+# 注册表加一条（slug / mappingVersionId / dungeonId / sourceUrl / phase），再导入
+node scripts/import-route.mjs --dungeon=<slug> --out=content/routes/waves-<slug>.json
+```
+
+地形图：从路线页挑出该副本的 `tiles_webp/<expansion>/<dungeonKey>/<floor>/<zoom>/<x>_<y>.webp`，4×4 张 384×256 拼成 1536×1024，存 `content/maps/<slug 用连字符>.webp`（入库）；`npm run build` 会把它复制到 `dist/maps`。
+
+写完收口这两步（`chapterRoute` 已按副本读取）：
 
 1. `content/routes/waves-<slug>.json`：文件名里的 `<slug>` 必须与章节 `map.dungeon` 一致（如 `altar_of_fangs`）。
 2. `apps/web/src/data/content.ts` 的 `ROUTE_DOCS` 加一行 `slug: wavesJson as unknown as RouteDoc`。
@@ -113,7 +126,7 @@ node <抓取脚本或手工存 content/routes/>
 ## 4. 门禁（不许跳过）
 
 ```bash
-npm run validate:content   # 数字来源 + 结构完整性 + 55 段图契约
+npm run validate:content   # 数字来源 + 结构完整性 + 60 段图契约
 npm run typecheck          # 类型
 npx vitest run             # 27 条，含结构、数据层、相邻交换、分析门禁与路线按副本读取
 npm run check:copy         # 可见文案：禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追
@@ -122,7 +135,7 @@ npm run check:doc:selftest  # 文档解析器 LF / CRLF 自测
 npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
 npm run check:analysis     # 配装阳性对照 / 属性复现差 / 最优预测误差
 npm run check:adjacent     # 相邻两行交换的差值、误差与判定按 runId 重算
-npm run check:ui           # 先构建，再逐章查 11 章；图契约标 ready 的段必须有真图
+npm run check:ui           # 先构建，再逐章查 12 章；图契约标 ready 的段必须有真图
 npm run verify:gates       # 门禁自检 23 项：正样本绿、坏样本红
 npm run build              # 单文件产出
 ```
@@ -147,7 +160,7 @@ npm run build              # 单文件产出
 | # | 待办 | 说明 |
 | --- | --- | --- |
 | 3 | ~~图契约中 2 段缺图~~ 已补齐 | L0-03 与 L1-01 第⑤段改用模拟动作时间线（`content/analysis/simulated-timelines-archon.json`，契约里 kind 仍为 `phase-chart`），状态由 `missing` 改为 `ready`；当前 55 段为 50 有图 / 0 缺图 / 5 不适用 | `content/figures/chapters.json` |
-| 4 | 第二个副本的 L2 页 | 只剩数据：路线抓取归一化 + 章节 JSON（`chapterRoute` 已按副本读取，见 §3.3）。缺路线时页面显示「待补」，不拿祭牙数据顶 |
+| 4 | ~~第二个副本的 L2 页~~ 已上线 | 红玉新生池（`l2-02-ruby-life-pools`）：12 波 / 76 只 / 554 forces，路线 `Xnxx3lT`；地形图 `content/maps/ruby-life-pools.webp`；`chapterRoute` 按副本读取，缺数据不拿祭牙顶 |
 | 5 | 高手对照做到单波级 | 需要带 `Fights` 或 `UNIT_DIED` 的导出；现在的 9 段是阶段级 |
 | 6 | ~~BOSS 带小怪改用真加怪模型~~ 已按近似方案落地 | 毒牙祭坛 p10（11 只含 BOSS）与 p15（7 只含 BOSS）改为按全场目标数近似（`w30_8` / `w30_7`，BOSS 计入目标数），波次上带 `approximation` 标记，页面顶部与当前波都标注「近似 · 按 N 目标档」，p12 空波次仍不出数。真加怪仍不可得：`raid_events+=/adds` 被静默忽略（41.4 万 → 41.6 万，±0.6% 内），`fight_style=DungeonSlice` 是合成副本。换到支持 raid_events 的构建后应改回真模型 |
 
@@ -185,6 +198,7 @@ npm run build              # 单文件产出
 | NGA `read.php` | 直连 403 | 本地浏览器可读 |
 | 目标数 > 8 | 模拟上限 | 一律按 8 计，页面注明 |
 | `num_executes` 是按目标数分桶的字典 | 直接取会得到 null | 求和后再用 |
+| 地形图是瓦片拼的，不随构建生成 | 换副本要自己抓瓦片拼接（步骤见 `docs/research/route-data-pipeline.md`）；漏了就只有文字、没有底图 |
 | `talentsHash` 在 2026-10-29 之前的 296 条记录里只有 12 位 | 那是天赋串前缀（`CIQAAAAAAAAA`），两套构建同值，**不能**用来判定构建一致 | 生产者已改成整串 sha256 取 16 位（只对之后的新 run 有效）；旧记录按 `profileFile` + `hero` 认构建 |
 
 ---

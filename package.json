@@ -6,7 +6,7 @@
   "description": "暗牧学习系统 — 看图学输出：这一波怎么打，爆发给哪一波",
   "scripts": {
     "dev": "vite --config apps/web/vite.config.ts",
-    "build": "vite build --config apps/web/vite.config.ts",
+    "build": "vite build --config apps/web/vite.config.ts && node scripts/sync-maps.mjs",
     "preview": "vite preview --config apps/web/vite.config.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",

@@ -17,6 +17,7 @@ import l104 from '../../../../content/chapters/l1-04-boss.json';
 import l105 from '../../../../content/chapters/l1-05-rhythm.json';
 import l106 from '../../../../content/chapters/l1-06-adds.json';
 import l201 from '../../../../content/chapters/l2-01-altar-of-fangs.json';
+import l202 from '../../../../content/chapters/l2-02-ruby-life-pools.json';
 import figuresJson from '../../../../content/figures/chapters.json';
 import interactionsJson from '../../../../content/analysis/interactions.json';
 import leverageJson from '../../../../content/analysis/leverage-archon.json';
@@ -30,6 +31,7 @@ import skillsJson from '../../../../content/guides/skills.json';
 import crosscheckJson from '../../../../content/guides/crosscheck-archon.json';
 import sourcesSummaryJson from '../../../../content/guides/sources-summary.json';
 import altarWavesJson from '../../../../content/routes/waves-altar-of-fangs.json';
+import rubyWavesJson from '../../../../content/routes/waves-ruby-life-pools.json';
 import eventsJson from '../../../../content/logs/xiaohuasheng-events.json';
 import phasesJson from '../../../../content/logs/xiaohuasheng-phases.json';
 import numericSummaryJson from '../../../../content/sims/numeric-summary.json';
@@ -629,7 +631,7 @@ export interface SimulatedTimelinesDoc {
   timelines: SimulatedTimeline[];
 }
 
-const rawChapters = [l001, l002, l003, l004, l101, l102, l103, l104, l105, l106, l201];
+const rawChapters = [l001, l002, l003, l004, l101, l102, l103, l104, l105, l106, l201, l202];
 const numericSummary = numericSummaryJson as NumericSummary;
 const skills = (skillsJson as SkillsDoc).skills;
 const priorityTable = priorityTableJson as PriorityTableDoc;
@@ -645,6 +647,7 @@ export const FIGURES = (figuresJson as unknown as FiguresDoc).chapters;
  */
 const ROUTE_DOCS: Record<string, RouteDoc> = {
   altar_of_fangs: altarWavesJson as unknown as RouteDoc,
+  ruby_life_pools: rubyWavesJson as unknown as RouteDoc,
 };
 
 /** L1 通用模型借路线举例时的默认副本；换样本只改这一处。 */

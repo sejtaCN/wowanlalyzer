@@ -54,7 +54,7 @@ describe('前端数据适配层', () => {
   });
 
   it('读取全部章节与唯一 runId', () => {
-    expect(CHAPTERS).toHaveLength(11);
+    expect(CHAPTERS).toHaveLength(12);
     const runs = allRuns();
     expect(runs.length).toBeGreaterThan(180);
     expect(new Set(runs.map((run) => run.runId)).size).toBe(runs.length);
@@ -90,10 +90,10 @@ describe('前端数据适配层', () => {
   });
 
   it('路线按副本取，缺数据时不拿别的副本顶', () => {
-    expect(ROUTE_DUNGEONS).toEqual(['altar_of_fangs']);
+    expect(ROUTE_DUNGEONS).toEqual(['altar_of_fangs', 'ruby_life_pools']);
     expect(routeFor('altar_of_fangs')?.routePublicKey).toBe('xwt8Pza');
     // 未登记的副本返回 null，不静默回落到已有路线。
-    expect(routeFor('ruby_life_pools')).toBeNull();
+    expect(routeFor('the_blinding_vale')).toBeNull();
     expect(routeFor(undefined)).toBeNull();
 
     // L2 只认自己副本：章节声明哪个副本就必须拿到哪个副本的路线。
@@ -110,13 +110,28 @@ describe('前端数据适配层', () => {
     }
 
     // 汇总与注册表一致，首页状态条读的就是它。
-    expect(ROUTE_SUMMARY).toEqual({ routes: 1, pulls: 15, mobs: 108 });
+    expect(ROUTE_SUMMARY).toEqual({ routes: 2, pulls: 27, mobs: 184 });
+
+    // 第二条路线：红玉新生池 12 波 / 76 只 / 554 forces，与 keystone 路线页一致。
+    const ruby = routeFor('ruby_life_pools')!;
+    expect(ruby.pulls).toBe(12);
+    expect(ruby.totalMobs).toBe(76);
+    expect(ruby.totalForces).toBe(554);
+    expect(ruby.requiredForces).toBe(551);
+    expect(ruby.waves.reduce((sum, wave) => sum + wave.forces, 0)).toBe(554);
+    // 每波的目标档都必须在已跑过的模拟里有配对，否则会静默不出数。
+    for (const wave of ruby.waves) {
+      if (wave.scenarioId == null) continue;
+      expect(getRun(`dec_voidform_on_1__${wave.scenarioId}__5000`)).toBeTruthy();
+      expect(getRun(`dec_voidform_on_0__${wave.scenarioId}__5000`)).toBeTruthy();
+    }
   });
 
   it('保留图契约、路线、日志和优先级数据', () => {
     const figures = Object.values(FIGURES).flat();
-    expect(figures.filter((figure) => figure.status === 'ready')).toHaveLength(50);
-    expect(figures.filter((figure) => figure.status === 'missing')).toHaveLength(0);
+    expect(figures.filter((figure) => figure.status === 'ready')).toHaveLength(54);
+    // 红玉新生池第⑤段没有真人日志：缺图必须显式标 missing，不能拿模拟或别的副本顶。
+    expect(figures.filter((figure) => figure.status === 'missing')).toHaveLength(1);
     expect(figures.filter((figure) => figure.status === 'not-applicable')).toHaveLength(5);
 
     expect(ALTAR.pulls).toBe(15);
@@ -218,7 +233,7 @@ describe('专精注册表', () => {
       expect.objectContaining({ id: 'archon', status: 'active' }),
       expect.objectContaining({ id: 'voidweaver', status: 'planned' }),
     ]);
-    expect(chaptersFor(DEFAULT_SPEC)).toHaveLength(11);
+    expect(chaptersFor(DEFAULT_SPEC)).toHaveLength(12);
     expect(SPECS.find((spec) => spec.status === 'planned')).toBeDefined();
     expect(chaptersFor('devourer')).toEqual([]);
     expect(allRuns('devourer')).toEqual([]);

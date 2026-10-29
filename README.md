@@ -86,7 +86,7 @@ npm run check:doc:selftest # 文档解析器 LF / CRLF 自测
 npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
 npm run check:analysis     # 关卡：配装阳性对照 / 属性复现差 / 最优预测误差
 npm run check:adjacent     # 关卡：相邻两行交换的差值、误差与判定按 runId 重算
-npm run check:ui           # 关卡：先构建，再逐章查 11 章五段 / 图契约 / 字号 / 栅格 / 无 JS 错误
+npm run check:ui           # 关卡：先构建，再逐章查 12 章五段 / 图契约 / 字号 / 栅格 / 无 JS 错误
 npm run verify:gates       # 关卡自检：23 项正样本应绿、坏样本应红
 
 # 数据生产线（一般只在换版本时跑）
@@ -126,7 +126,7 @@ npm run phases             # 日志 → 阶段表
 | [ui-reference-decomposition.md](docs/ui-reference-decomposition.md) | 参考站拆解、第一性原理、L1-02 视觉重构基线 |
 | [curriculum.md](docs/curriculum.md) | 章节结构与进度表 |
 | [methods.md](docs/methods.md) | 方法说明：联动/杠杆 · 日志阶段推断 · 教程交叉核对 · 配装与属性优化 |
-| [figure-contract.md](docs/figure-contract.md) | 图契约：五段图清单、缺图状态、11 章 UI 门禁与坏样本自检 |
+| [figure-contract.md](docs/figure-contract.md) | 图契约：五段图清单、缺图状态、12 章 UI 门禁与坏样本自检 |
 | [first-principles.md](docs/first-principles.md) | 第一性原理：其他教程做什么、我们缺什么、下一步补什么 |
 
 ---
@@ -134,9 +134,9 @@ npm run phases             # 日志 → 阶段表
 ## 当前状态
 
 - 专精：暗影牧师当前只开放执政官；虚空编织者设为待办，噬灭（歼灭者）仍是占位预览
-- 章节 11 篇：L0×4、L1×6、L2×1
+- 章节 12 篇：L0×4、L1×6、L2×2（毒牙祭坛 / 红玉新生池）
 - 数据：原始归档 296 个 runId；站点只查询已明确归属执政官的记录 235 条（含配装 36 + 属性优化 80 + 动作 trace 7）、9 段真实日志阶段、1 条副本路线（毒牙祭坛 15 波）、4 个输出模型；L0-03 / L1-01 第五段使用模拟动作时间线，不冒充真人日志阶段
-- 门禁：`validate:content` 通过（55 段图契约：50 有图 / 0 缺图 / 5 不适用） · `check:doc` 11/11 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 11 章 + Archon-only 解析台 + 属性四模型 DOM 断言 + 桌面宽屏；移动端仅保留冻结冒烟 · `verify:gates` 23/23（含坏样本） · `vitest` 26/26 · `tsc` 通过
+- 门禁：`validate:content` 通过（60 段图契约：54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段，没有真人日志） · `check:doc` 12/12 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 12 章 + Archon-only 解析台 + 属性四模型 DOM 断言 + 桌面宽屏；移动端仅保留冻结冒烟 · `verify:gates` 23/23（含坏样本） · `vitest` 27/27 · `tsc` 通过
 
 ## 三条红线
 

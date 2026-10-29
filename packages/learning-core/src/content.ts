@@ -17,8 +17,8 @@ export interface WaveModelCard {
   durationSec: number;
   /** 移动/打断描述，如 "0–3s 移动" */
   movement: string;
-  /** 危险点数量（需要打断/驱散/分散的机制） */
-  dangers: number;
+  /** 危险点数量（需要打断/驱散/分散的机制）；没有机制来源时留空，不要写 0 */
+  dangers?: number;
   /** 这一档波次在路线里的出现频次，如 "30/84 波" */
   frequency?: string;
   /** 判断方式：普通波次按目标数，BOSS / ADD 窗口有各自的判据 */
