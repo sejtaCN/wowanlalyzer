@@ -96,6 +96,15 @@ function stats(j) {
   };
 }
 
+/** 差值保守误差上限；任一 CI 缺失、为 0 或非有限值就返回 null。 */
+function conservativeDeltaCiPct(on, off) {
+  if (!Number.isFinite(on?.mean) || !Number.isFinite(off?.mean) || off.mean <= 0) return null;
+  if (!Number.isFinite(on?.ci95Pct) || !Number.isFinite(off?.ci95Pct) || on.ci95Pct <= 0 || off.ci95Pct <= 0) return null;
+  const ciOnAbs = on.mean * on.ci95Pct / 100;
+  const ciOffAbs = off.mean * off.ci95Pct / 100;
+  return (ciOnAbs + ciOffAbs) / off.mean * 100;
+}
+
 function record({ runId, win, dps, j, edit, extra }) {
   const rec = {
     runId,
@@ -156,8 +165,9 @@ async function main() {
       edit: { note: '注释掉 actions.cds 的 voidform 行（整场不施放虚空形态）' },
     });
     const delta = ((on.mean - off.mean) / off.mean) * 100;
-    console.log(`${Math.round(off.mean).toLocaleString()} → 开爆发 ${delta >= 0 ? '+' : ''}${delta.toFixed(2)}%`);
+    console.log(`${Math.round(off.mean).toLocaleString()} · 配对完成`);
 
+    const ciPct = conservativeDeltaCiPct(on, off);
     rows.push({
       id: win.id,
       label: win.label,
@@ -166,9 +176,10 @@ async function main() {
       durationSec: win.maxTime,
       onDps: Math.round(on.mean),
       offDps: Math.round(off.mean),
-      burstDeltaPct: Math.round(delta * 100) / 100,
-      burstDamage: Math.round((on.mean - off.mean) * win.maxTime),
-      ciPct: Math.round(((on.ci95Pct ?? 0) + (off.ci95Pct ?? 0)) * 100) / 100,
+      onCi95Pct: on.ci95Pct,
+      burstDeltaPct: ciPct == null ? null : Math.round(delta * 100) / 100,
+      burstDamage: ciPct == null ? null : Math.round((on.mean - off.mean) * win.maxTime),
+      ciPct: ciPct == null ? null : Math.round(ciPct * 100) / 100,
       runIdOn: rOn.runId,
       runIdOff: rOff.runId,
     });
@@ -176,7 +187,9 @@ async function main() {
 
   const solo = rows.find((r) => r.id === 'win12_1');
   const add4 = rows.find((r) => r.id === 'win12_4');
-  const amplification = solo && add4 ? Math.round((add4.burstDamage / Math.max(1, solo.burstDamage)) * 100) / 100 : null;
+  const amplification = solo?.burstDamage != null && add4?.burstDamage != null
+    ? Math.round((add4.burstDamage / Math.max(1, solo.burstDamage)) * 100) / 100
+    : null;
 
   process.stdout.write('win12_4  AoE>4 ... ');
   const jAoe = await runSimc(variants.aoe4, WINDOWS[1]);
@@ -192,14 +205,16 @@ async function main() {
     });
     const base = rows.find((r) => r.id === 'win12_4');
     const d = base ? ((aoe.mean - base.onDps) / base.onDps) * 100 : 0;
+    const ciPct = base ? conservativeDeltaCiPct(aoe, { mean: base.onDps, ci95Pct: base.onCi95Pct }) : null;
     aoeRow = {
       label: '4 目标窗口里把 AoE 切换阈值提到 >4',
       dps: Math.round(aoe.mean),
       baselineDps: base?.onDps ?? null,
-      deltaPct: Math.round(d * 100) / 100,
+      deltaPct: ciPct == null ? null : Math.round(d * 100) / 100,
+      deltaCiPct: ciPct == null ? null : Math.round(ciPct * 100) / 100,
       runId: rAoe.runId,
     };
-    console.log(`${Math.round(aoe.mean).toLocaleString()} → ${d.toFixed(2)}%`);
+    console.log(ciPct == null ? 'CI 不完整，不出差值结论' : `${Math.round(aoe.mean).toLocaleString()} → ${d.toFixed(2)}% · 保守误差上限 ±${ciPct.toFixed(2)}%`);
   }
 
   const doc = {
@@ -213,7 +228,8 @@ async function main() {
       '近似会略高估（主目标在加怪期间仍会掉血，模型里不会）。只用于比较窗口内外的相对差异。',
     method:
       '每个窗口跑"开爆发 / 不开爆发"两遍，差值＝这个窗口里爆发的价值；' +
-      '再把 4 目标窗口的 AoE 切换阈值提到 >4，看"等更多怪"是否值得。',
+      '再把 4 目标窗口的 AoE 切换阈值提到 >4，看"等更多怪"是否值得。' +
+      '所有差值使用保守误差上限；任一 CI 不完整时不写差值结论。',
     rows,
     amplification,
     aoeThreshold: aoeRow,
@@ -223,11 +239,11 @@ async function main() {
 
   console.log('\n窗口对照：');
   for (const r of rows) {
-    console.log(
-      `  ${r.label.padEnd(28)} 开 ${r.onDps.toLocaleString().padStart(8)} / 不开 ${r.offDps
+    console.log(r.burstDeltaPct == null
+      ? `  ${r.label.padEnd(28)} CI 不完整，不出差值结论`
+      : `  ${r.label.padEnd(28)} 开 ${r.onDps.toLocaleString().padStart(8)} / 不开 ${r.offDps
         .toLocaleString()
-        .padStart(8)} → 爆发 ${r.burstDeltaPct >= 0 ? '+' : ''}${r.burstDeltaPct}% · 增量 ${(r.burstDamage / 1e6).toFixed(2)}M`,
-    );
+        .padStart(8)} → 爆发 ${r.burstDeltaPct >= 0 ? '+' : ''}${r.burstDeltaPct}% · 增量 ${(r.burstDamage / 1e6).toFixed(2)}M · 保守误差上限 ±${r.ciPct}%`);
   }
   if (amplification) console.log(`  同样 12 秒窗口：加 3 只怪让爆发增量放大 ${amplification} 倍`);
   console.log('写出 content/analysis/adds.json');

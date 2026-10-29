@@ -1,0 +1,85 @@
+{
+  "runId": "adj_ctl_pos__w30_8__5000_r1",
+  "layer": "A",
+  "kind": "adjacent-swap",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "a9a75f22a975acb5",
+  "baseProfileSha256": "ad9cdd996cff3505",
+  "variantId": "ctl_pos",
+  "variantLabel": "阳性对照：心灵鞭笞提到主循环第一位",
+  "swapGroup": "ctl_pos",
+  "scenarioId": "w30_8",
+  "scenarioLabel": "8 目标 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 30,
+  "rep": 1,
+  "iterations": 5007,
+  "dps": {
+    "mean": 1060225.47,
+    "ci95": 2578.51,
+    "ci95Pct": 0.24,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "mode": "move-line-to-top",
+    "lines": [
+      {
+        "lineNo": 102,
+        "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+      }
+    ],
+    "after": [
+      {
+        "lineNo": 77,
+        "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+      }
+    ]
+  },
+  "spellTrace": {
+    "tentacle_slam": {
+      "present": true,
+      "executions": 9998,
+      "damageMean": 0
+    },
+    "vampiric_touch": {
+      "present": true,
+      "executions": 59988,
+      "damageMean": 2678797
+    },
+    "void_volley": {
+      "present": true,
+      "executions": 25323,
+      "damageMean": 0
+    },
+    "void_blast": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "mind_flay": {
+      "present": true,
+      "executions": 83002,
+      "damageMean": 1428175
+    },
+    "shadow_word_death": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "undefined": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    }
+  },
+  "generatedAt": "2026-10-29T02:21:03.531Z"
+}

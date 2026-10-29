@@ -96,7 +96,7 @@
     "maxroll",
     "nga"
    ],
-   "detail": "三份有序列表都是 Halo → Void Eruption；IV 把光晕列为不必挤掉短冷却的长冷却"
+   "detail": "三份有序列表都是「光晕 → 虚空爆发」；Icy Veins 把光晕列为不必挤掉短冷却的长冷却"
   },
   {
    "point": "能量灌注在爆发之内（爆发后立刻）",
@@ -141,7 +141,7 @@
    "method": "第 12 位（灭之后、填充之前）",
    "maxroll": "第 6 位（癫之后、灭之前）",
    "nga": "第 6 位",
-   "apl": "两条独立条件：① cooldown.voidform.up 时用；② 无共振能量 / 虚空形态就绪<60s / 虚空形态中 / 有共振能量增益 / 碎虚≥4 层 时用",
+   "apl": "两条独立条件：①「cooldown.voidform.up」时用；② 无共振能量 / 虚空形态就绪<60s / 虚空形态中 / 有共振能量增益 / 碎虚≥4 层 时用",
    "verdict": "不是真矛盾：人类列表把它压成一行，APL 按条件分裂。以 APL 为准，教学写法用「爆发窗口内优先」表述。",
    "status": "resolved_by_apl"
   },
@@ -167,8 +167,8 @@
   {
    "id": "naming",
    "point": "术语差异",
-   "detail": "Method 写 Voidform，Maxroll/NGA 写 Void Eruption（虚空爆发）。两者指同一次爆发：Void Eruption 是让角色进入 Voidform 的那一下。",
-   "verdict": "教学文案统一用「虚空形态（Voidform）」，并注明起手是按 Void Eruption。",
+   "detail": "Method 写「Voidform」，Maxroll 与 NGA 写「Void Eruption」（虚空爆发）。两者指同一次爆发：「Void Eruption」是让角色进入「Voidform」的那一下。",
+   "verdict": "教学文案统一用「虚空形态（Voidform）」，并注明起手是按「Void Eruption」那一下。",
    "status": "naming"
   },
   {

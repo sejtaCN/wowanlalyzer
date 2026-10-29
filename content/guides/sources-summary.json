@@ -1,13 +1,13 @@
 {
  "generatedAt": "2026-10-26",
- "baseline": "SimC 1210.01 / WoW 12.1.5 / MID2（执政官）",
+ "baseline": "SimC 1210.01 / 12.1.5 版本 / 「MID2」（执政官）",
  "note": "四份原文都是直取（NGA 走本地浏览器，直连 403）。要点是摘录，不改写结论；有分歧的地方在页面下半部分单独列，不在这里调和。",
  "sources": [
   {
    "id": "method",
    "name": "Method.gg",
    "url": "https://method.gg/guides/shadow-priest/playstyle-and-rotation",
-   "version": "Midnight 12.1",
+   "version": "12.1 版本",
    "type": "有序列表 13 步 + 两套起手",
    "capture": "content/guides/sources/method-archon.md",
    "points": [
@@ -19,13 +19,13 @@
     "精神鞭笞可以随时被打断"
    ],
    "feature": "唯一给了「有/无 4 件套」两套起手的来源；顺序写得最细。",
-   "limit": "用词是 Voidform 而不是 Void Eruption，起手步骤需要按上下文对齐到虚空爆发按钮。"
+   "limit": "用词是「Voidform」而不是「Void Eruption」，起手步骤需要按上下文对齐到虚空爆发按钮。"
   },
   {
    "id": "maxroll",
    "name": "Maxroll",
    "url": "https://maxroll.gg/wow/class-guides/shadow-priest-mythic-plus-guide",
-   "version": "Patch 12.1",
+   "version": "12.1 版本",
    "type": "有序列表 10 步 + 套装 + 适用场景",
    "capture": "content/guides/sources/maxroll-archon.md",
    "points": [
@@ -67,11 +67,11 @@
     "顺序与 Maxroll 12.1 基本一致（DoT → 光晕 → 虚空爆发 → 能量灌注 → 癫 → 虚空齐射 → 灭 → 心灵震爆 → 鞭笞）",
     "把执政官的三条英雄天赋翻成人话：具象之力（光晕送鞭笞：狂）、共振能量（光晕目标承伤提高）、持久效能（延长或储存虚空形态）",
     "起手同样强调：先虚空形态，再饰品/药水/能量灌注/种族技能",
-    "提供成套中文技能名，是本站中文名的重要来源（未逐条核对，标 verified:false）"
+    "提供成套中文技能名，是本站中文名的重要来源（未逐条核对）"
    ],
    "feature": "唯一的中文来源，也是本站技能中文名的主要出处。",
-   "limit": "版本落后一档（12.0 vs 12.1），套装与数值细节需按 Maxroll/SimC 复核。"
+   "limit": "版本落后一档（12.0 对 12.1），套装与数值细节需按 Maxroll 与 SimC 复核。"
   }
  ],
- "howWeUse": "共识项直接进正文（如「光晕在爆发之前」「能量灌注在虚空形态之后再开」）；分歧项不挑权威，交给 APL 条件与 runId 数据裁决，裁决过程写在 docs/methods.md。原文里 Hero 天赋的机制描述（光晕送鞭笞：狂、共振能量增伤）本站未单独跑批验证，暂列为「原文说法」。"
+ "howWeUse": "共识项直接进正文（如「光晕在爆发之前」「能量灌注在虚空形态之后再开」）；分歧项不挑权威，交给 APL 条件与模拟记录裁决，裁决方法写在方法说明里。原文里英雄天赋的机制描述（光晕送鞭笞：狂、共振能量增伤）本站未单独跑批验证，暂列为「原文说法」。"
 }

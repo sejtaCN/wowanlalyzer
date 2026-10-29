@@ -115,7 +115,7 @@ export default function Home({
         ) : (
           <>
             <h1>主线章节都打开了</h1>
-            <p>想深挖就去解析台看数据、联动和每一条 runId。</p>
+            <p>想深挖就去解析台看数据、联动和每一条模拟记录。</p>
             <button className="btn" onClick={onAnalyzer}>
               去解析台
             </button>
@@ -168,8 +168,8 @@ export default function Home({
 
 
       <div className="statusline">
-        <span>SimC {simc?.version ?? '—'} ({simc?.commit?.slice(0, 7) ?? '—'})</span>
-        <span>执政官 runId {runs.length} 个</span>
+        <span>模拟器 {simc?.version ?? '—'}</span>
+        <span>执政官 {runs.length} 组模拟</span>
         <span>章节 {chapters.length} 篇</span>
         <span>路线 {ALTAR_WAVES.pulls} 波 / {ALTAR_WAVES.totalMobs} 只</span>
         <span>日志 1 场 · 阶段推断 9 段</span>

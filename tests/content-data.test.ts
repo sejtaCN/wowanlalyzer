@@ -8,17 +8,22 @@ import {
   ARCHON_PROFILE_ID,
   ALTAR_WAVES,
   burstPairs,
+  burstPairFromRuns,
   budgetFor,
+  conservativeDeltaCiPct,
   CHAPTERS,
   chaptersFor,
   FIGURES,
   getPhases,
   getRun,
   getSimulatedTimeline,
+  isComparableRunPair,
+  LEVERAGE,
   prioritySections,
   skillUsage,
 } from '../apps/web/src/data/content';
 import { DEFAULT_SPEC, findSpec, hasContent, SPECS } from '../apps/web/src/data/specs';
+import { burstValueFor } from '../apps/web/src/components/Teaching/rules';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -91,6 +96,35 @@ describe('前端数据适配层', () => {
     expect(ALTAR_WAVES.routePublicKey).toBe('xwt8Pza');
     expect(ALTAR_WAVES.waves.every((wave) => wave.enemyIds?.length === wave.mobCount)).toBe(true);
     expect(ALTAR_WAVES.waves.reduce((sum, wave) => sum + wave.forces, 0)).toBe(825);
+    // 空波次：既没有场景，也不出任何数值。
+    const emptyWave = ALTAR_WAVES.waves.find((item) => item.pull === 12)!;
+    expect(emptyWave.mobCount).toBe(0);
+    expect(emptyWave.scenarioId).toBeNull();
+    const emptyValue = burstValueFor(emptyWave, getRun);
+    expect(emptyValue.reason).toBe('empty');
+    expect(emptyValue.deltaPct).toBeNull();
+    expect(emptyValue.approximation).toBeNull();
+
+    // BOSS 混小怪：按全场目标数近似，必须带 approximation 标记，数值来自真实配对 runId。
+    for (const [pull, scenarioId, simulatedTargets] of [[10, 'w30_8', 8], [15, 'w30_7', 7]] as const) {
+      const wave = ALTAR_WAVES.waves.find((item) => item.pull === pull)!;
+      expect(wave.scenarioId).toBe(scenarioId);
+      expect(wave.approximation?.kind).toBe('desired-targets');
+      expect(wave.approximation?.actualMobs).toBe(wave.mobCount);
+      expect(wave.approximation?.simulatedTargets).toBe(simulatedTargets);
+      const value = burstValueFor(wave, getRun);
+      expect(value.reason).toBeNull();
+      expect(value.approximation?.simulatedTargets).toBe(simulatedTargets);
+      expect(value.deltaPct).not.toBeNull();
+      expect(value.onRunId).toBe(`dec_voidform_on_1__${scenarioId}__5000`);
+      expect(value.offRunId).toBe(`dec_voidform_on_0__${scenarioId}__5000`);
+    }
+
+    // 没有近似档的 BOSS 混小怪仍必须拦截，防止新路线静默出数。
+    const bareMixed = { mobCount: 9, isBoss: true, trashMobCount: 8, scenarioId: null, approximation: null };
+    expect(burstValueFor(bareMixed, getRun).reason).toBe('mixed-boss');
+    expect(burstValueFor(bareMixed, getRun).deltaPct).toBeNull();
+    expect(ALTAR_WAVES.waves.find((wave) => wave.pull === 12)?.mobCount).toBe(0);
     expect(getPhases('xiaohuasheng-phases')?.phases).toHaveLength(9);
 
     const priorityRows = prioritySections().flatMap((section) => section.rows);
@@ -101,6 +135,35 @@ describe('前端数据适配层', () => {
     expect(budgetFor('w30_7')?.actionCount).toBeGreaterThan(0);
     expect(getSimulatedTimeline('single-target-priority')?.phases).toHaveLength(3);
     expect(getSimulatedTimeline('mid-wave')?.phases).toHaveLength(3);
+  });
+
+  it('差值统一使用保守误差上限，并拒绝元数据或 CI 不完整的配对', () => {
+    const on = getRun('dec_voidform_on_1__w30_8__5000')!;
+    const off = getRun('dec_voidform_on_0__w30_8__5000')!;
+    const expected = (on.dps * on.ci95Pct! / 100 + off.dps * off.ci95Pct! / 100) / off.dps * 100;
+    expect(conservativeDeltaCiPct(on, off)).toBeCloseTo(expected, 10);
+    expect(burstPairFromRuns(on, off)?.ciPct).toBeCloseTo(expected, 10);
+    expect(isComparableRunPair(on, off)).toBe(true);
+
+    for (const mutate of [
+      (run: typeof on) => { run.samples = 1; },
+      (run: typeof on) => { run.durationSec = 31; },
+      (run: typeof on) => { run.targets = 7; },
+      (run: typeof on) => { run.profileId = 'other'; },
+      (run: typeof on) => { run.scenarioId = 'other'; },
+      (run: typeof on) => { run.simc = { ...run.simc!, commit: 'other' }; },
+      (run: typeof on) => { run.simc = { ...run.simc!, version: 'other' }; },
+    ]) {
+      const changed = structuredClone(on);
+      mutate(changed);
+      expect(burstPairFromRuns(changed, off)).toBeNull();
+    }
+    for (const ci95Pct of [null, 0, Number.NaN, Number.POSITIVE_INFINITY]) {
+      expect(burstPairFromRuns({ ...on, ci95Pct }, off)).toBeNull();
+      expect(burstPairFromRuns(on, { ...off, ci95Pct })).toBeNull();
+    }
+    expect(LEVERAGE.rows.every((row) => row.deltaCiPct != null && row.beyondCi != null)).toBe(true);
+    expect(CHAPTERS.filter((chapter) => chapter.claim).map((chapter) => chapter.id)).toEqual(['l1-04-boss']);
   });
 
   it('能按章节声明的 runId 配对爆发数据', () => {

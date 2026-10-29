@@ -19,14 +19,10 @@ const STATUS_LABEL: Record<string, { text: string; tone: 'ok' | 'warn' | 'info' 
 };
 
 export default function Sources({ summary, crosscheck }: { summary: SourcesSummary; crosscheck: CrosscheckDoc }) {
-  const byId = new Map(crosscheck.sources.map((s) => [s.id, s]));
-
   return (
     <div className="sources">
       <div className="src-grid">
-        {summary.sources.map((s) => {
-          const meta = byId.get(s.id);
-          return (
+        {summary.sources.map((s) => (
             <div className="src-card" key={s.id}>
               <div className="src-hd">
                 <b>{s.name}</b>
@@ -34,7 +30,6 @@ export default function Sources({ summary, crosscheck }: { summary: SourcesSumma
               </div>
               <div className="src-meta">
                 {s.type} · <a href={s.url} target="_blank" rel="noreferrer">原文</a>
-                {meta?.capture ? <span className="mono dim"> · {meta.capture.split('/').pop()}</span> : null}
               </div>
               <ul className="src-points">
                 {s.points.map((p) => (
@@ -48,8 +43,7 @@ export default function Sources({ summary, crosscheck }: { summary: SourcesSumma
                 <b>局限</b>：{s.limit}
               </div>
             </div>
-          );
-        })}
+        ))}
       </div>
 
       <h3>四家一致的（可以直接当结论）</h3>
@@ -74,14 +68,14 @@ export default function Sources({ summary, crosscheck }: { summary: SourcesSumma
         </table>
       </div>
 
-      <h3 style={{ marginTop: 16 }}>四家不一致的（以及我们怎么处理）</h3>
+      <h3 style={{ marginTop: 16 }}>四家不一致的（以及怎么处理）</h3>
       <div className="tblwrap">
         <table className="tbl">
           <thead>
             <tr>
               <th style={{ width: 104 }}>分歧</th>
               <th>各家说法</th>
-              <th style={{ width: 208 }}>我们的处理</th>
+              <th style={{ width: 208 }}>处理方式</th>
               <th style={{ width: 122 }}>状态</th>
             </tr>
           </thead>

@@ -84,7 +84,7 @@ export default function BurstTimeline({ logId, highlight }: { logId: string; hig
           <g key={t}>
             <line x1={x(t)} y1={80} x2={x(t)} y2={85} stroke="var(--line-2)" strokeWidth={1} />
             <text x={x(t)} y={96} fontSize={9} fill="var(--curve-down-soft)" textAnchor={t === 0 ? 'start' : 'middle'}>
-              {Math.round(t / 60)}min
+              {Math.round(t / 60)}分
             </text>
           </g>
         ))}

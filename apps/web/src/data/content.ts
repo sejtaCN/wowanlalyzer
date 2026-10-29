@@ -82,6 +82,8 @@ export interface PriorityRow {
   targetSelectRaw: string;
   targetSelectZh: string;
   enabled: boolean;
+  /** 本构建用不上的行：kind 是原因分类，evidence 是施放次数来源 */
+  dead?: { kind: string; reason: string; evidence: string } | null;
 }
 
 export interface PrioritySection {
@@ -149,6 +151,14 @@ export interface RouteWave {
   scenarioId: string | null;
   isBoss: boolean;
   trashMobCount?: number;
+  /** BOSS 与同波小怪无法用木桩复原，只能按全场目标数近似；有值即表示差值来自近似档。 */
+  approximation?: {
+    kind: 'desired-targets';
+    actualMobs: number;
+    bossCount: number;
+    trashMobCount: number;
+    simulatedTargets: number;
+  } | null;
   classification?: 'boss' | 'trash';
   phase?: string;
   encounter?: string | null;
@@ -242,8 +252,8 @@ export interface LeverageRow {
   skill: string;
   scenarioId: string;
   deltaPct: number;
-  deltaCiPct: number;
-  beyondCi: boolean;
+  deltaCiPct: number | null;
+  beyondCi: boolean | null;
 }
 
 export interface LeverageDoc {
@@ -631,7 +641,7 @@ export const CHAPTERS = rawChapters as unknown as Chapter[];
 export const FIGURES = (figuresJson as unknown as FiguresDoc).chapters;
 export const ALTAR_WAVES = altarWavesJson as unknown as RouteDoc;
 export const INTERACTIONS = interactionsJson as unknown as InteractionsDoc;
-export const LEVERAGE = leverageJson as unknown as LeverageDoc;
+const RAW_LEVERAGE = leverageJson as unknown as LeverageDoc;
 export const SHARE = shareJson as unknown as ShareDoc;
 export const GEARING = gearingJson as unknown as GearingDoc;
 export const STAT_OPT = statOptJson as unknown as StatOptDoc;
@@ -666,6 +676,66 @@ export function getRun(runId: string | null | undefined, heroId = ARCHON_PROFILE
   return run && heroId === ARCHON_PROFILE_ID && isArchonRun(run) ? run : null;
 }
 
+/**
+ * 差值的保守误差上限：先把两边的 95% CI 换成绝对 DPS，再相加，
+ * 最后相对 off / baseline 的 DPS 转成百分比。任一 CI 缺失、为 0 或非有限值就不出结论。
+ */
+export function conservativeDeltaCiPct(
+  on: Pick<SimRun, 'dps' | 'ci95Pct'>,
+  off: Pick<SimRun, 'dps' | 'ci95Pct'>,
+): number | null {
+  if (
+    !Number.isFinite(on.dps) || !Number.isFinite(off.dps) || off.dps <= 0 ||
+    on.ci95Pct == null || off.ci95Pct == null ||
+    !Number.isFinite(on.ci95Pct) || !Number.isFinite(off.ci95Pct) ||
+    on.ci95Pct <= 0 || off.ci95Pct <= 0
+  ) return null;
+  const ciOnAbs = on.dps * on.ci95Pct / 100;
+  const ciOffAbs = off.dps * off.ci95Pct / 100;
+  return (ciOnAbs + ciOffAbs) / off.dps * 100;
+}
+
+/** 只有同模型、同运行元数据的两条记录才能配对；缺字段不等于“相同”。 */
+export function isComparableRunPair(on: SimRun, off: SimRun): boolean {
+  const positive = (value: number | null): value is number => value != null && Number.isFinite(value) && value > 0;
+  return Boolean(
+    on.scenarioId && on.scenarioId === off.scenarioId &&
+    on.profileId && on.profileId === off.profileId &&
+    on.simc?.version && on.simc.version === off.simc?.version &&
+    on.simc.commit && on.simc.commit === off.simc?.commit &&
+    positive(on.samples) && on.samples === off.samples &&
+    positive(on.durationSec) && on.durationSec === off.durationSec &&
+    positive(on.targets) && on.targets === off.targets
+  );
+}
+
+export function burstPairFromRuns(on: SimRun, off: SimRun): BurstPair | null {
+  const ciPct = conservativeDeltaCiPct(on, off);
+  if (!isComparableRunPair(on, off) || ciPct == null || on.durationSec == null) return null;
+  return {
+    on,
+    off,
+    label: on.label ?? on.scenarioId ?? '未命名场景',
+    deltaDamage: (on.dps - off.dps) * on.durationSec,
+    deltaPct: ((on.dps - off.dps) / off.dps) * 100,
+    ciPct,
+  };
+}
+
+export const LEVERAGE: LeverageDoc = {
+  ...RAW_LEVERAGE,
+  rows: RAW_LEVERAGE.rows.map((row) => {
+    const variant = getRun(row.runId);
+    const baseline = getRun(`lev_base__${row.scenarioId}__${RAW_LEVERAGE.iterations}`);
+    const deltaCiPct = variant && baseline ? conservativeDeltaCiPct(variant, baseline) : null;
+    return {
+      ...row,
+      deltaCiPct,
+      beyondCi: deltaCiPct == null ? null : Math.abs(row.deltaPct) > deltaCiPct,
+    };
+  }),
+};
+
 export function getLog(logId: string): LogDoc | null {
   return LOGS.get(logId) ?? null;
 }
@@ -684,7 +754,7 @@ export function chaptersFor(specId: string, heroId = ARCHON_PROFILE_ID): Chapter
 
 /**
  * 把 chart.evidence 中列出的开 / 不开 runId 配成图所需的 pair。
- * 只返回两个 runId 都被显式列出、且 scenario 相同的配对。
+ * 两个 runId 必须被显式列出，并通过全部模型元数据与 CI 检查。
  */
 export function burstPairs(runIds: string[]): BurstPair[] {
   const scenarios = new Set(
@@ -700,15 +770,8 @@ export function burstPairs(runIds: string[]): BurstPair[] {
     if (!onId || !offId) continue;
     const on = getRun(onId);
     const off = getRun(offId);
-    if (!on || !off || on.durationSec == null) continue;
-    pairs.push({
-      on,
-      off,
-      label: on.label ?? scenarioId,
-      deltaDamage: (on.dps - off.dps) * on.durationSec,
-      deltaPct: ((on.dps - off.dps) / off.dps) * 100,
-      ciPct: (on.ci95Pct ?? 0) + (off.ci95Pct ?? 0),
-    });
+    const pair = on && off ? burstPairFromRuns(on, off) : null;
+    if (pair) pairs.push(pair);
   }
 
   return pairs.sort((a, b) => (a.on.targets ?? 0) - (b.on.targets ?? 0));

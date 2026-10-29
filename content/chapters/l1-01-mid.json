@@ -11,7 +11,6 @@
   "dangers": 2,
   "frequency": "35/84 波"
  },
- "claim": "5 只以上就开爆发。这一档一次换 9.3–11.6M，是同场 BOSS 波的 1.8–2.2 倍。",
  "chart": {
   "kind": "burst-bars",
   "title": "5 / 6 / 7 目标：开爆发和不开的差",

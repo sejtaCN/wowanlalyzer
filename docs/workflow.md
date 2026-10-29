@@ -257,10 +257,14 @@ L2 第③段不是独立数据：按当前选波的目标数映射到 L1-01/02/0
 
 ```bash
 npm run validate:content   # 数字必须有来源；runId 必须存在且带版本/迭代/CI；五段图契约齐全
-npx tsc -p tsconfig.json   # 类型
-npx vitest run             # 4 条测试（含"学习主线只依赖 learning-core"的导入图测试）
+npm run typecheck          # 类型
+npx vitest run             # 26 条测试（含"学习主线只依赖 learning-core"的导入图测试）
+npm run check:copy         # 可见文案：禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追
+npm run check:design       # 间距阶 / 颜色 token / 中文排版 / 无障碍
+npm run check:analysis     # 配装阳性对照 / 属性复现差 / 最优预测误差
+npm run check:adjacent     # 相邻两行交换：按 runId 重算差值、误差与判定
 npm run check:ui           # 先构建，再逐章查 11 章；图契约标 ready 的段必须有真图，缺图逐条警告
-npm run verify:gates       # 门禁自检：图契约坏样本与 UI 坏样本都必须变红
+npm run verify:gates       # 门禁自检 23 项：图契约 / UI / 分析 / 相邻 / 设计 / 文案的坏样本都必须变红
 npm run build              # 单文件产出
 ```
 

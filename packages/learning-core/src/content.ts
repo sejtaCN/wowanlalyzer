@@ -97,8 +97,8 @@ export interface Chapter {
   subtitle: string;
   /** ① 模型卡；L0 页可为 null（基础页没有波次模型） */
   model: WaveModelCard | null;
-  /** 每页唯一的那句"该怎么办" */
-  claim: string;
+  /** 可选的输出结论；保留时由页面从 runId / 日志派生数值并只显示一次。 */
+  claim?: string;
   /** ② 主图 */
   chart: ChartSpec;
   /** ① 的目标档动作预算；指向 trace runId 的 scenarioId */

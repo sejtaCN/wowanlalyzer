@@ -11,7 +11,7 @@
         { "id": "archon", "name": "执政官", "status": "active", "note": "当前唯一实装" },
         { "id": "voidweaver", "name": "虚空编织者", "status": "planned", "note": "该天赋数据待补" }
       ],
-      "baseline": "Midnight 12.1.5 · MID2",
+      "baseline": "12.1.5 版本 · 「MID2」",
       "note": "当前只做执政官；虚空编织者保留为后续待办"
     },
     {

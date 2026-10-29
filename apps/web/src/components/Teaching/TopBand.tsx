@@ -1,16 +1,9 @@
 import React from 'react';
 import type { Chapter } from '@learn';
 import { ALTAR_WAVES, burstPairs, getRun } from '../../data/content';
-import { useReaderRefresh } from '../../state/reader-refresh';
-import { burstAdvice, burstValueFor, parseTargets } from './rules';
-import DecisionFlow from './DecisionFlow';
+import { burstValueFor, chapterDecision } from './rules';
 
-/**
- * 顶图带：三格 = 这一波长什么样 / 一条数字结论 / 该做什么。
- *
- * 三格都从章节数据算：波次来自路线，数字来自 runId 配对，
- * 动作来自 rules.ts 的同一套阈值。缺数据的格子写"待补"，不写形容词。
- */
+/** 顶图带：当前场景、可核对的差值、主行动。三格都读取同一份规则与配对结果。 */
 
 /** 第一格的小图：整条路线的每一波，本档高亮 */
 function MiniRoute({ range, selectedPull }: { range: [number, number] | null; selectedPull?: number }) {
@@ -33,40 +26,30 @@ function MiniRoute({ range, selectedPull }: { range: [number, number] | null; se
 }
 
 export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; selectedPull?: number }) {
-  const readerRefresh = useReaderRefresh();
   const isRoute = chapter.level === 'L2';
   const routeWave = isRoute ? ALTAR_WAVES.waves.find((w) => w.pull === selectedPull) : null;
-  const modelKind = routeWave ? (routeWave.isBoss ? 'boss' : 'wave') : chapter.model?.kind ?? 'wave';
-  const range = modelKind === 'rhythm' ? null : routeWave ? [routeWave.mobCount, routeWave.mobCount] as [number, number] : parseTargets(chapter.model?.targets ?? null);
+  const { modelKind, range, advice } = chapterDecision(chapter, routeWave);
   const pairs = chapter.chart.kind === 'burst-bars' ? burstPairs(chapter.chart.runIds ?? []) : [];
-  const routeValue = routeWave ? burstValueFor(routeWave.mobCount, routeWave.isBoss, getRun) : null;
-  const routeOn = routeValue ? getRun(routeValue.onRunId) : null;
-  const routeOff = routeValue ? getRun(routeValue.offRunId) : null;
+  const routeValue = routeWave ? burstValueFor(routeWave, getRun) : null;
+  const routeOn = routeValue?.on ?? null;
+  const routeOff = routeValue?.off ?? null;
   const top = pairs[0];
   const deltaPct = routeValue?.deltaPct ?? top?.deltaPct ?? null;
   const deltaDamage = routeValue?.deltaDamage ?? top?.deltaDamage ?? null;
   const ciPct = routeValue?.ciPct ?? top?.ciPct ?? null;
   const samples = routeOn?.samples ?? top?.on.samples ?? null;
-  const routeType = routeWave ? (routeWave.isBoss ? 'BOSS' : routeWave.mobCount >= 10 ? '大波' : routeWave.mobCount >= 5 ? '中波' : '小波') : null;
-  const advice = modelKind === 'rhythm'
-    ? {
-        text: '看间隔',
-        tone: 'maybe' as const,
-        why: '两波间隔 <122.4s 给大波；≥122.4s 两波都能开',
-      }
-    : modelKind === 'adds'
-      ? {
-          text: '开',
-          tone: 'yes' as const,
-          why: '加怪窗口看爆发放大倍数，不套普通目标数阈值',
-        }
-      : range
-        ? burstAdvice({ mobCount: range[0], isBoss: modelKind === 'boss' })
-        : null;
+  const routeType = routeWave
+    ? routeWave.mobCount <= 0 ? '空波次' : routeWave.isBoss ? 'BOSS' : routeWave.mobCount >= 10 ? '大波' : routeWave.mobCount >= 5 ? '中波' : '小波'
+    : null;
+  const routeUnavailable = routeValue?.reason === 'empty'
+    ? '这一波次 没有怪，不出差值结论'
+    : routeValue?.reason === 'mixed-boss'
+      ? 'BOSS 混小怪，不套普通木桩差值'
+      : '配对或 CI 不完整，不出差值结论';
 
   return (
-    <div className={`topband${readerRefresh ? ' reader-topband' : ''}`}>
-      <div className={`tb-cell${readerRefresh ? ' reader-situation' : ''}`}>
+    <div className="topband reader-topband">
+      <div className="tb-cell reader-situation">
         <div className="tb-k">{isRoute ? '当前选中的波' : '这一波长什么样'}</div>
         <MiniRoute range={range} selectedPull={isRoute ? routeWave?.pull : undefined} />
         <div className="tb-v">
@@ -77,28 +60,38 @@ export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; s
         </div>
       </div>
 
-      <div className={`tb-cell${readerRefresh ? ' reader-value' : ''}`}>
+      <div className="tb-cell reader-value">
         <div className="tb-k">一条数字结论</div>
         <div className="tb-big">
-          {deltaPct != null ? `+${deltaPct.toFixed(1)}%` : chapter.model?.frequency ?? '—'}
+          {deltaPct != null ? `+${deltaPct.toFixed(1)}%` : routeWave ? '—' : chapter.model?.frequency ?? '—'}
         </div>
-        {routeOn && routeOff || top ? (
+        {(routeOn && routeOff) || top ? (
           <div className="tb-pair" aria-hidden>
             <i className="on" style={{ width: `${((routeOn?.dps ?? top?.on.dps ?? 0) / Math.max(routeOn?.dps ?? top?.on.dps ?? 0, routeOff?.dps ?? top?.off.dps ?? 0, 1)) * 100}%` }} />
             <i className="off" style={{ width: `${((routeOff?.dps ?? top?.off.dps ?? 0) / Math.max(routeOn?.dps ?? top?.on.dps ?? 0, routeOff?.dps ?? top?.off.dps ?? 0, 1)) * 100}%` }} />
           </div>
         ) : null}
         <div className="tb-v">
-          {deltaDamage != null ? `一次爆发 +${(deltaDamage / 1e6).toFixed(1)}M` : top === null && pairs.length === 0 && chapter.chart.kind === 'burst-bars' ? '这组 runId 配不成对' : '本章结论见正文'}
+          {deltaDamage != null
+            ? `一次爆发 +${(deltaDamage / 1e6).toFixed(1)}M`
+            : routeWave
+              ? routeUnavailable
+              : !top && pairs.length === 0 && chapter.chart.kind === 'burst-bars'
+                ? '这组记录配不成对'
+                : '本章结论见正文'}
         </div>
         <div className="tb-sub">
-          {ciPct != null ? `±${ciPct.toFixed(2)}% (95% CI, n=${samples ?? '—'})` : '来源：路线数据 / 优先级表'}
+          {ciPct != null
+            ? routeValue?.approximation
+              ? `近似 · 按 ${routeValue.approximation.simulatedTargets} 目标档 · 保守误差上限 ±${ciPct.toFixed(2)}% · n=${samples ?? '—'}`
+              : `保守误差上限 ±${ciPct.toFixed(2)}% · n=${samples ?? '—'}`
+            : routeWave ? routeUnavailable : '来源：路线数据 / 优先级表'}
         </div>
       </div>
 
-      <div className={`tb-cell${readerRefresh ? ' reader-action' : ''}`}>
+      <div className="tb-cell reader-action">
         <div className="tb-k">该做什么</div>
-        {readerRefresh && advice ? (
+        {advice ? (
           <>
             <div className={`reader-verdict ${advice.tone}`}>{advice.text}</div>
             <div className="reader-verdict-why">{advice.why}</div>
@@ -111,14 +104,7 @@ export default function TopBand({ chapter, selectedPull }: { chapter: Chapter; s
             </div>
           </>
         ) : (
-          <DecisionFlow
-            targets={routeWave ? String(routeWave.mobCount) : chapter.model?.targets ?? null}
-            durationSec={routeWave ? 30 : chapter.model?.durationSec ?? null}
-            isBoss={modelKind === 'boss'}
-            isAdds={modelKind === 'adds'}
-            isRhythm={modelKind === 'rhythm'}
-            compact
-          />
+          <div className="figempty" data-figure-kind="missing">这一章没有波次模型：L0 不画波次图。</div>
         )}
       </div>
     </div>

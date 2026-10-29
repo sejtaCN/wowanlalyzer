@@ -2,8 +2,8 @@
   "source": "content/profiles/MID2_shadow_archon.simc",
   "hero": "archon",
   "gameVersion": "MID2",
-  "generatedAt": "2026-10-27T17:29:18.630Z",
-  "note": "直接从 APL 抽取，条件原文与人话并列；人话只改写法，不改逻辑，也不补\"为什么\"。有出处的名字用中文，没出处的用「」标成标识符。",
+  "generatedAt": "2026-10-29T05:52:44.806Z",
+  "note": "直接从 APL 抽取，条件原文与人话并列；人话只改写法，不改逻辑，也不补\"为什么\"。有出处的名字用中文，没出处的用「」标成标识符。dead 非空的行表示本构建用不上（种族/装备/队友/条件/天赋），原因与施放次数一并给出。",
   "sections": [
     {
       "key": "actions.main",
@@ -97,7 +97,12 @@
           ],
           "targetSelectRaw": "max:(dot.shadow_word_madness.remains*1000+target.time_to_die)",
           "targetSelectZh": "取最大：（暗言术：癫剩余时间×1000 + 目标剩余存活）",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "talent",
+            "reason": "天赋没点，本构建的技能集里没有它",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.main",
@@ -137,7 +142,12 @@
           "conditionGroups": [],
           "targetSelectRaw": "max:(dot.shadow_word_madness.remains*1000+target.time_to_die)",
           "targetSelectZh": "取最大：（暗言术：癫剩余时间×1000 + 目标剩余存活）",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "talent",
+            "reason": "天赋没点，本构建的技能集里没有它",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.main",
@@ -336,7 +346,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "race",
+            "reason": "种族技能（矮人/黑铁矮人专属），本构建是虚空精灵",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.cds",
@@ -351,7 +366,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "race",
+            "reason": "种族技能（巨魔/赞达拉巨魔专属），本构建是虚空精灵",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.cds",
@@ -366,7 +386,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "race",
+            "reason": "种族技能（兽人/玛格汉兽人专属），本构建是虚空精灵",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.cds",
@@ -381,7 +406,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "race",
+            "reason": "种族技能（牛头人/高岭牛头人专属），本构建是虚空精灵",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.cds",
@@ -395,7 +425,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "external",
+            "reason": "要队友施放，单人模拟拿不到",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.cds",
@@ -410,7 +445,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "external",
+            "reason": "要队友施放，单人模拟拿不到",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.cds",
@@ -450,7 +490,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "gear",
+            "reason": "指定饰品没带（「stormbound_emblem_of_dazar」）",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.cds",
@@ -478,7 +523,12 @@
           ],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "condition",
+            "reason": "条件没触发：血量没降到 75% 以下",
+            "evidence": "8 个场景 0 次施放"
+          }
         }
       ]
     },
@@ -510,7 +560,12 @@
           "conditionGroups": [],
           "targetSelectRaw": "",
           "targetSelectZh": "",
-          "enabled": true
+          "enabled": false,
+          "dead": {
+            "kind": "race",
+            "reason": "种族技能（血精灵专属），本构建是虚空精灵",
+            "evidence": "8 个场景 0 次施放"
+          }
         },
         {
           "section": "actions.precombat",

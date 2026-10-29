@@ -117,6 +117,15 @@ function statsOf(j) {
 
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
 
+/** 差值保守误差上限；任一 CI 缺失、为 0 或非有限值就返回 null。 */
+function conservativeDeltaCiPct(on, off) {
+  if (!Number.isFinite(on?.mean) || !Number.isFinite(off?.mean) || off.mean <= 0) return null;
+  if (!Number.isFinite(on?.ci95Pct) || !Number.isFinite(off?.ci95Pct) || on.ci95Pct <= 0 || off.ci95Pct <= 0) return null;
+  const ciOnAbs = on.mean * on.ci95Pct / 100;
+  const ciOffAbs = off.mean * off.ci95Pct / 100;
+  return (ciOnAbs + ciOffAbs) / off.mean * 100;
+}
+
 async function main() {
   mkdirSync(TMP, { recursive: true });
   mkdirSync(ANALYSIS, { recursive: true });
@@ -142,7 +151,7 @@ async function main() {
     writeFileSync(
       join(SIMS, `lev_base__${sc.id}__${ITERS}.json`),
       JSON.stringify({
-        runId: `lev_base__${sc.id}__${ITERS}`, layer: 'A', kind: 'leverage-baseline', hero: HERO,
+        runId: `lev_base__${sc.id}__${ITERS}`, layer: 'A', kind: 'leverage-baseline', hero: HERO, profileId: HERO, profileFile: PROFILE,
         scenarioId: sc.id, scenarioLabel: sc.label, durationSec: sc.maxTime, targets: sc.targets,
         dps: s, simc: { version: j.version ?? null, gitRevision: j.git_revision ?? null },
         generatedAt: new Date().toISOString(),
@@ -170,23 +179,22 @@ async function main() {
       const s = statsOf(j);
       if (!s) { console.log('无结果'); continue; }
       const deltaPct = ((s.mean - base.mean) / base.mean) * 100;
-      const ciPct = (s.ci95Pct ?? 0) + (base.ci95Pct ?? 0);
+      const ciPct = conservativeDeltaCiPct(s, base);
       const runId = `lev_${skill}__${sc.id}__${ITERS}`;
       const rec = {
-        runId, layer: 'A', kind: 'leverage', hero: HERO, skill,
+        runId, layer: 'A', kind: 'leverage', hero: HERO, profileId: HERO, profileFile: PROFILE, skill,
         scenarioId: sc.id, scenarioLabel: sc.label, durationSec: sc.maxTime, targets: sc.targets,
         disabledLines: touched,
         dps: s, baselineDps: base,
         deltaPct: Math.round(deltaPct * 100) / 100,
-        deltaCiPct: Math.round(ciPct * 100) / 100,
-        /** 差值超出两倍误差带才算"真的有影响" */
-        beyondCi: Math.abs(deltaPct) > ciPct,
+        deltaCiPct: ciPct == null ? null : Math.round(ciPct * 100) / 100,
+        beyondCi: ciPct == null ? null : Math.abs(deltaPct) > ciPct,
         simc: { version: j.version ?? null, gitRevision: j.git_revision ?? null },
         generatedAt: new Date().toISOString(),
       };
       writeFileSync(join(SIMS, `${runId}.json`), JSON.stringify(rec, null, 2) + '\n');
       rows.push(rec);
-      console.log(`Δ ${deltaPct.toFixed(2)}% ±${ciPct.toFixed(2)}%`);
+      console.log(ciPct == null ? 'CI 不完整，不出差值结论' : `Δ ${deltaPct.toFixed(2)}% · 保守误差上限 ±${ciPct.toFixed(2)}%`);
     }
   }
 
@@ -196,7 +204,8 @@ async function main() {
     iterations: ITERS,
     method:
       '逐技能从 APL 注释掉该技能的全部动作行，重跑同一场景；差值 = 禁用后 DPS 相对基线。' +
-      '读法：这是「少这一个技能、其他照常打」的代价，不是它的全部伤害占比。',
+      '读法：这是「少这一个技能、其他照常打」的代价，不是它的全部伤害占比。' +
+      '差值使用保守误差上限：两边绝对 95% CI 相加后相对基线 DPS；CI 不完整时不判断显著性。',
     scenarios: SCENARIOS.map((s) => ({ id: s.id, label: s.label, targets: s.targets, maxTime: s.maxTime })),
     baseline,
     rows: rows.sort((a, b) => a.deltaPct - b.deltaPct),

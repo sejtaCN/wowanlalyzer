@@ -3,9 +3,8 @@
  "level": "L0",
  "order": 2,
  "title": "技能清单",
- "subtitle": "先认出现最多的两个，其余往后放",
+ "subtitle": "哪些技能反复出现，值得先认清",
  "model": null,
- "claim": "先记触须猛击和暗言术：灭，各占 5 条规则。24 个技能里其余的大多只在一个条件下出现，认错代价不大。",
  "chart": {
   "kind": "skill-cards",
   "title": "每个技能在优先级表里出现几次（多的先认）"
@@ -31,8 +30,8 @@
    },
    {
     "skill": "arcane_torrent",
-    "reason": "用来回资源，循环稳了再记",
-    "evidence": "优先级表：「actions.precombat」段"
+    "reason": "血精灵种族技能，回资源用；本角色是虚空精灵，换种族才用得上",
+    "evidence": "优先级表：「actions.precombat」段；模拟 8 个场景 0 次施放"
    }
   ]
  },

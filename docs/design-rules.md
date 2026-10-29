@@ -206,6 +206,8 @@ npm run check:design
 | `check:ui` | 真实 DOM：字号档位、内容宽、五段结构、图契约 |
 | `check:copy` | 文案：禁用词、术语、AI 腔、长度预算、依据可追 |
 | `check:doc` | 交付文档与落盘 JSON 逐字一致 |
+| `check:analysis` | 配装阳性对照、属性复现差、最优预测误差 |
+| `check:adjacent` | 相邻两行交换的差值、误差与判定按 runId 重算 |
 | `validate:content` | 数据：数字有来源、runId 存在 |
 
 ---

@@ -1,0 +1,93 @@
+{
+  "runId": "adj_s1__add5__5000_r1",
+  "layer": "A",
+  "kind": "adjacent-swap",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "1312cfbd5037534c",
+  "baseProfileSha256": "ad9cdd996cff3505",
+  "variantId": "s1",
+  "variantLabel": "同条件的两个挂 DoT 动作：触手猛击 ↔ 吸血鬼之触",
+  "swapGroup": "s1",
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "rep": 1,
+  "iterations": 5007,
+  "dps": {
+    "mean": 927448.52,
+    "ci95": 1234.96,
+    "ci95Pct": 0.13,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "mode": "swap-two-adjacent-lines",
+    "lines": [
+      {
+        "lineNo": 78,
+        "text": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+      },
+      {
+        "lineNo": 79,
+        "text": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+      }
+    ],
+    "after": [
+      {
+        "lineNo": 78,
+        "text": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+      },
+      {
+        "lineNo": 79,
+        "text": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+      }
+    ]
+  },
+  "spellTrace": {
+    "tentacle_slam": {
+      "present": true,
+      "executions": 17442,
+      "damageMean": 0
+    },
+    "vampiric_touch": {
+      "present": true,
+      "executions": 111545,
+      "damageMean": 1835943
+    },
+    "void_volley": {
+      "present": true,
+      "executions": 65730,
+      "damageMean": 0
+    },
+    "void_blast": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "mind_flay": {
+      "present": true,
+      "executions": 7134,
+      "damageMean": 125986
+    },
+    "shadow_word_death": {
+      "present": true,
+      "executions": 4999,
+      "damageMean": 206595
+    },
+    "undefined": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    }
+  },
+  "generatedAt": "2026-10-29T02:21:34.862Z"
+}

@@ -76,7 +76,7 @@ const WAVES = [
   { id: 'w45_3', label: '3 目标 45s', fightStyle: 'Patchwerk', targets: 3, maxTime: 45 },
   { id: 'w45_1', label: '单体 45s', fightStyle: 'Patchwerk', targets: 1, maxTime: 45 },
   { id: 'w90_1', label: '单体 90s', fightStyle: 'Patchwerk', targets: 1, maxTime: 90 },
-  // 路线波次用：目标数取自 Altar of Fangs 的 14 波，超过 8 只按 8 计（模拟上限）
+  // 路线波次用：目标数取自 Altar of Fangs 的 15 波，超过 8 只按 8 计（模拟上限）
   { id: 'w90_1b', label: 'BOSS 单体 90s', fightStyle: 'Patchwerk', targets: 1, maxTime: 90 },
   { id: 'w30_2', label: '2 目标 30s', fightStyle: 'Patchwerk', targets: 2, maxTime: 30 },
   { id: 'w30_6', label: '6 目标 30s', fightStyle: 'Patchwerk', targets: 6, maxTime: 30 },
@@ -136,6 +136,15 @@ function runSimc(profilePath, scenario, iters) {
 }
 
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
+
+/** 差值保守误差上限；任一 CI 缺失、为 0 或非有限值就返回 null。 */
+function conservativeDeltaCiPct(on, off) {
+  if (!Number.isFinite(on?.mean) || !Number.isFinite(off?.mean) || off.mean <= 0) return null;
+  if (!Number.isFinite(on?.ci95Pct) || !Number.isFinite(off?.ci95Pct) || on.ci95Pct <= 0 || off.ci95Pct <= 0) return null;
+  const ciOnAbs = on.mean * on.ci95Pct / 100;
+  const ciOffAbs = off.mean * off.ci95Pct / 100;
+  return (ciOnAbs + ciOffAbs) / off.mean * 100;
+}
 
 async function main() {
   mkdirSync(TMP, { recursive: true });
@@ -210,12 +219,13 @@ async function main() {
     const base = rows.find((r) => r.value === active.baseValue) ?? rows[0];
     if (!base) continue;
     for (const r of rows) {
+      const ciPct = conservativeDeltaCiPct(r.dps, base.dps);
       out.deltas.push({
         scenarioId: scenario.id,
         value: r.value,
         baseValue: base.value,
-        deltaPct: Math.round(((r.dps.mean - base.dps.mean) / base.dps.mean) * 10000) / 100,
-        ciPct: Math.round((Math.hypot(r.dps.ci95 ?? 0, base.dps.ci95 ?? 0) / base.dps.mean) * 10000) / 100,
+        deltaPct: ciPct == null ? null : Math.round(((r.dps.mean - base.dps.mean) / base.dps.mean) * 10000) / 100,
+        ciPct: ciPct == null ? null : Math.round(ciPct * 100) / 100,
         runId: r.runId,
         baseRunId: base.runId,
       });
@@ -226,7 +236,9 @@ async function main() {
     const rows = out.deltas.filter((d) => d.scenarioId === scenario.id).sort((a, b) => a.value - b.value);
     console.log(`\n${scenario.label}`);
     for (const d of rows) {
-      console.log(`  ≥${String(d.value).padStart(2)}s  ${(d.deltaPct > 0 ? '+' : '') + d.deltaPct}%  ±${d.ciPct}`);
+      console.log(d.deltaPct == null
+        ? `  ≥${String(d.value).padStart(2)}s  CI 不完整，不出差值结论`
+        : `  ≥${String(d.value).padStart(2)}s  ${(d.deltaPct > 0 ? '+' : '') + d.deltaPct}% · 保守误差上限 ±${d.ciPct}%`);
     }
   }
   console.log(`\n写出 ${results.length} 个决策 runId`);

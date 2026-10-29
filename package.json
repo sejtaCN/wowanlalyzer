@@ -21,6 +21,8 @@
     "check:doc": "node scripts/check-doc-sync.mjs",
     "check:doc:selftest": "node scripts/check-doc-sync.mjs --self-test",
     "check:design": "node scripts/check-design.mjs",
+    "check:analysis": "node scripts/check-analysis.mjs",
+    "check:adjacent": "node scripts/check-adjacent.mjs",
     "check:ui": "npm run build && node scripts/check-ui.mjs",
     "verify:gates": "npm run build && node scripts/verify-gates.mjs",
     "sims:summary": "node scripts/sims-summary.mjs",
@@ -31,6 +33,7 @@
     "analysis:interactions": "node scripts/analyze-interactions.mjs",
     "analysis:leverage": "node scripts/leverage.mjs",
     "analysis:share": "node scripts/ability-share.mjs",
+    "analysis:timelines": "node scripts/simulated-timelines.mjs",
     "gearing": "node scripts/gearing-run.mjs",
     "statopt": "node scripts/stat-opt.mjs",
     "phases": "node scripts/infer-phases.mjs"

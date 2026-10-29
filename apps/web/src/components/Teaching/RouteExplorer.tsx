@@ -1,12 +1,11 @@
 import React from 'react';
 import type { RouteWave } from '../../data/content';
 import { ALTAR_WAVES, getRun } from '../../data/content';
-import { useReaderRefresh } from '../../state/reader-refresh';
-import { burstAdvice, burstRunPair, burstValueFor } from './rules';
+import { burstAdvice, burstValueFor } from './rules';
 
-const TYPE = (w: RouteWave) => (w.isBoss ? 'BOSS' : w.mobCount >= 10 ? '大波' : w.mobCount >= 5 ? '中波' : '小波');
+const TYPE = (w: RouteWave) => (w.mobCount <= 0 ? '空波次' : w.isBoss ? 'BOSS' : w.mobCount >= 10 ? '大波' : w.mobCount >= 5 ? '中波' : '小波');
 
-/** 路线总览：真实 14 波，柱高 = 怪数，色 = 建议；点柱切当前波，不标地图坐标。 */
+/** 路线总览：真实波次，柱高 = 怪数，色 = 建议；点柱切当前波，不标地图坐标。 */
 export function RouteExplorer({
   selectedPull,
   onSelect,
@@ -18,7 +17,7 @@ export function RouteExplorer({
   const max = Math.max(...waves.map((w) => w.mobCount));
   return (
     <div className="route-explorer" data-figure-kind="route-strip">
-      <div className="route-strip" role="group" aria-label="祭牙祭坛 14 波，选择一波查看">
+      <div className="route-strip" role="group" aria-label={`祭牙祭坛 ${ALTAR_WAVES.pulls} 波，选择一波查看`}>
         {waves.map((w) => {
           const adv = burstAdvice(w);
           const active = w.pull === selectedPull;
@@ -49,18 +48,15 @@ export function RouteExplorer({
   );
 }
 
-/** 当前波的细节：只显示组成、目标档与一次爆发的开/不开两行。 */
+/** 当前波的细节：组成与合法配对共用同一取值结果；空波与混合 BOSS 不出差值。 */
 export function SelectedWavePanel({ wave }: { wave: RouteWave }) {
-  const readerRefresh = useReaderRefresh();
-  const value = wave.isBoss && (wave.trashMobCount ?? wave.mobCount) > 0
-    ? { ...burstRunPair(wave.mobCount, true), deltaDamage: null, deltaPct: null, ciPct: null }
-    : burstValueFor(wave.mobCount, wave.isBoss, getRun);
-  const on = getRun(value.onRunId);
-  const off = getRun(value.offRunId);
+  const value = burstValueFor(wave, getRun);
+  const on = value.on;
+  const off = value.off;
   const adv = burstAdvice(wave);
   const maxDps = Math.max(on?.dps ?? 0, off?.dps ?? 0) || 1;
   return (
-    <div className="selected-wave" data-figure-kind="selected-wave">
+    <div className="selected-wave" data-figure-kind="selected-wave" data-burst-reason={value.reason ?? 'paired'}>
       <div className="sw-top">
         <span className="sw-pull">第 {wave.pull} 波{wave.encounter ? ` · ${wave.encounter}` : ''}</span>
         <span className="sw-kind">{TYPE(wave)} · {wave.mobCount} 只</span>
@@ -73,7 +69,7 @@ export function SelectedWavePanel({ wave }: { wave: RouteWave }) {
           </span>
         ))}
       </div>
-      {on && off && value.deltaDamage != null && value.deltaPct != null ? (
+      {on && off && value.deltaDamage != null && value.deltaPct != null && value.ciPct != null ? (
         <>
           <div className="bars sw-bars">
             <div className="brow">
@@ -90,27 +86,27 @@ export function SelectedWavePanel({ wave }: { wave: RouteWave }) {
           <div className="sw-read">
             <span>差 <b>+{value.deltaPct.toFixed(1)}%</b></span>
             <span>一次多 <b>+{(value.deltaDamage / 1e6).toFixed(1)}M</b></span>
-            <span>±{value.ciPct?.toFixed(2)}%（95% CI，n={on.samples ?? '—'}）</span>
+            <span>保守误差上限 ±{value.ciPct.toFixed(2)}% · n={on.samples ?? '—'}</span>
           </div>
-          {readerRefresh ? (
-            <details className="sw-raw">
-              <summary>查看配对记录</summary>
-              <div className="note">开：{value.onRunId}</div>
-              <div className="note">不开：{value.offRunId}</div>
-            </details>
-          ) : (
-            <div className="sw-read">
-              <span className="mono">开：{value.onRunId}</span>
-              <span className="mono">不开：{value.offRunId}</span>
-            </div>
-          )}
-          {wave.mobCount > 8 ? <p className="sw-note">这一波 {wave.mobCount} 只，模拟按 8 只档计；数值是保守下限。</p> : null}
+          <details className="sw-raw">
+            <summary>查看配对记录</summary>
+            <div className="note">开：{value.onRunId}</div>
+            <div className="note">不开：{value.offRunId}</div>
+          </details>
+          {value.approximation ? (
+            <p className="sw-note">
+              本波 {value.approximation.actualMobs} 只（含 {value.approximation.bossCount} 只 BOSS），木桩复原不了这个组合；
+              差值按 {value.approximation.simulatedTargets} 目标档近似，只作方向参考。
+            </p>
+          ) : wave.mobCount > 8 ? <p className="sw-note">这一波 {wave.mobCount} 只，模拟按 8 只档计；数值是保守下限。</p> : null}
         </>
       ) : (
         <div className="figempty">
-          {wave.isBoss
-            ? '这一波是 BOSS 波，当前的单体模拟不能直接当作这场 BOSS 的增量；这里不补假数。'
-            : '这一波的配对模拟缺失，数值待补。'}
+          {value.reason === 'empty'
+            ? '这一波次 没有怪，不匹配模拟场景，也不显示爆发差值。'
+            : value.reason === 'mixed-boss'
+              ? 'BOSS 与小怪同波，现有单体或多目标木桩都不能代表这一组合；这里不显示差值。'
+              : '配对元数据或 CI 不完整，不出差值结论。'}
         </div>
       )}
     </div>

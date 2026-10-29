@@ -3,7 +3,7 @@
  "route": "Skandar Tank - Altar of Fangs (+10 to +16 Keys)",
  "source": "keystone.guru",
  "sourceUrl": "https://keystone.guru/route/altar-of-fangs/xwt8Pza/skandar-tank-altar-of-fangs-10-to-16-keys",
- "fetchedAt": "2026-10-28",
+ "fetchedAt": "2026-10-29",
  "pulls": 15,
  "totalMobs": 108,
  "waves": [
@@ -145,6 +145,7 @@
    "skippable": 0,
    "forcesPct": 9.4,
    "scenarioId": "w30_8",
+   "approximation": null,
    "burst": null,
    "sourcePull": 1
   },
@@ -234,6 +235,7 @@
    "skippable": 0,
    "forcesPct": 16.3,
    "scenarioId": "w30_6",
+   "approximation": null,
    "burst": null,
    "sourcePull": 2
   },
@@ -351,6 +353,7 @@
    "skippable": 0,
    "forcesPct": 23.5,
    "scenarioId": "w30_8",
+   "approximation": null,
    "burst": null,
    "sourcePull": 3
   },
@@ -458,6 +461,7 @@
    "skippable": 0,
    "forcesPct": 31.9,
    "scenarioId": "w30_8",
+   "approximation": null,
    "burst": null,
    "sourcePull": 4
   },
@@ -541,6 +545,7 @@
    "skippable": 0,
    "forcesPct": 37.9,
    "scenarioId": "w30_5",
+   "approximation": null,
    "burst": null,
    "sourcePull": 5
   },
@@ -586,6 +591,7 @@
    "skippable": 0,
    "forcesPct": 44.1,
    "scenarioId": "w30_2",
+   "approximation": null,
    "burst": null,
    "sourcePull": 6
   },
@@ -625,6 +631,7 @@
    "skippable": 0,
    "forcesPct": 44.1,
    "scenarioId": "w90_1b",
+   "approximation": null,
    "burst": null,
    "sourcePull": 7
   },
@@ -720,6 +727,7 @@
    "skippable": 0,
    "forcesPct": 51.3,
    "scenarioId": "w30_7",
+   "approximation": null,
    "burst": null,
    "sourcePull": 8
   },
@@ -833,6 +841,7 @@
    "skippable": 0,
    "forcesPct": 60.3,
    "scenarioId": "w30_8",
+   "approximation": null,
    "burst": null,
    "sourcePull": 9
   },
@@ -972,7 +981,14 @@
    "dangerous": [],
    "skippable": 0,
    "forcesPct": 67,
-   "scenarioId": null,
+   "scenarioId": "w30_8",
+   "approximation": {
+    "kind": "desired-targets",
+    "actualMobs": 11,
+    "bossCount": 1,
+    "trashMobCount": 10,
+    "simulatedTargets": 8
+   },
    "burst": null,
    "sourcePull": 10
   },
@@ -1086,6 +1102,7 @@
    "skippable": 0,
    "forcesPct": 77.1,
    "scenarioId": "w30_8",
+   "approximation": null,
    "burst": null,
    "sourcePull": 11
   },
@@ -1105,7 +1122,8 @@
    "dangerous": [],
    "skippable": 0,
    "forcesPct": 77.1,
-   "scenarioId": "w30_2",
+   "scenarioId": null,
+   "approximation": null,
    "burst": null,
    "sourcePull": 12
   },
@@ -1225,6 +1243,7 @@
    "skippable": 0,
    "forcesPct": 83.4,
    "scenarioId": "w30_8",
+   "approximation": null,
    "burst": null,
    "sourcePull": 13
   },
@@ -1320,6 +1339,7 @@
    "skippable": 0,
    "forcesPct": 90.6,
    "scenarioId": "w30_7",
+   "approximation": null,
    "burst": null,
    "sourcePull": 14
   },
@@ -1434,7 +1454,14 @@
    "dangerous": [],
    "skippable": 0,
    "forcesPct": 101,
-   "scenarioId": null,
+   "scenarioId": "w30_7",
+   "approximation": {
+    "kind": "desired-targets",
+    "actualMobs": 7,
+    "bossCount": 1,
+    "trashMobCount": 6,
+    "simulatedTargets": 7
+   },
    "burst": null,
    "sourcePull": 15
   }

@@ -8,6 +8,21 @@
     "secondary": "NGA 魔兽世界板块精华攻略帖（如 tid=46398013 萌面人搬运 Maxroll 12.0）",
     "localMirror": "content/guides/sources/nga-maxroll-12.0.md"
   },
+  "coverage": {
+    "applicationEntry": "apps/web/src/App.tsx",
+    "visibleJson": [
+      "content/coaching/general.json",
+      "content/specs.json",
+      "content/guides/sources-summary.json",
+      "content/guides/crosscheck-archon.json"
+    ],
+    "deferred": [
+      {
+        "label": "ComingSoon",
+        "path": "apps/web/src/views/ComingSoon.tsx"
+      }
+    ]
+  },
   "principles": [
     "结论前置：先给该做什么，再给为什么，最后给数据。",
     "删掉分析过程与设问，只留结论。",
@@ -73,6 +88,9 @@
       "UNIT",
       "DIED",
       "Maxroll",
+      "Method",
+      "Method.gg",
+      "Icy Veins",
       "A/B"
     ],
     "mustWrapInBrackets": [

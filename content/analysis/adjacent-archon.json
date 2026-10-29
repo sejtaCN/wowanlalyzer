@@ -1,0 +1,1132 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-29T02:23:43.339Z",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "ad9cdd996cff3505",
+  "priorityTable": "content/guides/priority-table.json",
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "method": {
+    "design": "单对相邻行交换，其余行逐字不变；before 一律是未改动 profile 的同场景同 rep 跑分。",
+    "pairing": "hero / profileId / 场景 / 目标数 / 时长 / 迭代 / 样本数 / SimC 版本与 commit 必须逐项相同，否则不出差值。",
+    "errorBound": "ciOnAbs = on.dps * on.ci95Pct / 100；ciOffAbs = off.dps * off.ci95Pct / 100；deltaCiPct = (ciOnAbs + ciOffAbs) / off.dps * 100。",
+    "decisionRule": "|差值| > 保守误差上限 且 REPS 次方向一致 → 该场景有可测影响；至少两个场景同号才升格为整组有效，单场景有效记为 scenario_specific。",
+    "iterations": 5000,
+    "threads": 8,
+    "reps": 2,
+    "scenarios": [
+      {
+        "id": "st",
+        "label": "单体 300s",
+        "targets": 1,
+        "durationSec": 300,
+        "fightStyle": "Patchwerk"
+      },
+      {
+        "id": "t3",
+        "label": "3 目标 300s",
+        "targets": 3,
+        "durationSec": 300,
+        "fightStyle": "Patchwerk"
+      },
+      {
+        "id": "add5",
+        "label": "5 小怪 30s",
+        "targets": 5,
+        "durationSec": 30,
+        "fightStyle": "Patchwerk"
+      },
+      {
+        "id": "w30_8",
+        "label": "8 目标 30s",
+        "targets": 8,
+        "durationSec": 30,
+        "fightStyle": "Patchwerk"
+      }
+    ]
+  },
+  "controls": {
+    "rerun": {
+      "perScenario": {
+        "st": {
+          "runIds": [
+            "adj_base__st__5000_r1",
+            "adj_base__st__5000_r2"
+          ],
+          "deltaPct": 0.02,
+          "ciPct": 0.12,
+          "verdict": "within_noise",
+          "note": "同一份 profile 重跑两次；若判成 effective，说明这套阈值太松。"
+        },
+        "t3": {
+          "runIds": [
+            "adj_base__t3__5000_r1",
+            "adj_base__t3__5000_r2"
+          ],
+          "deltaPct": 0.01,
+          "ciPct": 0.1,
+          "verdict": "within_noise",
+          "note": "同一份 profile 重跑两次；若判成 effective，说明这套阈值太松。"
+        },
+        "add5": {
+          "runIds": [
+            "adj_base__add5__5000_r1",
+            "adj_base__add5__5000_r2"
+          ],
+          "deltaPct": -0.1,
+          "ciPct": 0.26,
+          "verdict": "within_noise",
+          "note": "同一份 profile 重跑两次；若判成 effective，说明这套阈值太松。"
+        },
+        "w30_8": {
+          "runIds": [
+            "adj_base__w30_8__5000_r1",
+            "adj_base__w30_8__5000_r2"
+          ],
+          "deltaPct": -0.03,
+          "ciPct": 0.28,
+          "verdict": "within_noise",
+          "note": "同一份 profile 重跑两次；若判成 effective，说明这套阈值太松。"
+        }
+      }
+    },
+    "positive": {
+      "perScenario": {
+        "st": {
+          "verdict": "effective",
+          "deltaPct": -73.47,
+          "ciPct": 0.11,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__st__5000_r1",
+              "afterRunId": "adj_ctl_pos__st__5000_r1",
+              "beforeDps": 231317.09,
+              "afterDps": 61348.46,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.17,
+              "deltaPct": -73.48,
+              "ciPct": 0.11,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__st__5000_r2",
+              "afterRunId": "adj_ctl_pos__st__5000_r2",
+              "beforeDps": 231359.94,
+              "afterDps": 61387,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.17,
+              "deltaPct": -73.47,
+              "ciPct": 0.11,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "t3": {
+          "verdict": "effective",
+          "deltaPct": -79.56,
+          "ciPct": 0.09,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__t3__5000_r1",
+              "afterRunId": "adj_ctl_pos__t3__5000_r1",
+              "beforeDps": 413060.33,
+              "afterDps": 84437.2,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.22,
+              "deltaPct": -79.56,
+              "ciPct": 0.09,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__t3__5000_r2",
+              "afterRunId": "adj_ctl_pos__t3__5000_r2",
+              "beforeDps": 413083.82,
+              "afterDps": 84403.13,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.22,
+              "deltaPct": -79.57,
+              "ciPct": 0.09,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "add5": {
+          "verdict": "effective",
+          "deltaPct": -27.51,
+          "ciPct": 0.27,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__add5__5000_r1",
+              "afterRunId": "adj_ctl_pos__add5__5000_r1",
+              "beforeDps": 1044809.04,
+              "afterDps": 756655.41,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.19,
+              "deltaPct": -27.58,
+              "ciPct": 0.27,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__add5__5000_r2",
+              "afterRunId": "adj_ctl_pos__add5__5000_r2",
+              "beforeDps": 1043733.6,
+              "afterDps": 757338.84,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.19,
+              "deltaPct": -27.44,
+              "ciPct": 0.27,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "w30_8": {
+          "verdict": "effective",
+          "deltaPct": -23.48,
+          "ciPct": 0.32,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__w30_8__5000_r1",
+              "afterRunId": "adj_ctl_pos__w30_8__5000_r1",
+              "beforeDps": 1386576.86,
+              "afterDps": 1060225.47,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.24,
+              "deltaPct": -23.54,
+              "ciPct": 0.32,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__w30_8__5000_r2",
+              "afterRunId": "adj_ctl_pos__w30_8__5000_r2",
+              "beforeDps": 1386183.43,
+              "afterDps": 1061594.35,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.24,
+              "deltaPct": -23.42,
+              "ciPct": 0.32,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        }
+      },
+      "verdict": "effective",
+      "deltaPct": -73.47,
+      "guideClaim": {
+        "chapter": "l0-01-what-shadow-does",
+        "quote": "精神鞭笞：它是填充。持续伤害没铺满时，不要拿它换刷新",
+        "raw": "actions.main 里 mind_flay 排在所有 DoT 之后",
+        "expectation": "swap_hurts",
+        "note": "把填充置顶是这句话的反向验证：掉得越狠，指南这句越站得住。"
+      },
+      "guideMatch": "supports"
+    }
+  },
+  "groups": [
+    {
+      "id": "s1",
+      "label": "同条件的两个挂 DoT 动作：触手猛击 ↔ 吸血鬼之触",
+      "why": "两行条件逐字相同（都要求吸血鬼之触没在跳、目标存活 ≥ 10、已挂 < 5），只差谁先占这个 GCD。",
+      "tableOrder": [
+        2,
+        3
+      ],
+      "apl": {
+        "mode": "swap-two-adjacent-lines",
+        "before": [
+          {
+            "lineNo": 78,
+            "text": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+          },
+          {
+            "lineNo": 79,
+            "text": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+          }
+        ],
+        "after": [
+          {
+            "lineNo": 78,
+            "text": "actions.main+=/vampiric_touch,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+          },
+          {
+            "lineNo": 79,
+            "text": "actions.main+=/tentacle_slam,target_if=min:dot.vampiric_touch.remains,if=!dot.vampiric_touch.ticking&target.time_to_die>=10&active_dot.vampiric_touch<5"
+          }
+        ]
+      },
+      "verdict": "effective",
+      "deltaPct": -6.06,
+      "guideClaim": {
+        "chapter": "l0-01-what-shadow-does",
+        "quote": "吸血鬼之触：第一个 GCD 就给它，别等怪聚齐",
+        "raw": "actions.main 顺序里 vampiric_touch 排在填充技能之前",
+        "expectation": "none",
+        "note": "指南没直接说「触手猛击与吸血鬼之触」谁先，只说了 DoT 要排在填充前；本条只提供这两行互换的实测值。"
+      },
+      "guideMatch": "not_claimed",
+      "trace": {
+        "baseExecutions": {
+          "tentacle_slam": {
+            "st": 132091,
+            "t3": 132013,
+            "add5": 19234,
+            "w30_8": 19159
+          },
+          "vampiric_touch": {
+            "st": 131893,
+            "t3": 395406,
+            "add5": 95030,
+            "w30_8": 113700
+          }
+        },
+        "afterExecutions": {
+          "tentacle_slam": {
+            "st": 131714,
+            "t3": 130973,
+            "add5": 17442,
+            "w30_8": 17604
+          },
+          "vampiric_touch": {
+            "st": 136528,
+            "t3": 407280,
+            "add5": 111545,
+            "w30_8": 129743
+          }
+        },
+        "inertInAllScenarios": []
+      },
+      "structuralNote": null,
+      "perScenario": {
+        "st": {
+          "verdict": "effective",
+          "deltaPct": -0.2,
+          "ciPct": 0.12,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__st__5000_r1",
+              "afterRunId": "adj_s1__st__5000_r1",
+              "beforeDps": 231317.09,
+              "afterDps": 230878.98,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.06,
+              "deltaPct": -0.19,
+              "ciPct": 0.12,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__st__5000_r2",
+              "afterRunId": "adj_s1__st__5000_r2",
+              "beforeDps": 231359.94,
+              "afterDps": 230870.46,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.06,
+              "deltaPct": -0.21,
+              "ciPct": 0.12,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "t3": {
+          "verdict": "effective",
+          "deltaPct": -0.54,
+          "ciPct": 0.1,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__t3__5000_r1",
+              "afterRunId": "adj_s1__t3__5000_r1",
+              "beforeDps": 413060.33,
+              "afterDps": 410809.85,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.05,
+              "deltaPct": -0.54,
+              "ciPct": 0.1,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__t3__5000_r2",
+              "afterRunId": "adj_s1__t3__5000_r2",
+              "beforeDps": 413083.82,
+              "afterDps": 410853.16,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.05,
+              "deltaPct": -0.54,
+              "ciPct": 0.1,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "add5": {
+          "verdict": "effective",
+          "deltaPct": -11.18,
+          "ciPct": 0.25,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__add5__5000_r1",
+              "afterRunId": "adj_s1__add5__5000_r1",
+              "beforeDps": 1044809.04,
+              "afterDps": 927448.52,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -11.23,
+              "ciPct": 0.25,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__add5__5000_r2",
+              "afterRunId": "adj_s1__add5__5000_r2",
+              "beforeDps": 1043733.6,
+              "afterDps": 927487.43,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -11.14,
+              "ciPct": 0.25,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "w30_8": {
+          "verdict": "effective",
+          "deltaPct": -12.31,
+          "ciPct": 0.27,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__w30_8__5000_r1",
+              "afterRunId": "adj_s1__w30_8__5000_r1",
+              "beforeDps": 1386576.86,
+              "afterDps": 1215425.76,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.15,
+              "deltaPct": -12.34,
+              "ciPct": 0.27,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__w30_8__5000_r2",
+              "afterRunId": "adj_s1__w30_8__5000_r2",
+              "beforeDps": 1386183.43,
+              "afterDps": 1215964.15,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.15,
+              "deltaPct": -12.28,
+              "ciPct": 0.27,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "label": "虚空齐射（前段那行）↔ 虚空冲击",
+      "why": "齐射是多目标覆盖面最大的动作，冲击是单体填充；交换检验「齐射靠前」这条到底值多少。",
+      "tableOrder": [
+        8,
+        9
+      ],
+      "apl": {
+        "mode": "swap-two-adjacent-lines",
+        "before": [
+          {
+            "lineNo": 86,
+            "text": "actions.main+=/void_volley,if=cooldown.voidform.up"
+          },
+          {
+            "lineNo": 87,
+            "text": "actions.main+=/void_blast,target_if=max:(dot.shadow_word_madness.remains*1000+target.time_to_die)"
+          }
+        ],
+        "after": [
+          {
+            "lineNo": 86,
+            "text": "actions.main+=/void_blast,target_if=max:(dot.shadow_word_madness.remains*1000+target.time_to_die)"
+          },
+          {
+            "lineNo": 87,
+            "text": "actions.main+=/void_volley,if=cooldown.voidform.up"
+          }
+        ]
+      },
+      "verdict": "structurally_inert",
+      "deltaPct": -0.02,
+      "guideClaim": {
+        "chapter": "l1-02-large",
+        "quote": "虚空齐射：多目标时它覆盖的目标最多，冷却好了就用",
+        "raw": "actions.main+=/void_volley 排在前段；模拟 w30_8 增益稳定",
+        "expectation": "swap_hurts",
+        "note": "指南说齐射该靠前；若交换后多目标场景 DPS 下降，说明这个位置确实值钱。"
+      },
+      "guideMatch": "untested",
+      "trace": {
+        "baseExecutions": {
+          "void_volley": {
+            "st": 325943,
+            "t3": 318317,
+            "add5": 74587,
+            "w30_8": 70248
+          },
+          "void_blast": {
+            "st": 0,
+            "t3": 0,
+            "add5": 0,
+            "w30_8": 0
+          }
+        },
+        "afterExecutions": {
+          "void_volley": {
+            "st": 325927,
+            "t3": 318419,
+            "add5": 74615,
+            "w30_8": 70248
+          },
+          "void_blast": {
+            "st": 0,
+            "t3": 0,
+            "add5": 0,
+            "w30_8": 0
+          }
+        },
+        "inertInAllScenarios": [
+          "void_blast"
+        ]
+      },
+      "structuralNote": "交换的 void_blast 在 4 个场景的基础跑分里 0 次施放。这一组是无效对照：差值来自结构等价，不能读成「顺序不影响」，也不计入「误差内」的结论。",
+      "perScenario": {
+        "st": {
+          "verdict": "within_noise",
+          "deltaPct": -0.01,
+          "ciPct": 0.12,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__st__5000_r1",
+              "afterRunId": "adj_s2__st__5000_r1",
+              "beforeDps": 231317.09,
+              "afterDps": 231388.15,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.06,
+              "deltaPct": 0.03,
+              "ciPct": 0.12,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__st__5000_r2",
+              "afterRunId": "adj_s2__st__5000_r2",
+              "beforeDps": 231359.94,
+              "afterDps": 231268.87,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.06,
+              "deltaPct": -0.04,
+              "ciPct": 0.12,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        },
+        "t3": {
+          "verdict": "within_noise",
+          "deltaPct": 0.01,
+          "ciPct": 0.11,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__t3__5000_r1",
+              "afterRunId": "adj_s2__t3__5000_r1",
+              "beforeDps": 413060.33,
+              "afterDps": 413076.09,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.06,
+              "deltaPct": 0,
+              "ciPct": 0.11,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__t3__5000_r2",
+              "afterRunId": "adj_s2__t3__5000_r2",
+              "beforeDps": 413083.82,
+              "afterDps": 413133.52,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.05,
+              "deltaPct": 0.01,
+              "ciPct": 0.1,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        },
+        "add5": {
+          "verdict": "within_noise",
+          "deltaPct": -0.05,
+          "ciPct": 0.26,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__add5__5000_r1",
+              "afterRunId": "adj_s2__add5__5000_r1",
+              "beforeDps": 1044809.04,
+              "afterDps": 1043678.11,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -0.11,
+              "ciPct": 0.26,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__add5__5000_r2",
+              "afterRunId": "adj_s2__add5__5000_r2",
+              "beforeDps": 1043733.6,
+              "afterDps": 1043759.27,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.13,
+              "deltaPct": 0,
+              "ciPct": 0.26,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        },
+        "w30_8": {
+          "verdict": "within_noise",
+          "deltaPct": -0.02,
+          "ciPct": 0.28,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__w30_8__5000_r1",
+              "afterRunId": "adj_s2__w30_8__5000_r1",
+              "beforeDps": 1386576.86,
+              "afterDps": 1386183.95,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.14,
+              "deltaPct": -0.03,
+              "ciPct": 0.28,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__w30_8__5000_r2",
+              "afterRunId": "adj_s2__w30_8__5000_r2",
+              "beforeDps": 1386183.43,
+              "afterDps": 1386079.38,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -0.01,
+              "ciPct": 0.27,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "label": "虚空齐射（存层那行）↔ 心灵鞭笞",
+      "why": "存层那行是有条件的齐射，鞭笞是无条件填充；交换等于「先补鞭笞再放齐射」。",
+      "tableOrder": [
+        17,
+        18
+      ],
+      "apl": {
+        "mode": "swap-two-adjacent-lines",
+        "before": [
+          {
+            "lineNo": 101,
+            "text": "actions.main+=/void_volley,if=!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45"
+          },
+          {
+            "lineNo": 102,
+            "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+          }
+        ],
+        "after": [
+          {
+            "lineNo": 101,
+            "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+          },
+          {
+            "lineNo": 102,
+            "text": "actions.main+=/void_volley,if=!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45"
+          }
+        ]
+      },
+      "verdict": "effective",
+      "deltaPct": -4.04,
+      "guideClaim": {
+        "chapter": "l0-01-what-shadow-does",
+        "quote": "精神鞭笞：它是填充。持续伤害没铺满时，不要拿它换刷新",
+        "raw": "actions.main 里 mind_flay 排在所有 DoT 之后",
+        "expectation": "swap_hurts",
+        "note": "指南说填充该垫底；把鞭笞提到条件性齐射之前，应该掉 DPS。"
+      },
+      "guideMatch": "supports",
+      "trace": {
+        "baseExecutions": {
+          "void_volley": {
+            "st": 325943,
+            "t3": 318317,
+            "add5": 74587,
+            "w30_8": 70248
+          },
+          "mind_flay": {
+            "st": 480978,
+            "t3": 442678,
+            "add5": 21349,
+            "w30_8": 11021
+          }
+        },
+        "afterExecutions": {
+          "void_volley": {
+            "st": 167570,
+            "t3": 167897,
+            "add5": 41499,
+            "w30_8": 40276
+          },
+          "mind_flay": {
+            "st": 638749,
+            "t3": 597406,
+            "add5": 54253,
+            "w30_8": 41133
+          }
+        },
+        "inertInAllScenarios": []
+      },
+      "structuralNote": null,
+      "perScenario": {
+        "st": {
+          "verdict": "effective",
+          "deltaPct": -5.6,
+          "ciPct": 0.11,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__st__5000_r1",
+              "afterRunId": "adj_s3__st__5000_r1",
+              "beforeDps": 231317.09,
+              "afterDps": 218313.31,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.05,
+              "deltaPct": -5.62,
+              "ciPct": 0.11,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__st__5000_r2",
+              "afterRunId": "adj_s3__st__5000_r2",
+              "beforeDps": 231359.94,
+              "afterDps": 218431.17,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.05,
+              "deltaPct": -5.59,
+              "ciPct": 0.11,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "t3": {
+          "verdict": "effective",
+          "deltaPct": -3.85,
+          "ciPct": 0.1,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__t3__5000_r1",
+              "afterRunId": "adj_s3__t3__5000_r1",
+              "beforeDps": 413060.33,
+              "afterDps": 397175.1,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.05,
+              "deltaPct": -3.85,
+              "ciPct": 0.1,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__t3__5000_r2",
+              "afterRunId": "adj_s3__t3__5000_r2",
+              "beforeDps": 413083.82,
+              "afterDps": 397176.52,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.05,
+              "deltaPct": -3.85,
+              "ciPct": 0.1,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "add5": {
+          "verdict": "effective",
+          "deltaPct": -3.89,
+          "ciPct": 0.25,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__add5__5000_r1",
+              "afterRunId": "adj_s3__add5__5000_r1",
+              "beforeDps": 1044809.04,
+              "afterDps": 1003682.18,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -3.94,
+              "ciPct": 0.25,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__add5__5000_r2",
+              "afterRunId": "adj_s3__add5__5000_r2",
+              "beforeDps": 1043733.6,
+              "afterDps": 1003520.96,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.12,
+              "deltaPct": -3.85,
+              "ciPct": 0.25,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        },
+        "w30_8": {
+          "verdict": "effective",
+          "deltaPct": -2.83,
+          "ciPct": 0.27,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__w30_8__5000_r1",
+              "afterRunId": "adj_s3__w30_8__5000_r1",
+              "beforeDps": 1386576.86,
+              "afterDps": 1347637.95,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -2.81,
+              "ciPct": 0.27,
+              "verdict": "effective",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__w30_8__5000_r2",
+              "afterRunId": "adj_s3__w30_8__5000_r2",
+              "beforeDps": 1386183.43,
+              "afterDps": 1346512.62,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -2.86,
+              "ciPct": 0.27,
+              "verdict": "effective",
+              "issues": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "label": "触手猛击（留充能那行）↔ 暗言术：灭（残血那行）",
+      "why": "低位两行：一行是「加怪前留充能」，一行是「只打残血」；交换检验灭到底会不会抢走 GCD。",
+      "tableOrder": [
+        19,
+        20
+      ],
+      "apl": {
+        "mode": "swap-two-adjacent-lines",
+        "before": [
+          {
+            "lineNo": 104,
+            "text": "actions.main+=/tentacle_slam,if=raid_event.adds.in>20"
+          },
+          {
+            "lineNo": 106,
+            "text": "actions.main+=/shadow_word_death,target_if=target.health.pct<20"
+          }
+        ],
+        "after": [
+          {
+            "lineNo": 104,
+            "text": "actions.main+=/shadow_word_death,target_if=target.health.pct<20"
+          },
+          {
+            "lineNo": 106,
+            "text": "actions.main+=/tentacle_slam,if=raid_event.adds.in>20"
+          }
+        ]
+      },
+      "verdict": "within_noise",
+      "deltaPct": -0.01,
+      "guideClaim": {
+        "chapter": "l1-06-adds",
+        "quote": "暗言术：灭：加怪窗口里目标满血，轮不上。把 GCD 让给持续伤害",
+        "raw": "灭的两个条件都要目标残血或有吸收盾",
+        "expectation": "swap_no_effect",
+        "note": "指南说灭基本轮不上；若交换落在误差内，正好支持这句话。"
+      },
+      "guideMatch": "supports",
+      "trace": {
+        "baseExecutions": {
+          "tentacle_slam": {
+            "st": 132091,
+            "t3": 132013,
+            "add5": 19234,
+            "w30_8": 19159
+          },
+          "shadow_word_death": {
+            "st": 27711,
+            "t3": 27736,
+            "add5": 4999,
+            "w30_8": 4999
+          }
+        },
+        "afterExecutions": {
+          "tentacle_slam": {
+            "st": 132069,
+            "t3": 132048,
+            "add5": 19225,
+            "w30_8": 19166
+          },
+          "shadow_word_death": {
+            "st": 27714,
+            "t3": 27711,
+            "add5": 4999,
+            "w30_8": 4999
+          }
+        },
+        "inertInAllScenarios": []
+      },
+      "structuralNote": null,
+      "perScenario": {
+        "st": {
+          "verdict": "within_noise",
+          "deltaPct": 0.02,
+          "ciPct": 0.12,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__st__5000_r1",
+              "afterRunId": "adj_s4__st__5000_r1",
+              "beforeDps": 231317.09,
+              "afterDps": 231370.53,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.06,
+              "deltaPct": 0.02,
+              "ciPct": 0.12,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__st__5000_r2",
+              "afterRunId": "adj_s4__st__5000_r2",
+              "beforeDps": 231359.94,
+              "afterDps": 231382.26,
+              "beforeCi95Pct": 0.06,
+              "afterCi95Pct": 0.06,
+              "deltaPct": 0.01,
+              "ciPct": 0.12,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        },
+        "t3": {
+          "verdict": "within_noise",
+          "deltaPct": 0,
+          "ciPct": 0.11,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__t3__5000_r1",
+              "afterRunId": "adj_s4__t3__5000_r1",
+              "beforeDps": 413060.33,
+              "afterDps": 413130.77,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.06,
+              "deltaPct": 0.02,
+              "ciPct": 0.11,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__t3__5000_r2",
+              "afterRunId": "adj_s4__t3__5000_r2",
+              "beforeDps": 413083.82,
+              "afterDps": 413001.17,
+              "beforeCi95Pct": 0.05,
+              "afterCi95Pct": 0.05,
+              "deltaPct": -0.02,
+              "ciPct": 0.1,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        },
+        "add5": {
+          "verdict": "within_noise",
+          "deltaPct": -0.01,
+          "ciPct": 0.26,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__add5__5000_r1",
+              "afterRunId": "adj_s4__add5__5000_r1",
+              "beforeDps": 1044809.04,
+              "afterDps": 1044538.36,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -0.03,
+              "ciPct": 0.26,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__add5__5000_r2",
+              "afterRunId": "adj_s4__add5__5000_r2",
+              "beforeDps": 1043733.6,
+              "afterDps": 1043789.52,
+              "beforeCi95Pct": 0.13,
+              "afterCi95Pct": 0.13,
+              "deltaPct": 0.01,
+              "ciPct": 0.26,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        },
+        "w30_8": {
+          "verdict": "within_noise",
+          "deltaPct": -0.04,
+          "ciPct": 0.27,
+          "pairs": [
+            {
+              "rep": 1,
+              "beforeRunId": "adj_base__w30_8__5000_r1",
+              "afterRunId": "adj_s4__w30_8__5000_r1",
+              "beforeDps": 1386576.86,
+              "afterDps": 1385384.84,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.13,
+              "deltaPct": -0.09,
+              "ciPct": 0.27,
+              "verdict": "within_noise",
+              "issues": []
+            },
+            {
+              "rep": 2,
+              "beforeRunId": "adj_base__w30_8__5000_r2",
+              "afterRunId": "adj_s4__w30_8__5000_r2",
+              "beforeDps": 1386183.43,
+              "afterDps": 1386219.02,
+              "beforeCi95Pct": 0.14,
+              "afterCi95Pct": 0.14,
+              "deltaPct": 0,
+              "ciPct": 0.28,
+              "verdict": "within_noise",
+              "issues": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "runs": [
+    "adj_base__add5__5000_r1",
+    "adj_base__add5__5000_r2",
+    "adj_base__st__5000_r1",
+    "adj_base__st__5000_r2",
+    "adj_base__t3__5000_r1",
+    "adj_base__t3__5000_r2",
+    "adj_base__w30_8__5000_r1",
+    "adj_base__w30_8__5000_r2",
+    "adj_ctl_pos__add5__5000_r1",
+    "adj_ctl_pos__add5__5000_r2",
+    "adj_ctl_pos__st__5000_r1",
+    "adj_ctl_pos__st__5000_r2",
+    "adj_ctl_pos__t3__5000_r1",
+    "adj_ctl_pos__t3__5000_r2",
+    "adj_ctl_pos__w30_8__5000_r1",
+    "adj_ctl_pos__w30_8__5000_r2",
+    "adj_s1__add5__5000_r1",
+    "adj_s1__add5__5000_r2",
+    "adj_s1__st__5000_r1",
+    "adj_s1__st__5000_r2",
+    "adj_s1__t3__5000_r1",
+    "adj_s1__t3__5000_r2",
+    "adj_s1__w30_8__5000_r1",
+    "adj_s1__w30_8__5000_r2",
+    "adj_s2__add5__5000_r1",
+    "adj_s2__add5__5000_r2",
+    "adj_s2__st__5000_r1",
+    "adj_s2__st__5000_r2",
+    "adj_s2__t3__5000_r1",
+    "adj_s2__t3__5000_r2",
+    "adj_s2__w30_8__5000_r1",
+    "adj_s2__w30_8__5000_r2",
+    "adj_s3__add5__5000_r1",
+    "adj_s3__add5__5000_r2",
+    "adj_s3__st__5000_r1",
+    "adj_s3__st__5000_r2",
+    "adj_s3__t3__5000_r1",
+    "adj_s3__t3__5000_r2",
+    "adj_s3__w30_8__5000_r1",
+    "adj_s3__w30_8__5000_r2",
+    "adj_s4__add5__5000_r1",
+    "adj_s4__add5__5000_r2",
+    "adj_s4__st__5000_r1",
+    "adj_s4__st__5000_r2",
+    "adj_s4__t3__5000_r1",
+    "adj_s4__t3__5000_r2",
+    "adj_s4__w30_8__5000_r1",
+    "adj_s4__w30_8__5000_r2"
+  ]
+}

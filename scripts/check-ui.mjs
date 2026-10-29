@@ -17,6 +17,7 @@ import puppeteer from 'puppeteer-core';
 import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createServer } from 'vite';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const argOf = (name, fallback) => {
@@ -40,8 +41,16 @@ const BROWSER_CANDIDATES = [
 const BROWSER = BROWSER_CANDIDATES.find((path) => existsSync(path));
 const CHAPTERS_DIR = join(ROOT, 'content', 'chapters');
 const FIGURES = JSON.parse(readFileSync(join(ROOT, 'content', 'figures', 'chapters.json'), 'utf8'));
-
-const FS_OK = new Set(['36px', '24px', '18px', '16px', '14px', '12px']);
+const ROUTE = JSON.parse(readFileSync(join(ROOT, 'content', 'routes', 'waves-altar-of-fangs.json'), 'utf8'));
+const CSS = readFileSync(join(ROOT, 'apps', 'web', 'src', 'ui.css'), 'utf8');
+const typographySource = Object.fromEntries(
+  ['display', 'title', 'sub', 'body', 'meta', 'caption'].map((name) => {
+    const value = CSS.match(new RegExp(`--fs-${name}:\\s*([^;]+);`))?.[1]?.trim();
+    if (!value) throw new Error(`ui.css 缺少 --fs-${name}`);
+    return [name, value];
+  }),
+);
+const FS_OK = new Set(Object.values(typographySource));
 const fails = [];
 const warnings = [];
 const check = (cond, msg) => {
@@ -64,7 +73,6 @@ const VISUALS = {
   'target-band': '[data-figure-kind="target-band"]',
   'play-budget': '[data-figure-kind="play-budget"] .pb-bar, [data-figure-kind="play-budget"] .pb-res svg',
   'cooldown-window': '[data-figure-kind="cooldown-window"] .cw-track',
-  'decision-flow': '.df[data-figure-kind="decision-flow"] .df-step',
   'burst-bars': '.bars .grp',
   'priority-table': 'table.tbl',
   'skill-cards': '.skills .sk',
@@ -86,6 +94,15 @@ const chapters = readdirSync(CHAPTERS_DIR)
   .filter((f) => f.endsWith('.json'))
   .map((f) => JSON.parse(readFileSync(join(CHAPTERS_DIR, f), 'utf8')))
   .sort((a, b) => a.level.localeCompare(b.level) || a.order - b.order);
+
+// 直接加载页面实际使用的规则，不在门禁里维护第二份主行动结论表。
+const vite = await createServer({
+  root: ROOT,
+  logLevel: 'silent',
+  appType: 'custom',
+  server: { middlewareMode: true, hmr: false },
+});
+const { chapterDecision } = await vite.ssrLoadModule('/apps/web/src/components/Teaching/rules.ts');
 
 const browser = await puppeteer.launch({
   executablePath: BROWSER,
@@ -148,10 +165,8 @@ const typographyTokens = await page.evaluate(() => {
   };
 });
 check(
-  JSON.stringify(typographyTokens) === JSON.stringify({
-    display: '36px', title: '24px', subtitle: '18px', body: '16px', meta: '14px', caption: '12px',
-  }),
-  `全局字号 token 不是 36/24/18/16/14/12：${JSON.stringify(typographyTokens)}`,
+  Object.entries(typographySource).every(([name, value]) => typographyTokens[name === 'sub' ? 'subtitle' : name] === value),
+  `全局字号 token 与 ui.css 不一致：${JSON.stringify(typographyTokens)}`,
 );
 const homeTypography = await page.evaluate(() => ({
   h1: getComputedStyle(document.querySelector('.page h1')).fontSize,
@@ -206,7 +221,8 @@ for (const chapter of chapters) {
 
   const expectedContentWidth = chapter.level === 'L0' ? 1392 : 1168;
   check(obs.width === expectedContentWidth, `${chapter.id}: 内容宽 ${obs.width}，应为 ${expectedContentWidth}`);
-  check(obs.topband === 3, `${chapter.id}: 顶图带 ${obs.topband} 格，应为 3`);
+  const expectedTopCells = chapter.level === 'L0' ? 0 : 3;
+  check(obs.topband === expectedTopCells, `${chapter.id}: 顶图带 ${obs.topband} 格，应为 ${expectedTopCells}`);
   check(obs.sections.length === 5, `${chapter.id}: 五段实际 ${obs.sections.length} 段`);
   check(obs.sections.every((s) => s.question), `${chapter.id}: 有段落缺标题`);
   check(obs.sections.every((s) => s.note), `${chapter.id}: 有段落缺一句说明`);
@@ -289,6 +305,7 @@ for (const chapter of chapters) {
         action: css('.reader-page .reader-action', 'backgroundColor'),
       },
       readerVerdict: document.querySelector('.reader-page .reader-verdict')?.textContent?.trim() ?? '',
+      claimCount: document.querySelectorAll('.page .claim').length,
       readerType: {
         h1: css('.reader-page h1', 'fontSize'),
         h2: css('.reader-page .sec h2', 'fontSize'),
@@ -325,6 +342,9 @@ for (const chapter of chapters) {
     };
   }, { id: chapter.id, runIds: chapter.evidence.runIds });
 
+  const expectedClaimCount = chapter.id === 'l1-04-boss' ? 1 : 0;
+  check(readerView.claimCount === expectedClaimCount, `${chapter.id}: claim 应显示 ${expectedClaimCount} 次，实际 ${readerView.claimCount} 次`);
+
   if (chapter.level !== 'L0') {
     check(!/[`*]{1,2}|##/.test(readerView.pageText), `${chapter.id}: 可见文本含 Markdown 标记`);
     check(
@@ -342,18 +362,13 @@ for (const chapter of chapters) {
     check(readerView.readerAccent.topNavActive === 'rgba(0, 0, 0, 0)', `${chapter.id}: 顶栏激活态不应与主行动卡共用金色实底`);
     check(readerView.readerAccent.primaryNumber === 'rgba(245, 196, 81, 0.12)', `${chapter.id}: 主段号应使用弱金色底，不应与行动卡同权`);
     check(readerView.readerAccent.action === 'rgb(245, 196, 81)', `${chapter.id}: 黄色实底应只属于主行动卡`);
-    const expectedVerdicts = {
-      'l1-01-mid': '看冷却',
-      'l1-02-large': '开',
-      'l1-03-small': '不开',
-      'l1-04-boss': '看下一波',
-      'l1-05-rhythm': '看间隔',
-      'l1-06-adds': '开',
-      'l2-01-altar-of-fangs': '开',
-    };
+    const expectedAdvice = chapterDecision(
+      chapter,
+      chapter.level === 'L2' ? ROUTE.waves.find((wave) => wave.pull === 1) : null,
+    ).advice;
     check(
-      readerView.readerVerdict === expectedVerdicts[chapter.id],
-      `${chapter.id}: 主行动结论应为「${expectedVerdicts[chapter.id]}」，实际「${readerView.readerVerdict}」`,
+      readerView.readerVerdict === expectedAdvice?.text,
+      `${chapter.id}: 主行动结论应为 rules.ts 的「${expectedAdvice?.text}」，实际「${readerView.readerVerdict}」`,
     );
     check(readerView.readerSpacing.sectionTop === '32px', `${chapter.id}: 五段主间距应为 32px，实际 ${readerView.readerSpacing.sectionTop}`);
     check(readerView.readerSpacing.topbandGap === '16px', `${chapter.id}: 顶图带组内间距应为 16px，实际 ${readerView.readerSpacing.topbandGap}`);
@@ -400,8 +415,12 @@ for (const chapter of chapters) {
     check(readerView.readerType.meta === '14px', `${chapter.id}: 元信息应为 14px，实际 ${readerView.readerType.meta}`);
     check(readerView.readerType.caption === '12px', `${chapter.id}: 图注应为 12px，实际 ${readerView.readerType.caption}`);
   } else if (chapter.level === 'L0') {
-    for (const [selector, count] of Object.entries(readerView.newDisplays)) {
-      check(count === 0, `${chapter.id}: 提前出现 L1-02 样板展示 ${selector}`);
+    for (const selector of ['.reader-page', '.reader-topband', '.chapter-toc']) {
+      check(readerView.newDisplays[selector] === 0, `${chapter.id}: 不应出现 L1/L2 阅读骨架 ${selector}`);
+    }
+    if (chapter.id === 'l0-01-what-shadow-does') {
+      check(readerView.pageText.includes('下一个 GCD'), 'l0-01: 缺少攻略式开头（下一个 GCD 该做什么）');
+      check(readerView.pageText.includes('继续铺持续伤害，还是进爆发'), 'l0-01: 缺少本页要建立的判断');
     }
   }
 
@@ -473,6 +492,45 @@ const l2Sections = await page.$$('.sec');
 if (l2Sections[1]) await l2Sections[1].screenshot({ path: `${SHOTS}/chapter-l2-selected-wave.png` });
 if (l2Sections[2]) await l2Sections[2].screenshot({ path: `${SHOTS}/chapter-l2-priority.png` });
 if (l2Sections[3]) await l2Sections[3].screenshot({ path: `${SHOTS}/chapter-l2-map.png` });
+
+// 特殊波次分两类：
+//   1. BOSS 混小怪（p10 / p15）：按目标数近似出数，但顶部与当前波都必须带「近似」标注，
+//      且不能伪装成普通木桩结论；
+//   2. 空波次（p12）：仍然不出任何数值。
+const specialOf = () => page.evaluate(() => ({
+  top: document.querySelector('.topband .reader-value')?.innerText ?? '',
+  selected: document.querySelector('.selected-wave')?.innerText ?? '',
+  reason: document.querySelector('.selected-wave')?.getAttribute('data-burst-reason'),
+  selectedBars: document.querySelectorAll('.selected-wave .sw-bars').length,
+  selectedRaw: document.querySelectorAll('.selected-wave .sw-raw').length,
+  topBars: document.querySelectorAll('.topband .reader-value .tb-pair').length,
+  approxNote: document.querySelector('.selected-wave .sw-note')?.textContent ?? '',
+  topNote: document.querySelector('.topband .reader-value .tb-sub')?.textContent ?? '',
+}));
+
+for (const pull of [10, 15]) {
+  await page.evaluate((index) => document.querySelectorAll('.route-wave')[index]?.click(), pull - 1);
+  await sleep(180);
+  const approx = await specialOf();
+  check(approx.reason === 'paired', `L2 第 ${pull} 波应走近似配对，实际原因 ${approx.reason}`);
+  check(approx.selectedBars === 1 && approx.topBars === 1, `L2 第 ${pull} 波近似档未显示 DPS 条`);
+  check(approx.selectedRaw === 1, `L2 第 ${pull} 波近似档未保留配对记录`);
+  check(/近似/.test(approx.approxNote), `L2 第 ${pull} 波未在当波标注「近似」：${approx.approxNote}`);
+  check(/目标档/.test(approx.approxNote), `L2 第 ${pull} 波近似标注未写明目标档：${approx.approxNote}`);
+  check(/近似/.test(approx.topNote), `L2 第 ${pull} 波顶部未标注「近似」：${approx.topNote}`);
+}
+
+await page.evaluate((index) => document.querySelectorAll('.route-wave')[index]?.click(), 11);
+await sleep(180);
+const emptyPull = await specialOf();
+check(emptyPull.reason === 'empty', `L2 第 12 波应为空波次，实际原因 ${emptyPull.reason}`);
+check(emptyPull.selectedBars === 0 && emptyPull.topBars === 0, 'L2 第 12 波空波次仍显示 DPS 条');
+check(emptyPull.selectedRaw === 0, 'L2 第 12 波空波次仍显示配对记录');
+check(
+  !/[%％]|\bDPS\b|95% CI|保守误差上限\s*±/.test(`${emptyPull.top}\n${emptyPull.selected}`),
+  `L2 第 12 波空波次仍显示百分比 / DPS / CI：${emptyPull.top}\n${emptyPull.selected}`,
+);
+await page.screenshot({ path: `${SHOTS}/chapter-l2-empty-pull.png` });
 
 // ---- 解析台 ----
 await page.evaluate(() => [...document.querySelectorAll('nav button')].find((b) => b.textContent.includes('解析台'))?.click());
@@ -637,6 +695,7 @@ check(comingSoonOverflow === 0, `噬灭骨架页 420px 页面横向溢出 ${comi
 await page.screenshot({ path: `${SHOTS}/comingsoon-mobile.png` });
 
 await browser.close();
+await vite.close();
 check(jsErrors.length === 0, `页面有 JS 错误：${jsErrors.slice(0, 3).join(' | ')}`);
 
 if (warnings.length) {
@@ -649,6 +708,6 @@ if (fails.length) {
   process.exit(1);
 }
 console.log(
-  `界面门禁通过：${chapters.length} 章逐章检查 · 字号白名单 · 内容宽 ${pageWidth} · 顶图带 3 格 + 五段 · 解析台 6 段无 tab · 骨架页 3 张灰模`,
+  `界面门禁通过：${chapters.length} 章逐章检查 · CSS 同源字号 · 内容宽 ${pageWidth} · L0 样板 / 三格顶图带分层 · 五段 · 近似波次带标注 / 空波次无数值 · 解析台 6 段无 tab`,
 );
 console.log(`截图：${SHOTS}`);

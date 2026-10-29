@@ -110,7 +110,7 @@ function Shell() {
 
       {ready && screen.name === 'chapter' && !chapter ? (
         <div className="page">
-          <div className="empty">找不到这一章（id: {screen.id}）。</div>
+          <div className="empty">找不到这一章。回目录换一篇试试。</div>
         </div>
       ) : null}
 

@@ -10,6 +10,7 @@
  *   node scripts/sims-run.mjs --only t3      # 只跑某场景
  */
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -80,6 +81,15 @@ function runOne(profile, scenario, iters) {
 
 const fmt = (n, d = 0) => Number(n).toLocaleString('en-US', { maximumFractionDigits: d });
 
+/** 差值保守误差上限；任一 CI 缺失、为 0 或非有限值就返回 null。 */
+function conservativeDeltaCiPct(on, off) {
+  if (!Number.isFinite(on?.mean) || !Number.isFinite(off?.mean) || off.mean <= 0) return null;
+  if (!Number.isFinite(on?.ci95Pct) || !Number.isFinite(off?.ci95Pct) || on.ci95Pct <= 0 || off.ci95Pct <= 0) return null;
+  const ciOnAbs = on.mean * on.ci95Pct / 100;
+  const ciOffAbs = off.mean * off.ci95Pct / 100;
+  return (ciOnAbs + ciOffAbs) / off.mean * 100;
+}
+
 /**
  * 把一次模拟的施法序列压成可核对的统计。
  * 只统计，不解释——解释归讲解层，且必须引用这里的数字。
@@ -146,6 +156,7 @@ async function main() {
       // 95% 置信区间 = 1.96 × 标准误；标准误 = std_dev / √n
       const ci95 = dps.std_dev ? (1.96 * dps.std_dev) / Math.sqrt(n) : null;
       const runId = `${profile.id}__${scenario.id}__${ITERS}`;
+      const talents = player.talents ?? '';
       const rec = {
         runId,
         layer: 'A',
@@ -178,7 +189,10 @@ async function main() {
         actions: summarizeSequence(player.collected_data?.action_sequence ?? []),
         spec: player.specialization ?? null,
         level: player.level ?? null,
-        talentsHash: (player.talents ?? '').slice(0, 12),
+        // 天赋串整串取哈希：SimC 返回的天赋串开头是固定前缀，截前 12 位会让不同构建撞值
+        talentsHash: createHash('sha256').update(player.talents ?? '').digest('hex').slice(0, 16),
+        /** 天赋串本身也留一份，换构建时能直接比对，不用靠哈希猜 */
+        talents,
         elapsedMs,
         generatedAt: startedAt,
       };
@@ -197,18 +211,21 @@ async function main() {
     if (!base) continue;
     for (const r of rows) {
       if (r.profileId === 'voidweaver') continue;
+      const ciPct = conservativeDeltaCiPct(r.dps, base.dps);
       deltas.push({
         scenarioId: sid,
         key: `${r.profileId}_vs_voidweaver`,
-        deltaPct: Math.round(((r.dps.mean - base.dps.mean) / base.dps.mean) * 10000) / 100,
-        ciPct: Math.round((Math.hypot(r.dps.ci95 ?? 0, base.dps.ci95 ?? 0) / base.dps.mean) * 10000) / 100,
+        deltaPct: ciPct == null ? null : Math.round(((r.dps.mean - base.dps.mean) / base.dps.mean) * 10000) / 100,
+        ciPct: ciPct == null ? null : Math.round(ciPct * 100) / 100,
         baseRunId: base.runId,
         runId: r.runId,
       });
     }
   }
   console.log(`\n写出 ${index.length} 个 runId（${deltas.length} 条对比）`);
-  for (const d of deltas) console.log(`  ${d.scenarioId.padEnd(6)} ${d.key.padEnd(24)} ${d.deltaPct > 0 ? '+' : ''}${d.deltaPct}% ±${d.ciPct}`);
+  for (const d of deltas) console.log(d.deltaPct == null
+    ? `  ${d.scenarioId.padEnd(6)} ${d.key.padEnd(24)} CI 不完整，不出差值结论`
+    : `  ${d.scenarioId.padEnd(6)} ${d.key.padEnd(24)} ${d.deltaPct > 0 ? '+' : ''}${d.deltaPct}% · 保守误差上限 ±${d.ciPct}%`);
 }
 
 main().catch((e) => {

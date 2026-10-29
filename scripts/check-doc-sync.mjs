@@ -138,6 +138,10 @@ for (const j of chapters) {
   // ---- 副标题 / 结论 / 图题 ----
   const one = (label, expected) => {
     const it = items.find((x) => x.label === label);
+    if (expected == null) {
+      if (it) errors.push(`${DOC} §4 ${key}: JSON 已删除「${label}」，文档快照也必须删除`);
+      return;
+    }
     if (!it) { errors.push(`${DOC} §4 ${key}: 缺少「${label}」`); return; }
     if (!eq(it.value, expected)) {
       errors.push(`${DOC} §4 ${key}: 「${label}」与 JSON 不一致 → 文档「${it.value.slice(0, 50)}」/ JSON「${String(expected ?? '').slice(0, 50)}」`);

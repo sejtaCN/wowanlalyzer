@@ -1,0 +1,85 @@
+{
+  "runId": "adj_ctl_pos__add5__5000_r1",
+  "layer": "A",
+  "kind": "adjacent-swap",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "a9a75f22a975acb5",
+  "baseProfileSha256": "ad9cdd996cff3505",
+  "variantId": "ctl_pos",
+  "variantLabel": "阳性对照：心灵鞭笞提到主循环第一位",
+  "swapGroup": "ctl_pos",
+  "scenarioId": "add5",
+  "scenarioLabel": "5 小怪 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 5,
+  "durationSec": 30,
+  "rep": 1,
+  "iterations": 5007,
+  "dps": {
+    "mean": 756655.41,
+    "ci95": 1461.87,
+    "ci95Pct": 0.19,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "mode": "move-line-to-top",
+    "lines": [
+      {
+        "lineNo": 102,
+        "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+      }
+    ],
+    "after": [
+      {
+        "lineNo": 77,
+        "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+      }
+    ]
+  },
+  "spellTrace": {
+    "tentacle_slam": {
+      "present": true,
+      "executions": 9998,
+      "damageMean": 0
+    },
+    "vampiric_touch": {
+      "present": true,
+      "executions": 49990,
+      "damageMean": 1615718
+    },
+    "void_volley": {
+      "present": true,
+      "executions": 22989,
+      "damageMean": 0
+    },
+    "void_blast": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "mind_flay": {
+      "present": true,
+      "executions": 99992,
+      "damageMean": 1745772
+    },
+    "shadow_word_death": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "undefined": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    }
+  },
+  "generatedAt": "2026-10-29T02:21:00.870Z"
+}

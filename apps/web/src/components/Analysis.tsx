@@ -16,11 +16,12 @@ export function LeverageChart({ hero }: { hero: string }) {
   const maxAbs = Math.max(...rows.map((r) => Math.abs(r.deltaPct)), 1);
   const baseline = LEVERAGE.baseline[scenarioId];
 
-  /** 三态：显著 / 在误差内 / 未生效（没点这个天赋，或条件永不成立） */
+  /** 显著 / 在误差内 / 误差缺失 / 未生效；显著性只按保守误差上限判断。 */
   const stateOf = (r: (typeof rows)[number], share: ReturnType<typeof shareFor>) => {
     const dmg = share?.damage ?? 0;
     // 先判"本配置里根本没这个技能"，再判显著性
     if (dmg === 0 && Math.abs(r.deltaPct) < 1) return { key: 'unused', label: '未生效' };
+    if (r.beyondCi == null) return { key: 'flat', label: '误差缺失' };
     if (!r.beyondCi) return { key: 'flat', label: '在误差内' };
     return { key: 'real', label: '显著' };
   };
@@ -84,12 +85,12 @@ export function LeverageChart({ hero }: { hero: string }) {
         </table>
         <div className="note" style={{ marginTop: 8 }}>
           基线 DPS {Math.round(baseline?.mean ?? 0).toLocaleString()}（±{baseline?.ci95Pct ?? '—'}%）。
-          读法：把这个技能从 APL 里注释掉、其他照常打，DPS 的变化；误差带 = 两边的 95% CI 之和。
+          读法：把这个技能从 APL 里注释掉、其他照常打，DPS 的变化；保守误差上限 = 两边绝对 95% CI 相加后相对基线 DPS。
         </div>
         <div className="note" style={{ marginTop: 4 }}>
-          三种状态：<b>显著</b>=差异超过误差带；<b>在误差内</b>=分不清有没有影响；<b>未生效</b>=这个天赋没点/条件永不成立（伤害为 0 且差异 &lt;1%）。
+          四种状态：<b>显著</b>=差异超过保守误差上限；<b>在误差内</b>=分不清有没有影响；<b>误差缺失</b>=CI 不完整，不出差值结论；<b>未生效</b>=伤害为 0 且差异 &lt;1%。
           「无直接伤害」的是增益类技能（如虚空形态、能量灌注），它们不产生伤害行，但禁掉照样掉 DPS。
-          另外：统计显著 ≠ 实战关键——−0.23%（暗言术：灭）虽然超出误差带，但量级可以忽略。
+          另外：统计显著 ≠ 实战关键——−0.23%（暗言术：灭）虽然超出保守误差上限，但量级可以忽略。
         </div>
       </div>
     </div>

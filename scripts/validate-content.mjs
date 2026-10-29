@@ -166,18 +166,31 @@ for (const f of files) {
   }
 
   // 4. 技能在优先级表里
+  //    本构建用不上的行（种族 / 天赋 / 装备 / 队友）被章节当成"该用的技能"引用时要点名：
+  //    条件型（血量没触发）不算——那是木桩测不到，实战仍要按条件用。
+  const deadSkills = new Map(
+    priority.sections
+      .flatMap((s) => s.rows)
+      .filter((r) => r.dead && r.dead.kind !== 'condition')
+      .map((r) => [r.skill, r.dead.reason]),
+  );
   for (const s of [...(c.priorityDiff?.add ?? []), ...(c.priorityDiff?.drop ?? [])]) {
     const label = s.skill.trim();
     if (label.startsWith('（')) continue; // 说明性条目
     if (label === 'aoe_loop') continue; // 伪技能：表示"切多目标循环"这个动作
-    if (!skillKeys.has(label) && !label.includes('循环') && !label.includes('填充')) {
+    if (deadSkills.has(label)) {
+      // 已经写明「本角色」限制的条目不算：那是把这条当限制讲，不是教读者去用。
+      const acknowledged = /本角色|用不上|测不到/.test(`${s.reason ?? ''}${s.evidence ?? ''}`);
+      if (!acknowledged) {
+        warnings.push(`${where}: 引用了本构建用不上的技能 ${label}（${deadSkills.get(label)}）`);
+      }
+    } else if (!skillKeys.has(label) && !label.includes('循环') && !label.includes('填充')) {
       warnings.push(`${where}: 技能 ${label} 不在 priority-table 里（可能是中文名或新技能）`);
     }
   }
 
   // 5. 模型卡
   if (c.level !== 'L0' && !c.model) errors.push(`${where}: ${c.level} 页必须有模型卡`);
-  if (!c.claim?.trim()) errors.push(`${where}: 缺少唯一结论 claim`);
 
   // 6. 图契约：未知主图是错误；缺图是警告，必须与「不适用」分开。
   if (!CHART_KINDS.has(c.chart?.kind)) errors.push(`${where}: 未知主图类型 ${c.chart?.kind}`);

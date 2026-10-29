@@ -239,7 +239,10 @@ async function main() {
   }
   // 阳性对照不通过就不许写结论
   // 阈值 -10%：长窗口实测 −20% 左右，30 秒 ADD 窗口 −17%，都远超误差带（±0.2%）
-  const controlOk = Object.values(controlPerScenario).every((v) => v.deltaPct != null && v.deltaPct < -10);
+  const controlOk = scenarios.every((sc) => {
+    const value = controlPerScenario[sc.id]?.deltaPct;
+    return Number.isFinite(value) && value <= -10;
+  });
 
   const doc = {
     hero: 'archon',

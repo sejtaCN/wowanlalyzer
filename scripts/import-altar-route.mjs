@@ -32,6 +32,11 @@ function parseContext(file) {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+/** 木桩目标档：模拟上限 8 只，超过按 8 计；BOSS 混小怪也走这张表（页面须标注为近似）。 */
+const trashScenarioOf = (targets) =>
+  targets >= 8 ? 'w30_8' : targets >= 7 ? 'w30_7' : targets >= 6 ? 'w30_6' : targets >= 5 ? 'w30_5' : 'w30_2';
+const SIMULATED_TARGETS = { w30_8: 8, w30_7: 7, w30_6: 6, w30_5: 5, w30_2: 2 };
+
 const html = readFileSync(ROUTE_FILE, 'utf8');
 const routeMatch = html.match(/"killZones":(\[.*?\]),"mapIcons":/s);
 if (!routeMatch) throw new Error('找不到路线 killZones');
@@ -127,20 +132,22 @@ const waves = killZones.map((zone) => {
     skippable: 0,
     // 文档里的 forcesPct 是累计进度，不是这一 pull 的 forces / 门槛。
     forcesPct: Math.round((accumulatedForces += forces) / mapping.mappingVersion.enemy_forces_required * 1000) / 10,
-    // BOSS 不在这里冒充“单体木桩”；只有纯 BOSS 且没有小怪时才匹配单体档。
-    scenarioId: boss
-      ? trashMobCount === 0
+    // 空 pull 不匹配任何木桩；纯 BOSS 用单体档。
+    scenarioId: zone.enemies.length === 0
+      ? null
+      : boss && trashMobCount === 0
         ? 'w90_1b'
-        : null
-      : trashMobCount >= 8
-        ? 'w30_8'
-        : trashMobCount >= 7
-          ? 'w30_7'
-          : trashMobCount >= 6
-            ? 'w30_6'
-            : trashMobCount >= 5
-              ? 'w30_5'
-              : 'w30_2',
+        : trashScenarioOf(boss ? zone.enemies.length : trashMobCount),
+    // BOSS 与同波小怪无法用木桩复原，只能按全场目标数近似；页面必须显式标注。
+    approximation: zone.enemies.length > 0 && boss && trashMobCount > 0
+      ? {
+        kind: 'desired-targets',
+        actualMobs: zone.enemies.length,
+        bossCount: zone.enemies.length - trashMobCount,
+        trashMobCount,
+        simulatedTargets: SIMULATED_TARGETS[trashScenarioOf(zone.enemies.length)],
+      }
+      : null,
     burst: null,
     sourcePull: zone.index,
   };

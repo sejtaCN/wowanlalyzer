@@ -94,7 +94,7 @@ export default function Gearing({ doc, hero }: { doc: GearingDoc; hero: string }
                         : e.kind === 'consumable'
                           ? '消耗品'
                           : e.kind === 'embellishment'
-                            ? 'crafted bonus'
+                            ? '制造加成'
                             : '套装效果'}
                     </span>
                   ) : null}

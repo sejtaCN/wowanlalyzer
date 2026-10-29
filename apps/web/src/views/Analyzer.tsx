@@ -44,12 +44,17 @@ export default function Analyzer() {
   const simc = runs[0]?.simc;
   const levReal = LEVERAGE.rows.filter((r) => r.beyondCi).length;
   const shareScenarios = Object.keys(SHARE.scenarios).length;
+  const abCount = runs.filter((r) => r.kind === 'decision-ab').length;
 
   return (
     <div className="page">
       <h1>解析台</h1>
       <p className="page-sub">
-        当前只展示执政官（Archon）。学习页给的每个数字都在这里能查到出处。从上往下读：结构 → 数量 → 构成 → 配装 → 参考资料 → 原始结果。
+        当前只展示执政官这一套天赋。学习页给的每个数字都在这里能查到出处。从上往下读：结构 → 数量 → 构成 → 配装 → 参考资料 → 原始结果。
+      </p>
+
+      <p className="note">
+        <a href="#grp-decision-ab">决策 A/B：{abCount} 条对照记录，跳到原始结果</a>
       </p>
 
       <div className="statusline" style={{ marginTop: 0, borderTop: 0, paddingTop: 0 }}>
@@ -65,7 +70,7 @@ export default function Analyzer() {
         no="①"
         question="谁依赖谁"
         tag="APL 条件 + 日志窗口"
-        note={`${INTERACTIONS.counts.apl} 条来自 APL 的 dot/buff 条件（可复现），${INTERACTIONS.counts.burst} 条来自爆发窗口内的施法占比（真实日志）。线越粗，占比越高。`}
+        note={`${INTERACTIONS.counts.apl} 条来自 APL 的 DoT 与增益条件（可复现），${INTERACTIONS.counts.burst} 条来自爆发窗口内的施法占比（真实日志）。线越粗，占比越高。`}
       >
         <InteractionGraph hero="archon" />
       </Section>
@@ -74,7 +79,7 @@ export default function Analyzer() {
         no="②"
         question="少它会掉多少"
         tag={`${LEVERAGE.iterations} 迭代`}
-        note={`把技能在 APL 里的动作行全部注释掉再重跑：${LEVERAGE.rows.length} 条里有 ${levReal} 条超出误差带（真的在起作用）。误差带内的不算结论。`}
+        note={`把技能在 APL 里的动作行全部注释掉再重跑：${LEVERAGE.rows.length} 条里有 ${levReal} 条超出保守误差上限。上限内或 CI 不完整的都不算结论。`}
       >
         <LeverageChart hero="archon" />
       </Section>
@@ -100,7 +105,7 @@ export default function Analyzer() {
 
       <Section
         no="⑤"
-        question="攻略是谁说的，我们验了什么"
+        question="攻略是谁说的，这里验了什么"
         tag={`${SOURCES_SUMMARY.sources.length} 家原文`}
         note={`四家一致 ${CROSSCHECK.agreements.length} 条直接进正文；分歧 ${CROSSCHECK.divergences.length} 条不挑权威，交给 APL 与 runId 裁决。原文抓取时间 ${SOURCES_SUMMARY.generatedAt}。`}
       >
@@ -117,12 +122,12 @@ export default function Analyzer() {
           className="filter"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="筛选：w30_8 / lev_halo / voidform / archon …"
-          aria-label="筛选 runId"
+          placeholder="筛选场景或记录号"
+          aria-label="筛选模拟记录"
         />
         <div className="tblwrap">
           {groups.map(([name, rows]) => (
-            <div key={name} style={{ marginBottom: 18 }}>
+            <div key={name} id={name === '决策 A/B' ? 'grp-decision-ab' : undefined} style={{ marginBottom: 18 }}>
               <h3 style={{ display: 'flex', gap: 8, alignItems: 'baseline' }}>
                 {name}
                 <span className="note">{rows.length} 条</span>

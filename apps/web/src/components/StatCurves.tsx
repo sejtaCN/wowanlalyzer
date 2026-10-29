@@ -24,7 +24,7 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
   const sc = doc.scenarios.find((s) => s.id === sid) ?? doc.scenarios[0];
   const data = doc.perScenario[sc.id];
   if (!data || !data.curves) {
-    return <div className="figempty">还没有 {sc?.label ?? sid} 的曲线数据：先跑 npm run statopt。</div>;
+    return <div className="figempty">还没有 {sc?.label ?? sid} 的曲线数据。</div>;
   }
 
   const stats = doc.stats.map((s) => ({ ...s, points: data.curves[s.key] ?? [] }));

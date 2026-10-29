@@ -1,0 +1,93 @@
+{
+  "runId": "adj_s4__t3__5000_r1",
+  "layer": "A",
+  "kind": "adjacent-swap",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "31bbd1ad3548ac60",
+  "baseProfileSha256": "ad9cdd996cff3505",
+  "variantId": "s4",
+  "variantLabel": "触手猛击（留充能那行）↔ 暗言术：灭（残血那行）",
+  "swapGroup": "s4",
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "rep": 1,
+  "iterations": 5007,
+  "dps": {
+    "mean": 413130.77,
+    "ci95": 227.99,
+    "ci95Pct": 0.06,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "mode": "swap-two-adjacent-lines",
+    "lines": [
+      {
+        "lineNo": 104,
+        "text": "actions.main+=/tentacle_slam,if=raid_event.adds.in>20"
+      },
+      {
+        "lineNo": 106,
+        "text": "actions.main+=/shadow_word_death,target_if=target.health.pct<20"
+      }
+    ],
+    "after": [
+      {
+        "lineNo": 104,
+        "text": "actions.main+=/shadow_word_death,target_if=target.health.pct<20"
+      },
+      {
+        "lineNo": 106,
+        "text": "actions.main+=/tentacle_slam,if=raid_event.adds.in>20"
+      }
+    ]
+  },
+  "spellTrace": {
+    "tentacle_slam": {
+      "present": true,
+      "executions": 132048,
+      "damageMean": 0
+    },
+    "vampiric_touch": {
+      "present": true,
+      "executions": 395523,
+      "damageMean": 6756134
+    },
+    "void_volley": {
+      "present": true,
+      "executions": 318484,
+      "damageMean": 0
+    },
+    "void_blast": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "mind_flay": {
+      "present": true,
+      "executions": 442652,
+      "damageMean": 6861472
+    },
+    "shadow_word_death": {
+      "present": true,
+      "executions": 27711,
+      "damageMean": 850731
+    },
+    "undefined": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    }
+  },
+  "generatedAt": "2026-10-29T02:23:24.429Z"
+}

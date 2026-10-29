@@ -24,8 +24,8 @@
 | # | 问题 | 本文采用的默认 | 影响面 |
 | --- | --- | --- | --- |
 | Q1 🔴 | 用户提的「评论互动 / 收藏点赞 / 账号中心 / 标签导航 / 相关推荐」**当前项目完全没有**。是要新建，还是本次只做现有模块的 UI 优化？ | **本次不新建**。这些模块在 §1.2 标注为「规划中」，不进本轮交付。理由：评论/账号需要后端与运营，UI 先做会返工 | 若要新建，需追加 §4.7–4.9 与后端方案 |
-| Q2 🔴 | 是否要支持**亮色主题**？`index.html` 写的是 `color-scheme: light`，但实际主题是暗色——这是一处矛盾 | **只做暗色**，但把 `color-scheme` 改为 `dark` 并把色板抽成语义 token，为将来加亮色留口子 | 改 1 行 + 色板重构 |
-| Q3 | 章节页要不要加**粘性目录侧栏**（Icy Veins / Wowhead 的做法）？会改变 `check:ui` 的 `pageWidth === 720` 断言 | **已落地桌面版**：1440 下章节壳 1392px，由 200px 目录 + 24px 间隔 + 1168px 主栏组成；移动端冻结 | `check:ui` 已改为桌面宽度断言 |
+| Q2 🔴 | 是否要支持**亮色主题**？`index.html` 写的是 `color-scheme: light`，但实际主题是暗色——这是一处矛盾 | **只做暗色**，但把 `color-scheme` 改为 `dark` 并把色板抽成语义 token，为将来加亮色留口子（2026-10-29 已落地：meta 与 `html` 均为 `dark`） | 改 1 行 + 色板重构 |
+| Q3 | 章节页要不要加**粘性目录侧栏**（Icy Veins / Wowhead 的做法）？会改变 `check:ui` 的内容宽断言 | **已落地桌面版**：1440 下章节壳 1392px，由 200px 目录 + 24px 间隔 + 1168px 主栏组成；移动端冻结 | `check:ui` 已改为桌面宽度断言 |
 | Q4 | 解析台原始 run 表格默认全展开还是折叠？ | **当前只列 Archon，默认每组 12 行 + 「展开全部」** | 解析台一节的高度减半，且不混入 Voidweaver |
 | Q5 | 目标用户画像？新玩家 vs 已有经验的暗牧？ | 按 **ui-design.md §1** 的现有定位：「学到自己能判断」，偏有基础但不会看数据的中阶玩家 | 影响文案深度，不影响布局 |
 | Q6 | 是否需要**多专精并行入口**（P0 待办里的英雄天赋切换）？ | **不设并行入口**。沿用现有顶栏专精下拉，切换后整站数据跟着换 | 无 |
@@ -525,7 +525,7 @@
 **改后**：单行、居中、12px `--text-muted`，只保留读者能理解的：
 
 ```
-数据更新于 2026-10-25 · 246 组模拟 · 1 场真实日志 · 路线 14 波
+数据更新于 2026-10-25 · 235 组模拟 · 1 场真实日志 · 路线 15 波
 ```
 
 `SimC 1210.01 (73a372b)` 这类版本号移进 `<details>「数据版本」`。
@@ -580,7 +580,7 @@
 ```
 段标题行：  ①  [h2 21px 问题式标题]              [状态 chip 12px]
              ────────────────────────────────────────────
-图区：      宽度 720px（等于容器），内部间距 --sp-3 14px
+图区：      宽度 1168px（章节主栏），内部间距 --sp-5 16px
              ────────────────────────────────────────────
 说明句：    13px --text-secondary，max-width 36em，≤2句
              （超 2 句 → 折叠进 <details>）
@@ -691,7 +691,7 @@
 ┌──────────────────────────────────────────────────────┐
 │ 模拟 8 只目标 · 开/不开对照 · 各 5000 次                │
 │ 日志 1 场（整场，无分段）                                │
-│ 来源 模拟器 1210.01 · keystone.guru 6 条路线 · 2026-10-25 │
+│ 来源 模拟器 1210.01 · keystone.guru 路线 15 波 · 2026-10-25 │
 │ ▸ 查看原始记录                                          │
 └──────────────────────────────────────────────────────┘
 ```
@@ -705,11 +705,11 @@
 
 | 元素 | 宽度 | 说明 |
 | --- | --- | --- |
-| 容器 | **720px**（不变） | 表格与图件需要 |
+| 容器 | **1168px** 主栏（章节壳 1392） | 表格与图件需要 |
 | 结论条 / 说明句 / claim | `max-width: 36em`（≈576px @16px） | 30–45 全角字，clreq 舒适行长 |
-| 表格 / 图 | 720px 全宽 | 高密度信息需要 |
+| 表格 / 图 | 1168px 全宽 | 高密度信息需要 |
 
-整列 720px ÷ 16px = **45 全角字/行**；正文再限制到 36em，避免长段落铺满图件宽度。
+正文限制在 36em，避免长段落铺满图件宽度。
 
 ---
 
@@ -731,14 +731,14 @@
 │ ③ 伤害从哪来          [3 个场景]                   │
 │ ④ 换个输出模型…      [12 项·4 模型]                │
 │ ⑤ 攻略是谁说的…      [4 家原文]                    │
-│ ⑥ 原始结果在哪        [246 个 runId]               │
+│ ⑥ 原始结果在哪        [235 个 runId]               │
 └────────────────────────────────────────────────────┘
 ```
 
 #### 状态条（改后）
 
 ```
-模拟器 1210.01 · 246 组模拟 · 杠杆 4 场景 × 22 技能 · 联动 41 条边 · 配装 12 项 × 4 模型 · 参考 4 家
+模拟器 1210.01 · 235 组模拟 · 杠杆 4 场景 × 22 技能 · 联动 41 条边 · 配装 12 项 × 4 模型 · 参考 4 家
 ```
 
 现状 6 项全是构建指标（`runId 246 个`），改为读者能理解的量。
@@ -887,7 +887,6 @@
 | `TargetBand` | `components/Teaching/TargetBand.tsx` | 改：阈值线样式 |
 | `WaveDiagram` | `components/Teaching/WaveDiagram.tsx` | 保持 |
 | `BurstTimeline` | `components/Teaching/BurstTimeline.tsx` | 保持 |
-| `DecisionFlow` | `components/Teaching/DecisionFlow.tsx` | 保持 |
 | `ActionBudget` | `components/Teaching/ActionBudget.tsx` | 保持 |
 | `CooldownWindow` | `components/Teaching/CooldownWindow.tsx` | 保持 |
 | `PriorityMap` | `components/Teaching/PriorityMap.tsx` | 改：图例压缩 + 证据引用块 |
@@ -896,8 +895,10 @@
 | `Skeleton` | `components/Teaching/Skeleton.tsx` | 保持 |
 | `Gearing` / `StatCurves` / `Sources` | `components/*.tsx` | 改：卡片标题 17px + 说明句 13px |
 | `Analysis.tsx`（3 图） | `components/Analysis.tsx` | 改：说明句分层 |
+| `Coaching` / `Gloss` | `components/Coaching.tsx` / `components/Gloss.tsx` | 保持 |
+| `ChapterSections` | `components/ChapterSections.tsx` | 保持 |
 
-### 5.2 新增组件（4 个）
+### 5.2 新增组件
 
 | 组件 | 用途 | 关键规格 |
 | --- | --- | --- |
@@ -906,10 +907,20 @@
 | `<StatusChip tone>` | 统一状态标签 | 12px；胶囊；tone = `positive` / `warning` / `neutral` / `accent` |
 | `<Measure>` | 正文宽度容器 | `max-width: 36em`；包裹结论条、说明句、claim |
 
+**落地情况（2026-10-29 核对）**：上面 4 个组件都没有建成独立文件，也没有对应的统一类名。折叠区直接用页面里的 `<details>`（`.evidence-raw` / `.phase-method` / `.sw-raw`）；正文行长 `max-width: 36em` 分别写在 4 处具体选择器上，没有 `<Measure>` 包装层。同期待新增的通用组件若继续加，会先补成组件再落规格。
+
+B 重构期间实际新增的是这两个：
+
+| 组件 | 用途 | 关键规格 |
+| --- | --- | --- |
+| `ChapterToc` | 章节页五段目录 | `components/ChapterToc.tsx`；固定 5 项（场景 / 爆发价值 / 技能调整 / 路线位置 / 真人对照）；顶栏横向导航 |
+| `SimulatedTimeline` | 模拟动作时间线 | `components/Teaching/SimulatedTimeline.tsx`；按 DoT / 填充 / 爆发 / 药水四类着色，数据取自 `content/analysis/simulated-timelines-archon.json` |
+
 ### 5.3 删除 / 合并
 
 | 对象 | 处理 |
 | --- | --- |
+| `Teaching/DecisionFlow` | 组件与 `.df` 样式族一并移除；三步判断（几只 → 多久 → 开不开）并入顶图带主行动格，压成一行「N 只 › 30 秒 › 结论」，判定逻辑在 `rules.ts` 的 `burstAdvice` |
 | `.note` 的两种用法混用 | 拆成 `.caption`（图注，12px `--text-muted`）与 `.caption--body`（说明句，13px `--text-secondary`） |
 | 优先级位置图图例 4 条 | 压到 1 条 |
 | 证据条「组」行 | 删除 |

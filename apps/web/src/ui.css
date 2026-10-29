@@ -121,6 +121,7 @@
 }
 
 * { box-sizing: border-box; }
+html { color-scheme: dark; }
 html, body, #root { min-height: 100%; }
 body {
   margin: 0;
@@ -224,6 +225,14 @@ h3 { font-size: var(--fs-sub); line-height: 1.45; margin: 0 0 8px; font-weight: 
 .card > .bd { padding: 16px; overflow-x: auto; }
 .tbl-lev { min-width: 620px; }
 .tbl-priority { min-width: 620px; }
+/* 本构建用不上的行：留在表里（表是 APL 原文），但压到次要色并写明原因 */
+.tbl-priority tr.is-dead td { color: var(--muted); }
+.tbl-priority .dead-tag {
+  margin-left: var(--sp-1); padding: 0 var(--sp-2);
+  border: 1px solid var(--line-2); border-radius: var(--radius-sm);
+  font-size: var(--fs-caption); color: var(--muted); white-space: nowrap;
+}
+.tbl-priority .dead-why { display: block; margin-top: var(--sp-1); font-size: var(--fs-caption); color: var(--muted); }
 .tblwrap { width: 100%; max-width: 100%; min-width: 0; overflow-x: auto; }
 .filter {
   width: 100%; padding: 8px 12px; border: 1px solid var(--line-2); border-radius: var(--radius-sm);
@@ -324,34 +333,6 @@ h3 { font-size: var(--fs-sub); line-height: 1.45; margin: 0 0 8px; font-weight: 
 .tb-pair i { display: block; height: 7px; border-radius: 3px; }
 .tb-pair i.on { background: linear-gradient(90deg, var(--data-on), var(--up)); }
 .tb-pair i.off { background: var(--data-off); }
-
-/* ---------- 判断流程（几只 → 多久 → 开不开） ---------- */
-.df { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; }
-.df-step {
-  flex: 1; min-width: 108px; border: 1px solid var(--line); border-radius: var(--radius-sm);
-  background: var(--card-2); padding: 12px 12px;
-}
-.df-n {
-  width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center;
-  font-family: var(--mono); font-size: var(--fs-4); font-weight: 700;
-  color: var(--gold); background: var(--accent-soft); border: 1px solid rgba(245,196,81,0.3);
-  margin-bottom: 8px;
-}
-.df-k { font-size: var(--fs-4); color: var(--muted); }
-.df-v { font-size: var(--fs-3); font-weight: 700; color: var(--ink); }
-.df-v.adv { display: inline-block; padding: 0; border: 0; background: none; }
-.df-sub { font-size: var(--fs-4); color: var(--muted); margin-top: 2px; }
-.df-arw { display: grid; place-items: center; color: var(--gold); opacity: 0.75; font-size: var(--fs-2); }
-.df-note { flex-basis: 100%; font-size: var(--fs-4); color: var(--muted); margin: 8px 0 0; }
-.df.compact { display: flex; flex-direction: column; gap: 8px; }
-.df-inline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.df-inline i { color: var(--line-2); font-style: normal; font-size: var(--fs-3); }
-.df-chip {
-  font-size: var(--fs-4); color: var(--sub);
-  border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; background: var(--card-2);
-}
-.df-chip b { font-family: var(--mono); font-size: var(--fs-4); color: var(--ink); }
-.df-chip.adv { border: 0; padding: 2px 12px; }
 
 /* 建议标签（开 / 看冷却 / 不开） */
 .adv { font-size: var(--fs-4); font-weight: 500; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }

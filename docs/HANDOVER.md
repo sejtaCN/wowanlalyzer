@@ -6,7 +6,7 @@
 
 ---
 
-## 1. 现状（2026-10-27）
+## 1. 现状（2026-10-29）
 
 | 项 | 数量 | 位置 |
 | --- | --- | --- |
@@ -14,10 +14,10 @@
 | 占位专精 | 1（恶魔猎手·噬灭·歼灭者） | 同上，`status: planned` |
 | 章节 | 11（L0×4 / L1×6 / L2×1） | `content/chapters/` |
 | 教练建议 | 7 条 | `content/coaching/general.json` |
-| 模拟 runId | 原始 248 个；前端仅查明确归属 Archon 的记录 | `content/sims/` + 汇总 `numeric-summary.json` |
+| 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
 | 图契约 | 11 章 × 5 段；50 有图 / 0 缺图 / 5 不适用；L0-03 / L1-01 第五段为模拟时间线 | `content/figures/chapters.json` |
-| 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 4,050 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
+| 代码量 | 约 4,670 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
@@ -30,7 +30,7 @@
 content/
   specs.json            专精注册表（active 才有内容）
   profiles/*.simc       SimC profile（含 APL）—— 一切数值的源头
-  guides/priority-table.json   APL → 人话优先级表（38 条）
+  guides/priority-table.json   APL → 人话优先级表（38 条；10 条本构建用不上，行内带原因）
   guides/skills.json          技能中文名（verified 分两档）
   glossary.json               术语表（页面上悬停解释）
   chapters/*.json             章节内容（五段结构）
@@ -49,8 +49,9 @@ docs/                    产品 / UI / 教学 / 流程 / 规范
   nga-copy-spec.md        NGA 风格改写的施工记录 + 已落盘正文快照
   ui-blueprint.md        **UI 设计源**：模块划分 / 参考模板 / 设计语言 / 逐页详细设计
   ui-refresh-plan.md     文案与可读性优化方案（改写对照表 + 排版设定 + 验收）
+  research/              外部数据核对记录（route-data-pipeline.md：路线采集链路与复现步骤）
 apps/web/src/            三屏 + 解析台
-  components/Teaching/   教学图组件（顶图带 / 波次图 / 爆发时间轴 / 判断流程 / 灰模库）
+  components/Teaching/   教学图组件（顶图带 / 目标刻度 / 波次图 / 动作预算 / 冷却窗口 / 爆发时间轴 / 模拟时间线 / 灰模库）
 packages/learning-core/  内容模型 + 进度（纯逻辑）
 ```
 
@@ -75,7 +76,7 @@ npm run sims:trace && npm run analysis:budget && npm run analysis:cooldown
 npm run validate:content && npm test && npm run build
 ```
 
-章节 JSON 不用改——它们引用的是 runId，数值会自己更新。**唯一的例外**：正文里写死的数字（如"−48.04%"）需要跟着改，改完要跑 `validate:content` 确认来源还在。
+章节 JSON 不用改——它们引用的是 runId，数值会自己更新。**唯一的例外**：正文里写死的中文数字（claim 与说明句里的增益、差值）需要跟着改，改完要跑 `validate:content` 确认来源还在。
 
 ### 3.2 加一章（新波次模型 / 新主题）
 
@@ -107,12 +108,16 @@ node <抓取脚本或手工存 content/routes/>
 
 ```bash
 npm run validate:content   # 数字来源 + 结构完整性 + 55 段图契约
-npx tsc -p tsconfig.json   # 类型
-npx vitest run             # 9 条，含依赖方向与数据层回归
+npm run typecheck          # 类型
+npx vitest run             # 26 条，含结构、数据层、相邻交换与分析门禁回归
+npm run check:copy         # 可见文案：禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追
+npm run check:design       # 间距阶 / 颜色 token / 中文排版 / 无障碍
 npm run check:doc:selftest  # 文档解析器 LF / CRLF 自测
 npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
+npm run check:analysis     # 配装阳性对照 / 属性复现差 / 最优预测误差
+npm run check:adjacent     # 相邻两行交换的差值、误差与判定按 runId 重算
 npm run check:ui           # 先构建，再逐章查 11 章；图契约标 ready 的段必须有真图
-npm run verify:gates       # 门禁自检：正样本绿、坏样本红
+npm run verify:gates       # 门禁自检 23 项：正样本绿、坏样本红
 npm run build              # 单文件产出
 ```
 
@@ -135,17 +140,17 @@ npm run build              # 单文件产出
 
 | # | 待办 | 说明 |
 | --- | --- | --- |
-| 3 | 图契约中 2 段缺图 | 当前 55 段里有 48 段有真图；剩余 L0-03 与 L1-01 第⑤段都是阶段图，缺 Fights/UNIT_DIED，不能硬切单波；归 E | `content/figures/chapters.json` |
+| 3 | ~~图契约中 2 段缺图~~ 已补齐 | L0-03 与 L1-01 第⑤段改用模拟动作时间线（`content/analysis/simulated-timelines-archon.json`，契约里 kind 仍为 `phase-chart`），状态由 `missing` 改为 `ready`；当前 55 段为 50 有图 / 0 缺图 / 5 不适用 | `content/figures/chapters.json` |
 | 4 | 第二个副本的 L2 页 | 需要路线数据 + 波次归一化；`data/content.ts` 里 `ALTAR_WAVES` 要改成按副本读取 |
 | 5 | 高手对照做到单波级 | 需要带 `Fights` 或 `UNIT_DIED` 的导出；现在的 9 段是阶段级 |
-| 6 | ADD 型改用真加怪模型 | 当前是"窗口近似"；要么换支持 `raid_events` 的 SimC 构建，要么用 `DungeonSlice` |
+| 6 | ~~BOSS 带小怪改用真加怪模型~~ 已按近似方案落地 | 毒牙祭坛 p10（11 只含 BOSS）与 p15（7 只含 BOSS）改为按全场目标数近似（`w30_8` / `w30_7`，BOSS 计入目标数），波次上带 `approximation` 标记，页面顶部与当前波都标注「近似 · 按 N 目标档」，p12 空波次仍不出数。真加怪仍不可得：`raid_events+=/adds` 被静默忽略（41.4 万 → 41.6 万，±0.6% 内），`fight_style=DungeonSlice` 是合成副本。换到支持 raid_events 的构建后应改回真模型 |
 
 ### P2 · 体验
 
 | # | 待办 | 说明 |
 | --- | --- | --- |
 | 6 | 章节页进度条 | 顶栏显示 L0/L1/L2 各读了几篇（`progress.seen` 已有数据） |
-| 7 | 解析台加"相邻两行交换" A/B | 比"禁用技能"更贴近优先级本身 |
+| 7 | ~~解析台加"相邻两行交换" A/B~~ 已上线 | `scripts/adjacent-swap.mjs` 只换相邻两行、`check:adjacent` 按 runId 重算；4 组结论（s1 / s3 有效，s2 **无效对照**——交换的 `void_blast` 四场景 0 次施放，s4 误差内）在 `content/analysis/adjacent-archon.json`，解析台页首有锚点入口 | `npm run check:adjacent` |
 | 8 | 联动图补"谁挂上了 DoT"的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） |
 | 9 | 教练卡按"你哪条没做到"高亮 | 依赖日志分段 |
 | 10 | **读者可见文案中文化 + 排版 6 档字号** | 全局已落地 `36/24/18/16/14/12`、400/500 两档字重、16px 正文、32px 段距与 36em 行长；6 个 L1 与 L2 已统一目录、决策顶图带、证据折叠与阶段结构，L0 仍保留基础章节结构 | `docs/ui-reference-decomposition.md`、`docs/ui-blueprint.md` §3–§4 |
@@ -174,6 +179,7 @@ npm run build              # 单文件产出
 | NGA `read.php` | 直连 403 | 本地浏览器可读 |
 | 目标数 > 8 | 模拟上限 | 一律按 8 计，页面注明 |
 | `num_executes` 是按目标数分桶的字典 | 直接取会得到 null | 求和后再用 |
+| `talentsHash` 在 2026-10-29 之前的 296 条记录里只有 12 位 | 那是天赋串前缀（`CIQAAAAAAAAA`），两套构建同值，**不能**用来判定构建一致 | 生产者已改成整串 sha256 取 16 位（只对之后的新 run 有效）；旧记录按 `profileFile` + `hero` 认构建 |
 
 ---
 

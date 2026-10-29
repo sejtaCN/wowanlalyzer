@@ -11,7 +11,6 @@
   "dangers": 3,
   "frequency": "30/84 波"
  },
- "claim": "10 只以上直接开，别留。一次换 12.7M（模拟上限按 8 只算），是 BOSS 波的 2.5 倍；冷却只够覆盖一部分大波，所以要挑更大的那一波。",
  "chart": {
   "kind": "burst-bars",
   "title": "8 目标：开爆发和不开的差",
@@ -30,9 +29,9 @@
    },
    {
     "skill": "void_volley",
-    "reason": "多目标时它覆盖的目标最多，冷却好了就用",
-    "evidence": "虚空齐射排在主循环前段；8 只目标、30 秒模拟的增益稳定",
-    "raw": "actions.main+=/void_volley 排在前段；模拟 w30_8 增益稳定"
+    "reason": "冷却好了就用，别把这一下让给填充技能",
+    "evidence": "APL 条件：虚空形态冷却好了就放；主循环里排在第 8 行，在精神震爆之前",
+    "raw": "actions.main+=/void_volley,if=cooldown.voidform.up"
    }
   ],
   "drop": [

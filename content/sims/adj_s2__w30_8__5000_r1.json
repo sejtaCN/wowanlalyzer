@@ -1,0 +1,93 @@
+{
+  "runId": "adj_s2__w30_8__5000_r1",
+  "layer": "A",
+  "kind": "adjacent-swap",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "e1856df70d61c86a",
+  "baseProfileSha256": "ad9cdd996cff3505",
+  "variantId": "s2",
+  "variantLabel": "虚空齐射（前段那行）↔ 虚空冲击",
+  "swapGroup": "s2",
+  "scenarioId": "w30_8",
+  "scenarioLabel": "8 目标 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 30,
+  "rep": 1,
+  "iterations": 5007,
+  "dps": {
+    "mean": 1386183.95,
+    "ci95": 1929.31,
+    "ci95Pct": 0.14,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "mode": "swap-two-adjacent-lines",
+    "lines": [
+      {
+        "lineNo": 86,
+        "text": "actions.main+=/void_volley,if=cooldown.voidform.up"
+      },
+      {
+        "lineNo": 87,
+        "text": "actions.main+=/void_blast,target_if=max:(dot.shadow_word_madness.remains*1000+target.time_to_die)"
+      }
+    ],
+    "after": [
+      {
+        "lineNo": 86,
+        "text": "actions.main+=/void_blast,target_if=max:(dot.shadow_word_madness.remains*1000+target.time_to_die)"
+      },
+      {
+        "lineNo": 87,
+        "text": "actions.main+=/void_volley,if=cooldown.voidform.up"
+      }
+    ]
+  },
+  "spellTrace": {
+    "tentacle_slam": {
+      "present": true,
+      "executions": 19171,
+      "damageMean": 0
+    },
+    "vampiric_touch": {
+      "present": true,
+      "executions": 113790,
+      "damageMean": 3145254
+    },
+    "void_volley": {
+      "present": true,
+      "executions": 70248,
+      "damageMean": 0
+    },
+    "void_blast": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "mind_flay": {
+      "present": true,
+      "executions": 10968,
+      "damageMean": 195687
+    },
+    "shadow_word_death": {
+      "present": true,
+      "executions": 4999,
+      "damageMean": 204281
+    },
+    "undefined": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    }
+  },
+  "generatedAt": "2026-10-29T02:22:19.199Z"
+}

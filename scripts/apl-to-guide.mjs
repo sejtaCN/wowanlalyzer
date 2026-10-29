@@ -8,7 +8,7 @@
  * 输出 content/guides/priority-table.json：
  *   [{ section, order, skill, conditionRaw, conditionZh, enabled }]
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync } from 'node:fs';
 import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -250,8 +250,153 @@ const SECTION_LABEL = {
   'actions.precombat': '开打前',
 };
 
+/* ------------------------------------------------------------ 死行判定
+ *
+ * 表里有些行在本构建里永远不会施放：种族不对、装备没带、要队友、条件不到、天赋没点。
+ * 这些行照留（表是 APL 原文），但必须带原因，不能和能用的行长得一样。
+ *
+ * 两条硬规矩，违反就抛：
+ *   1. 数据说 0 次施放、却没有原因 → 抛。新出现的死行必须当次解决，不许默默留在表里。
+ *   2. 写了原因、数据却有施放 → 抛。规则比数据旧了，不许继续拿来说事。
+ */
+
+const RACE_ZH = {
+  blood_elf: '血精灵',
+  void_elf: '虚空精灵',
+  dwarf: '矮人',
+  dark_iron_dwarf: '黑铁矮人',
+  troll: '巨魔',
+  zandalari_troll: '赞达拉巨魔',
+  orc: '兽人',
+  maghar_orc: '玛格汉兽人',
+  tauren: '牛头人',
+  highmountain_tauren: '高岭牛头人',
+  night_elf: '暗夜精灵',
+  human: '人类',
+  undead: '亡灵',
+  worgen: '狼人',
+  goblin: '地精',
+  pandaren: '熊猫人',
+  draenei: '德莱尼',
+  lightforged_draenei: '光铸德莱尼',
+  gnome: '侏儒',
+  mechagnome: '机械侏儒',
+  vulpera: '狐人',
+  nightborne: '夜之子',
+  kul_tiran: '库尔提拉斯人',
+  earthen: '土灵',
+};
+
+const zhRace = (race) => RACE_ZH[race] ?? `「${race}」`;
+
+/** 种族技能 → 拥有它的种族。profile 的 race 不在其中，这一行就用不了。 */
+const RACIAL_SKILLS = [
+  { skills: ['arcane_torrent'], races: ['blood_elf'] },
+  { skills: ['fireblood'], races: ['dwarf', 'dark_iron_dwarf'] },
+  { skills: ['berserking'], races: ['troll', 'zandalari_troll'] },
+  { skills: ['blood_fury'], races: ['orc', 'maghar_orc'] },
+  { skills: ['ancestral_call'], races: ['tauren', 'highmountain_tauren'] },
+];
+
+/** 不靠种族判断来源的三类：天赋没点、装备没带、要队友、条件不到。 */
+const TALENT_ONLY = ['void_blast', 'void_torrent'];
+
+/**
+ * 施放证据：ability-share 给多迭代的次数，trace 给真实动作序列。
+ * 两者合起来回答「这个技能在本构建里到底会不会出现」。
+ */
+export function loadExecutionEvidence(hero) {
+  const exec = new Map();
+  const scenes = new Set();
+  const bump = (skill, n) => {
+    if (skill && n > 0) exec.set(skill, (exec.get(skill) ?? 0) + n);
+  };
+
+  const shareFile = join(ROOT, 'content', 'analysis', `ability-share-${hero}.json`);
+  if (existsSync(shareFile)) {
+    const share = JSON.parse(readFileSync(shareFile, 'utf8'));
+    for (const [id, s] of Object.entries(share.scenarios ?? {})) {
+      scenes.add(id);
+      for (const r of s.rows ?? []) bump(r.spell, r.executes ?? 0);
+    }
+  }
+
+  const simsDir = join(ROOT, 'content', 'sims');
+  for (const f of readdirSync(simsDir)) {
+    if (!/^trace_.*\.json$/.test(f)) continue;
+    const j = JSON.parse(readFileSync(join(simsDir, f), 'utf8'));
+    if (j.hero !== hero || !j.actions?.series) continue;
+    scenes.add(j.scenarioId ?? f);
+    for (const a of j.actions.series) bump(a.name, 1);
+  }
+
+  return { exec, scenes: [...scenes].sort() };
+}
+
+function buildDeadRows(lines, profileText, hero) {
+  if (hero !== 'archon') {
+    console.log(`  注：死行规则目前只对 archon 成立，${hero} 不判定`);
+    return new Map();
+  }
+
+  const apl = new Map();
+  for (const line of lines) {
+    const m = /^(actions(?:\.[a-z_]+)?)\+?=\/([a-z_0-9]+)(?:,(.*))?$/.exec(line.trim());
+    if (!m || !SECTION_LABEL[m[1]]) continue;
+    if (['variable', 'call_action_list', 'run_action_list'].includes(m[2])) continue;
+    apl.set(m[2], m[3] ?? '');
+  }
+
+  const race = /^race=(.+)$/m.exec(profileText)?.[1]?.trim() ?? '';
+  const dead = new Map();
+  const mark = (skill, kind, reason) => dead.set(skill, { kind, reason });
+
+  for (const rule of RACIAL_SKILLS) {
+    if (rule.races.includes(race)) continue;
+    const owner = rule.races.map(zhRace).join('/');
+    for (const skill of rule.skills) {
+      if (apl.has(skill)) mark(skill, 'race', `种族技能（${owner}专属），本构建是${zhRace(race)}`);
+    }
+  }
+
+  for (const skill of TALENT_ONLY) {
+    if (apl.has(skill)) mark(skill, 'talent', '天赋没点，本构建的技能集里没有它');
+  }
+
+  if (apl.has('use_item')) {
+    const item = /name=([a-z_0-9]+)/.exec(apl.get('use_item'))?.[1];
+    if (item && !new RegExp(`^[a-z_0-9]+=${item}[,\\r\\n]`, 'm').test(profileText)) {
+      mark('use_item', 'gear', `指定饰品没带（「${item}」）`);
+    }
+  }
+
+  if (apl.has('invoke_external_buff')) {
+    mark('invoke_external_buff', 'external', '要队友施放，单人模拟拿不到');
+  }
+
+  if (apl.has('desperate_prayer')) {
+    const pct = /health\.pct\s*<=\s*(\d+)/.exec(apl.get('desperate_prayer'))?.[1];
+    mark('desperate_prayer', 'condition', pct ? `条件没触发：血量没降到 ${pct}% 以下` : '条件没触发');
+  }
+
+  const { exec, scenes } = loadExecutionEvidence(hero);
+  for (const [skill, info] of dead) {
+    const n = exec.get(skill) ?? 0;
+    if (n > 0) throw new Error(`死行规则失效：${skill} 被标成不可用，但 ${scenes.length} 个场景里有 ${n} 次施放`);
+    if (!apl.has(skill)) throw new Error(`死行规则失效：${skill} 已不在 APL 里，规则该删了`);
+    info.evidence = `${scenes.length} 个场景 0 次施放`;
+  }
+  for (const skill of apl.keys()) {
+    if ((exec.get(skill) ?? 0) === 0 && !dead.has(skill)) {
+      throw new Error(`新增死行：${skill} 在 ${scenes.length} 个场景里 0 次施放，但没有写原因（补进 RACIAL_SKILLS / TALENT_ONLY 或单独规则）`);
+    }
+  }
+  return dead;
+}
+
 const src = readFileSync(PROFILE, 'utf8');
 const lines = src.split(/\r?\n/);
+const dead = buildDeadRows(lines, src, HERO);
 
 const rows = [];
 let order = {};
@@ -271,6 +416,7 @@ for (const line of lines) {
   const condRaw = grab('if');
   const targetIfRaw = grab('target_if');
   const cond = condRaw ? toChinese(condRaw) : { zh: '无条件（排到就打）', groups: [] };
+  const deadInfo = dead.get(skill) ?? null;
   rows.push({
     section,
     sectionLabel: SECTION_LABEL[section],
@@ -282,7 +428,9 @@ for (const line of lines) {
     conditionGroups: cond.groups,
     targetSelectRaw: targetIfRaw,
     targetSelectZh: targetIfRaw ? toChineseSelect(targetIfRaw) : '',
-    enabled: !/,\s*if=0\b/.test(rest ?? ''),
+    enabled: !/,\s*if=0\b/.test(rest ?? '') && !deadInfo,
+    /** 本构建用不上的行：kind 给原因分类，evidence 是施放次数来源 */
+    ...(deadInfo ? { dead: deadInfo } : {}),
   });
 }
 
@@ -294,7 +442,8 @@ const out = {
   generatedAt: new Date().toISOString(),
   note:
     '直接从 APL 抽取，条件原文与人话并列；人话只改写法，不改逻辑，也不补"为什么"。' +
-    '有出处的名字用中文，没出处的用「」标成标识符。',
+    '有出处的名字用中文，没出处的用「」标成标识符。' +
+    'dead 非空的行表示本构建用不上（种族/装备/队友/条件/天赋），原因与施放次数一并给出。',
   sections: Object.entries(SECTION_LABEL)
     .map(([k, v]) => ({ key: k, label: v, rows: rows.filter((r) => r.section === k) }))
     .filter((s) => s.rows.length),
@@ -302,6 +451,10 @@ const out = {
 writeFileSync(join(OUT_DIR, 'priority-table.json'), JSON.stringify(out, null, 2) + '\n');
 
 console.log(`写出 content/guides/priority-table.json · ${rows.length} 条优先级`);
+if (dead.size) {
+  console.log(`  本构建用不上 ${dead.size} 条：`);
+  for (const [skill, info] of dead) console.log(`    ${skill.padEnd(22)} ${info.reason}（${info.evidence}）`);
+}
 for (const s of out.sections) {
   console.log(`\n【${s.label}】${s.rows.length} 条`);
   for (const r of s.rows.slice(0, 12)) {

@@ -95,9 +95,8 @@ export default function WaveDiagram({ targets, highlightPull, limit = 3, kind = 
             <div className="wd-v">
               按目标档模拟{' '}
               {(() => {
-                if (w.isBoss && (w.trashMobCount ?? w.mobCount) > 0) return <b>待补</b>;
-                const v = burstValueFor(w.mobCount, w.isBoss, getRun);
-                return v.deltaDamage == null ? <b>待补</b> : <b>{(v.deltaDamage / 1e6).toFixed(1)}M</b>;
+                const v = burstValueFor(w, getRun);
+                return v.deltaDamage == null ? <b>不出差值</b> : <b>{(v.deltaDamage / 1e6).toFixed(1)}M</b>;
               })()}
             </div>
           </div>
@@ -105,7 +104,7 @@ export default function WaveDiagram({ targets, highlightPull, limit = 3, kind = 
       })}
       <div className="wd-legend">
         <span><i className="wd-key" />一个方块 = 一只怪 · 同色 = 同一种怪</span>
-        <span>数值 = 按当前波目标数匹配的模拟档位（&gt;8 只按 8 只计）。BOSS pull 若混有小怪，不拿普通单体木桩冒充。</span>
+        <span>数值 = 按当前波目标数匹配的模拟档位（&gt;8 只按 8 只计）。空波次、BOSS 混小怪都不套普通木桩。</span>
         {hidden > 0 ? <span>另有 {hidden} 波同档未显示</span> : null}
       </div>
       {shown.some((w) => w.mobs.length) ? (

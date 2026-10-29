@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import type { Chapter } from '@learn';
 import { ChapterBody } from '../components/ChapterSections';
 import ChapterToc from '../components/ChapterToc';
-import { ReaderRefreshProvider } from '../state/reader-refresh';
 
 export default function ChapterView({
   chapter,
@@ -33,9 +32,7 @@ export default function ChapterView({
       </div>
       <h1>{chapter.title}</h1>
       <p className="page-sub">{chapter.subtitle}</p>
-      <ReaderRefreshProvider value={readerRefresh}>
-        <ChapterBody key={chapter.id} chapter={chapter} />
-      </ReaderRefreshProvider>
+      <ChapterBody key={chapter.id} chapter={chapter} />
     </div>
   );
 

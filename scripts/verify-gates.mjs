@@ -11,6 +11,9 @@
  *   7. design negative: ui.css 注入离阶间距 + 中文标签正字距 + token 块外色值
  *      → check:design 必须失败并逐条点名（改完必须还原）
  *   8. design positive: 还原后的 ui.css → check:design 必须通过
+ *   9–14. analysis: 真实产物通过；空对照 / 缺场景 / 弱对照 / 复现差 / 最优误差分别变红
+ *   15–19. adjacent: 真实交换数据通过；改差值 / 假 runId / 阳性对照被杀 / 无效对照改回误差内分别变红
+ *   20–23. copy: 真实文案通过；比较句 / 纯英文机器串 / 可见 JSON 的坏样本按诊断文本点名
  *
  * 用法：npm run verify:gates
  */
@@ -102,6 +105,84 @@ try {
     `--shots=${join(temp, 'shots-markdown-bad')}`,
   ], false, '可见文本含 Markdown 标记');
 
+  // ---- check:analysis ----
+  const gearing = JSON.parse(readFileSync(join(ROOT, 'content', 'analysis', 'gearing-archon.json'), 'utf8'));
+  const statOpt = JSON.parse(readFileSync(join(ROOT, 'content', 'analysis', 'stat-opt-archon.json'), 'utf8'));
+  const analysisCase = (name, mutateGearing, mutateStatOpt) => {
+    const g = structuredClone(gearing);
+    const s = structuredClone(statOpt);
+    mutateGearing?.(g);
+    mutateStatOpt?.(s);
+    const gearingPath = join(temp, `${name}-gearing.json`);
+    const statOptPath = join(temp, `${name}-stat-opt.json`);
+    writeFileSync(gearingPath, JSON.stringify(g));
+    writeFileSync(statOptPath, JSON.stringify(s));
+    return [`--gearing=${gearingPath}`, `--stat-opt=${statOptPath}`];
+  };
+  run('analysis 正样本：真实配装与属性产物', process.execPath, [
+    'scripts/check-analysis.mjs',
+  ], true, '分析门禁：通过');
+  run('analysis 负样本：空阳性对照', process.execPath, [
+    'scripts/check-analysis.mjs',
+    ...analysisCase('empty-control', (g) => { g.control.perScenario = {}; }),
+  ], false, 'gearing.control.perScenario：不能为空');
+  run('analysis 负样本：阳性对照缺一个场景', process.execPath, [
+    'scripts/check-analysis.mjs',
+    ...analysisCase('missing-control', (g) => { delete g.control.perScenario.t8; }),
+  ], false, '缺少场景 t8');
+  run('analysis 负样本：阳性对照只有 -5%', process.execPath, [
+    'scripts/check-analysis.mjs',
+    ...analysisCase('weak-control', (g) => { g.control.perScenario.st.deltaPct = -5; }),
+  ], false, 'gearing.control.st.deltaPct：-5% 未满足 <= -10%');
+  run('analysis 负样本：属性复现差 1.5%', process.execPath, [
+    'scripts/check-analysis.mjs',
+    ...analysisCase('repro-gap', null, (s) => { s.perScenario.st.reproduced.gapPct = 1.5; }),
+  ], false, 'gapPct=1.5%');
+  run('analysis 负样本：最优预测误差 3%', process.execPath, [
+    'scripts/check-analysis.mjs',
+    ...analysisCase('optimum-error', null, (s) => { s.perScenario.t3.optimum.absErrorPct = 3; }),
+  ], false, 'stat-opt.t3.optimum.absErrorPct：3% 超过 2%');
+
+  // ---- check:adjacent ----
+  const adjacent = JSON.parse(readFileSync(join(ROOT, 'content', 'analysis', 'adjacent-archon.json'), 'utf8'));
+  const adjacentCase = (name, mutate) => {
+    const a = structuredClone(adjacent);
+    mutate(a);
+    const p = join(temp, `${name}-adjacent.json`);
+    writeFileSync(p, JSON.stringify(a));
+    return [`--analysis=${p}`];
+  };
+  run('adjacent 正样本：4 组交换逐项可复核', process.execPath, [
+    'scripts/check-adjacent.mjs',
+  ], true, '全部可复核');
+  run('adjacent 负样本：手改 deltaPct', process.execPath, [
+    'scripts/check-adjacent.mjs',
+    ...adjacentCase('tampered-delta', (a) => {
+      a.groups[0].perScenario.st.pairs[0].deltaPct = -0.96;
+    }),
+  ], false, 'deltaPct：写的是 -0.96');
+  run('adjacent 负样本：引用不存在的 runId', process.execPath, [
+    'scripts/check-adjacent.mjs',
+    ...adjacentCase('missing-run', (a) => {
+      a.groups[1].perScenario.t3.pairs[0].afterRunId = 'adj_s2__t3__5000_r9';
+    }),
+  ], false, '在 content/sims 里不存在');
+  run('adjacent 负样本：阳性对照被判成无效', process.execPath, [
+    'scripts/check-adjacent.mjs',
+    ...adjacentCase('dead-control', (a) => {
+      a.controls.positive.perScenario.st.verdict = 'within_noise';
+      a.controls.positive.perScenario.st.pairs.forEach((p) => { p.verdict = 'within_noise'; });
+    }),
+  ], false, '阳性对照必须四个场景都判 effective');
+  run('adjacent 负样本：把无效对照改回「误差内」', process.execPath, [
+    'scripts/check-adjacent.mjs',
+    ...adjacentCase('inert-back-to-noise', (a) => {
+      const s2 = a.groups.find((g) => g.id === 's2');
+      s2.verdict = 'within_noise';
+      s2.guideMatch = 'insufficient';
+    }),
+  ], false, '与原始记录应为的 structurally_inert 不符');
+
   // ---- check:design ----
   // 它跑源码，负样本必须临时改 ui.css，用完必须还原。
   const cssPath = join(ROOT, 'apps', 'web', 'src', 'ui.css');
@@ -130,6 +211,46 @@ try {
   run('design 正样本：还原后的 ui.css', process.execPath, [
     'scripts/check-design.mjs',
   ], true, '设计门禁：0 条错误');
+
+  // ---- check:copy ----
+  run('copy 正样本：真实文案且 ComingSoon 单列延期', process.execPath, [
+    'scripts/check-copy.mjs',
+  ], true, 'deferred: ComingSoon');
+
+  const appPath = join(ROOT, 'apps', 'web', 'src', 'App.tsx');
+  const appOriginal = readFileSync(appPath, 'utf8');
+  try {
+    writeFileSync(appPath, `${appOriginal}\nexport const COPY_GATE_COMPARISON_PROBE = <span>{'两波间隔 <122.4s；我们'}</span>;\n`);
+    run('copy 负样本：App.tsx 含 < 的比较句进入提醒通道', process.execPath, [
+      'scripts/check-copy.mjs',
+    ], true, 'apps/web/src/App.tsx · tsx string：出现 AI 腔词「我们」');
+  } finally {
+    writeFileSync(appPath, appOriginal);
+  }
+
+  const sourcesPath = join(ROOT, 'apps', 'web', 'src', 'components', 'Sources.tsx');
+  const sourcesOriginal = readFileSync(sourcesPath, 'utf8');
+  try {
+    writeFileSync(sourcesPath, `${sourcesOriginal}\nexport const COPY_GATE_MACHINE_PROBE = <span>{'sims-run.mjs'}</span>;\n`);
+    run('copy 负样本：纯英文机器字符串被点名', process.execPath, [
+      'scripts/check-copy.mjs',
+    ], true, 'apps/web/src/components/Sources.tsx · tsx string：出现禁用词「.mjs」');
+  } finally {
+    writeFileSync(sourcesPath, sourcesOriginal);
+  }
+
+  const coachingPath = join(ROOT, 'content', 'coaching', 'general.json');
+  const coachingOriginal = readFileSync(coachingPath, 'utf8');
+  try {
+    const coaching = JSON.parse(coachingOriginal);
+    coaching.title += ' 我们';
+    writeFileSync(coachingPath, JSON.stringify(coaching, null, 2));
+    run('copy 负样本：可见 coaching JSON 被点名', process.execPath, [
+      'scripts/check-copy.mjs',
+    ], true, 'content/coaching/general.json · title：出现 AI 腔词「我们」');
+  } finally {
+    writeFileSync(coachingPath, coachingOriginal);
+  }
 } finally {
   rmSync(temp, { recursive: true, force: true });
 }

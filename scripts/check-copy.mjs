@@ -15,6 +15,7 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RULES = JSON.parse(readFileSync(join(ROOT, 'content', 'guides', 'copy-rules.json'), 'utf8'));
@@ -47,60 +48,81 @@ function chapterFragments(ch) {
 }
 
 /**
- * TSX 里面向读者的文案。
- * 用词法扫描取真正的字符串字面量，避免正则跨过 JSX 边界把 HTML 当成文案；
- * 模板字面量里的 ${...} 是代码不是文案，直接跳过。
+ * TSX 里面向读者的文案。用 TypeScript 语法树而不是跨 JSX 的正则：
+ * - 中文字符串保留原扫描范围，避免漏掉先存变量再渲染的文案；
+ * - 纯英文 / 机器字符串只在 JSX 文本、JSX 表达式或可见属性里采集；
+ * - 字符串里的 < / > 只是文本，不再被当成标签边界丢掉。
  */
-function extractStrings(src) {
-  const out = [];
-  let i = 0;
-  while (i < src.length) {
-    const ch = src[i];
-    if (ch !== '"' && ch !== "'" && ch !== '`') {
-      i += 1;
+const VISIBLE_ATTRIBUTES = new Set(['alt', 'aria-label', 'aria-description', 'aria-valuetext', 'placeholder', 'title']);
+
+function literalText(node) {
+  if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) return node.text;
+  if (ts.isTemplateExpression(node)) {
+    return [node.head.text, ...node.templateSpans.map((span) => span.literal.text)].join(' ');
+  }
+  return null;
+}
+
+function jsxContext(node) {
+  let current = node;
+  for (let parent = current.parent; parent; current = parent, parent = current.parent) {
+    if (ts.isParenthesizedExpression(parent) || ts.isAsExpression(parent)) continue;
+    if (ts.isConditionalExpression(parent)) {
+      if (parent.condition === current) return null;
       continue;
     }
-    const quote = ch;
-    let j = i + 1;
-    let buf = '';
-    while (j < src.length) {
-      const c = src[j];
-      if (c === '\\') {
-        j += 2;
-        continue;
-      }
-      if (c === quote) break;
-      if (quote === '`' && c === '$' && src[j + 1] === '{') {
-        let depth = 1;
-        j += 2;
-        while (j < src.length && depth > 0) {
-          if (src[j] === '{') depth += 1;
-          else if (src[j] === '}') depth -= 1;
-          j += 1;
-        }
-        continue;
-      }
-      buf += c;
-      j += 1;
+    if (ts.isBinaryExpression(parent)) {
+      if (parent.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken || parent.operatorToken.kind === ts.SyntaxKind.BarBarToken) continue;
+      return null;
     }
-    if (/[\u4e00-\u9fa5]/.test(buf) && !buf.includes('<') && !buf.includes('>')) out.push(buf);
-    i = j + 1;
+    if (ts.isJsxExpression(parent)) {
+      if (ts.isJsxAttribute(parent.parent)) continue;
+      return 'tsx string';
+    }
+    if (ts.isJsxAttribute(parent)) {
+      const name = parent.name.getText();
+      return VISIBLE_ATTRIBUTES.has(name) ? 'tsx attr' : null;
+    }
+    return null;
   }
-  return out;
+  return null;
+}
+
+function decodeJsxText(text) {
+  return text
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&');
 }
 
 function tsxFragments(file) {
   const src = readFileSync(file, 'utf8');
-  const noComments = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+  const source = ts.createSourceFile(file, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   const out = [];
+  const push = (where, text, baseline = false) => {
+    const clean = decodeJsxText(text).trim();
+    if (clean) out.push({ where, text: clean, baseline });
+  };
 
-  for (const text of extractStrings(noComments)) out.push({ where: 'tsx string', text });
-
-  // JSX 纯文本节点：同一行、不含属性标点
-  for (const m of noComments.matchAll(/>([^<>{}\n"'=]*[\u4e00-\u9fa5][^<>{}\n"'=]*)</g)) {
-    const text = m[1].trim();
-    if (text && text.length <= 120) out.push({ where: 'tsx jsx', text });
-  }
+  const visit = (node) => {
+    if (ts.isJsxText(node)) {
+      const siblings = node.parent?.children ?? [];
+      const mixed = siblings.some((sibling) => ts.isJsxExpression(sibling));
+      const comparison = /[<>]|&(?:lt|gt);/.test(node.text);
+      push('tsx jsx', node.text, mixed || comparison || !/[\u4e00-\u9fa5]/.test(node.text));
+    }
+    const text = literalText(node);
+    if (text !== null) {
+      const context = jsxContext(node);
+      const chinese = /[\u4e00-\u9fa5]/.test(text);
+      if (chinese || context) push(context ?? 'tsx string', text, !chinese || text.includes('<') || text.includes('>'));
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(source);
   return out;
 }
 
@@ -144,10 +166,11 @@ const TECH_TERMS = new Set([
 
 function checkFragment(frag, fileLabel, strict) {
   const { where, text } = frag;
+  const channel = strict && !frag.baseline ? errors : warnings;
 
   for (const w of bannedError) {
     if (!text.includes(w)) continue;
-    (strict ? errors : warnings).push(
+    channel.push(
       `${fileLabel} · ${where}：出现禁用词「${w}」 → ${text.slice(0, 60)}`,
     );
   }
@@ -159,7 +182,7 @@ function checkFragment(frag, fileLabel, strict) {
   for (const id of mustWrap) {
     const re = new RegExp(`(^|[^「])${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^」]|$)`);
     if (re.test(text)) {
-      (strict ? errors : warnings).push(
+      channel.push(
         `${fileLabel} · ${where}：机器标识符「${id}」未用「」框住 → ${text.slice(0, 60)}`,
       );
     }
@@ -176,7 +199,7 @@ function checkFragment(frag, fileLabel, strict) {
       words.every((w) => allowedLatin.has(w) || TECH_TERMS.has(w));
     if (ok) continue;
     if (/^[A-Z]{2,}$/.test(phrase)) continue; // 全大写缩写
-    (strict ? errors : warnings).push(
+    channel.push(
       `${fileLabel} · ${where}：未本地化英文「${phrase}」 → ${text.slice(0, 60)}`,
     );
   }
@@ -265,6 +288,49 @@ function checkEvidenceMatchesRaw(ch, fileLabel) {
   }
 }
 
+/* ---------- 页面直接渲染的 JSON 字段 ---------- */
+
+function visibleJsonFragments(relativePath) {
+  const doc = JSON.parse(readFileSync(join(ROOT, relativePath), 'utf8'));
+  const out = [];
+  const push = (where, text) => {
+    if (typeof text === 'string' && text.trim()) out.push({ where, text });
+  };
+
+  if (relativePath === 'content/coaching/general.json') {
+    push('title', doc.title);
+    push('subtitle', doc.subtitle);
+    push('hero', doc.hero);
+    for (const [index, item] of (doc.items ?? []).entries()) {
+      push(`items[${index}].title`, item.title);
+      push(`items[${index}].why`, item.why);
+      push(`items[${index}].do`, item.do);
+      for (const text of item.evidence ?? []) push(`items[${index}].evidence[]`, text);
+    }
+  } else if (relativePath === 'content/specs.json') {
+    for (const [index, spec] of (doc.specs ?? []).entries()) {
+      for (const key of ['className', 'name', 'short', 'baseline']) push(`specs[${index}].${key}`, spec[key]);
+      for (const [heroIndex, hero] of (spec.heroTrees ?? []).entries()) push(`specs[${index}].heroTrees[${heroIndex}].name`, hero.name);
+    }
+  } else if (relativePath === 'content/guides/sources-summary.json') {
+    push('baseline', doc.baseline);
+    push('howWeUse', doc.howWeUse);
+    for (const [index, source] of (doc.sources ?? []).entries()) {
+      for (const key of ['name', 'version', 'type', 'feature', 'limit']) push(`sources[${index}].${key}`, source[key]);
+      for (const text of source.points ?? []) push(`sources[${index}].points[]`, text);
+    }
+  } else if (relativePath === 'content/guides/crosscheck-archon.json') {
+    for (const [index, item] of (doc.agreements ?? []).entries()) {
+      push(`agreements[${index}].point`, item.point);
+      push(`agreements[${index}].detail`, item.detail);
+    }
+    for (const [index, item] of (doc.divergences ?? []).entries()) {
+      for (const key of ['point', 'method', 'maxroll', 'nga', 'detail', 'verdict', 'apl']) push(`divergences[${index}].${key}`, item[key]);
+    }
+  }
+  return out;
+}
+
 /* ---------- 跑 ---------- */
 
 const chaptersDir = join(ROOT, 'content', 'chapters');
@@ -282,14 +348,28 @@ for (const file of walk(join(ROOT, 'apps', 'web', 'src', 'components'), (n) => n
   for (const frag of tsxFragments(file)) checkFragment(frag, rel, true);
 }
 
-// 应用层：工具页与骨架页，只提醒
+// 应用层：入口与工具页只提醒；ComingSoon 是本轮明确延期项，不扫描。
+const deferred = RULES.coverage?.deferred ?? [];
+const deferredPaths = new Set(deferred.map((item) => item.path));
+const appEntry = RULES.coverage?.applicationEntry ?? 'apps/web/src/App.tsx';
+const appEntryAbs = join(ROOT, appEntry);
+if (existsSync(appEntryAbs)) {
+  for (const frag of tsxFragments(appEntryAbs)) checkFragment(frag, appEntry, false);
+}
 for (const file of walk(join(ROOT, 'apps', 'web', 'src', 'views'), (n) => n.endsWith('.tsx'))) {
   const rel = file.replace(/\\/g, '/').replace(/^.*apps\//, 'apps/');
+  if (deferredPaths.has(rel)) continue;
   for (const frag of tsxFragments(file)) checkFragment(frag, rel, false);
+}
+
+// 页面直接渲染的非章节 JSON：本批建立基线，先走提醒通道。
+for (const rel of RULES.coverage?.visibleJson ?? []) {
+  for (const frag of visibleJsonFragments(rel)) checkFragment(frag, rel, false);
 }
 
 /* ---------- 输出 ---------- */
 
+for (const item of deferred) console.log(`deferred: ${item.label}（${item.path}；本轮不扫描、不计入错误或提醒）`);
 for (const w of warnings) console.log(`  ⚠ ${w}`);
 for (const e of errors) console.log(`  ✗ ${e}`);
 

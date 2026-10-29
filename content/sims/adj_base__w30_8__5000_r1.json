@@ -1,0 +1,74 @@
+{
+  "runId": "adj_base__w30_8__5000_r1",
+  "layer": "A",
+  "kind": "adjacent-swap",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "ad9cdd996cff3505",
+  "baseProfileSha256": "ad9cdd996cff3505",
+  "variantId": "base",
+  "variantLabel": "未改动 profile（同文本重跑作对照）",
+  "swapGroup": null,
+  "scenarioId": "w30_8",
+  "scenarioLabel": "8 目标 30s",
+  "fightStyle": "Patchwerk",
+  "targets": 8,
+  "durationSec": 30,
+  "rep": 1,
+  "iterations": 5007,
+  "dps": {
+    "mean": 1386576.86,
+    "ci95": 1881.7,
+    "ci95Pct": 0.14,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "mode": "none",
+    "lines": []
+  },
+  "spellTrace": {
+    "tentacle_slam": {
+      "present": true,
+      "executions": 19159,
+      "damageMean": 0
+    },
+    "vampiric_touch": {
+      "present": true,
+      "executions": 113700,
+      "damageMean": 3148715
+    },
+    "void_volley": {
+      "present": true,
+      "executions": 70248,
+      "damageMean": 0
+    },
+    "void_blast": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "mind_flay": {
+      "present": true,
+      "executions": 11021,
+      "damageMean": 196370
+    },
+    "shadow_word_death": {
+      "present": true,
+      "executions": 4999,
+      "damageMean": 205105
+    },
+    "undefined": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    }
+  },
+  "generatedAt": "2026-10-29T02:20:51.363Z"
+}

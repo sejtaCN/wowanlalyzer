@@ -3,18 +3,17 @@
  "level": "L2",
  "order": 1,
  "title": "Altar of Fangs（毒牙祭坛）",
- "subtitle": "一条真实路线：14 波，每波该不该花爆发",
+ "subtitle": "一条真实路线：15 波，每波该不该花爆发",
  "model": {
   "targets": "1–13",
   "durationSec": 30,
   "movement": "按波次",
   "dangers": 4,
-  "frequency": "14 波 / 108 只怪"
+  "frequency": "15 波 / 108 只怪"
  },
- "claim": "照着表打：7 只以上开，5–6 只看冷却，2 只巡逻不开；BOSS 看下一波是不是更大。",
  "chart": {
   "kind": "wave-table",
-  "title": "14 波，每波值多少爆发"
+  "title": "15 波，每波值多少爆发"
  },
  "priorityDiff": {
   "add": [
@@ -47,7 +46,7 @@
    "dec_voidform_on_1__w90_1b__5000"
   ],
   "sources": [
-   "keystone.guru xwt8Pza（14 波 / 108 只怪）",
+   "keystone.guru xwt8Pza（15 波 / 108 只怪）",
    "SimC 1210.01"
   ],
   "generatedAt": "2026-10-25T16:00:00Z"

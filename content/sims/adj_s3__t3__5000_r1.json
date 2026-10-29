@@ -1,0 +1,93 @@
+{
+  "runId": "adj_s3__t3__5000_r1",
+  "layer": "A",
+  "kind": "adjacent-swap",
+  "hero": "archon",
+  "profileId": "archon",
+  "profileFile": "content/profiles/MID2_shadow_archon.simc",
+  "profileSha256": "f78c0430558e0df4",
+  "baseProfileSha256": "ad9cdd996cff3505",
+  "variantId": "s3",
+  "variantLabel": "虚空齐射（存层那行）↔ 心灵鞭笞",
+  "swapGroup": "s3",
+  "scenarioId": "t3",
+  "scenarioLabel": "3 目标 300s",
+  "fightStyle": "Patchwerk",
+  "targets": 3,
+  "durationSec": 300,
+  "rep": 1,
+  "iterations": 5007,
+  "dps": {
+    "mean": 397175.1,
+    "ci95": 201.53,
+    "ci95Pct": 0.05,
+    "samples": 4999
+  },
+  "simc": {
+    "version": "1210-01",
+    "gitBranch": "midnight",
+    "gitRevision": "73a372b",
+    "buildDate": "Oct 23 2026"
+  },
+  "edit": {
+    "mode": "swap-two-adjacent-lines",
+    "lines": [
+      {
+        "lineNo": 101,
+        "text": "actions.main+=/void_volley,if=!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45"
+      },
+      {
+        "lineNo": 102,
+        "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+      }
+    ],
+    "after": [
+      {
+        "lineNo": 101,
+        "text": "actions.main+=/mind_flay,target_if=max:dot.shadow_word_madness.remains,chain=1,interrupt_immediate=1,interrupt_if=ticks>=2,interrupt_global=1"
+      },
+      {
+        "lineNo": 102,
+        "text": "actions.main+=/void_volley,if=!talent.resonant_energy|cooldown.voidform.remains<60|buff.voidform.up|buff.resonant_energy_damage.react|buff.crushing_void.stack>=4|fight_remains<45"
+      }
+    ]
+  },
+  "spellTrace": {
+    "tentacle_slam": {
+      "present": true,
+      "executions": 131878,
+      "damageMean": 0
+    },
+    "vampiric_touch": {
+      "present": true,
+      "executions": 395025,
+      "damageMean": 6659917
+    },
+    "void_volley": {
+      "present": true,
+      "executions": 167897,
+      "damageMean": 0
+    },
+    "void_blast": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    },
+    "mind_flay": {
+      "present": true,
+      "executions": 597406,
+      "damageMean": 9583525
+    },
+    "shadow_word_death": {
+      "present": true,
+      "executions": 24725,
+      "damageMean": 754631
+    },
+    "undefined": {
+      "present": false,
+      "executions": 0,
+      "damageMean": 0
+    }
+  },
+  "generatedAt": "2026-10-29T02:22:43.509Z"
+}
