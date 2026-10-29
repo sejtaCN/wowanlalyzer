@@ -17,8 +17,9 @@
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
 | 图契约 | 11 章 × 5 段；50 有图 / 0 缺图 / 5 不适用；L0-03 / L1-01 第五段为模拟时间线 | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 4,670 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 代码量 | 约 5,292 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
+| 单文件产物 | 792,012 字节（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -149,20 +150,20 @@ npm run build              # 单文件产出
 
 | # | 待办 | 说明 |
 | --- | --- | --- |
-| 6 | 章节页进度条 | 顶栏显示 L0/L1/L2 各读了几篇（`progress.seen` 已有数据） |
-| 7 | ~~解析台加"相邻两行交换" A/B~~ 已上线 | `scripts/adjacent-swap.mjs` 只换相邻两行、`check:adjacent` 按 runId 重算；4 组结论（s1 / s3 有效，s2 **无效对照**——交换的 `void_blast` 四场景 0 次施放，s4 误差内）在 `content/analysis/adjacent-archon.json`，解析台页首有锚点入口 | `npm run check:adjacent` |
-| 8 | 联动图补"谁挂上了 DoT"的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） |
-| 9 | 教练卡按"你哪条没做到"高亮 | 依赖日志分段 |
-| 10 | **读者可见文案中文化 + 排版 6 档字号** | 全局已落地 `36/24/18/16/14/12`、400/500 两档字重、16px 正文、32px 段距与 36em 行长；6 个 L1 与 L2 已统一目录、决策顶图带、证据折叠与阶段结构，L0 仍保留基础章节结构 | `docs/ui-reference-decomposition.md`、`docs/ui-blueprint.md` §3–§4 |
-| 11 | **UI 设计文档（已出稿）** | 已有 `docs/ui-blueprint.md`：功能模块盘点、10 个真实参考站来源、设计语言、逐页详细设计、响应式断点、验收门禁 | 同上；§0 有 7 条待确认（Q1 评论/账号是否本轮新建、Q2 亮色主题、Q3 粘性目录侧栏） |
+| 7 | 章节页进度条 | 顶栏显示 L0/L1/L2 各读了几篇（`progress.seen` 已用于首页路径打点与「已读」标记；顶栏「各读了几篇」的计数尚未渲染，只差这一处） |
+| 8 | ~~解析台加"相邻两行交换" A/B~~ 已上线 | `scripts/adjacent-swap.mjs` 只换相邻两行、`check:adjacent` 按 runId 重算；4 组结论（s1 / s3 有效，s2 **无效对照**——交换的 `void_blast` 四场景 0 次施放，s4 误差内）在 `content/analysis/adjacent-archon.json`，解析台页首有锚点入口 | `npm run check:adjacent` |
+| 9 | 联动图补"谁挂上了 DoT"的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） |
+| 10 | 教练卡按"你哪条没做到"高亮 | 依赖日志分段 |
+| 11 | **读者可见文案中文化 + 排版 6 档字号** | 全局已落地 `36/24/18/16/14/12`、400/500 两档字重、16px 正文、32px 段距与 36em 行长；6 个 L1 与 L2 已统一目录、决策顶图带、证据折叠与阶段结构，L0 仍保留基础章节结构 | `docs/ui-reference-decomposition.md`、`docs/ui-blueprint.md` §3–§4 |
+| 12 | **UI 设计文档（已出稿）** | 已有 `docs/ui-blueprint.md`：功能模块盘点、10 个真实参考站来源、设计语言、逐页详细设计、响应式断点、验收门禁 | 同上；§0 有 7 条待确认（Q1 评论/账号是否本轮新建、Q2 亮色主题、Q3 粘性目录侧栏） |
 
 ### P3 · 上线与合规（暂不进入主线）
 
 | # | 待办 | 说明 |
 | --- | --- | --- |
-| 12 | **补 `LICENSE`** | 参考同类开源项目的许可文件作为模板；同时确认代码授权、第三方数据/地图来源和魔兽世界非官方声明。正式公开前完成，当前不阻塞主线。 |
-| 13 | **静态部署预演** | 用 Cloudflare Pages / Netlify / Vercel 之一部署只读版本；构建命令 `npm ci && npm run build`，产物目录 `dist`。先使用平台临时域名，不购买或绑定域名。 |
-| 14 | **`.io` 域名与在线产品化** | 预演通过后再处理自定义域名、章节 URL/分享链接、SEO 元数据、SPA 回退和自动部署门禁；账号、收藏、评论等动态能力另立后端议题。 |
+| 13 | **补 `LICENSE`** | 参考同类开源项目的许可文件作为模板；同时确认代码授权、第三方数据/地图来源和魔兽世界非官方声明。正式公开前完成，当前不阻塞主线。 |
+| 14 | **静态部署预演** | 用 Cloudflare Pages / Netlify / Vercel 之一部署只读版本；构建命令 `npm ci && npm run build`，产物目录 `dist`。先使用平台临时域名，不购买或绑定域名。 |
+| 15 | **`.io` 域名与在线产品化** | 预演通过后再处理自定义域名、章节 URL/分享链接、SEO 元数据、SPA 回退和自动部署门禁；账号、收藏、评论等动态能力另立后端议题。 |
 
 ---
 
