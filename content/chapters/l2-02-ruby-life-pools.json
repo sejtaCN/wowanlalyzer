@@ -29,8 +29,18 @@
   "routeKey": "Xnxx3lT"
  },
  "casePanel": {
-  "status": "pending",
-  "reason": "这份副本还没有真人日志导出；要拿到带战斗分段的导出，才能对齐阶段与爆发时刻。"
+  "status": "phases",
+  "logId": "dukkie-ruby-life-pools-phases",
+  "headline": "「Dukkie」在 8 个真实战斗分段里开了 12 次虚空形态",
+  "highlight": [
+   1,
+   2,
+   3,
+   5,
+   6,
+   8
+  ],
+  "reading": "先看 7 秒短波没有开爆发，再看其余分段如何把两次虚空形态分配到长战斗里。"
  },
  "evidence": {
   "runIds": [
@@ -40,7 +50,11 @@
   ],
   "sources": [
    "keystone.guru Xnxx3lT（12 波 / 76 只怪）",
-   "SimC 1210.01"
+   "SimC 1210.01",
+   "WCL j9YnMJVfBzgHwvcD · Dukkie · Ruby Life Pools +21"
+  ],
+  "logs": [
+   "dukkie-ruby-life-pools-events"
   ],
   "generatedAt": "2026-10-30T01:20:00Z"
  }

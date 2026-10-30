@@ -7,7 +7,7 @@ import { getLog, getPhases } from '../../data/content';
  * 两条都是真实时间轴，同一把尺子（秒）：
  *   - 阶段带：`content/logs/<run>-phases.json`（推断出来的区域/BOSS 分段，有方法说明）
  *   - 爆发窗口：`content/logs/<run>-events.json` 里 Voidform 的真实起止时间
- * 不画"这一波何时开始"——日志没有死亡事件，切不出单波。
+ * 阶段边界来自日志或 WCL Fights；没有真实分段时不画猜测边界。
  */
 
 const W = 660;
@@ -16,20 +16,29 @@ const PAD = 8;
 
 export default function BurstTimeline({ logId, highlight }: { logId: string; highlight?: number[] }) {
   const doc = getPhases(logId);
-  const log = getLog('xiaohuasheng-events');
   if (!doc) return <div className="figempty">找不到阶段数据（{logId}）。</div>;
+  const log = getLog(doc.sourceLog);
+  if (!log) return <div className="figempty">找不到阶段对应的日志（{doc.sourceLog}）。</div>;
 
   const total = doc.totalSec || doc.phases[doc.phases.length - 1].to;
   const x = (t: number) => PAD + (Math.max(0, Math.min(t, total)) / total) * (W - PAD * 2);
-  const windows = (log?.segments[0]?.burstWindows ?? []).filter((w) => w.buff === 'Voidform');
+  const windows = log.segments.flatMap((segment) =>
+    segment.burstWindows
+      .filter((window) => window.buff === 'Voidform')
+      .map((window) => ({
+        ...window,
+        start: (segment.fromAbs ?? 0) + window.start,
+        end: (segment.fromAbs ?? 0) + window.end,
+      })),
+  );
   const hi = new Set(highlight ?? []);
   const totalBursts = doc.phases.reduce((n, p) => n + p.bursts, 0);
 
   const mm = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(Math.round(s % 60)).padStart(2, '0')}`;
 
   return (
-    <div className="btl">
-      <svg viewBox={`0 0 ${W} ${H}`} shapeRendering="crispEdges" role="img" aria-label="整场时间轴：9 个阶段 + 爆发窗口">
+    <div className="btl" data-burst-windows={windows.length} data-phase-bursts={totalBursts}>
+      <svg viewBox={`0 0 ${W} ${H}`} shapeRendering="crispEdges" role="img" aria-label={`整场时间轴：${doc.phases.length} 个阶段 + 爆发窗口`}>
         {/* 阶段带 */}
         {doc.phases.map((p) => {
           const x0 = x(p.from);

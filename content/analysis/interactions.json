@@ -1,11 +1,11 @@
 {
  "hero": "archon",
  "profile": "content/profiles/MID2_shadow_archon.simc",
- "logId": "xiaohuasheng-events",
+ "logId": "dukkie-ruby-life-pools-events",
  "method": "APL 边＝条件依赖（可复现）；日志边＝真实施法统计（applies=DoT 条带开始前 1s 的施法；cast_in_burst=施法瞬间是否在虚空形态；opener=爆发窗口前 3s 的施法）",
  "counts": {
   "apl": 55,
-  "applies": 4,
+  "applies": 5,
   "burst": 12,
   "opener": 8
  },
@@ -179,16 +179,34 @@
    "en": "shadowy_apparition"
   },
   {
+   "id": "horrific_visions",
+   "kind": "dot",
+   "zh": null,
+   "en": "horrific_visions"
+  },
+  {
+   "id": "power_word_shield",
+   "kind": "skill",
+   "zh": null,
+   "en": "power_word_shield"
+  },
+  {
+   "id": "flash_heal",
+   "kind": "skill",
+   "zh": null,
+   "en": "flash_heal"
+  },
+  {
    "id": "fade",
    "kind": "skill",
    "zh": null,
    "en": "fade"
   },
   {
-   "id": "angelic_feather",
+   "id": "freightrunner_s_flask",
    "kind": "skill",
    "zh": null,
-   "en": "angelic_feather"
+   "en": "freightrunner_s_flask"
   },
   {
    "id": "vampiric_embrace",
@@ -197,10 +215,10 @@
    "en": "vampiric_embrace"
   },
   {
-   "id": "hex_lord_s_doom",
+   "id": "silence",
    "kind": "skill",
    "zh": null,
-   "en": "hex_lord_s_doom"
+   "en": "silence"
   }
  ],
  "edges": [
@@ -505,229 +523,229 @@
    }
   },
   {
-   "from": "tentacle_slam",
-   "to": "vampiric_touch",
-   "count": 1,
+   "from": "shadowy_apparition",
+   "to": "horrific_visions",
+   "count": 63,
    "kind": "applies_dot",
-   "label": "挂上 vampiric_touch：1 次",
+   "label": "挂上 horrific_visions：63 次",
    "evidence": {
     "type": "log",
-    "detail": "DoT 条带开始前 1.5s 内、命中同目标的施加技能（样本 600 条，未归因 568 条）"
+    "detail": "DoT 条带开始前 0.6s 内、命中同目标的施加技能（样本 1555 条，未归因 1347 条）"
    }
   },
   {
    "from": "tentacle_slam",
-   "to": "shadow_word_pain",
-   "count": 1,
+   "to": "vampiric_touch",
+   "count": 4,
    "kind": "applies_dot",
-   "label": "挂上 shadow_word_pain：1 次",
+   "label": "挂上 vampiric_touch：4 次",
    "evidence": {
     "type": "log",
-    "detail": "DoT 条带开始前 1.5s 内、命中同目标的施加技能（样本 600 条，未归因 568 条）"
+    "detail": "DoT 条带开始前 0.6s 内、命中同目标的施加技能（样本 1555 条，未归因 1347 条）"
    }
   },
   {
    "from": "power_infusion",
    "to": "voidform",
    "kind": "cast_in_burst",
-   "label": "82% 在爆发内（18/22）",
-   "weight": 0.8181818181818182,
+   "label": "95% 在爆发内（21/22）",
+   "weight": 0.9545454545454546,
    "evidence": {
     "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
-   }
-  },
-  {
-   "from": "halo",
-   "to": "voidform",
-   "kind": "cast_in_burst",
-   "label": "50% 在爆发内（11/22）",
-   "weight": 0.5,
-   "evidence": {
-    "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
    }
   },
   {
    "from": "mind_flay_insanity",
    "to": "voidform",
    "kind": "cast_in_burst",
-   "label": "50% 在爆发内（44/88）",
-   "weight": 0.5,
+   "label": "53% 在爆发内（48/91）",
+   "weight": 0.5274725274725275,
    "evidence": {
     "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
-   }
-  },
-  {
-   "from": "void_volley",
-   "to": "voidform",
-   "kind": "cast_in_burst",
-   "label": "39% 在爆发内（69/179）",
-   "weight": 0.3854748603351955,
-   "evidence": {
-    "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
    }
   },
   {
    "from": "shadow_word_madness",
    "to": "voidform",
    "kind": "cast_in_burst",
-   "label": "35% 在爆发内（81/229）",
-   "weight": 0.3537117903930131,
+   "label": "43% 在爆发内（90/209）",
+   "weight": 0.430622009569378,
    "evidence": {
     "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
    }
   },
   {
-   "from": "shadowy_apparition",
+   "from": "void_volley",
    "to": "voidform",
    "kind": "cast_in_burst",
-   "label": "34% 在爆发内（393/1158）",
-   "weight": 0.3393782383419689,
+   "label": "42% 在爆发内（71/169）",
+   "weight": 0.42011834319526625,
    "evidence": {
     "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
-   }
-  },
-  {
-   "from": "mind_blast",
-   "to": "voidform",
-   "kind": "cast_in_burst",
-   "label": "29% 在爆发内（47/163）",
-   "weight": 0.2883435582822086,
-   "evidence": {
-    "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
-   }
-  },
-  {
-   "from": "tentacle_slam",
-   "to": "voidform",
-   "kind": "cast_in_burst",
-   "label": "28% 在爆发内（39/139）",
-   "weight": 0.2805755395683453,
-   "evidence": {
-    "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
-   }
-  },
-  {
-   "from": "fade",
-   "to": "voidform",
-   "kind": "cast_in_burst",
-   "label": "18% 在爆发内（5/28）",
-   "weight": 0.17857142857142858,
-   "evidence": {
-    "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
-   }
-  },
-  {
-   "from": "mind_flay",
-   "to": "voidform",
-   "kind": "cast_in_burst",
-   "label": "16% 在爆发内（38/242）",
-   "weight": 0.15702479338842976,
-   "evidence": {
-    "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
    }
   },
   {
    "from": "shadow_word_death",
    "to": "voidform",
    "kind": "cast_in_burst",
-   "label": "14% 在爆发内（7/50）",
-   "weight": 0.14,
+   "label": "39% 在爆发内（13/33）",
+   "weight": 0.3939393939393939,
    "evidence": {
     "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
    }
   },
   {
-   "from": "angelic_feather",
+   "from": "shadowy_apparition",
    "to": "voidform",
    "kind": "cast_in_burst",
-   "label": "11% 在爆发内（5/44）",
-   "weight": 0.11363636363636363,
+   "label": "39% 在爆发内（416/1061）",
+   "weight": 0.3920829406220547,
    "evidence": {
     "type": "log",
-    "detail": "按虚空形态窗口时间区间判定（11 个窗口，共 11 段）"
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
+   }
+  },
+  {
+   "from": "mind_blast",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "39% 在爆发内（52/135）",
+   "weight": 0.3851851851851852,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
+   }
+  },
+  {
+   "from": "mind_flay",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "31% 在爆发内（66/214）",
+   "weight": 0.308411214953271,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
+   }
+  },
+  {
+   "from": "tentacle_slam",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "29% 在爆发内（35/120）",
+   "weight": 0.2916666666666667,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
+   }
+  },
+  {
+   "from": "power_word_shield",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "27% 在爆发内（8/30）",
+   "weight": 0.26666666666666666,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
+   }
+  },
+  {
+   "from": "flash_heal",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "25% 在爆发内（7/28）",
+   "weight": 0.25,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
+   }
+  },
+  {
+   "from": "fade",
+   "to": "voidform",
+   "kind": "cast_in_burst",
+   "label": "23% 在爆发内（8/35）",
+   "weight": 0.22857142857142856,
+   "evidence": {
+    "type": "log",
+    "detail": "按虚空形态窗口时间区间判定（共 12 段）"
    }
   },
   {
    "from": "shadowy_apparition",
    "to": "voidform",
    "kind": "opener_before_burst",
-   "label": "18/11 次爆发前 3 秒内出现",
+   "label": "45/12 次爆发前 3 秒内出现",
    "evidence": {
     "type": "log",
-    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+    "detail": "12 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
    }
   },
   {
    "from": "power_infusion",
    "to": "voidform",
    "kind": "opener_before_burst",
-   "label": "10/11 次爆发前 3 秒内出现",
+   "label": "22/12 次爆发前 3 秒内出现",
    "evidence": {
     "type": "log",
-    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
-   }
-  },
-  {
-   "from": "halo",
-   "to": "voidform",
-   "kind": "opener_before_burst",
-   "label": "9/11 次爆发前 3 秒内出现",
-   "evidence": {
-    "type": "log",
-    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
-   }
-  },
-  {
-   "from": "vampiric_embrace",
-   "to": "voidform",
-   "kind": "opener_before_burst",
-   "label": "7/11 次爆发前 3 秒内出现",
-   "evidence": {
-    "type": "log",
-    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
-   }
-  },
-  {
-   "from": "hex_lord_s_doom",
-   "to": "voidform",
-   "kind": "opener_before_burst",
-   "label": "7/11 次爆发前 3 秒内出现",
-   "evidence": {
-    "type": "log",
-    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
-   }
-  },
-  {
-   "from": "void_volley",
-   "to": "voidform",
-   "kind": "opener_before_burst",
-   "label": "4/11 次爆发前 3 秒内出现",
-   "evidence": {
-    "type": "log",
-    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+    "detail": "12 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
    }
   },
   {
    "from": "shadow_word_madness",
    "to": "voidform",
    "kind": "opener_before_burst",
-   "label": "3/11 次爆发前 3 秒内出现",
+   "label": "17/12 次爆发前 3 秒内出现",
    "evidence": {
     "type": "log",
-    "detail": "11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+    "detail": "12 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "halo",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "11/12 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "12 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "void_volley",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "11/12 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "12 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "freightrunner_s_flask",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "10/12 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "12 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
+   }
+  },
+  {
+   "from": "vampiric_embrace",
+   "to": "voidform",
+   "kind": "opener_before_burst",
+   "label": "4/12 次爆发前 3 秒内出现",
+   "evidence": {
+    "type": "log",
+    "detail": "12 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法"
    }
   }
  ],
- "generatedAt": "2026-10-26T02:37:35.162Z"
+ "generatedAt": "2026-10-30T09:55:06.645Z"
 }

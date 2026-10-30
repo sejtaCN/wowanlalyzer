@@ -1,0 +1,394 @@
+{
+  "runId": "archon-kings-rest-phases",
+  "sourceLog": "archon-kings-rest-events",
+  "dungeonSlug": "kings_rest",
+  "wclEncounterId": 61762,
+  "label": "列兵天使 · Kings' Rest +22",
+  "sourceUrl": "https://www.warcraftlogs.com/reports/Nj9cF8kQ3XGW2y1J?fight=1",
+  "player": "列兵天使",
+  "profile": "archon",
+  "keyLevel": 22,
+  "method": {
+    "summary": "直接采用 WCL Fights 视图的 11 个真实战斗分段；施法、虚空形态和四个核心 DoT 事件来自同一份公开报告的默认事件页",
+    "bucketSec": 0,
+    "minPhaseSec": 0,
+    "coWindowSec": 0,
+    "cohorts": {}
+  },
+  "limitation": "这是单个 +22 执政官暗牧样本。WCL 的 11 个真实战斗分段没有绑定 keystone.guru 路线；路线列只表示怪物族重合成度。未筛选敌方伤害事件，因此本数据不用于伤害归因。",
+  "totalSec": 1924,
+  "phases": [
+    {
+      "index": 1,
+      "kind": "area",
+      "label": "Animated Guardian",
+      "from": 24,
+      "to": 215,
+      "durationSec": 191,
+      "families": [
+        {
+          "name": "Animated Guardian",
+          "count": 102
+        },
+        {
+          "name": "Umbral Warrior",
+          "count": 53
+        },
+        {
+          "name": "Shadow-Borne Champion",
+          "count": 52
+        },
+        {
+          "name": "Risen Hexer",
+          "count": 41
+        },
+        {
+          "name": "叮呤灵",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 291,
+      "castsPerMinute": 91.4,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 2,
+      "kind": "boss",
+      "label": "The Golden Serpent",
+      "from": 216,
+      "to": 470,
+      "durationSec": 254,
+      "families": [
+        {
+          "name": "The Golden Serpent",
+          "count": 186
+        },
+        {
+          "name": "Animated Gold",
+          "count": 86
+        },
+        {
+          "name": "Animated Guardian",
+          "count": 8
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 388,
+      "castsPerMinute": 91.7,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 3,
+      "kind": "area",
+      "label": "King Timalji",
+      "from": 482,
+      "to": 641,
+      "durationSec": 159,
+      "families": [
+        {
+          "name": "King Rahu'ai",
+          "count": 225
+        },
+        {
+          "name": "Queen Wasi",
+          "count": 115
+        },
+        {
+          "name": "Animated Guardian",
+          "count": 106
+        },
+        {
+          "name": "Guard Captain Atu",
+          "count": 90
+        },
+        {
+          "name": "King Timalji",
+          "count": 60
+        },
+        {
+          "name": "Seneschal M'bara",
+          "count": 57
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 237,
+      "castsPerMinute": 89.4,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 4,
+      "kind": "area",
+      "label": "King A'akul",
+      "from": 647,
+      "to": 734,
+      "durationSec": 87,
+      "families": [
+        {
+          "name": "King A'akul",
+          "count": 380
+        },
+        {
+          "name": "Bloodsworn Assassin",
+          "count": 105
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 142,
+      "castsPerMinute": 97.9,
+      "bursts": 1,
+      "burstUptimeSec": 34.5
+    },
+    {
+      "index": 5,
+      "kind": "area",
+      "label": "Queen Patlaa",
+      "from": 740,
+      "to": 804,
+      "durationSec": 64,
+      "families": [
+        {
+          "name": "Queen Patlaa",
+          "count": 182
+        },
+        {
+          "name": "Skeletal Hunting Raptor",
+          "count": 32
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 89,
+      "castsPerMinute": 83.4,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 6,
+      "kind": "area",
+      "label": "Purification Construct",
+      "from": 831,
+      "to": 937,
+      "durationSec": 106,
+      "families": [
+        {
+          "name": "Interment Construct",
+          "count": 433
+        },
+        {
+          "name": "Embalming Fluid",
+          "count": 162
+        },
+        {
+          "name": "Half-Finished Mummy",
+          "count": 35
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 161,
+      "castsPerMinute": 91.1,
+      "bursts": 1,
+      "burstUptimeSec": 36.4
+    },
+    {
+      "index": 7,
+      "kind": "boss",
+      "label": "Mchimba the Embalmer",
+      "from": 941,
+      "to": 1164,
+      "durationSec": 223,
+      "families": [
+        {
+          "name": "Mchimba the Embalmer",
+          "count": 880
+        },
+        {
+          "name": "Half-Finished Mummy",
+          "count": 83
+        },
+        {
+          "name": "叮呤灵",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 347,
+      "castsPerMinute": 93.4,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 8,
+      "kind": "area",
+      "label": "Ghostly Brute",
+      "from": 1183,
+      "to": 1287,
+      "durationSec": 104,
+      "families": [
+        {
+          "name": "Ghostly Brute",
+          "count": 188
+        },
+        {
+          "name": "Royal Berserker",
+          "count": 79
+        },
+        {
+          "name": "Honored Raptor",
+          "count": 66
+        },
+        {
+          "name": "Spectral Shaman",
+          "count": 52
+        },
+        {
+          "name": "Phantom Hex Priest",
+          "count": 22
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 124,
+      "castsPerMinute": 71.5,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 9,
+      "kind": "boss",
+      "label": "The Council of Tribes",
+      "from": 1287,
+      "to": 1576,
+      "durationSec": 289,
+      "families": [
+        {
+          "name": "Zanazal the Wise",
+          "count": 384
+        },
+        {
+          "name": "Kula the Butcher",
+          "count": 283
+        },
+        {
+          "name": "Aka'ali the Conqueror",
+          "count": 258
+        },
+        {
+          "name": "Honored Raptor",
+          "count": 67
+        },
+        {
+          "name": "Torrent Totem",
+          "count": 40
+        },
+        {
+          "name": "Explosive Totem",
+          "count": 36
+        },
+        {
+          "name": "Royal Berserker",
+          "count": 32
+        },
+        {
+          "name": "Thundering Totem",
+          "count": 32
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 428,
+      "castsPerMinute": 88.9,
+      "bursts": 2,
+      "burstUptimeSec": 69
+    },
+    {
+      "index": 10,
+      "kind": "area",
+      "label": "Shadow of Zul",
+      "from": 1603,
+      "to": 1683,
+      "durationSec": 80,
+      "families": [
+        {
+          "name": "Shadow of Zul",
+          "count": 369
+        },
+        {
+          "name": "Minion of Zul",
+          "count": 4
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 131,
+      "castsPerMinute": 98.3,
+      "bursts": 1,
+      "burstUptimeSec": 37.5
+    },
+    {
+      "index": 11,
+      "kind": "boss",
+      "label": "King Dazar",
+      "from": 1700,
+      "to": 1931,
+      "durationSec": 231,
+      "families": [
+        {
+          "name": "King Dazar",
+          "count": 676
+        },
+        {
+          "name": "Reban",
+          "count": 303
+        },
+        {
+          "name": "T'zala",
+          "count": 69
+        },
+        {
+          "name": "叮呤灵",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 382,
+      "castsPerMinute": 99.2,
+      "bursts": 2,
+      "burstUptimeSec": 67
+    }
+  ],
+  "routeMatches": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "11": []
+  },
+  "routeSource": null,
+  "generatedAt": "2026-10-30T13:51:42.314Z"
+}

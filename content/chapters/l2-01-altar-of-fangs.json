@@ -31,13 +31,16 @@
  },
  "casePanel": {
   "status": "phases",
-  "logId": "xiaohuasheng-phases",
+  "logId": "archon-altar-of-fangs-phases",
   "highlight": [
-   2,
-   9
+   1,
+   3,
+   6,
+   9,
+   10
   ],
-  "headline": "他这场也打的是这张图：9 个阶段、两个 BOSS",
-  "reading": "他没按表里这条路线打（波次顺序不同），所以这里只对齐阶段。每段后面的「匹配」是他这段的怪物组成和路线波次的重合度。"
+  "headline": "「Slicecrisps」在 10 个真实战斗分段里开了 11 次虚空形态",
+  "reading": "先看 21 秒和 7 秒短波都没有交爆发，再看长波与两个首领如何分配两次窗口。"
  },
  "evidence": {
   "runIds": [
@@ -47,7 +50,11 @@
   ],
   "sources": [
    "keystone.guru xwt8Pza（15 波 / 108 只怪）",
-   "SimC 1210.01"
+   "SimC 1210.01",
+   "WCL tHAzZ4bpaFCdNDmB · Slicecrisps · Altar of Fangs +21"
+  ],
+  "logs": [
+   "archon-altar-of-fangs-events"
   ],
   "generatedAt": "2026-10-25T16:00:00Z"
  }

@@ -17,6 +17,7 @@ import {
   getPhases,
   getRun,
   getSimulatedTimeline,
+  INTERACTIONS,
   isComparableRunPair,
   LEVERAGE,
   prioritySections,
@@ -172,9 +173,8 @@ describe('前端数据适配层', () => {
 
   it('保留图契约、路线、日志和优先级数据', () => {
     const figures = Object.values(FIGURES).flat();
-    expect(figures.filter((figure) => figure.status === 'ready')).toHaveLength(54);
-    // 红玉新生池第⑤段没有真人日志：缺图必须显式标 missing，不能拿模拟或别的副本顶。
-    expect(figures.filter((figure) => figure.status === 'missing')).toHaveLength(1);
+    expect(figures.filter((figure) => figure.status === 'ready')).toHaveLength(55);
+    expect(figures.filter((figure) => figure.status === 'missing')).toHaveLength(0);
     expect(figures.filter((figure) => figure.status === 'not-applicable')).toHaveLength(5);
 
     expect(ALTAR.pulls).toBe(15);
@@ -214,6 +214,10 @@ describe('前端数据适配层', () => {
     expect(burstValueFor(bareMixed, getRun).deltaPct).toBeNull();
     expect(ALTAR.waves.find((wave) => wave.pull === 12)?.mobCount).toBe(0);
     expect(getPhases('xiaohuasheng-phases')?.phases).toHaveLength(9);
+    expect(getPhases('dukkie-ruby-life-pools-phases')?.phases).toHaveLength(8);
+    expect(getPhases('dukkie-ruby-life-pools-phases')?.phases.reduce((sum, phase) => sum + phase.bursts, 0)).toBe(12);
+    expect(INTERACTIONS.logId).toBe('dukkie-ruby-life-pools-events');
+    expect(INTERACTIONS.counts.applies).toBeGreaterThanOrEqual(5);
 
     const priorityRows = prioritySections().flatMap((section) => section.rows);
     expect(priorityRows).toHaveLength(38);

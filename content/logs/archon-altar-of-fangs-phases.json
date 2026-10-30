@@ -1,0 +1,460 @@
+{
+  "runId": "archon-altar-of-fangs-phases",
+  "sourceLog": "archon-altar-of-fangs-events",
+  "dungeonSlug": "altar_of_fangs",
+  "wclEncounterId": 12993,
+  "label": "Slicecrisps · Altar of Fangs +21",
+  "sourceUrl": "https://www.warcraftlogs.com/reports/tHAzZ4bpaFCdNDmB?fight=6",
+  "player": "Slicecrisps",
+  "profile": "archon",
+  "keyLevel": 21,
+  "method": {
+    "summary": "直接采用 WCL Fights 视图的 10 个真实战斗分段；施法、虚空形态和四个核心 DoT 事件来自同一份公开报告的默认事件页",
+    "bucketSec": 0,
+    "minPhaseSec": 0,
+    "coWindowSec": 0,
+    "cohorts": {}
+  },
+  "limitation": "这是单个 +21 执政官暗牧样本。WCL 的 10 个真实战斗分段与 keystone.guru 的 15 波不是一一对应；路线列只表示怪物族重合成度。未筛选敌方伤害事件，因此本数据不用于伤害归因。",
+  "totalSec": 1774,
+  "phases": [
+    {
+      "index": 1,
+      "kind": "area",
+      "label": "Ritual Chieftain",
+      "from": 13,
+      "to": 214,
+      "durationSec": 201,
+      "families": [
+        {
+          "name": "Primal Serpent",
+          "count": 574
+        },
+        {
+          "name": "Ritual Chieftain",
+          "count": 368
+        },
+        {
+          "name": "Venom Leech",
+          "count": 220
+        },
+        {
+          "name": "Ravenous Descendant",
+          "count": 189
+        },
+        {
+          "name": "Twinfang Harrower",
+          "count": 59
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 318,
+      "castsPerMinute": 94.9,
+      "bursts": 2,
+      "burstUptimeSec": 67
+    },
+    {
+      "index": 2,
+      "kind": "area",
+      "label": "Ritual Chieftain",
+      "from": 225,
+      "to": 405,
+      "durationSec": 180,
+      "families": [
+        {
+          "name": "Ritual Chieftain",
+          "count": 365
+        },
+        {
+          "name": "Ravenous Descendant",
+          "count": 238
+        },
+        {
+          "name": "Twinfang Harrower",
+          "count": 230
+        },
+        {
+          "name": "Primal Serpent",
+          "count": 169
+        },
+        {
+          "name": "Venom Leech",
+          "count": 100
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 273,
+      "castsPerMinute": 91,
+      "bursts": 1,
+      "burstUptimeSec": 37.5
+    },
+    {
+      "index": 3,
+      "kind": "area",
+      "label": "Ravenous Descendant",
+      "from": 414,
+      "to": 435,
+      "durationSec": 21,
+      "families": [],
+      "enemyCasts": 0,
+      "allCasts": 7,
+      "castsPerMinute": 20,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 4,
+      "kind": "boss",
+      "label": "Rav'i",
+      "from": 440,
+      "to": 688,
+      "durationSec": 248,
+      "families": [
+        {
+          "name": "Rav'i",
+          "count": 856
+        },
+        {
+          "name": "Ravenous Descendant",
+          "count": 153
+        },
+        {
+          "name": "Venom Leech",
+          "count": 64
+        },
+        {
+          "name": "Ptbax",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 366,
+      "castsPerMinute": 88.5,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 5,
+      "kind": "area",
+      "label": "Rattling Writhe",
+      "from": 704,
+      "to": 851,
+      "durationSec": 147,
+      "families": [
+        {
+          "name": "Bloodletter",
+          "count": 365
+        },
+        {
+          "name": "Rattling Writhe",
+          "count": 361
+        },
+        {
+          "name": "High Evolutionist",
+          "count": 194
+        },
+        {
+          "name": "Hatchling",
+          "count": 64
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 234,
+      "castsPerMinute": 95.5,
+      "bursts": 1,
+      "burstUptimeSec": 36.5
+    },
+    {
+      "index": 6,
+      "kind": "area",
+      "label": "Bloodletter",
+      "from": 856,
+      "to": 863,
+      "durationSec": 7,
+      "families": [],
+      "enemyCasts": 0,
+      "allCasts": 5,
+      "castsPerMinute": 42.9,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 7,
+      "kind": "area",
+      "label": "The Writhing Coil",
+      "from": 866,
+      "to": 1101,
+      "durationSec": 235,
+      "families": [
+        {
+          "name": "The Writhing Coil",
+          "count": 544
+        },
+        {
+          "name": "Uncoiled Writhe",
+          "count": 340
+        },
+        {
+          "name": "Bloodletter",
+          "count": 58
+        },
+        {
+          "name": "Unknown Actor",
+          "count": 7
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 327,
+      "castsPerMinute": 83.5,
+      "bursts": 1,
+      "burstUptimeSec": 31.5
+    },
+    {
+      "index": 8,
+      "kind": "area",
+      "label": "Blade of the Altar",
+      "from": 1112,
+      "to": 1211,
+      "durationSec": 99,
+      "families": [
+        {
+          "name": "High Evolutionist",
+          "count": 381
+        },
+        {
+          "name": "Blade of the Altar",
+          "count": 244
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 137,
+      "castsPerMinute": 83,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 9,
+      "kind": "area",
+      "label": "Ascendant Serpent",
+      "from": 1216,
+      "to": 1501,
+      "durationSec": 285,
+      "families": [
+        {
+          "name": "Blade of the Altar",
+          "count": 462
+        },
+        {
+          "name": "Ula'tek's Chosen",
+          "count": 327
+        },
+        {
+          "name": "Ritual Chieftain",
+          "count": 309
+        },
+        {
+          "name": "Hatchling",
+          "count": 298
+        },
+        {
+          "name": "Ascendant Serpent",
+          "count": 154
+        },
+        {
+          "name": "Twinfang Harrower",
+          "count": 121
+        },
+        {
+          "name": "Primal Serpent",
+          "count": 113
+        },
+        {
+          "name": "Living Venom",
+          "count": 61
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 444,
+      "castsPerMinute": 93.5,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 10,
+      "kind": "boss",
+      "label": "Zul'jan",
+      "from": 1506,
+      "to": 1766,
+      "durationSec": 260,
+      "families": [
+        {
+          "name": "Zul'jan",
+          "count": 1038
+        },
+        {
+          "name": "Bechilling",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 383,
+      "castsPerMinute": 88.4,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    }
+  ],
+  "routeMatches": {
+    "1": [
+      {
+        "pull": 1,
+        "mobs": 13,
+        "isBoss": false,
+        "jaccard": 0.8
+      },
+      {
+        "pull": 3,
+        "mobs": 9,
+        "isBoss": false,
+        "jaccard": 0.8
+      },
+      {
+        "pull": 2,
+        "mobs": 6,
+        "isBoss": false,
+        "jaccard": 0.6
+      }
+    ],
+    "2": [
+      {
+        "pull": 1,
+        "mobs": 13,
+        "isBoss": false,
+        "jaccard": 0.8
+      },
+      {
+        "pull": 3,
+        "mobs": 9,
+        "isBoss": false,
+        "jaccard": 0.8
+      },
+      {
+        "pull": 2,
+        "mobs": 6,
+        "isBoss": false,
+        "jaccard": 0.6
+      }
+    ],
+    "3": [],
+    "4": [
+      {
+        "pull": 1,
+        "mobs": 13,
+        "isBoss": false,
+        "jaccard": 0.33
+      },
+      {
+        "pull": 3,
+        "mobs": 9,
+        "isBoss": false,
+        "jaccard": 0.33
+      },
+      {
+        "pull": 7,
+        "mobs": 1,
+        "isBoss": true,
+        "jaccard": 0.25
+      }
+    ],
+    "5": [
+      {
+        "pull": 8,
+        "mobs": 7,
+        "isBoss": false,
+        "jaccard": 0.75
+      },
+      {
+        "pull": 9,
+        "mobs": 10,
+        "isBoss": false,
+        "jaccard": 0.75
+      },
+      {
+        "pull": 10,
+        "mobs": 11,
+        "isBoss": true,
+        "jaccard": 0.5
+      }
+    ],
+    "6": [],
+    "7": [
+      {
+        "pull": 10,
+        "mobs": 11,
+        "isBoss": true,
+        "jaccard": 0.5
+      },
+      {
+        "pull": 8,
+        "mobs": 7,
+        "isBoss": false,
+        "jaccard": 0.17
+      },
+      {
+        "pull": 9,
+        "mobs": 10,
+        "isBoss": false,
+        "jaccard": 0.17
+      }
+    ],
+    "8": [
+      {
+        "pull": 11,
+        "mobs": 10,
+        "isBoss": false,
+        "jaccard": 0.67
+      },
+      {
+        "pull": 8,
+        "mobs": 7,
+        "isBoss": false,
+        "jaccard": 0.25
+      },
+      {
+        "pull": 9,
+        "mobs": 10,
+        "isBoss": false,
+        "jaccard": 0.25
+      }
+    ],
+    "9": [
+      {
+        "pull": 13,
+        "mobs": 11,
+        "isBoss": false,
+        "jaccard": 0.38
+      },
+      {
+        "pull": 14,
+        "mobs": 7,
+        "isBoss": false,
+        "jaccard": 0.38
+      },
+      {
+        "pull": 15,
+        "mobs": 7,
+        "isBoss": true,
+        "jaccard": 0.3
+      }
+    ],
+    "10": [
+      {
+        "pull": 15,
+        "mobs": 7,
+        "isBoss": true,
+        "jaccard": 0.17
+      }
+    ]
+  },
+  "routeSource": "content/routes/waves-altar-of-fangs.json",
+  "generatedAt": "2026-10-30T13:51:42.052Z"
+}

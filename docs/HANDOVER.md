@@ -6,7 +6,7 @@
 
 ---
 
-## 1. 现状（2026-10-29）
+## 1. 现状（2026-10-30）
 
 | 项 | 数量 | 位置 |
 | --- | --- | --- |
@@ -15,11 +15,12 @@
 | 章节 | 12（L0×4 / L1×6 / L2×2：毒牙祭坛 / 红玉新生池） | `content/chapters/` |
 | 教练建议 | 7 条 | `content/coaching/general.json` |
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
-| 图契约 | 12 章 × 5 段；54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段（没有真人日志）；L0-03 / L1-01 第五段为模拟时间线；L0-03 第②段是「表 + 两张核对图」同屏（契约 kind 仍为 priority-table） | `content/figures/chapters.json` |
-| 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
+| 日志样本 | 小花生阶段级 9 段；8 本大秘境 Archon 暗牧 WCL 单样本共 329 页、97,599 条筛选事件、81 个有效 Pull、100 个虚空形态窗口、12,147 个 DoT 区间，打法均为 `sample-reviewed` | `content/logs/`、`content/strategy/` |
+| 图契约 | 12 章 × 5 段；55 有图 / 0 缺图 / 5 不适用；红玉第⑤段使用 WCL 8 个真实战斗分段；L0-03 / L1-01 第五段为模拟时间线；L0-03 第②段是「表 + 两张核对图」同屏（契约 kind 仍为 priority-table） | `content/figures/chapters.json` |
+| 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换；红玉样本 1,536 个 DoT 区间 | `content/analysis/`、`content/logs/` |
 | 代码量 | 约 5,709 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 834,202 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
+| 单文件产物 | 1,112,982 字节（含红玉事件、L0-03 右栏与分析数据） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -46,6 +47,7 @@ content/
   maps/*.webp                地牢地形图（瓦片拼接产物，入库；构建时复制到 dist/maps）
 
 scripts/                 数据生产线（全部可重跑）
+  import-wcl-event-pages.mjs  公开 WCL 标题筛选事件 → 真实 Pull 分段
 docs/                    产品 / UI / 教学 / 流程 / 规范
   guide-content-rules.md  **文案与内容结构规范源**：四类内容表达规范 / 写作流程 / AI 味清单
   design-rules.md         **设计规范适配层**：间距阶 / 颜色 token / 中文排版 / 无障碍底线
@@ -53,6 +55,7 @@ docs/                    产品 / UI / 教学 / 流程 / 规范
   ui-blueprint.md        **UI 设计源**：模块划分 / 参考模板 / 设计语言 / 逐页详细设计
   ui-refresh-plan.md     文案与可读性优化方案（改写对照表 + 排版设定 + 验收）
   research/              外部数据核对记录（route-data-pipeline.md：路线采集链路与复现步骤）
+  WCL-ARCHON-PIPELINE.md 8 本副本的 WCL 提取、归一化与打法定稿流程
 apps/web/src/            三屏 + 解析台
   components/Teaching/   教学图组件（顶图带 / 目标刻度 / 波次图 / 动作预算 / 冷却窗口 / 爆发时间轴 / 模拟时间线 / 灰模库）
 packages/learning-core/  内容模型 + 进度（纯逻辑）
@@ -129,7 +132,7 @@ node scripts/import-route.mjs --dungeon=<slug> --out=content/routes/waves-<slug>
 ```bash
 npm run validate:content   # 数字来源 + 结构完整性 + 60 段图契约
 npm run typecheck          # 类型
-npx vitest run             # 27 条，含结构、数据层、相邻交换、分析门禁与路线按副本读取
+npx vitest run             # 30 条，含结构、数据层、相邻交换、分析门禁与 WCL 8 本清单
 npm run check:copy         # 可见文案：禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追
 npm run check:design       # 间距阶 / 颜色 token / 中文排版 / 无障碍
 npm run check:doc:selftest  # 文档解析器 LF / CRLF 自测
@@ -140,7 +143,7 @@ npm run check:ui           # 先构建，再逐章查 12 章；图契约标 read
 npm run check:static       # 本地起 HTTP 加载 dist：验证放到静态托管也能跑（底图走相对路径）
 npm run audit:text         # 报告型：逐页抓读者可见文字里的工程口径泄漏（「」框住的不算）
                            # 记录编号按数据计，不计入问题数
-npm run verify:gates       # 门禁自检 25 项：正样本绿、坏样本红
+npm run verify:gates       # 门禁自检 26 项：正样本绿、坏样本红
 npm run build              # 单文件产出
 ```
 
@@ -152,7 +155,7 @@ npm run build              # 单文件产出
 
 ## 5. 待办（按优先级）
 
-> 现状：**能立即动手 4 条**（P2 的三条体验项 + P0 的决策项）、**被外部来源卡住 5 条**、**等你拍板 3 条**、**已完成 8 条**。
+> 现状：**仍有 1 个专精范围、1 个毒牙单波日志、1 个个人日志导入与部署事项未完成**；红玉日志、DoT 边、主层地图标注和教练卡样本自检已收口。
 > 每条只写「为什么 / 入口 / 依赖」，做完改成 ~~删除线~~ 并补一句实测口径，不要另开第二份待办文档。
 
 ### P0 · 影响正确性
@@ -166,10 +169,10 @@ npm run build              # 单文件产出
 
 | # | 待办 | 说明 | 依赖 |
 | --- | --- | --- | --- |
-| 3 | ~~图契约缺图~~ 已补齐 | L0-03 / L1-01 第⑤段改用模拟动作时间线；当前 60 段 = 54 有图 / 1 缺图 / 5 不适用 | — |
+| 3 | ~~图契约缺图~~ 已补齐 | L0-03 / L1-01 第⑤段改用模拟动作时间线；当前 60 段 = 55 有图 / 0 缺图 / 5 不适用 | — |
 | 4 | ~~第二个副本的 L2 页~~ 已上线 | 红玉新生池：12 波 / 76 只 / 554 forces，路线 `Xnxx3lT`，地形图已拼 | — |
-| 5 | **红玉第⑤段（真人对照）** | 现在契约标 `missing`，页面明写「缺这份副本的日志」。补一份**带战斗分段的导出**即可对齐阶段与爆发时刻 | **等日志导出**（WCL 事件表 CSV） |
-| 6 | 高手对照做到单波级 | 需要 `Fights` 或 `UNIT_DIED` 事件；现有 9 段只到阶段级 | **等日志导出** |
+| 5 | ~~红玉第⑤段（真人对照）~~ 已完成 | 使用 WCL 公共报告 `j9YnMJVfBzgHwvcD` 的 `Dukkie` +21 执政官暗牧；8 个真实 Pull、12 个虚空形态窗口、10,722 条筛选事件 | `dukkie-ruby-life-pools-events/phases` |
+| 6 | 8 本高手样本人工复核 | 8 本均已到 WCL Pull 级数据；玩法结论仍是 `sample-reviewed`，需逐条复核证据后才能改为 `final` | **待人工定稿** |
 | 7 | ~~BOSS 带小怪的真加怪模型~~ 按近似方案落地 | p10 / p15 按全场目标数近似并显式标注；`raid_events+=/adds` 被静默忽略 | 若要精确 → **等支持 raid_events 的 SimC 构建** |
 
 ### P2 · 体验（本地网页，能立即动手）
@@ -180,9 +183,10 @@ npm run build              # 单文件产出
 | 9 | ~~相邻两行交换 A/B 上图~~ 已上到 L0-03 右栏 | 4 组结论 + 无效对照说明；入口只有 L0-03 第②段 | — |
 | 10 | ~~优先级表「条件」列人工补人话~~ 已上线 | 38 行口语版写在 `content/guides/condition-human.json`，生成时合并成 `conditionHuman`；页面读人话，`validate:content` 查「缺行 / 混进 APL 原文 / 超过 150 字」，`verify:gates` 有坏样本 | — |
 | 10b | ~~解析台读者化~~ 已上线 | 技能名缺中文时加「」、段名/表头改「模拟记录」、`跑批`改「模拟」、配装方法里的 SimC 命令加「」；`audit:text` 现为 0 处（记录编号按数据计） | — |
-| 11 | **红玉地形图只有一层** | 现在是路线页展示的那一层（1536×1024）。要么标注「只画主层」，要么把另外两层瓦片也拼上并加楼层切换 | **等你选**（拼图约 1 小时/层） |
-| 12 | 联动图补「谁挂上了 DoT」的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） | **等数据** |
-| 13 | 教练卡按「你哪条没做到」高亮 | 依赖日志分段 | **等日志导出** |
+| 11 | ~~红玉地形图只有一层~~ 已拍板 | 保留主层，并明确标注「仅主层，不表示完整楼层路径」；现有波次数据没有逐波楼层归属 | `waves-ruby-life-pools.json#mapScope` |
+| 12 | ~~联动图补「谁挂上了 DoT」的边~~ 已补齐 | 红玉样本含 1,536 个完整 DoT 区间；`analyze-interactions` 已切换到该日志 | `content/analysis/interactions.json` |
+| 13 | ~~教练卡样本自检~~ 已上线 | 用同一份 8 段日志标出「已做到 / 需检查」；这是公开样本，不是个人日志 | `content/coaching/dukkie-sample-audit.json` |
+| 13b | 个人日志上传后的角色级高亮 | 仍需用户导入自己的分段日志，再把规则结果映射到个人角色 | **等个人日志导入功能** |
 
 ### P3 · 上线与合规
 
@@ -194,19 +198,19 @@ npm run build              # 单文件产出
 
 ### 等你拍板（三选一即可，不拍也能继续跑）
 
-1. **优先级表条件列**：人工补人话（3–4 小时）还是维持现状 + 表头说明？
-2. **红玉地形图**：只画主层（加标注）还是补齐三层 + 楼层切换？
-3. **部署**：继续等账号，还是先不做、只保留双击与本地 HTTP 两种打开方式？
+1. ~~优先级表条件列~~：已选人工补人话并上线。
+2. ~~红玉地形图~~：已选主层 + 明确标注。
+3. **部署**：已暂缓；保留双击与本地 HTTP 两种打开方式。
 
 ## 6. 已知限制（别重复踩）
 
 | 限制 | 影响 | 已知解法 |
 | --- | --- | --- |
 | `raid_events+=/adds` 不生效 | 加怪只能近似 | 用「N+1 目标 × 同时长」窗口 |
-| 日志无战斗分段 / 无死亡事件 | 切不出单波 | 只到阶段级（9 段） |
+| 小花生日志无战斗分段 / 无死亡事件 | 该份日志切不出单波 | 只到阶段级（9 段）；红玉另有 WCL Pull 级样本 |
 | 动作序列只有一次代表迭代 | 动作数 / 狂乱曲线不是 5000 次平均 | 页面分开写；DPS 仍用全部迭代的均值与 CI |
 | `dec_*` 的 hero 来源 | 旧文件曾用 Voidweaver 底稿、文档按 Archon 引用 | 已全部用 Archon 重跑并写入 `hero/profileId/profileFile`；读 run 前先看这三个字段 |
-| WCL 网页 / API | 需 Battle.net，CN 不可用 | 走事件表 CSV |
+| WCL API / 网页 | v2 API 需注册客户端凭据；公开报告页可能弹真人验证 | 公开报告页 + 默认事件视图逐页取数；本地样本已留 URL、报告代码和筛选表达式 |
 | Wowhead | CloudFront 403 | 只取到总览页 |
 | NGA `read.php` | 直连 403 | 本地浏览器可读 |
 | 目标数 > 8 | 模拟上限 | 一律按 8 计，页面注明 |

@@ -393,7 +393,8 @@
         "section": 5,
         "kind": "phase-chart",
         "status": "ready",
-        "source": "xiaohuasheng-phases"
+        "source": "archon-altar-of-fangs-phases + archon-altar-of-fangs-events",
+        "note": "WCL 10 个真实战斗分段；样本为 Slicecrisps 的 +21 执政官暗牧。"
       }
     ],
     "l2-02-ruby-life-pools": [
@@ -425,9 +426,9 @@
       {
         "section": 5,
         "kind": "phase-chart",
-        "status": "missing",
-        "source": "红玉新生池没有真人日志导出",
-        "next": "补一份带战斗分段的日志后再对齐阶段"
+        "status": "ready",
+        "source": "dukkie-ruby-life-pools-phases + dukkie-ruby-life-pools-events",
+        "note": "WCL 8 个真实战斗分段；样本为 Dukkie 的 +21 执政官暗牧。"
       }
     ]
   }

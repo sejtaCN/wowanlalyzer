@@ -356,11 +356,11 @@ export function MapPanel({
         <img
           className="mapimg"
           src={`./maps/${(map.dungeon || '').replace(/_/g, '-')}.webp`}
-          alt={`${route.dungeon} 地牢平面图（keystone.guru 瓦片拼接）`}
+          alt={`${route.dungeon} 地牢平面图（keystone.guru 瓦片拼接${route.mapScope ? `，${route.mapScope}` : ''}）`}
         />
         <div className="note" style={{ marginTop: 6 }}>
           {level === 'L2'
-            ? 'keystone.guru 瓦片拼接（1536×1024）。路线没有每波坐标，所以这张图只给地形，不标位置。'
+            ? `${route.mapScope ? `${route.mapScope}。` : ''}keystone.guru 瓦片拼接（1536×1024）。路线没有每波坐标，所以这张图只给地形，不标位置。`
             : '这条路线只用来举例：它不证明通用模型绑定这一波。路线没有每波坐标，不往图上标位置。'}
         </div>
       </div>
@@ -374,7 +374,10 @@ export function MapPanel({
                 {wave.mobs.map((m) => <span key={m.name}>{m.name} ×{m.count}</span>)}
               </div>
             </div>
-            <p className="note">平面图只回答“整张地牢长什么样”；波次顺序看上面的路线条。</p>
+            <p className="note">
+              {route.mapScope ? `${route.mapScope}。` : ''}
+              平面图只回答“整张地牢长什么样”；波次顺序看上面的路线条。
+            </p>
           </>
         ) : (
           <WaveDiagram route={route} targets={targets ?? null} highlightPull={selectedPull ?? map.pull} kind={kind} />
@@ -403,7 +406,7 @@ export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: Re
         </div>
         {timeline}
         <details className="phase-details">
-          <summary>展开 9 段阶段明细（时长 / 路线重合 / 爆发 / 施法）</summary>
+          <summary>展开 {doc.phases.length} 段战斗明细（时长 / 路线重合 / 爆发 / 施法）</summary>
           <div className="tblwrap">
           <table className="tbl tbl-ph">
             <thead>
@@ -459,6 +462,11 @@ export function CasePanel({ block, timeline }: { block: CaseBlock; timeline?: Re
           <div className="note" style={{ marginTop: 4, color: 'var(--ink-on-gold-soft)' }}>
             限制：{doc.limitation}
           </div>
+          {doc.sourceUrl ? (
+            <div className="note" style={{ marginTop: 8 }}>
+              <a href={doc.sourceUrl} target="_blank" rel="noreferrer">打开 WCL 原始报告</a>
+            </div>
+          ) : null}
         </details>
       </>
     );
@@ -674,7 +682,7 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
             ? '「≈第N波」是这段的怪物组成和路线第 N 波有多像（重合度 %），不是“他现在打到了第几波”。只列最高的一波；低于 40% 说明他走的是另一条顺序。'
             : chapter.casePanel.status === 'simulation'
               ? '按模拟代表迭代划分三段：显示动作按职责落在哪里，不是真人日志阶段，也不代表多迭代平均。'
-              : '整场日志推出的阶段，不是单波。这份导出没有死亡事件，切不出「第 N 波几时开始」。'
+              : '按 WCL 战斗记录的真实战斗分段切段。和路线图的「第 N 波」只按怪物族重合度关联，不是同一个编号。'
         }
       >
         <CasePanel

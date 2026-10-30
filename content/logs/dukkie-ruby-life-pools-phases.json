@@ -1,0 +1,419 @@
+{
+  "runId": "dukkie-ruby-life-pools-phases",
+  "sourceLog": "dukkie-ruby-life-pools-events",
+  "dungeonSlug": "ruby_life_pools",
+  "wclEncounterId": 112521,
+  "label": "Dukkie · Ruby Life Pools +21",
+  "sourceUrl": "https://www.warcraftlogs.com/reports/j9YnMJVfBzgHwvcD?fight=1",
+  "player": "Dukkie",
+  "profile": "archon",
+  "keyLevel": 21,
+  "method": {
+    "summary": "直接采用 WCL Fights 视图的 8 个真实战斗分段；施法、虚空形态和四个核心 DoT 事件来自同一份公开报告的默认事件页",
+    "bucketSec": 0,
+    "minPhaseSec": 0,
+    "coWindowSec": 0,
+    "cohorts": {}
+  },
+  "limitation": "这是单个 +21 执政官暗牧样本。WCL 的 8 个真实战斗分段与 keystone.guru 的 12 波不是一一对应；路线列只表示怪物族重合成度。未筛选敌方伤害事件，因此本数据不用于伤害归因。",
+  "totalSec": 1571,
+  "phases": [
+    {
+      "index": 1,
+      "kind": "area",
+      "label": "Defier Draghar",
+      "from": 10,
+      "to": 229,
+      "durationSec": 219,
+      "families": [
+        {
+          "name": "Defier Draghar",
+          "count": 313
+        },
+        {
+          "name": "Earthbound Guardian",
+          "count": 239
+        },
+        {
+          "name": "Flashfrost Chillweaver",
+          "count": 230
+        },
+        {
+          "name": "Primal Juggernaut",
+          "count": 224
+        },
+        {
+          "name": "Deepstone Earthshaper",
+          "count": 205
+        },
+        {
+          "name": "Infused Whelp",
+          "count": 99
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 371,
+      "castsPerMinute": 101.6,
+      "bursts": 2,
+      "burstUptimeSec": 67
+    },
+    {
+      "index": 2,
+      "kind": "boss",
+      "label": "Melidrussa Chillworn",
+      "from": 229,
+      "to": 437,
+      "durationSec": 208,
+      "families": [
+        {
+          "name": "Melidrussa Chillworn",
+          "count": 830
+        },
+        {
+          "name": "Infused Whelp",
+          "count": 382
+        },
+        {
+          "name": "Deepstone Earthshaper",
+          "count": 40
+        },
+        {
+          "name": "Earthbound Guardian",
+          "count": 23
+        },
+        {
+          "name": "Flashfrost Chillweaver",
+          "count": 12
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 362,
+      "castsPerMinute": 104.4,
+      "bursts": 2,
+      "burstUptimeSec": 63.7
+    },
+    {
+      "index": 3,
+      "kind": "area",
+      "label": "Flamegullet",
+      "from": 466,
+      "to": 698,
+      "durationSec": 232,
+      "families": [
+        {
+          "name": "Blazebound Destroyer",
+          "count": 505
+        },
+        {
+          "name": "Flamegullet",
+          "count": 267
+        },
+        {
+          "name": "Ashseer Flamelasher",
+          "count": 251
+        },
+        {
+          "name": "Primalist Cinderweaver",
+          "count": 159
+        },
+        {
+          "name": "Scorchling",
+          "count": 98
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 396,
+      "castsPerMinute": 102.4,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 4,
+      "kind": "area",
+      "label": "Blazebound Destroyer",
+      "from": 705,
+      "to": 905,
+      "durationSec": 200,
+      "families": [
+        {
+          "name": "Blazebound Destroyer",
+          "count": 478
+        },
+        {
+          "name": "Ashseer Flamelasher",
+          "count": 206
+        },
+        {
+          "name": "Primalist Cinderweaver",
+          "count": 192
+        },
+        {
+          "name": "Scorchling",
+          "count": 101
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 289,
+      "castsPerMinute": 86.7,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 5,
+      "kind": "boss",
+      "label": "Kokia Blazehoof",
+      "from": 906,
+      "to": 1126,
+      "durationSec": 220,
+      "families": [
+        {
+          "name": "Kokia Blazehoof",
+          "count": 622
+        },
+        {
+          "name": "Blazebound Firestorm",
+          "count": 429
+        },
+        {
+          "name": "Scorchling",
+          "count": 30
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 376,
+      "castsPerMinute": 102.5,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 6,
+      "kind": "area",
+      "label": "High Channeler Ryvati",
+      "from": 1138,
+      "to": 1342,
+      "durationSec": 204,
+      "families": [
+        {
+          "name": "Tempest Channeler",
+          "count": 394
+        },
+        {
+          "name": "Primal Thundercloud",
+          "count": 264
+        },
+        {
+          "name": "Storm Warrior",
+          "count": 224
+        },
+        {
+          "name": "High Channeler Ryvati",
+          "count": 165
+        },
+        {
+          "name": "Primalist Cinderweaver",
+          "count": 75
+        },
+        {
+          "name": "Ashseer Flamelasher",
+          "count": 26
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 317,
+      "castsPerMinute": 93.2,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 7,
+      "kind": "area",
+      "label": "Primal Thundercloud",
+      "from": 1348,
+      "to": 1355,
+      "durationSec": 7,
+      "families": [
+        {
+          "name": "Primal Thundercloud",
+          "count": 13
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 4,
+      "castsPerMinute": 34.3,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 8,
+      "kind": "boss",
+      "label": "Kyrakka and Erkhart Stormvein",
+      "from": 1355,
+      "to": 1548,
+      "durationSec": 193,
+      "families": [
+        {
+          "name": "Kyrakka",
+          "count": 571
+        },
+        {
+          "name": "Erkhart Stormvein",
+          "count": 307
+        },
+        {
+          "name": "Primal Thundercloud",
+          "count": 132
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 314,
+      "castsPerMinute": 97.6,
+      "bursts": 2,
+      "burstUptimeSec": 67.1
+    }
+  ],
+  "routeMatches": {
+    "1": [
+      {
+        "pull": 3,
+        "mobs": 8,
+        "isBoss": true,
+        "jaccard": 0.83
+      },
+      {
+        "pull": 1,
+        "mobs": 8,
+        "isBoss": false,
+        "jaccard": 0.67
+      },
+      {
+        "pull": 2,
+        "mobs": 5,
+        "isBoss": false,
+        "jaccard": 0.5
+      }
+    ],
+    "2": [
+      {
+        "pull": 3,
+        "mobs": 8,
+        "isBoss": true,
+        "jaccard": 0.67
+      },
+      {
+        "pull": 1,
+        "mobs": 8,
+        "isBoss": false,
+        "jaccard": 0.5
+      },
+      {
+        "pull": 2,
+        "mobs": 5,
+        "isBoss": false,
+        "jaccard": 0.33
+      }
+    ],
+    "3": [
+      {
+        "pull": 5,
+        "mobs": 6,
+        "isBoss": true,
+        "jaccard": 0.8
+      },
+      {
+        "pull": 4,
+        "mobs": 5,
+        "isBoss": false,
+        "jaccard": 0.6
+      },
+      {
+        "pull": 6,
+        "mobs": 5,
+        "isBoss": false,
+        "jaccard": 0.6
+      }
+    ],
+    "4": [
+      {
+        "pull": 4,
+        "mobs": 5,
+        "isBoss": false,
+        "jaccard": 0.75
+      },
+      {
+        "pull": 6,
+        "mobs": 5,
+        "isBoss": false,
+        "jaccard": 0.75
+      },
+      {
+        "pull": 7,
+        "mobs": 5,
+        "isBoss": false,
+        "jaccard": 0.75
+      }
+    ],
+    "5": [],
+    "6": [
+      {
+        "pull": 9,
+        "mobs": 9,
+        "isBoss": false,
+        "jaccard": 0.83
+      },
+      {
+        "pull": 8,
+        "mobs": 9,
+        "isBoss": false,
+        "jaccard": 0.5
+      },
+      {
+        "pull": 10,
+        "mobs": 11,
+        "isBoss": true,
+        "jaccard": 0.5
+      }
+    ],
+    "7": [
+      {
+        "pull": 8,
+        "mobs": 9,
+        "isBoss": false,
+        "jaccard": 0.33
+      },
+      {
+        "pull": 10,
+        "mobs": 11,
+        "isBoss": true,
+        "jaccard": 0.33
+      },
+      {
+        "pull": 11,
+        "mobs": 5,
+        "isBoss": true,
+        "jaccard": 0.33
+      }
+    ],
+    "8": [
+      {
+        "pull": 11,
+        "mobs": 5,
+        "isBoss": true,
+        "jaccard": 1
+      },
+      {
+        "pull": 8,
+        "mobs": 9,
+        "isBoss": false,
+        "jaccard": 0.2
+      },
+      {
+        "pull": 10,
+        "mobs": 11,
+        "isBoss": true,
+        "jaccard": 0.2
+      }
+    ]
+  },
+  "routeSource": "content/routes/waves-ruby-life-pools.json",
+  "generatedAt": "2026-10-30T13:51:42.574Z"
+}

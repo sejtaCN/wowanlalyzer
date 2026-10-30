@@ -1,0 +1,374 @@
+{
+  "runId": "archon-temple-of-sethraliss-phases",
+  "sourceLog": "archon-temple-of-sethraliss-events",
+  "dungeonSlug": "temple_of_sethraliss",
+  "wclEncounterId": 61877,
+  "label": "列兵天使 · Temple of Sethraliss +22",
+  "sourceUrl": "https://www.warcraftlogs.com/reports/Nj9cF8kQ3XGW2y1J?fight=8",
+  "player": "列兵天使",
+  "profile": "archon",
+  "keyLevel": 22,
+  "method": {
+    "summary": "直接采用 WCL Fights 视图的 9 个真实战斗分段；施法、虚空形态和四个核心 DoT 事件来自同一份公开报告的默认事件页",
+    "bucketSec": 0,
+    "minPhaseSec": 0,
+    "coWindowSec": 0,
+    "cohorts": {}
+  },
+  "limitation": "这是单个 +22 执政官暗牧样本。WCL 的 9 个真实战斗分段没有绑定 keystone.guru 路线；路线列只表示怪物族重合成度。未筛选敌方伤害事件，因此本数据不用于伤害归因。",
+  "totalSec": 1850,
+  "phases": [
+    {
+      "index": 1,
+      "kind": "area",
+      "label": "Sandfury Stonefist",
+      "from": 9,
+      "to": 98,
+      "durationSec": 89,
+      "families": [
+        {
+          "name": "Sandfury Stonefist",
+          "count": 409
+        },
+        {
+          "name": "Shrouded Fang",
+          "count": 81
+        },
+        {
+          "name": "Sandswept Hunter",
+          "count": 59
+        },
+        {
+          "name": "Barbed Krolusk",
+          "count": 19
+        },
+        {
+          "name": "Storm Adept",
+          "count": 16
+        },
+        {
+          "name": "Rogue Krolusk",
+          "count": 12
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 154,
+      "castsPerMinute": 103.8,
+      "bursts": 1,
+      "burstUptimeSec": 31.5
+    },
+    {
+      "index": 2,
+      "kind": "boss",
+      "label": "Adderis and Aspix",
+      "from": 99,
+      "to": 347,
+      "durationSec": 248,
+      "families": [
+        {
+          "name": "Adderis",
+          "count": 614
+        },
+        {
+          "name": "Aspix",
+          "count": 413
+        },
+        {
+          "name": "Storm Adept",
+          "count": 71
+        },
+        {
+          "name": "Sandswept Hunter",
+          "count": 33
+        },
+        {
+          "name": "Barbed Krolusk",
+          "count": 30
+        },
+        {
+          "name": "Shrouded Fang",
+          "count": 23
+        },
+        {
+          "name": "叮呤灵",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 360,
+      "castsPerMinute": 87.1,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 3,
+      "kind": "area",
+      "label": "Sand-Sworn Rider",
+      "from": 357,
+      "to": 699,
+      "durationSec": 342,
+      "families": [
+        {
+          "name": "Sand-Sworn Rider",
+          "count": 792
+        },
+        {
+          "name": "Krolusk Matriarch",
+          "count": 278
+        },
+        {
+          "name": "Lightning Serpent",
+          "count": 151
+        },
+        {
+          "name": "Poisonous Viper",
+          "count": 124
+        },
+        {
+          "name": "Sandswept Hunter",
+          "count": 95
+        },
+        {
+          "name": "Brood Tender",
+          "count": 81
+        },
+        {
+          "name": "Storm Adept",
+          "count": 58
+        },
+        {
+          "name": "Swarming Krolusk 13 (Sand-Sworn Rider)",
+          "count": 51
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 503,
+      "castsPerMinute": 88.2,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 4,
+      "kind": "boss",
+      "label": "Merektha",
+      "from": 704,
+      "to": 943,
+      "durationSec": 239,
+      "families": [
+        {
+          "name": "Merektha",
+          "count": 606
+        },
+        {
+          "name": "Storm Serpent",
+          "count": 266
+        },
+        {
+          "name": "Snake",
+          "count": 174
+        },
+        {
+          "name": "Toxic Viper",
+          "count": 129
+        },
+        {
+          "name": "Unknown Actor",
+          "count": 8
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        },
+        {
+          "name": "忧郁萨",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 342,
+      "castsPerMinute": 85.9,
+      "bursts": 2,
+      "burstUptimeSec": 63.9
+    },
+    {
+      "index": 5,
+      "kind": "area",
+      "label": "Agitated Nimbus",
+      "from": 952,
+      "to": 1059,
+      "durationSec": 107,
+      "families": [
+        {
+          "name": "Agitated Nimbus",
+          "count": 345
+        },
+        {
+          "name": "Spark Channeler",
+          "count": 69
+        },
+        {
+          "name": "Static Anomaly",
+          "count": 69
+        },
+        {
+          "name": "Imbued Stormcaller",
+          "count": 66
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 149,
+      "castsPerMinute": 83.6,
+      "bursts": 1,
+      "burstUptimeSec": 22.4
+    },
+    {
+      "index": 6,
+      "kind": "area",
+      "label": "Agitated Nimbus",
+      "from": 1065,
+      "to": 1152,
+      "durationSec": 87,
+      "families": [
+        {
+          "name": "Agitated Nimbus",
+          "count": 171
+        },
+        {
+          "name": "Static Anomaly",
+          "count": 171
+        },
+        {
+          "name": "Imbued Stormcaller",
+          "count": 44
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 118,
+      "castsPerMinute": 81.4,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 7,
+      "kind": "boss",
+      "label": "Galvazzt",
+      "from": 1159,
+      "to": 1369,
+      "durationSec": 210,
+      "families": [
+        {
+          "name": "Galvazzt",
+          "count": 945
+        },
+        {
+          "name": "叮呤灵",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 357,
+      "castsPerMinute": 102,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 8,
+      "kind": "area",
+      "label": "Orb Watcher",
+      "from": 1387,
+      "to": 1622,
+      "durationSec": 235,
+      "families": [
+        {
+          "name": "Orb Watcher",
+          "count": 484
+        },
+        {
+          "name": "Faithless Conscript",
+          "count": 358
+        },
+        {
+          "name": "Twisted Hexxer",
+          "count": 172
+        },
+        {
+          "name": "Temple Disruptor",
+          "count": 78
+        },
+        {
+          "name": "Spark Channeler",
+          "count": 24
+        },
+        {
+          "name": "Faithless Tormentor",
+          "count": 18
+        },
+        {
+          "name": "叮呤灵",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 312,
+      "castsPerMinute": 79.7,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 9,
+      "kind": "boss",
+      "label": "Avatar of Sethraliss",
+      "from": 1623,
+      "to": 1842,
+      "durationSec": 219,
+      "families": [
+        {
+          "name": "Essence Defiler",
+          "count": 421
+        },
+        {
+          "name": "Faithless Tormentor",
+          "count": 369
+        },
+        {
+          "name": "Corrupted Guardian",
+          "count": 189
+        },
+        {
+          "name": "Twisted Hexxer",
+          "count": 92
+        },
+        {
+          "name": "叮呤灵",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 295,
+      "castsPerMinute": 80.8,
+      "bursts": 2,
+      "burstUptimeSec": 72
+    }
+  ],
+  "routeMatches": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": []
+  },
+  "routeSource": null,
+  "generatedAt": "2026-10-30T13:51:42.709Z"
+}

@@ -1169,13 +1169,21 @@ h3 { font-size: var(--fs-sub); line-height: 1.45; margin: 0 0 8px; font-weight: 
 .state.unused { background: var(--card-3); color: var(--muted); }
 
 /* ---------- 教练卡片 ---------- */
+.coach-wrap { display: grid; gap: 12px; }
 .coach { display: grid; gap: 12px; }
+.coach-audit {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--card-3); color: var(--sub); font-size: var(--fs-4);
+}
+.coach-audit b { color: var(--ink); font-size: var(--fs-3); }
 .coachcard {
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--card);
   padding: 16px; display: grid; grid-template-columns: 30px 1fr; gap: 14px;
   transition: border-color 0.12s ease;
 }
 .coachcard:hover { border-color: var(--line-2); }
+.coachcard.needs-review { border-color: rgba(245,196,81,0.55); }
 .coachcard .num {
   width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
   background: var(--accent-soft); color: var(--gold); font-weight: 800; font-size: var(--fs-4);
@@ -1187,6 +1195,16 @@ h3 { font-size: var(--fs-sub); line-height: 1.45; margin: 0 0 8px; font-weight: 
 .prio.必修 { background: rgba(248,113,113,0.16); color: var(--down); }
 .prio.建议 { background: rgba(245,196,81,0.16); color: var(--gold); }
 .prio.可选 { background: var(--card-3); color: var(--muted); }
+.coach-audit-badge {
+  font-size: var(--fs-4); font-weight: 700; padding: 2px 8px; border-radius: 999px;
+}
+.coach-audit-badge.pass { background: rgba(74,222,128,0.14); color: var(--up); }
+.coach-audit-badge.review { background: rgba(245,196,81,0.16); color: var(--gold); }
+.coach-audit-badge.info { background: var(--card-3); color: var(--muted); }
+.coach-audit-note {
+  margin-top: 12px; padding-left: 12px; border-left: 2px solid var(--line-2);
+  color: var(--sub); font-size: var(--fs-4); line-height: 1.65;
+}
 .coachcard .why { font-size: var(--fs-4); color: var(--muted); margin: 12px 0; line-height: 1.65; }
 .coachcard .evidence-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .chip {

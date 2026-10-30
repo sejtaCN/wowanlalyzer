@@ -12,6 +12,7 @@
     "applicationEntry": "apps/web/src/App.tsx",
     "visibleJson": [
       "content/coaching/general.json",
+      "content/coaching/dukkie-sample-audit.json",
       "content/specs.json",
       "content/guides/sources-summary.json",
       "content/guides/crosscheck-archon.json"

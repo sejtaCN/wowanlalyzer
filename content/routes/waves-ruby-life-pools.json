@@ -2,6 +2,7 @@
  "dungeon": "Ruby Life Pools",
  "route": "Skandar Tank - Ruby Life Pools (+10 to +16)",
  "routePublicKey": "Xnxx3lT",
+ "mapScope": "仅主层，不表示完整楼层路径",
  "source": "keystone.guru",
  "sourceUrl": "https://keystone.guru/route/ruby-life-pools/Xnxx3lT/skandar-tank-ruby-life-pools-10-to-16",
  "fetchedAt": "2026-10-29",

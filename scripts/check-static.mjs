@@ -13,7 +13,7 @@ import { createServer } from 'node:http';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer-core';
+import { findBrowser, launchBrowser } from './browser-launch.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = resolve(process.argv.find((x) => x.startsWith('--dist='))?.slice(7) ?? join(ROOT, 'dist'));
@@ -47,24 +47,14 @@ const listen = () => new Promise((done) => server.listen(0, '127.0.0.1', () => d
 const port = await listen();
 const base = `http://127.0.0.1:${port}/`;
 
-const candidates = [
-  process.env.CHROME_PATH,
-  'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
-  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  '/usr/bin/google-chrome',
-  '/usr/bin/chromium',
-].filter(Boolean);
-const browserPath = candidates.find((path) => existsSync(path));
+const browserPath = findBrowser();
 if (!browserPath) {
   console.error('找不到浏览器：装 Chrome/Edge，或用 CHROME_PATH 指定可执行文件。');
   server.close();
   process.exit(1);
 }
 
-const browser = await puppeteer.launch({ executablePath: browserPath, headless: 'new' });
+const browser = await launchBrowser({ executablePath: browserPath });
 const page = await browser.newPage();
 await page.setViewport({ width: 1440, height: 1000 });
 const failedRequests = [];

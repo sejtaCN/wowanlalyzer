@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-30",
+  "season": "Mythic+ Season 2",
+  "gameVersion": "MID2",
+  "zoneId": 55,
+  "spec": "Priest",
+  "specName": "Shadow",
+  "heroTree": "Archon",
+  "heroTreeId": 19,
+  "statusValues": {
+    "ready": "已有完整 Pull 级事件与阶段数据",
+    "phase-only": "已有旧日志的阶段级数据，尚未升级到 Pull 级",
+    "pending": "尚未取得该副本的 Archon 暗牧样本"
+  },
+  "dungeons": [
+    {
+      "slug": "altar_of_fangs",
+      "name": "Altar of Fangs",
+      "wclEncounterId": 12993,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "tHAzZ4bpaFCdNDmB",
+        "fightId": 6,
+        "player": "Slicecrisps",
+        "playerActorId": 1,
+        "keyLevel": 21,
+        "durationSec": 1774,
+        "reportUrl": "https://www.warcraftlogs.com/reports/tHAzZ4bpaFCdNDmB?fight=6",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": "WCL 另列一个 0:00 的尾段，未纳入 10 个有效 Pull"
+      },
+      "route": {
+        "status": "ready",
+        "file": "content/routes/waves-altar-of-fangs.json",
+        "map": "content/maps/altar-of-fangs.webp"
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/archon-altar_of_fangs-filtered-events.json",
+        "events": "content/logs/archon-altar-of-fangs-events.json",
+        "phases": "content/logs/archon-altar-of-fangs-phases.json",
+        "expected": {
+          "pages": 41,
+          "events": 12089,
+          "pulls": 10,
+          "bursts": 11,
+          "dotBands": 1726
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Ritual Chieftain", "from": 13, "to": 214 },
+        { "index": 2, "kind": "area", "label": "Ritual Chieftain", "from": 225, "to": 405 },
+        { "index": 3, "kind": "area", "label": "Ravenous Descendant", "from": 414, "to": 435 },
+        { "index": 4, "kind": "boss", "label": "Rav'i", "from": 440, "to": 688 },
+        { "index": 5, "kind": "area", "label": "Rattling Writhe", "from": 704, "to": 851 },
+        { "index": 6, "kind": "area", "label": "Bloodletter", "from": 856, "to": 863 },
+        { "index": 7, "kind": "area", "label": "The Writhing Coil", "from": 866, "to": 1101 },
+        { "index": 8, "kind": "area", "label": "Blade of the Altar", "from": 1112, "to": 1211 },
+        { "index": 9, "kind": "area", "label": "Ascendant Serpent", "from": 1216, "to": 1501 },
+        { "index": 10, "kind": "boss", "label": "Zul'jan", "from": 1506, "to": 1766 }
+      ]
+    },
+    {
+      "slug": "den_of_nalorakk",
+      "name": "Den of Nalorakk",
+      "wclEncounterId": 12825,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "GXHZWNKtvfwMQ6Bx",
+        "fightId": 12,
+        "player": "Çorruptêd",
+        "playerActorId": 2,
+        "keyLevel": 22,
+        "durationSec": 1980,
+        "reportUrl": "https://www.warcraftlogs.com/reports/GXHZWNKtvfwMQ6Bx?fight=12",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": null
+      },
+      "party": ["Çorruptêd", "Йонадх", "Knallkadse", "Холомета", "Орох"],
+      "route": {
+        "status": "pending",
+        "file": null,
+        "map": null
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/archon-den_of_nalorakk-filtered-events.json",
+        "events": "content/logs/archon-den-of-nalorakk-events.json",
+        "phases": "content/logs/archon-den-of-nalorakk-phases.json",
+        "expected": {
+          "pages": 42,
+          "events": 12440,
+          "pulls": 11,
+          "bursts": 14,
+          "dotBands": 1481
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Territorial Matriarch", "from": 20, "to": 119 },
+        { "index": 2, "kind": "area", "label": "Spirit of Hunger", "from": 136, "to": 208 },
+        { "index": 3, "kind": "area", "label": "Territorial Matriarch", "from": 226, "to": 245 },
+        { "index": 4, "kind": "boss", "label": "The Hoardmonger", "from": 246, "to": 492 },
+        { "index": 5, "kind": "area", "label": "Thornclaw Gatherer", "from": 505, "to": 608 },
+        { "index": 6, "kind": "area", "label": "Territorial Matriarch", "from": 612, "to": 729 },
+        { "index": 7, "kind": "area", "label": "Avatar of Determination", "from": 746, "to": 839 },
+        { "index": 8, "kind": "area", "label": "Avatar of Determination", "from": 855, "to": 1058 },
+        { "index": 9, "kind": "boss", "label": "Sentinel of Winter", "from": 1059, "to": 1320 },
+        { "index": 10, "kind": "area", "label": "Loa Speaker Nanea", "from": 1357, "to": 1661 },
+        { "index": 11, "kind": "boss", "label": "Nalorakk", "from": 1688, "to": 1914 }
+      ]
+    },
+    {
+      "slug": "kings_rest",
+      "name": "Kings' Rest",
+      "wclEncounterId": 61762,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "Nj9cF8kQ3XGW2y1J",
+        "fightId": 1,
+        "player": "列兵天使",
+        "playerActorId": 4,
+        "keyLevel": 22,
+        "durationSec": 1924,
+        "reportUrl": "https://www.warcraftlogs.com/reports/Nj9cF8kQ3XGW2y1J?fight=1",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": null
+      },
+      "route": {
+        "status": "pending",
+        "file": null,
+        "map": null
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/archon-kings_rest-filtered-events.json",
+        "events": "content/logs/archon-kings-rest-events.json",
+        "phases": "content/logs/archon-kings-rest-phases.json",
+        "expected": {
+          "pages": 38,
+          "events": 11179,
+          "pulls": 11,
+          "bursts": 9,
+          "dotBands": 804
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Animated Guardian", "from": 24, "to": 215 },
+        { "index": 2, "kind": "boss", "label": "The Golden Serpent", "from": 216, "to": 470 },
+        { "index": 3, "kind": "area", "label": "King Timalji", "from": 482, "to": 641 },
+        { "index": 4, "kind": "area", "label": "King A'akul", "from": 647, "to": 734 },
+        { "index": 5, "kind": "area", "label": "Queen Patlaa", "from": 740, "to": 804 },
+        { "index": 6, "kind": "area", "label": "Purification Construct", "from": 831, "to": 937 },
+        { "index": 7, "kind": "boss", "label": "Mchimba the Embalmer", "from": 941, "to": 1164 },
+        { "index": 8, "kind": "area", "label": "Ghostly Brute", "from": 1183, "to": 1287 },
+        { "index": 9, "kind": "boss", "label": "The Council of Tribes", "from": 1287, "to": 1576 },
+        { "index": 10, "kind": "area", "label": "Shadow of Zul", "from": 1603, "to": 1683 },
+        { "index": 11, "kind": "boss", "label": "King Dazar", "from": 1700, "to": 1931 }
+      ]
+    },
+    {
+      "slug": "murder_row",
+      "name": "Murder Row",
+      "wclEncounterId": 12813,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "CayqdzpNBZLkbMR3",
+        "fightId": 2,
+        "player": "网红镇",
+        "playerActorId": 4,
+        "keyLevel": 22,
+        "durationSec": 2032,
+        "reportUrl": "https://www.warcraftlogs.com/reports/CayqdzpNBZLkbMR3?fight=2",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": "WCL 另列一个 0:00 的 Kystia Manaheart 尾段，未纳入 15 个有效 Pull"
+      },
+      "route": {
+        "status": "pending",
+        "file": null,
+        "map": null
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/archon-murder_row-filtered-events.json",
+        "events": "content/logs/archon-murder-row-events.json",
+        "phases": "content/logs/archon-murder-row-phases.json",
+        "expected": {
+          "pages": 47,
+          "events": 13920,
+          "pulls": 15,
+          "bursts": 14,
+          "dotBands": 1759
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Bribed Captain", "from": 9, "to": 88 },
+        { "index": 2, "kind": "area", "label": "Bribed Guard", "from": 97, "to": 187 },
+        { "index": 3, "kind": "area", "label": "Massive Felwyrm", "from": 203, "to": 285 },
+        { "index": 4, "kind": "area", "label": "Street Sneak", "from": 300, "to": 320 },
+        { "index": 5, "kind": "boss", "label": "Kystia Manaheart", "from": 320, "to": 447 },
+        { "index": 6, "kind": "area", "label": "Influentual Reviewer", "from": 489, "to": 530 },
+        { "index": 7, "kind": "area", "label": "Warehouse Worker", "from": 541, "to": 547 },
+        { "index": 8, "kind": "boss", "label": "Zaen Bladesorrow", "from": 548, "to": 802 },
+        { "index": 9, "kind": "area", "label": "Shivan Punisher", "from": 829, "to": 1017 },
+        { "index": 10, "kind": "area", "label": "Shivan Punisher", "from": 1022, "to": 1112 },
+        { "index": 11, "kind": "boss", "label": "Xathuux the Annihilator", "from": 1131, "to": 1421 },
+        { "index": 12, "kind": "area", "label": "Wrathguard Flayer", "from": 1438, "to": 1554 },
+        { "index": 13, "kind": "area", "label": "Corrupted Warlock", "from": 1560, "to": 1666 },
+        { "index": 14, "kind": "area", "label": "Defiled Golem", "from": 1681, "to": 1685 },
+        { "index": 15, "kind": "boss", "label": "Lithiel Cinderfury", "from": 1706, "to": 1994 }
+      ]
+    },
+    {
+      "slug": "ruby_life_pools",
+      "name": "Ruby Life Pools",
+      "wclEncounterId": 112521,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "j9YnMJVfBzgHwvcD",
+        "fightId": 1,
+        "player": "Dukkie",
+        "playerActorId": 3,
+        "keyLevel": 21,
+        "durationSec": 1571,
+        "reportUrl": "https://www.warcraftlogs.com/reports/j9YnMJVfBzgHwvcD?fight=1",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": null
+      },
+      "route": {
+        "status": "ready",
+        "file": "content/routes/waves-ruby-life-pools.json",
+        "map": "content/maps/ruby-life-pools.webp",
+        "mapScope": "仅主层，不表示完整楼层路径"
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/dukkie-rlp-filtered-events.json",
+        "events": "content/logs/dukkie-ruby-life-pools-events.json",
+        "phases": "content/logs/dukkie-ruby-life-pools-phases.json",
+        "expected": {
+          "pages": 36,
+          "events": 10722,
+          "pulls": 8,
+          "bursts": 12,
+          "dotBands": 1536
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Defier Draghar", "from": 10, "to": 229 },
+        { "index": 2, "kind": "boss", "label": "Melidrussa Chillworn", "from": 229, "to": 437 },
+        { "index": 3, "kind": "area", "label": "Flamegullet", "from": 466, "to": 698 },
+        { "index": 4, "kind": "area", "label": "Blazebound Destroyer", "from": 705, "to": 905 },
+        { "index": 5, "kind": "boss", "label": "Kokia Blazehoof", "from": 906, "to": 1126 },
+        { "index": 6, "kind": "area", "label": "High Channeler Ryvati", "from": 1138, "to": 1342 },
+        { "index": 7, "kind": "area", "label": "Primal Thundercloud", "from": 1348, "to": 1355 },
+        { "index": 8, "kind": "boss", "label": "Kyrakka and Erkhart Stormvein", "from": 1355, "to": 1548 }
+      ]
+    },
+    {
+      "slug": "temple_of_sethraliss",
+      "name": "Temple of Sethraliss",
+      "wclEncounterId": 61877,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "Nj9cF8kQ3XGW2y1J",
+        "fightId": 8,
+        "player": "列兵天使",
+        "playerActorId": 4,
+        "keyLevel": 22,
+        "durationSec": 1850,
+        "reportUrl": "https://www.warcraftlogs.com/reports/Nj9cF8kQ3XGW2y1J?fight=8",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": "WCL 另列一个 0:00 的尾段，未纳入 9 个有效 Pull"
+      },
+      "route": {
+        "status": "pending",
+        "file": null,
+        "map": null
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/archon-temple_of_sethraliss-filtered-events.json",
+        "events": "content/logs/archon-temple-of-sethraliss-events.json",
+        "phases": "content/logs/archon-temple-of-sethraliss-phases.json",
+        "expected": {
+          "pages": 40,
+          "events": 12029,
+          "pulls": 9,
+          "bursts": 13,
+          "dotBands": 1680
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Sandfury Stonefist", "from": 9, "to": 98 },
+        { "index": 2, "kind": "boss", "label": "Adderis and Aspix", "from": 99, "to": 347 },
+        { "index": 3, "kind": "area", "label": "Sand-Sworn Rider", "from": 357, "to": 699 },
+        { "index": 4, "kind": "boss", "label": "Merektha", "from": 704, "to": 943 },
+        { "index": 5, "kind": "area", "label": "Agitated Nimbus", "from": 952, "to": 1059 },
+        { "index": 6, "kind": "area", "label": "Agitated Nimbus", "from": 1065, "to": 1152 },
+        { "index": 7, "kind": "boss", "label": "Galvazzt", "from": 1159, "to": 1369 },
+        { "index": 8, "kind": "area", "label": "Orb Watcher", "from": 1387, "to": 1622 },
+        { "index": 9, "kind": "boss", "label": "Avatar of Sethraliss", "from": 1623, "to": 1842 }
+      ]
+    },
+    {
+      "slug": "the_blinding_vale",
+      "name": "The Blinding Vale",
+      "wclEncounterId": 12859,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "J1pnX7WmcNZd2R6g",
+        "fightId": 3,
+        "player": "小花生",
+        "playerActorId": 6,
+        "keyLevel": 23,
+        "durationSec": 1792,
+        "reportUrl": "https://www.warcraftlogs.com/reports/J1pnX7WmcNZd2R6g?fight=3",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": "WCL 另列一个 0:00 的尾段，未纳入 9 个有效 Pull"
+      },
+      "route": {
+        "status": "pending",
+        "file": null,
+        "map": null
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/archon-the_blinding_vale-filtered-events.json",
+        "events": "content/logs/archon-the-blinding-vale-events.json",
+        "phases": "content/logs/archon-the-blinding-vale-phases.json",
+        "expected": {
+          "pages": 44,
+          "events": 13033,
+          "pulls": 9,
+          "bursts": 14,
+          "dotBands": 1704
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Virid Grovekeeper", "from": 14, "to": 275 },
+        { "index": 2, "kind": "boss", "label": "Lightblossom Trinity", "from": 276, "to": 549 },
+        { "index": 3, "kind": "area", "label": "Virid Grovekeeper", "from": 558, "to": 649 },
+        { "index": 4, "kind": "boss", "label": "Ikuzz the Light Hunter", "from": 649, "to": 916 },
+        { "index": 5, "kind": "area", "label": "Luminous Thornmaw", "from": 939, "to": 1046 },
+        { "index": 6, "kind": "boss", "label": "Lightwarden Ruia", "from": 1047, "to": 1308 },
+        { "index": 7, "kind": "area", "label": "Potatoad Matriarch", "from": 1328, "to": 1452 },
+        { "index": 8, "kind": "area", "label": "Luminous Thornmaw", "from": 1466, "to": 1540 },
+        { "index": 9, "kind": "boss", "label": "Ziekett", "from": 1540, "to": 1800 }
+      ]
+    },
+    {
+      "slug": "voidscar_arena",
+      "name": "Voidscar Arena",
+      "wclEncounterId": 12923,
+      "wclStatus": "ready",
+      "wcl": {
+        "reportCode": "yGNACM1w7PzJ4ZjH",
+        "fightId": 30,
+        "player": "悲嘆之息",
+        "playerActorId": 429,
+        "keyLevel": 22,
+        "durationSec": 1937,
+        "reportUrl": "https://www.warcraftlogs.com/reports/yGNACM1w7PzJ4ZjH?fight=30",
+        "eventFilter": "(type = \"cast\") OR (type in (\"applybuff\", \"refreshbuff\", \"removebuff\", \"applydebuff\", \"refreshdebuff\", \"removedebuff\") AND ability.name in (\"Voidform\", \"Vampiric Touch\", \"Shadow Word: Pain\", \"Shadow Word: Madness\", \"Horrific Visions\")) OR type in (\"death\", \"encounterstart\", \"encounterend\")",
+        "note": "WCL 另列一个 0:00 的 Watchful Harrower 尾段，未纳入 8 个有效 Pull"
+      },
+      "route": {
+        "status": "pending",
+        "file": null,
+        "map": null
+      },
+      "dataset": {
+        "rawSnapshot": ".tools/tmp/archon-voidscar_arena-filtered-events.json",
+        "events": "content/logs/archon-voidscar-arena-events.json",
+        "phases": "content/logs/archon-voidscar-arena-phases.json",
+        "expected": {
+          "pages": 41,
+          "events": 12187,
+          "pulls": 8,
+          "bursts": 13,
+          "dotBands": 1457
+        }
+      },
+      "pulls": [
+        { "index": 1, "kind": "area", "label": "Aegyra the Unyielding", "from": 17, "to": 424 },
+        { "index": 2, "kind": "boss", "label": "Taz'Rah", "from": 428, "to": 672 },
+        { "index": 3, "kind": "area", "label": "Watchful Harrower", "from": 682, "to": 785 },
+        { "index": 5, "kind": "boss", "label": "Atroxus", "from": 853, "to": 1086 },
+        { "index": 6, "kind": "area", "label": "Watchful Harrower", "from": 1101, "to": 1284 },
+        { "index": 7, "kind": "area", "label": "Devouring Brutalizer", "from": 1298, "to": 1387 },
+        { "index": 8, "kind": "area", "label": "Devouring Brutalizer", "from": 1396, "to": 1576 },
+        { "index": 9, "kind": "boss", "label": "Charonus", "from": 1577, "to": 1885 }
+      ]
+    }
+  ]
+}

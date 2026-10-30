@@ -13,10 +13,9 @@
  *   npm run audit:text           # 报告
  *   npm run audit:text -- --strict   # 有可见问题就 exit 1
  */
-import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer-core';
+import { findBrowser, launchBrowser } from './browser-launch.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -33,21 +32,16 @@ const PATTERNS = [
   ['异常值', /\b(NaN|undefined|null)\b/g],
 ];
 
-const browserPath = [
-  process.env.CHROME_PATH,
-  'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  '/usr/bin/google-chrome',
-  '/usr/bin/chromium',
-].filter(Boolean).find((path) => existsSync(path));
+const browserPath = findBrowser();
 if (!browserPath) {
   console.error('找不到浏览器：装 Chrome/Edge，或用 CHROME_PATH 指定可执行文件。');
   process.exit(2);
 }
 
-const browser = await puppeteer.launch({ executablePath: browserPath, headless: 'new', args: ['--allow-file-access-from-files'] });
+const browser = await launchBrowser({
+  executablePath: browserPath,
+  args: ['--allow-file-access-from-files'],
+});
 const page = await browser.newPage();
 await page.setViewport({ width: 1440, height: 1100 });
 const url = 'file:///' + DIST.replace(/\\/g, '/');

@@ -35,6 +35,10 @@ import rubyWavesJson from '../../../../content/routes/waves-ruby-life-pools.json
 import adjacentJson from '../../../../content/analysis/adjacent-archon.json';
 import eventsJson from '../../../../content/logs/xiaohuasheng-events.json';
 import phasesJson from '../../../../content/logs/xiaohuasheng-phases.json';
+import dukkieEventsJson from '../../../../content/logs/dukkie-ruby-life-pools-events.json';
+import dukkiePhasesJson from '../../../../content/logs/dukkie-ruby-life-pools-phases.json';
+import altarEventsJson from '../../../../content/logs/archon-altar-of-fangs-events.json';
+import altarPhasesJson from '../../../../content/logs/archon-altar-of-fangs-phases.json';
 import numericSummaryJson from '../../../../content/sims/numeric-summary.json';
 import simulatedTimelinesJson from '../../../../content/analysis/simulated-timelines-archon.json';
 
@@ -192,6 +196,7 @@ export interface RouteDoc {
   mappingVersion?: number;
   mdtMappingHash?: string | null;
   mdtAddonVersion?: number | null;
+  mapScope?: string | null;
   statExamples?: Array<{
     scenario: string;
     targets: number;
@@ -532,6 +537,8 @@ export interface CrosscheckDoc {
 
 export interface LogSegment {
   index: number;
+  fromAbs?: number;
+  spanSec?: number;
   casts: number;
   castsPerMinute: number;
   gcdMedian: number;
@@ -579,6 +586,7 @@ export interface PhasesDoc {
   runId: string;
   sourceLog: string;
   label: string;
+  sourceUrl?: string;
   method: {
     summary: string;
     bucketSec: number;
@@ -641,6 +649,10 @@ const priorityTable = priorityTableJson as PriorityTableDoc;
 const playBudget = playBudgetJson as unknown as PlayBudgetDoc;
 const events = eventsJson as unknown as LogDoc;
 const phases = phasesJson as unknown as PhasesDoc;
+const dukkieEvents = dukkieEventsJson as unknown as LogDoc;
+const dukkiePhases = dukkiePhasesJson as unknown as PhasesDoc;
+const altarEvents = altarEventsJson as unknown as LogDoc;
+const altarPhases = altarPhasesJson as unknown as PhasesDoc;
 
 export const CHAPTERS = rawChapters as unknown as Chapter[];
 export const FIGURES = (figuresJson as unknown as FiguresDoc).chapters;
@@ -703,8 +715,16 @@ const TIMELINES = new Map(simulatedTimelines.timelines.map((timeline) => [timeli
 
 const RUNS = Object.values(numericSummary.runs);
 const RUN_BY_ID = new Map(RUNS.map((run) => [run.runId, run]));
-const LOGS = new Map<string, LogDoc>([[events.runId, events]]);
-const PHASES = new Map<string, PhasesDoc>([[phases.runId, phases]]);
+const LOGS = new Map<string, LogDoc>([
+  [events.runId, events],
+  [dukkieEvents.runId, dukkieEvents],
+  [altarEvents.runId, altarEvents],
+]);
+const PHASES = new Map<string, PhasesDoc>([
+  [phases.runId, phases],
+  [dukkiePhases.runId, dukkiePhases],
+  [altarPhases.runId, altarPhases],
+]);
 
 export const ARCHON_PROFILE_ID = 'archon';
 

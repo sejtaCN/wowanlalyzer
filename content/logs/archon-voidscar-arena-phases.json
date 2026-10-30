@@ -1,0 +1,358 @@
+{
+  "runId": "archon-voidscar-arena-phases",
+  "sourceLog": "archon-voidscar-arena-events",
+  "dungeonSlug": "voidscar_arena",
+  "wclEncounterId": 12923,
+  "label": "悲嘆之息 · Voidscar Arena +22",
+  "sourceUrl": "https://www.warcraftlogs.com/reports/yGNACM1w7PzJ4ZjH?fight=30",
+  "player": "悲嘆之息",
+  "profile": "archon",
+  "keyLevel": 22,
+  "method": {
+    "summary": "直接采用 WCL Fights 视图的 8 个真实战斗分段；施法、虚空形态和四个核心 DoT 事件来自同一份公开报告的默认事件页",
+    "bucketSec": 0,
+    "minPhaseSec": 0,
+    "coWindowSec": 0,
+    "cohorts": {}
+  },
+  "limitation": "这是单个 +22 执政官暗牧样本。WCL 的 8 个真实战斗分段没有绑定 keystone.guru 路线；路线列只表示怪物族重合成度。未筛选敌方伤害事件，因此本数据不用于伤害归因。",
+  "totalSec": 1937,
+  "phases": [
+    {
+      "index": 1,
+      "kind": "area",
+      "label": "Aegyra the Unyielding",
+      "from": 17,
+      "to": 424,
+      "durationSec": 407,
+      "families": [
+        {
+          "name": "Feral Saberon",
+          "count": 459
+        },
+        {
+          "name": "Brutok",
+          "count": 372
+        },
+        {
+          "name": "Longtooth Tuskarr",
+          "count": 296
+        },
+        {
+          "name": "Aegyra the Unyielding",
+          "count": 280
+        },
+        {
+          "name": "Brutal Overseer",
+          "count": 221
+        },
+        {
+          "name": "Lost Sethrak",
+          "count": 210
+        },
+        {
+          "name": "Chitigoth",
+          "count": 204
+        },
+        {
+          "name": "Dominated Brawler",
+          "count": 97
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 661,
+      "castsPerMinute": 97.4,
+      "bursts": 3,
+      "burstUptimeSec": 102.5
+    },
+    {
+      "index": 2,
+      "kind": "boss",
+      "label": "Taz'Rah",
+      "from": 428,
+      "to": 672,
+      "durationSec": 244,
+      "families": [
+        {
+          "name": "Taz'Rah",
+          "count": 978
+        },
+        {
+          "name": "Sycophantic Tarasek",
+          "count": 34
+        },
+        {
+          "name": "Lost Sethrak",
+          "count": 28
+        },
+        {
+          "name": "小锦零三",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 391,
+      "castsPerMinute": 96.1,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 3,
+      "kind": "area",
+      "label": "Watchful Harrower",
+      "from": 682,
+      "to": 785,
+      "durationSec": 103,
+      "families": [
+        {
+          "name": "Watchful Harrower",
+          "count": 397
+        },
+        {
+          "name": "Savage Shredclaw",
+          "count": 122
+        },
+        {
+          "name": "Enthralled Shaman",
+          "count": 35
+        },
+        {
+          "name": "Blistercreep",
+          "count": 34
+        },
+        {
+          "name": "Kilivore Screamer",
+          "count": 26
+        },
+        {
+          "name": "小锦零三",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 159,
+      "castsPerMinute": 92.6,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 5,
+      "kind": "boss",
+      "label": "Atroxus",
+      "from": 853,
+      "to": 1086,
+      "durationSec": 233,
+      "families": [
+        {
+          "name": "Atroxus",
+          "count": 861
+        },
+        {
+          "name": "Toxic Creeper",
+          "count": 188
+        },
+        {
+          "name": "小锦零三",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 398,
+      "castsPerMinute": 102.5,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 6,
+      "kind": "area",
+      "label": "Watchful Harrower",
+      "from": 1101,
+      "to": 1284,
+      "durationSec": 183,
+      "families": [
+        {
+          "name": "Watchful Harrower",
+          "count": 414
+        },
+        {
+          "name": "Devouring Brutalizer",
+          "count": 364
+        },
+        {
+          "name": "Scavenging Siphoid",
+          "count": 208
+        },
+        {
+          "name": "Voidminder",
+          "count": 66
+        },
+        {
+          "name": "Savage Shredclaw",
+          "count": 64
+        },
+        {
+          "name": "Lost Sethrak",
+          "count": 46
+        },
+        {
+          "name": "Voidtouched Magi",
+          "count": 41
+        },
+        {
+          "name": "Kilivore Screamer",
+          "count": 20
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 309,
+      "castsPerMinute": 101.3,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 7,
+      "kind": "area",
+      "label": "Devouring Brutalizer",
+      "from": 1298,
+      "to": 1387,
+      "durationSec": 89,
+      "families": [
+        {
+          "name": "Devouring Brutalizer",
+          "count": 254
+        },
+        {
+          "name": "Scavenging Siphoid",
+          "count": 136
+        },
+        {
+          "name": "Feral Saberon",
+          "count": 103
+        },
+        {
+          "name": "Voidminder",
+          "count": 54
+        },
+        {
+          "name": "Savage Shredclaw",
+          "count": 31
+        },
+        {
+          "name": "Sycophantic Tarasek",
+          "count": 31
+        },
+        {
+          "name": "小锦零三",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 155,
+      "castsPerMinute": 104.5,
+      "bursts": 1,
+      "burstUptimeSec": 25.6
+    },
+    {
+      "index": 8,
+      "kind": "area",
+      "label": "Devouring Brutalizer",
+      "from": 1396,
+      "to": 1576,
+      "durationSec": 180,
+      "families": [
+        {
+          "name": "Devouring Brutalizer",
+          "count": 472
+        },
+        {
+          "name": "Scavenging Siphoid",
+          "count": 130
+        },
+        {
+          "name": "Savage Shredclaw",
+          "count": 69
+        },
+        {
+          "name": "Voidminder",
+          "count": 63
+        },
+        {
+          "name": "Enthralled Shaman",
+          "count": 51
+        },
+        {
+          "name": "Dominated Brawler",
+          "count": 45
+        },
+        {
+          "name": "Kilivore Screamer",
+          "count": 30
+        },
+        {
+          "name": "Lost Sethrak",
+          "count": 22
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 252,
+      "castsPerMinute": 84,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 9,
+      "kind": "boss",
+      "label": "Charonus",
+      "from": 1577,
+      "to": 1885,
+      "durationSec": 308,
+      "families": [
+        {
+          "name": "Charonus",
+          "count": 885
+        },
+        {
+          "name": "Savage Shredclaw",
+          "count": 52
+        },
+        {
+          "name": "Kilivore Screamer",
+          "count": 19
+        },
+        {
+          "name": "Sycophantic Tarasek",
+          "count": 16
+        },
+        {
+          "name": "Lost Sethrak",
+          "count": 12
+        },
+        {
+          "name": "Dominated Brawler",
+          "count": 4
+        },
+        {
+          "name": "小锦零三",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 344,
+      "castsPerMinute": 67,
+      "bursts": 2,
+      "burstUptimeSec": 67
+    }
+  ],
+  "routeMatches": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": []
+  },
+  "routeSource": null,
+  "generatedAt": "2026-10-30T13:51:42.976Z"
+}

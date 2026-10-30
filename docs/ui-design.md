@@ -95,7 +95,7 @@
 | ② 主图 | `BurstChart` / `PriorityTableChart` / `SkillCards` / `LogStats` / `WaveTable` | 开 vs 不开必须两行各带真实 DPS，避免"绿色是增量还是全长"的歧义；表格类必须带 n、±CI、来源 |
 | ③ 技能调整 | `PriorityDiff` | 只用「加 / 降」两列；每条一句话理由，理由必须能追到 APL 条件或 runId |
 | ④ 地图 | `MapPanel` | 瓦片来自 `dist/maps/altar-of-fangs.webp`（keystone.guru 4×4 拼接）；逐波柱 + 横轴波次号 + 本章高亮。**路线没有坐标，所以不往图上标位置** |
-| ⑤ 高手对照 | `CasePanel` + `Teaching/CastChart` + `Teaching/BurstTimeline` | L0 用整场施法次数（被动另列）；有阶段日志的章节用 9 段阶段表 + 11 个爆发窗口时间轴；无数据时显示「待补 · 需要带 Fights 的导出」 |
+| ⑤ 高手对照 | `CasePanel` + `Teaching/CastChart` + `Teaching/BurstTimeline` | L0 用整场施法次数（被动另列）；阶段日志给出阶段表和爆发窗口；红玉新生池使用 8 个 WCL Pull + 12 个虚空形态窗口；无数据时显示「待补 · 需要带 Fights 的导出」 |
 | 证据条 | `EvidenceBar` | 常驻页面底部；列出 runId / 日志 / 来源 / 日期 |
 
 阈值只写一处：`components/Teaching/rules.ts`（≥7 开 / 5–6 看冷却 / ≤4 不开 / BOSS 看下一波）。爆发增量不存常量，按目标档选 runId 后从 `numeric-summary.json` 计算。图、表、结论都从这里取，禁止各写一套。
@@ -110,7 +110,7 @@
 | `missing` | 标出下一批与需要的数据，不装成已完成 | 两道门禁逐条警告，不阻塞 |
 | `not-applicable` | 这一段本来就不该有图（如 L0 不绑定副本） | 不要求图 |
 
-当前 60 段：54 有图 / 1 缺图 / 5 不适用（红玉第⑤段待日志）；L0-03 与 L1-01 的第五段使用模拟动作时间线，明确不冒充真人日志阶段。`check:ui` 从首页逐章点开 12 章，而不是只查 L1-02；`npm run verify:gates` 用坏样本证明门禁会真红。详见 `docs/figure-contract.md`。
+当前 60 段：55 有图 / 0 缺图 / 5 不适用；红玉第⑤段使用 8 个真实 Pull，L0-03 与 L1-01 的第五段使用模拟动作时间线，明确不冒充真人日志阶段。`check:ui` 从首页逐章点开 12 章，而不是只查 L1-02；`npm run verify:gates` 用坏样本证明门禁会真红。详见 `docs/figure-contract.md`。
 
 ### 4.3 状态
 

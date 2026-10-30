@@ -1,0 +1,410 @@
+{
+  "runId": "archon-the-blinding-vale-phases",
+  "sourceLog": "archon-the-blinding-vale-events",
+  "dungeonSlug": "the_blinding_vale",
+  "wclEncounterId": 12859,
+  "label": "小花生 · The Blinding Vale +23",
+  "sourceUrl": "https://www.warcraftlogs.com/reports/J1pnX7WmcNZd2R6g?fight=3",
+  "player": "小花生",
+  "profile": "archon",
+  "keyLevel": 23,
+  "method": {
+    "summary": "直接采用 WCL Fights 视图的 9 个真实战斗分段；施法、虚空形态和四个核心 DoT 事件来自同一份公开报告的默认事件页",
+    "bucketSec": 0,
+    "minPhaseSec": 0,
+    "coWindowSec": 0,
+    "cohorts": {}
+  },
+  "limitation": "这是单个 +23 执政官暗牧样本。WCL 的 9 个真实战斗分段没有绑定 keystone.guru 路线；路线列只表示怪物族重合成度。未筛选敌方伤害事件，因此本数据不用于伤害归因。",
+  "totalSec": 1792,
+  "phases": [
+    {
+      "index": 1,
+      "kind": "area",
+      "label": "Virid Grovekeeper",
+      "from": 14,
+      "to": 275,
+      "durationSec": 261,
+      "families": [
+        {
+          "name": "Sporeblight Belcher",
+          "count": 487
+        },
+        {
+          "name": "Virid Grovekeeper",
+          "count": 416
+        },
+        {
+          "name": "Lasher",
+          "count": 225
+        },
+        {
+          "name": "Underbrush Stalker",
+          "count": 222
+        },
+        {
+          "name": "Lightgorged Lasher",
+          "count": 193
+        },
+        {
+          "name": "Radiant Spellsower",
+          "count": 117
+        },
+        {
+          "name": "Cherryz",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 425,
+      "castsPerMinute": 97.7,
+      "bursts": 2,
+      "burstUptimeSec": 67
+    },
+    {
+      "index": 2,
+      "kind": "boss",
+      "label": "Lightblossom Trinity",
+      "from": 276,
+      "to": 549,
+      "durationSec": 273,
+      "families": [
+        {
+          "name": "Kezkitt",
+          "count": 1100
+        },
+        {
+          "name": "Meittik",
+          "count": 115
+        },
+        {
+          "name": "Lekshi",
+          "count": 83
+        },
+        {
+          "name": "Lightgorged Lasher",
+          "count": 67
+        },
+        {
+          "name": "Lasher",
+          "count": 52
+        },
+        {
+          "name": "Underbrush Stalker",
+          "count": 16
+        },
+        {
+          "name": "Radiant Spellsower",
+          "count": 6
+        },
+        {
+          "name": "Cherryz",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 444,
+      "castsPerMinute": 97.6,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 3,
+      "kind": "area",
+      "label": "Virid Grovekeeper",
+      "from": 558,
+      "to": 649,
+      "durationSec": 91,
+      "families": [
+        {
+          "name": "Sporeblight Belcher",
+          "count": 323
+        },
+        {
+          "name": "Virid Grovekeeper",
+          "count": 80
+        },
+        {
+          "name": "Underbrush Stalker",
+          "count": 63
+        },
+        {
+          "name": "Lasher",
+          "count": 40
+        },
+        {
+          "name": "Lightgorged Lasher",
+          "count": 36
+        },
+        {
+          "name": "Lightfeather Petalwing",
+          "count": 33
+        },
+        {
+          "name": "Thorny Saptor",
+          "count": 21
+        },
+        {
+          "name": "Cherryz",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 144,
+      "castsPerMinute": 94.9,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 4,
+      "kind": "boss",
+      "label": "Ikuzz the Light Hunter",
+      "from": 649,
+      "to": 916,
+      "durationSec": 267,
+      "families": [
+        {
+          "name": "Ikuzz the Light Hunter",
+          "count": 1043
+        },
+        {
+          "name": "Bloodthorn Roots",
+          "count": 83
+        },
+        {
+          "name": "Virid Grovekeeper",
+          "count": 31
+        },
+        {
+          "name": "Lightfeather Petalwing",
+          "count": 17
+        },
+        {
+          "name": "Thorny Saptor",
+          "count": 13
+        },
+        {
+          "name": "Radiant Spellsower",
+          "count": 13
+        },
+        {
+          "name": "Underbrush Stalker",
+          "count": 10
+        },
+        {
+          "name": "Cherryz",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 430,
+      "castsPerMinute": 96.6,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 5,
+      "kind": "area",
+      "label": "Luminous Thornmaw",
+      "from": 939,
+      "to": 1046,
+      "durationSec": 107,
+      "families": [
+        {
+          "name": "Luminous Thornmaw",
+          "count": 388
+        },
+        {
+          "name": "Spineshield Beetle",
+          "count": 126
+        },
+        {
+          "name": "Leafy Grovecrawler",
+          "count": 84
+        },
+        {
+          "name": "Thorny Saptor",
+          "count": 67
+        },
+        {
+          "name": "Cherryz",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 156,
+      "castsPerMinute": 87.5,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 6,
+      "kind": "boss",
+      "label": "Lightwarden Ruia",
+      "from": 1047,
+      "to": 1308,
+      "durationSec": 261,
+      "families": [
+        {
+          "name": "Lightwarden Ruia",
+          "count": 947
+        },
+        {
+          "name": "Thorny Saptor",
+          "count": 74
+        },
+        {
+          "name": "Spineshield Beetle",
+          "count": 55
+        },
+        {
+          "name": "Leafy Grovecrawler",
+          "count": 34
+        },
+        {
+          "name": "Luminous Thornmaw",
+          "count": 3
+        },
+        {
+          "name": "Cherryz",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 381,
+      "castsPerMinute": 87.6,
+      "bursts": 2,
+      "burstUptimeSec": 85.1
+    },
+    {
+      "index": 7,
+      "kind": "area",
+      "label": "Potatoad Matriarch",
+      "from": 1328,
+      "to": 1452,
+      "durationSec": 124,
+      "families": [
+        {
+          "name": "Potatoad Matriarch",
+          "count": 406
+        },
+        {
+          "name": "Newborn Potadpole",
+          "count": 135
+        },
+        {
+          "name": "Lightgorged Lasher",
+          "count": 101
+        },
+        {
+          "name": "Potadpole Egg",
+          "count": 60
+        },
+        {
+          "name": "Lasher",
+          "count": 58
+        },
+        {
+          "name": "Lightfeather Petalwing",
+          "count": 50
+        },
+        {
+          "name": "Cherryz",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 198,
+      "castsPerMinute": 95.8,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 8,
+      "kind": "area",
+      "label": "Luminous Thornmaw",
+      "from": 1466,
+      "to": 1540,
+      "durationSec": 74,
+      "families": [
+        {
+          "name": "Sporeblight Belcher",
+          "count": 318
+        },
+        {
+          "name": "Lightgorged Lasher",
+          "count": 145
+        },
+        {
+          "name": "Radiant Spellsower",
+          "count": 50
+        },
+        {
+          "name": "Lasher",
+          "count": 46
+        },
+        {
+          "name": "Luminous Thornmaw",
+          "count": 34
+        },
+        {
+          "name": "Cherryz",
+          "count": 1
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 128,
+      "castsPerMinute": 103.8,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 9,
+      "kind": "boss",
+      "label": "Ziekett",
+      "from": 1540,
+      "to": 1800,
+      "durationSec": 260,
+      "families": [
+        {
+          "name": "Ziekket",
+          "count": 999
+        },
+        {
+          "name": "Lightspawn Lasher",
+          "count": 448
+        },
+        {
+          "name": "Lightgorged Lasher",
+          "count": 27
+        },
+        {
+          "name": "Luminous Thornmaw",
+          "count": 14
+        },
+        {
+          "name": "Cherryz",
+          "count": 2
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 432,
+      "castsPerMinute": 99.7,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    }
+  ],
+  "routeMatches": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": []
+  },
+  "routeSource": null,
+  "generatedAt": "2026-10-30T13:51:42.844Z"
+}

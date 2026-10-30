@@ -13,11 +13,11 @@
  *   node scripts/check-ui.mjs
  *   node scripts/check-ui.mjs --dist=<index.html> --shots=<目录>
  */
-import puppeteer from 'puppeteer-core';
 import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createServer } from 'vite';
+import { createServer as createViteServer } from 'vite';
+import { findBrowser, launchBrowser } from './browser-launch.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const argOf = (name, fallback) => {
@@ -26,19 +26,7 @@ const argOf = (name, fallback) => {
 };
 const DIST = resolve(argOf('dist', join(ROOT, 'dist', 'index.html')));
 const SHOTS = resolve(argOf('shots', join(ROOT, '.tools', 'tmp', 'ui')));
-const BROWSER_CANDIDATES = [
-  process.env.CHROME_PATH,
-  'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
-  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
-  '/usr/bin/google-chrome',
-  '/usr/bin/chromium',
-  '/usr/bin/chromium-browser',
-].filter(Boolean);
-const BROWSER = BROWSER_CANDIDATES.find((path) => existsSync(path));
+const BROWSER = findBrowser();
 const CHAPTERS_DIR = join(ROOT, 'content', 'chapters');
 const FIGURES = JSON.parse(readFileSync(join(ROOT, 'content', 'figures', 'chapters.json'), 'utf8'));
 const ROUTE = JSON.parse(readFileSync(join(ROOT, 'content', 'routes', 'waves-altar-of-fangs.json'), 'utf8'));
@@ -97,7 +85,7 @@ const chapters = readdirSync(CHAPTERS_DIR)
   .sort((a, b) => a.level.localeCompare(b.level) || a.order - b.order);
 
 // 直接加载页面实际使用的规则，不在门禁里维护第二份主行动结论表。
-const vite = await createServer({
+const vite = await createViteServer({
   root: ROOT,
   logLevel: 'silent',
   appType: 'custom',
@@ -105,9 +93,8 @@ const vite = await createServer({
 });
 const { chapterDecision } = await vite.ssrLoadModule('/apps/web/src/components/Teaching/rules.ts');
 
-const browser = await puppeteer.launch({
+const browser = await launchBrowser({
   executablePath: BROWSER,
-  headless: 'new',
   args: ['--allow-file-access-from-files'],
 });
 const page = await browser.newPage();
@@ -342,6 +329,8 @@ for (const chapter of chapters) {
       priorityText: sec3?.innerText ?? '',
       priorityKeyTitles: [...(sec3?.querySelectorAll('.pm-head b') ?? [])].map((el) => el.title).filter(Boolean),
       phaseRows: sec5?.querySelectorAll('details.phase-details tbody tr').length ?? 0,
+      phaseBursts: sec5?.querySelector('.btl')?.getAttribute('data-phase-bursts') ?? null,
+      timelineBursts: sec5?.querySelector('.btl')?.getAttribute('data-burst-windows') ?? null,
       hasPhaseMethod: Boolean(sec5?.querySelector('details.phase-method')),
       hasSelectedWaveRaw: Boolean(document.querySelector('details.sw-raw')),
       selectedWaveRawText: document.querySelector('details.sw-raw')?.textContent ?? '',
@@ -429,7 +418,17 @@ for (const chapter of chapters) {
     check(readerView.readerSpacing.noteMaxWidth === 576, `${chapter.id}: 说明行宽应为 36em（576px），实际 ${readerView.readerSpacing.noteMaxWidth}px`);
     check(readerView.readerSpacing.figureGap === '16px', `${chapter.id}: 段内图间距应为 16px，实际 ${readerView.readerSpacing.figureGap}`);
     if (chapter.casePanel.status === 'phases') {
-      check(readerView.phaseRows === 9, `${chapter.id}: 第五段阶段表应为 9 行，实际 ${readerView.phaseRows}`);
+      const phaseDoc = JSON.parse(
+        readFileSync(join(ROOT, 'content', 'logs', `${chapter.casePanel.logId}.json`), 'utf8'),
+      );
+      check(
+        readerView.phaseRows === phaseDoc.phases.length,
+        `${chapter.id}: 第五段阶段表应为 ${phaseDoc.phases.length} 行，实际 ${readerView.phaseRows}`,
+      );
+      check(
+        readerView.phaseBursts === readerView.timelineBursts,
+        `${chapter.id}: 时间轴爆发窗口 ${readerView.timelineBursts} 个，与阶段统计 ${readerView.phaseBursts} 个不一致`,
+      );
       check(readerView.hasPhaseMethod, `${chapter.id}: 第五段缺少 methods/限制折叠 details.phase-method`);
     }
     if (chapter.level === 'L2') {
@@ -495,6 +494,9 @@ const homeNarrative = await page.evaluate(() => ({
   hasReadCopy: document.querySelector('.path')?.textContent?.includes('已读') ?? false,
   nodeCount: document.querySelectorAll('.path-dot2').length,
   heroBtns: document.querySelectorAll('.hero .btn').length,
+  coachAudit: document.querySelector('.coach-audit')?.innerText ?? '',
+  coachAuditBadges: document.querySelectorAll('.coach-audit-badge').length,
+  coachReviewCards: document.querySelectorAll('.coachcard.needs-review').length,
   groupColumns: getComputedStyle(document.querySelector('.groups')).gridTemplateColumns
     .split(' ')
     .map((value) => Number.parseFloat(value)),
@@ -507,6 +509,12 @@ check(homeNarrative.progressBars === 0, '首页还在用进度条');
 check(!homeNarrative.hasReadCopy, '首页还在显示「已读」完成率');
 check(homeNarrative.nodeCount === chapters.length, `首页学习路径应列出 ${chapters.length} 个章节节点，实际 ${homeNarrative.nodeCount}`);
 check(homeNarrative.heroBtns === 1, `首页 hero 应只有一个主按钮，实际 ${homeNarrative.heroBtns}`);
+check(
+  homeNarrative.coachAudit.includes('Ruby Life Pools +21') && homeNarrative.coachAudit.includes('不是你的角色日志'),
+  `首页教练卡未标明样本日志范围：${homeNarrative.coachAudit}`,
+);
+check(homeNarrative.coachAuditBadges === 7, `教练卡样本自检应标 7 条，实际 ${homeNarrative.coachAuditBadges}`);
+check(homeNarrative.coachReviewCards === 2, `教练卡“需检查”应有 2 条，实际 ${homeNarrative.coachReviewCards}`);
 check(
   homeNarrative.groupColumns.length === 2
     && Math.abs(homeNarrative.groupRects[0].width - homeNarrative.groupRects[1].width) <= 2
@@ -582,6 +590,13 @@ check(
   `L2 第 12 波空波次仍显示百分比 / DPS / CI：${emptyPull.top}\n${emptyPull.selected}`,
 );
 await page.screenshot({ path: `${SHOTS}/chapter-l2-empty-pull.png` });
+
+await goHome();
+await page.evaluate(() => document.querySelector('button.chap[data-chapter-id="l2-02-ruby-life-pools"]')?.click());
+await sleep(240);
+const rubyMapScope = await page.evaluate(() => document.querySelector('.mapgrid')?.innerText ?? '');
+check(rubyMapScope.includes('仅主层'), `红玉地图未标明主层范围：${rubyMapScope}`);
+check(rubyMapScope.includes('不表示完整楼层路径'), `红玉地图未说明楼层限制：${rubyMapScope}`);
 
 // ---- 解析台 ----
 await page.evaluate(() => [...document.querySelectorAll('nav button')].find((b) => b.textContent.includes('解析台'))?.click());

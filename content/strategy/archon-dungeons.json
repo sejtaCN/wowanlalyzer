@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-30",
+  "hero": "Archon",
+  "gameVersion": "MID2",
+  "statusLegend": {
+    "sample-reviewed": "单个 Pull 级样本已抽取并生成候选结论，等待人工定稿",
+    "final": "Pull 级数据与打法结论均已人工复核",
+    "needs-refresh": "已有旧数据，但未达到 Pull 级最终版标准",
+    "pending": "尚未取得 Pull 级 WCL 样本"
+  },
+  "dungeons": [
+    {
+      "slug": "altar_of_fangs",
+      "name": "Altar of Fangs",
+      "status": "sample-reviewed",
+      "sourceLog": "archon-altar-of-fangs-phases",
+      "summary": "「Slicecrisps」+21 样本分成 10 个真实 Pull，共 11 次虚空形态；21 秒和 7 秒短波都没有交爆发。",
+      "corrections": [
+        {
+          "title": "长战斗把窗口分摊到前后半段",
+          "evidence": "第 9 段 285 秒开 2 次，第 10 段首领 260 秒开 2 次；第 4 段首领 248 秒只开 1 次。",
+          "action": "进入 200 秒以上战斗前确认两层充能，避免前半段用完后首领段只剩一次窗口。"
+        },
+        {
+          "title": "开波先确认痛已铺上",
+          "evidence": "第 1 段开波后 6.2 秒、第 7 段开波后 5.5 秒才出现首个痛的区间。",
+          "action": "先看聚怪是否完成；聚怪结束后把痛放进第一轮 GCD。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "20 秒左右短波不留爆发空转",
+          "evidence": "第 3 段 21 秒、0 次虚空形态；下一段首领战在 70.6 秒时开出窗口。",
+          "action": "短波只补 DoT 和资源，把爆发留给后续长波或首领。"
+        },
+        {
+          "title": "7 秒零散波次只做过渡",
+          "evidence": "第 6 段持续 7 秒，0 次虚空形态，随后进入 235 秒的盘绕回廊。",
+          "action": "这类波次不交冷却，也不为少量目标重铺完整 DoT。"
+        }
+      ]
+    },
+    {
+      "slug": "den_of_nalorakk",
+      "name": "Den of Nalorakk",
+      "status": "sample-reviewed",
+      "sourceLog": "archon-den-of-nalorakk-phases",
+      "summary": "「Çorruptêd」+22 样本分成 11 个真实 Pull，共 14 次虚空形态；19 秒短波没有交爆发。",
+      "corrections": [
+        {
+          "title": "117 秒无爆发分段要确认冷却去向",
+          "evidence": "第 6 段持续 117 秒且虚空形态 0 次；前后两段各开 1 次。",
+          "action": "开怪前确认是否为了下一段保留窗口；若不是，就按 30 秒窗口正常使用。"
+        },
+        {
+          "title": "铺痛时间要和聚怪结束对齐",
+          "evidence": "第 1 段 28.2 秒、第 5 段 10.4 秒才出现首个痛的区间。",
+          "action": "先判断是否需要长距离聚怪；聚怪完成后把痛放进第一轮 GCD。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "19 秒短波不交爆发",
+          "evidence": "第 3 段持续 19 秒，0 次虚空形态。",
+          "action": "短波只补资源与核心 DoT，把窗口留给下一段首领。"
+        },
+        {
+          "title": "超长波次拆三段窗口",
+          "evidence": "第 10 段持续 304 秒，共 3 次虚空形态；两个首领段各 2 次。",
+          "action": "250 秒以上战斗持续按窗口使用，不把两层充能压在同一次聚怪。"
+        }
+      ]
+    },
+    {
+      "slug": "kings_rest",
+      "name": "Kings' Rest",
+      "status": "sample-reviewed",
+      "sourceLog": "archon-kings-rest-phases",
+      "summary": "「列兵天使」+22 样本分成 11 个真实 Pull，共 9 次虚空形态，后四个战斗分段集中了 8 次。",
+      "corrections": [
+        {
+          "title": "前三个分段连续 594 秒没有爆发",
+          "evidence": "前 3 个 Pull 共 594 秒，其中黄金蛇首领 254 秒，虚空形态均为 0 次。",
+          "action": "开本前确认首轮冷却是否遗漏；黄金蛇至少应有一次完整窗口。"
+        },
+        {
+          "title": "爆发分配偏向后半程",
+          "evidence": "第 7、9、11 个首领段共 7 次爆发，前半段仅 2 次。",
+          "action": "按路线时长重新分配两层充能，避免前半程长时间空转。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "64 秒中波只交一次窗口",
+          "evidence": "第 5 段持续 64 秒，虚空形态 0 次；第 4 段 87 秒开 1 次。",
+          "action": "60 秒左右波次根据下一波大小决定是否交一次，不为收尾强开第二次。"
+        },
+        {
+          "title": "后半程首领维护两次窗口",
+          "evidence": "第 7、9、11 段分别 223、289、231 秒，各开 2 次。",
+          "action": "长首领战按窗口连续使用，把第二次落在增伤目标仍有生命时。"
+        }
+      ]
+    },
+    {
+      "slug": "murder_row",
+      "name": "Murder Row",
+      "status": "sample-reviewed",
+      "sourceLog": "archon-murder-row-phases",
+      "summary": "「网红镇」+22 样本分成 15 个真实 Pull，共 14 次虚空形态；4 秒、6 秒、20 秒和 41 秒短波都没有交爆发。",
+      "corrections": [
+        {
+          "title": "两个约 90 秒以上的分段没有窗口",
+          "evidence": "第 10 段 90 秒、第 12 段 116 秒均为 0 次虚空形态。",
+          "action": "若下一段不是更高层目标，按正常冷却交出一次；只有明确留给下一波时才保留。"
+        },
+        {
+          "title": "前半程首领只开一次",
+          "evidence": "第 5 段 Kystia 127 秒开 1 次；后半程 Zaen 254 秒和 Xathuux 290 秒各开 2 次。",
+          "action": "两只首领按同一冷却预算分配；不要因为开场路线短就提前耗尽两层充能。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "极短波次零爆发",
+          "evidence": "第 4、6、7、14 段分别 20、41、6、4 秒，全部 0 次虚空形态。",
+          "action": "这些波次只维持 DoT、资源和走位，不交主动冷却。"
+        },
+        {
+          "title": "终局首领保留三段窗口",
+          "evidence": "第 15 段 288 秒开 3 次，爆发覆盖 104.2 秒。",
+          "action": "进最终首领前至少保留一层充能，并确认主动饰品与药水进入同一轮换。"
+        }
+      ]
+    },
+    {
+      "slug": "ruby_life_pools",
+      "name": "Ruby Life Pools",
+      "status": "sample-reviewed",
+      "sourceLog": "dukkie-ruby-life-pools-phases",
+      "summary": "「Dukkie」+21 样本分成 8 个真实 Pull，共 12 次虚空形态；7 秒短波没有交爆发。",
+      "corrections": [
+        {
+          "title": "开波先铺暗言术：痛",
+          "evidence": "第 3 段开波后 5.8 秒、第 6 段开波后 5.0 秒才首次施放。",
+          "action": "先看聚怪是否完成；聚怪完成后把痛放进第一轮 GCD。"
+        },
+        {
+          "title": "手动补吸血鬼之触要复核",
+          "evidence": "整场出现 7 次手动吸血鬼之触。",
+          "action": "只在触须猛击两层都空、目标预计继续存活时手动补。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "7 秒短波保留爆发",
+          "evidence": "第 7 段持续 7 秒，虚空形态 0 次；随后首领段 10.2 秒时开始爆发。",
+          "action": "把短波爆发留给下一段高目标数或首领战斗。"
+        },
+        {
+          "title": "长战斗拆成两段爆发",
+          "evidence": "8 个 Pull 共 12 次虚空形态；6 个有爆发的 Pull 中，多数各开 2 次。",
+          "action": "长战斗按约 30 秒窗口连续使用，不把两次窗口压在同一次聚怪。"
+        }
+      ]
+    },
+    {
+      "slug": "temple_of_sethraliss",
+      "name": "Temple of Sethraliss",
+      "status": "sample-reviewed",
+      "sourceLog": "archon-temple-of-sethraliss-phases",
+      "summary": "「列兵天使」+22 样本分成 9 个真实 Pull，共 13 次虚空形态；四个首领段全部开满两次。",
+      "corrections": [
+        {
+          "title": "第二个 Agitated Nimbus 分段没有窗口",
+          "evidence": "第 6 段持续 87 秒，虚空形态 0 次；前一个 107 秒分段开 1 次。",
+          "action": "若下一段 Galvazzt 已接近，保留合理；否则 87 秒长波应至少开一次。"
+        },
+        {
+          "title": "长垃圾波不要只靠首领窗口",
+          "evidence": "第 3 段 342 秒开 2 次；第 8 段 235 秒只有 1 次。",
+          "action": "按剩余路线估算下一首领距离，避免所有资源都留到首领。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "四个首领各两次窗口",
+          "evidence": "第 2、4、7、9 段分别 248、239、210、219 秒，全部 2 次虚空形态。",
+          "action": "首领前保留至少一层充能，进入战斗后按约 30 秒窗口连续交。"
+        },
+        {
+          "title": "107 秒中波只交一次",
+          "evidence": "第 5 段 107 秒开 1 次，覆盖 22.4 秒。",
+          "action": "中波只交一轮完整窗口，不为尾段强行再开一次。"
+        }
+      ]
+    },
+    {
+      "slug": "the_blinding_vale",
+      "name": "The Blinding Vale",
+      "status": "sample-reviewed",
+      "sourceLog": "archon-the-blinding-vale-phases",
+      "summary": "「小花生」+23 样本分成 9 个真实 Pull，共 14 次虚空形态；每一段至少开出一次窗口。",
+      "corrections": [
+        {
+          "title": "相邻分段之间不要把窗口截断重算",
+          "evidence": "第 8 段 74 秒开 1 次，第 9 段紧接开始并再开 2 次；爆发覆盖按连续时间轴统计。",
+          "action": "跨波保持同一冷却账本，按剩余持续时间和下一波目标数决定是否续用。"
+        },
+        {
+          "title": "107 秒中波只交一轮",
+          "evidence": "第 5 段 107 秒开 1 次，覆盖 35.5 秒。",
+          "action": "这类长度只交一轮完整窗口，不为了尾段硬等第二次冷却。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "四个首领段都保留两次窗口",
+          "evidence": "第 2、4、6、9 段分别 273、267、261、260 秒，全部 2 次虚空形态。",
+          "action": "进入首领前至少留一层充能；长首领按 30 秒窗口连续使用。"
+        },
+        {
+          "title": "短波也按路线连续分配",
+          "evidence": "第 3、7、8 段分别 91、124、74 秒，均开 1 次，没有出现空转 Pull。",
+          "action": "看下一段是否立即接战；若连续，就允许窗口跨过分段边界。"
+        }
+      ]
+    },
+    {
+      "slug": "voidscar_arena",
+      "name": "Voidscar Arena",
+      "status": "sample-reviewed",
+      "sourceLog": "archon-voidscar-arena-phases",
+      "summary": "「悲嘆之息」+22 样本分成 8 个真实 Pull，共 13 次虚空形态；407 秒开场开 3 次，Taz'Rah、Atroxus 和 Charonus 三个首领各开 2 次。",
+      "corrections": [
+        {
+          "title": "180 秒垃圾波没有窗口，需复核冷却账本",
+          "evidence": "第 8 段持续 180 秒且虚空形态 0 次；前一段 89 秒只开 1 次，下一段 Charonus 在开波后 3.3 秒立即开出窗口。",
+          "action": "先确认是为了终局首领保留充能；若不是，就在第 8 段前中段补一轮完整窗口，避免 3 分钟冷却空转。"
+        },
+        {
+          "title": "Charonus 后半程长时间没有再开窗口",
+          "evidence": "首领战 308 秒，只在 3.3–34.8 秒和 127.9–163.4 秒开窗；第二次结束后到战斗结束仍有约 145 秒。",
+          "action": "复核转阶段、易伤和冷却是否允许第三轮；仅凭窗口次数不能判错，确认可用后把第三轮留给斩杀阶段。"
+        }
+      ],
+      "optimizations": [
+        {
+          "title": "高目标数连续段优先把双 DoT 铺满",
+          "evidence": "第 6、7、8 段平均覆盖目标分别为 7.98、12.81、7.87 个；第 7 段首次施法在开波后 2.9 秒。",
+          "action": "聚怪落定后先铺痛和吸血鬼之触，再进入单体资源循环；16 目标以上的中波优先保证覆盖广度。"
+        },
+        {
+          "title": "相邻分段按真实冷却可用点续交窗口",
+          "evidence": "第 6 段窗口在 136.9–172.4 秒，紧接的第 7 段直到 63.4 秒才开窗；两段间隔仅 14 秒。",
+          "action": "连续接怪时不按 Pull 重置爆发账本，等上一轮结束后按冷却可用点自然续交，避免开场硬等或重复开窗。"
+        }
+      ]
+    }
+  ]
+}

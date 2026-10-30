@@ -1,0 +1,410 @@
+{
+  "runId": "archon-den-of-nalorakk-phases",
+  "sourceLog": "archon-den-of-nalorakk-events",
+  "dungeonSlug": "den_of_nalorakk",
+  "wclEncounterId": 12825,
+  "label": "Çorruptêd · Den of Nalorakk +22",
+  "sourceUrl": "https://www.warcraftlogs.com/reports/GXHZWNKtvfwMQ6Bx?fight=12",
+  "player": "Çorruptêd",
+  "profile": "archon",
+  "keyLevel": 22,
+  "method": {
+    "summary": "直接采用 WCL Fights 视图的 11 个真实战斗分段；施法、虚空形态和四个核心 DoT 事件来自同一份公开报告的默认事件页",
+    "bucketSec": 0,
+    "minPhaseSec": 0,
+    "coWindowSec": 0,
+    "cohorts": {}
+  },
+  "limitation": "这是单个 +22 执政官暗牧样本。WCL 的 11 个真实战斗分段没有绑定 keystone.guru 路线；路线列只表示怪物族重合成度。未筛选敌方伤害事件，因此本数据不用于伤害归因。",
+  "totalSec": 1980,
+  "phases": [
+    {
+      "index": 1,
+      "kind": "area",
+      "label": "Territorial Matriarch",
+      "from": 20,
+      "to": 119,
+      "durationSec": 99,
+      "families": [
+        {
+          "name": "Thornclaw Gatherer",
+          "count": 388
+        },
+        {
+          "name": "Keen-Eyed Striker",
+          "count": 119
+        },
+        {
+          "name": "Territorial Matriarch",
+          "count": 34
+        },
+        {
+          "name": "Earthwhisper Tender",
+          "count": 31
+        },
+        {
+          "name": "Curious Yearling",
+          "count": 18
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 145,
+      "castsPerMinute": 87.9,
+      "bursts": 1,
+      "burstUptimeSec": 31.5
+    },
+    {
+      "index": 2,
+      "kind": "area",
+      "label": "Spirit of Hunger",
+      "from": 136,
+      "to": 208,
+      "durationSec": 72,
+      "families": [
+        {
+          "name": "Spirit of Hunger",
+          "count": 276
+        },
+        {
+          "name": "Territorial Matriarch",
+          "count": 53
+        },
+        {
+          "name": "Curious Yearling",
+          "count": 49
+        },
+        {
+          "name": "Starvation Effigy",
+          "count": 47
+        },
+        {
+          "name": "Thornclaw Gatherer",
+          "count": 36
+        },
+        {
+          "name": "Earthwhisper Tender",
+          "count": 33
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 127,
+      "castsPerMinute": 105.8,
+      "bursts": 1,
+      "burstUptimeSec": 23.5
+    },
+    {
+      "index": 3,
+      "kind": "area",
+      "label": "Territorial Matriarch",
+      "from": 226,
+      "to": 245,
+      "durationSec": 19,
+      "families": [
+        {
+          "name": "Curious Yearling",
+          "count": 12
+        },
+        {
+          "name": "Territorial Matriarch",
+          "count": 10
+        },
+        {
+          "name": "Keen-Eyed Striker",
+          "count": 7
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 8,
+      "castsPerMinute": 25.3,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 4,
+      "kind": "boss",
+      "label": "The Hoardmonger",
+      "from": 246,
+      "to": 492,
+      "durationSec": 246,
+      "families": [
+        {
+          "name": "The Hoardmonger",
+          "count": 1064
+        },
+        {
+          "name": "Territorial Matriarch",
+          "count": 35
+        },
+        {
+          "name": "Keen-Eyed Striker",
+          "count": 28
+        },
+        {
+          "name": "Curious Yearling",
+          "count": 24
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 413,
+      "castsPerMinute": 100.7,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 5,
+      "kind": "area",
+      "label": "Thornclaw Gatherer",
+      "from": 505,
+      "to": 608,
+      "durationSec": 103,
+      "families": [
+        {
+          "name": "Earthwhisper Tender",
+          "count": 383
+        },
+        {
+          "name": "Thornclaw Gatherer",
+          "count": 139
+        },
+        {
+          "name": "Keen-Eyed Striker",
+          "count": 112
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 169,
+      "castsPerMinute": 98.4,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 6,
+      "kind": "area",
+      "label": "Territorial Matriarch",
+      "from": 612,
+      "to": 729,
+      "durationSec": 117,
+      "families": [
+        {
+          "name": "Terra Rumbler",
+          "count": 205
+        },
+        {
+          "name": "Frostfang",
+          "count": 122
+        },
+        {
+          "name": "Territorial Matriarch",
+          "count": 75
+        },
+        {
+          "name": "Frigid Mauler",
+          "count": 44
+        },
+        {
+          "name": "Glacial Revenant",
+          "count": 27
+        },
+        {
+          "name": "Curious Yearling",
+          "count": 12
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 149,
+      "castsPerMinute": 76.4,
+      "bursts": 0,
+      "burstUptimeSec": 0
+    },
+    {
+      "index": 7,
+      "kind": "area",
+      "label": "Avatar of Determination",
+      "from": 746,
+      "to": 839,
+      "durationSec": 93,
+      "families": [
+        {
+          "name": "Avatar of Determination",
+          "count": 329
+        },
+        {
+          "name": "Frostfang",
+          "count": 85
+        },
+        {
+          "name": "Frigid Mauler",
+          "count": 78
+        },
+        {
+          "name": "Glacial Tomb",
+          "count": 67
+        },
+        {
+          "name": "Glacial Revenant",
+          "count": 62
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 150,
+      "castsPerMinute": 96.8,
+      "bursts": 1,
+      "burstUptimeSec": 31.5
+    },
+    {
+      "index": 8,
+      "kind": "area",
+      "label": "Avatar of Determination",
+      "from": 855,
+      "to": 1058,
+      "durationSec": 203,
+      "families": [
+        {
+          "name": "Terra Rumbler",
+          "count": 271
+        },
+        {
+          "name": "The Winter Squall",
+          "count": 195
+        },
+        {
+          "name": "Frigid Mauler",
+          "count": 179
+        },
+        {
+          "name": "Frostfang",
+          "count": 132
+        },
+        {
+          "name": "Glacial Tomb",
+          "count": 127
+        },
+        {
+          "name": "Avatar of Determination",
+          "count": 104
+        },
+        {
+          "name": "Glacial Revenant",
+          "count": 23
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 302,
+      "castsPerMinute": 89.3,
+      "bursts": 1,
+      "burstUptimeSec": 35.5
+    },
+    {
+      "index": 9,
+      "kind": "boss",
+      "label": "Sentinel of Winter",
+      "from": 1059,
+      "to": 1320,
+      "durationSec": 261,
+      "families": [
+        {
+          "name": "Sentinel of Winter",
+          "count": 794
+        },
+        {
+          "name": "Fractured Shivercore",
+          "count": 318
+        },
+        {
+          "name": "Frostfang",
+          "count": 57
+        },
+        {
+          "name": "Frigid Mauler",
+          "count": 51
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 422,
+      "castsPerMinute": 97,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    },
+    {
+      "index": 10,
+      "kind": "area",
+      "label": "Loa Speaker Nanea",
+      "from": 1357,
+      "to": 1661,
+      "durationSec": 304,
+      "families": [
+        {
+          "name": "Grizzled Warbringer",
+          "count": 716
+        },
+        {
+          "name": "Stormbound Mystic",
+          "count": 312
+        },
+        {
+          "name": "Loa Speaker Nanea",
+          "count": 292
+        },
+        {
+          "name": "Ruthless Totemcaller",
+          "count": 147
+        },
+        {
+          "name": "Bonded Beasttamer",
+          "count": 143
+        },
+        {
+          "name": "Loyal Saberfang",
+          "count": 98
+        },
+        {
+          "name": "Volatile Totem",
+          "count": 44
+        },
+        {
+          "name": "Magma Totem",
+          "count": 5
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 519,
+      "castsPerMinute": 102.4,
+      "bursts": 3,
+      "burstUptimeSec": 106.5
+    },
+    {
+      "index": 11,
+      "kind": "boss",
+      "label": "Nalorakk",
+      "from": 1688,
+      "to": 1914,
+      "durationSec": 226,
+      "families": [
+        {
+          "name": "Nalorakk",
+          "count": 1004
+        }
+      ],
+      "enemyCasts": 0,
+      "allCasts": 387,
+      "castsPerMinute": 102.7,
+      "bursts": 2,
+      "burstUptimeSec": 71
+    }
+  ],
+  "routeMatches": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "11": []
+  },
+  "routeSource": null,
+  "generatedAt": "2026-10-30T13:51:42.185Z"
+}

@@ -16,13 +16,14 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = (p) => join(ROOT, p);
 
 const profilePath = SRC('content/profiles/MID2_shadow_archon.simc');
-const logPath = SRC('content/logs/xiaohuasheng-events.json');
+const logPath = SRC('content/logs/dukkie-ruby-life-pools-events.json');
 const outPath = SRC('content/analysis/interactions.json');
 
 const NAME_TO_KEY = {
   'Vampiric Touch': 'vampiric_touch',
   'Shadow Word: Pain': 'shadow_word_pain',
   'Shadow Word: Madness': 'shadow_word_madness',
+  'Horrific Visions': 'horrific_visions',
   'Tentacle Slam': 'tentacle_slam',
   'Void Volley': 'void_volley',
   'Mind Blast': 'mind_blast',
@@ -101,9 +102,27 @@ for (const raw of apl.split(/\r?\n/)) {
 
 /* ---------------- B. 日志统计边 ---------------- */
 const log = JSON.parse(readFileSync(logPath, 'utf8'));
-const seg = log.segments[0];
-const series = seg.series.filter((e) => e.t != null);
-const PLAYERS = new Set(['小花生', '别回收我装备', '复制体丶张杰']);
+const series = log.segments.flatMap((segment) =>
+  segment.series
+    .filter((event) => event.t != null)
+    .map((event) => ({ ...event, t: segment.fromAbs + event.t })),
+);
+const allDotBands = log.segments.flatMap((segment) =>
+  (segment.dotBandsDetail ?? []).map((band) => ({
+    ...band,
+    start: segment.fromAbs + band.start,
+    end: segment.fromAbs + band.end,
+  })),
+);
+const vfWindows = log.segments.flatMap((segment) =>
+  segment.burstWindows
+    .filter((window) => window.buff === 'Voidform')
+    .map((window) => ({
+      ...window,
+      start: segment.fromAbs + window.start,
+      end: segment.fromAbs + window.end,
+    })),
+);
 const famOf = (t) => (t ? t.replace(/\s*\d+$/, '').trim() : '');
 
 /** 1) DoT 是谁挂上的：只认能施加该 DoT 的主动技能，且必须命中同一目标 */
@@ -111,18 +130,23 @@ const APPLIERS = {
   vampiric_touch: new Set(['vampiric_touch', 'tentacle_slam', 'void_bolt', 'misery']),
   shadow_word_pain: new Set(['shadow_word_pain', 'tentacle_slam', 'misery']),
   shadow_word_madness: new Set(['shadow_word_madness']),
+  horrific_visions: new Set(['horrific_visions', 'shadowy_apparition']),
   devouring_plague: new Set(['devouring_plague']),
 };
 const applier = {};
 let unattributed = 0;
-for (const band of seg.dotBandsDetail ?? []) {
+for (const band of allDotBands) {
   if (!band.start) continue;
   const dotKeyGuess = keyOfAny(band.ability);
   const allow = APPLIERS[dotKeyGuess];
-  // 只统计能确认的三种 DoT；目标名中英不一致，改用技能白名单 + 短窗口
+  // 只统计能确认的四种 DoT；目标名与短窗口必须同时匹配。
   if (!allow) { unattributed += 1; continue; }
   const before = series.filter(
-    (e) => e.t <= band.start + 0.15 && e.t >= band.start - 0.6 && allow.has(keyOfAny(e.name)),
+    (e) =>
+      e.t <= band.start + 0.15 &&
+      e.t >= band.start - 0.6 &&
+      allow.has(keyOfAny(e.name)) &&
+      (!e.target || !band.target || famOf(e.target) === famOf(band.target)),
   );
   if (!before.length) { unattributed += 1; continue; }
   const cast = before[before.length - 1];
@@ -139,11 +163,10 @@ const applyEdges = Object.values(applier)
   .map((e) => ({
     ...e, kind: 'applies_dot',
     label: `挂上 ${e.to}：${e.count} 次`,
-    evidence: { type: 'log', detail: `DoT 条带开始前 1.5s 内、命中同目标的施加技能（样本 ${seg.dotBandsDetail?.length ?? 0} 条，未归因 ${unattributed} 条）` },
+    evidence: { type: 'log', detail: `DoT 条带开始前 0.6s 内、命中同目标的施加技能（样本 ${allDotBands.length} 条，未归因 ${unattributed} 条）` },
   }));
 
 /** 2) 技能在爆发窗口内的占比（series 的 vf 标志） */
-const vfWindows = seg.burstWindows.filter((w) => w.buff === 'Voidform');
 const inBurst = (t) => vfWindows.some((w) => t >= w.start && t <= w.end);
 const castsBySkill = {};
 for (const e of series) {
@@ -158,7 +181,7 @@ const burstEdges = Object.entries(castsBySkill)
     from: k, to: 'voidform', kind: 'cast_in_burst',
     label: `${Math.round((v.inVf / v.total) * 100)}% 在爆发内（${v.inVf}/${v.total}）`,
     weight: v.inVf / v.total,
-    evidence: { type: 'log', detail: '按虚空形态窗口时间区间判定（11 个窗口，共 ' + vfWindows.length + ' 段）' },
+    evidence: { type: 'log', detail: `按虚空形态窗口时间区间判定（共 ${vfWindows.length} 段）` },
   }))
   .sort((a, b) => b.weight - a.weight)
   .slice(0, 12);
@@ -177,7 +200,7 @@ const openerEdges = Object.entries(openerCount)
   .map(([k, n]) => ({
     from: k, to: 'voidform', kind: 'opener_before_burst',
     label: `${n}/${openers.length} 次爆发前 3 秒内出现`,
-    evidence: { type: 'log', detail: '11 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法' },
+    evidence: { type: 'log', detail: `${vfWindows.length} 个虚空形态窗口，取窗口前 3 秒到后 2 秒的施法` },
   }));
 
 /* ---------------- 汇总 ---------------- */
@@ -202,7 +225,7 @@ for (const e of [...applyEdges, ...burstEdges, ...openerEdges]) {
 }
 // 日志里出现但 APL 没有的技能也标出来（例如暗影幻灵属于被动）
 for (const k of Object.keys(castsBySkill)) if (!nodes.has(k) && castsBySkill[k].total >= 20) addNode(k, 'skill');
-for (const k of ['vampiric_touch', 'shadow_word_pain', 'shadow_word_madness', 'devouring_plague']) {
+for (const k of ['vampiric_touch', 'shadow_word_pain', 'shadow_word_madness', 'horrific_visions', 'devouring_plague']) {
   if (nodes.has(k)) nodes.get(k).kind = 'dot';
 }
 for (const k of ['voidform', 'resonant_energy', 'void_apparitions']) {

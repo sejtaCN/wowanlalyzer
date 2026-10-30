@@ -32,7 +32,7 @@ profile/APL  →  sims / A-B / adds  →  联动·杠杆·构成  →  章节 JS
 | 专精 profile（含 APL） | `content/profiles/MID2_shadow_archon.simc` | SimC nightly 导出 | 每英雄天赋一份 |
 | 优先级表 | `content/guides/priority-table.json` | `npm run guide:apl` | 从 APL 生成，含条件人话 |
 | 中文技能名 | `content/guides/skills.json` | 手工核对 + NGA 对照 | `verified` 分两档 |
-| 日志 | `content/logs/*.json` | WCL 事件表 CSV 导入 | 整场，无战斗分段 |
+| 日志 | `content/logs/*.json` | WCL 事件表 CSV 或公开报告事件页导入 | 可为整场，也可使用 WCL Fights 的真实 Pull 分段 |
 | 路线 | `content/routes/*.json` | `node scripts/import-route.mjs --dungeon=<slug>` 导入 Keystone 路线 | 波次构成、forces、敌人实例；不是战斗日志 |
 | 专精注册表 | `content/specs.json` | 手工 | `active` 才有内容 |
 

@@ -140,6 +140,14 @@ for (const f of files) {
   // 1b. 日志存在性
   const logIds = new Set([...(c.evidence?.logs ?? []), ...(c.chart?.logId ? [c.chart.logId] : [])]);
   for (const id of logIds) if (!logs.has(id)) errors.push(`${where}: 引用了不存在的日志 ${id}`);
+  if (['log', 'phases'].includes(c.casePanel?.status) && c.casePanel?.logId) {
+    const caseLog = logs.get(c.casePanel.logId);
+    if (!caseLog) {
+      errors.push(`${where}: 高手对照引用了不存在的日志 ${c.casePanel.logId}`);
+    } else if (c.casePanel.status === 'phases' && !Array.isArray(caseLog.phases)) {
+      errors.push(`${where}: 高手对照需要阶段数据，但 ${c.casePanel.logId} 没有 phases`);
+    }
+  }
 
   // 2. runId 元数据完整
   for (const id of ids) {
