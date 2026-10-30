@@ -164,6 +164,8 @@
 
 `claim`、`chart.title`、②段导读、`casePanel.points[]`、顶图带「一条数字结论」格。
 
+**claim 里的数字一律写占位符**，例如 `单体 {{bossDurationSec}} 秒只换 {{bossDamageM}}M`，具体数值在同章 `claimFields` 里挂 runId（`pair` 取配对差值 / `runId` 取时长目标数 / `of` 取比值）。渲染由 `apps/web/src/data/claim.ts` 负责；写死数字会被 `validate:content` 直接拦下（门禁自检里有一条坏样本专门试这个）。
+
 ---
 
 ### 3.2 技能介绍

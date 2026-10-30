@@ -10,6 +10,29 @@ type IsoDateTime = string;
 export type ChapterLevel = 'L0' | 'L1' | 'L2';
 
 /** 波次模型卡：一屏一眼看懂"这一波长什么样" */
+/**
+ * claim 占位符的取值规则。三种来源，互斥：
+ *   pair = [开爆发 runId, 不开 runId]：用配对后的差值 / 两条 DPS / 差值误差
+ *   runId = 单条 runId：读 durationSec / targets
+ *   of = [字段 A, 字段 B]：两个已算好的字段相除，输出整数百分比
+ */
+export interface ClaimFieldSpec {
+  pair?: [string, string];
+  runId?: string;
+  of?: [string, string];
+  field:
+    | 'deltaDamageM'
+    | 'deltaPct'
+    | 'onDps'
+    | 'offDps'
+    | 'ciPct'
+    | 'durationSec'
+    | 'targets'
+    | 'ratioPct';
+  /** 小数位；不给就按「整数原样、非整数两位」 */
+  decimals?: number;
+}
+
 export interface WaveModelCard {
   /** 目标数区间，如 "10–22" */
   targets: string;
@@ -97,8 +120,13 @@ export interface Chapter {
   subtitle: string;
   /** ① 模型卡；L0 页可为 null（基础页没有波次模型） */
   model: WaveModelCard | null;
-  /** 可选的输出结论；保留时由页面从 runId / 日志派生数值并只显示一次。 */
+  /**
+   * 可选的输出结论。正文里的数字一律写成占位符 `{{字段名}}`，字段在 `claimFields`
+   * 里挂 runId，渲染时算出来——换版本重跑后数字跟着走，不靠人工改字。
+   */
   claim?: string;
+  /** claim 里有几个占位符，这里就有几条挂 runId 的取值规则。 */
+  claimFields?: Record<string, ClaimFieldSpec>;
   /** ② 主图 */
   chart: ChartSpec;
   /** ① 的目标档动作预算；指向 trace runId 的 scenarioId */

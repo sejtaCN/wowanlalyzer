@@ -54,6 +54,18 @@ try {
     `--check-figures=${badContract}`,
   ], false, '图契约必须有 5 段');
 
+  // claim 里写死数字：必须被点名，否则「数字挂 runId」这条会退化成人肉核对。
+  const badChapters = join(temp, 'chapters-claim-bad');
+  cpSync(join(ROOT, 'content', 'chapters'), badChapters, { recursive: true });
+  const bossPath = join(badChapters, 'l1-04-boss.json');
+  const bossDoc = JSON.parse(readFileSync(bossPath, 'utf8'));
+  bossDoc.claim = bossDoc.claim.replace('{{bossDamageM}}', '5.15');
+  writeFileSync(bossPath, JSON.stringify(bossDoc, null, 1));
+  run('validate 负样本：claim 写死数字', process.execPath, [
+    'scripts/validate-content.mjs',
+    `--check-chapters=${badChapters}`,
+  ], false, 'claim 里写死了数字');
+
   // ---- check:ui ----
   const badDistDir = join(temp, 'dist-bad');
   const shotsBad = join(temp, 'shots-bad');

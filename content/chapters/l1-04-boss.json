@@ -12,7 +12,7 @@
   "frequency": "11/84 波（13%）",
   "kind": "boss"
  },
- "claim": "BOSS 的爆发低于大波：单体 90 秒只换 5.15M，是大波的 41%；但它比 2 只小波（4.93M）高，所以「不开」的前提是下一波更大。",
+ "claim": "BOSS 的爆发低于大波：单体 {{bossDurationSec}} 秒只换 {{bossDamageM}}M，是大波的 {{bossVsLargePct}}%；但它比 {{smallTargets}} 只小波（{{smallDamageM}}M）高，所以「不开」的前提是下一波更大。",
  "chart": {
   "kind": "burst-bars",
   "title": "单体 90 秒 / 45 秒：开爆发和不开的差",
@@ -80,5 +80,43 @@
   ],
   "generatedAt": "2026-10-25T16:45:00Z"
  },
- "budgetScenario": "w90_1b"
+ "budgetScenario": "w90_1b",
+ "claimFields": {
+  "bossDurationSec": {
+   "runId": "dec_voidform_on_1__w90_1b__5000",
+   "field": "durationSec"
+  },
+  "bossDamageM": {
+   "pair": [
+    "dec_voidform_on_1__w90_1b__5000",
+    "dec_voidform_on_0__w90_1b__5000"
+   ],
+   "field": "deltaDamageM"
+  },
+  "bossVsLargePct": {
+   "of": [
+    "bossDamageM",
+    "largeDamageM"
+   ],
+   "field": "ratioPct"
+  },
+  "smallTargets": {
+   "runId": "dec_voidform_on_1__w30_2__5000",
+   "field": "targets"
+  },
+  "smallDamageM": {
+   "pair": [
+    "dec_voidform_on_1__w30_2__5000",
+    "dec_voidform_on_0__w30_2__5000"
+   ],
+   "field": "deltaDamageM"
+  },
+  "largeDamageM": {
+   "pair": [
+    "dec_voidform_on_1__w30_8__5000",
+    "dec_voidform_on_0__w30_8__5000"
+   ],
+   "field": "deltaDamageM"
+  }
+ }
 }

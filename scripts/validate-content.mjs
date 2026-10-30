@@ -27,6 +27,7 @@ const argOf = (name, fallback) => {
 const DATA_ROOT = resolve(argOf('root', ROOT));
 const SRC = (p) => join(DATA_ROOT, p);
 const FIGURES = resolve(argOf('check-figures', SRC('content/figures/chapters.json')));
+const CHAPTERS_DIR = resolve(argOf('check-chapters', SRC('content/chapters')));
 
 const errors = [];
 const warnings = [];
@@ -109,7 +110,7 @@ const missingFigures = [];
 if (!figureDoc) errors.push(`缺少图契约：${FIGURES}`);
 
 // ---- 遍历章节 ----
-const chaptersDir = SRC('content/chapters');
+const chaptersDir = CHAPTERS_DIR;
 const files = readdirSync(chaptersDir).filter((f) => f.endsWith('.json'));
 if (!files.length) errors.push('content/chapters 下没有章节 JSON');
 
@@ -187,6 +188,45 @@ for (const f of files) {
     } else if (!skillKeys.has(label) && !label.includes('循环') && !label.includes('填充')) {
       warnings.push(`${where}: 技能 ${label} 不在 priority-table 里（可能是中文名或新技能）`);
     }
+  }
+
+  // 4b. claim：正文数字必须全部是占位符，占位符与取值规则一一对应
+  if (c.claim) {
+    const placeholders = [...c.claim.matchAll(/\{\{(\w+)\}\}/g)].map((m) => m[1]);
+    const bare = c.claim.replace(/\{\{\w+\}\}/g, '');
+    const literals = bare.match(/\d+(?:\.\d+)?/g) ?? [];
+    if (literals.length) {
+      errors.push(`${where}: claim 里写死了数字 ${literals.join('/')}，改成 {{占位符}} 挂 runId`);
+    }
+    const specs = c.claimFields ?? {};
+    for (const name of placeholders) {
+      const spec = specs[name];
+      if (!spec) {
+        errors.push(`${where}: claim 占位符 {{${name}}} 没有 claimFields 取值规则`);
+        continue;
+      }
+      if (spec.of) {
+        if (spec.field !== 'ratioPct') errors.push(`${where}: claim 占位符 {{${name}}} 用 of 时必须 field=ratioPct`);
+        for (const ref of spec.of) {
+          if (!specs[ref]) errors.push(`${where}: claim 占位符 {{${name}}} 引用了未定义字段 ${ref}`);
+        }
+        continue;
+      }
+      const ids = spec.pair ?? (spec.runId ? [spec.runId] : []);
+      if (!ids.length) errors.push(`${where}: claim 占位符 {{${name}}} 既没有 pair 也没有 runId`);
+      for (const id of ids) {
+        if (!runs.has(id)) errors.push(`${where}: claim 占位符 {{${name}}} 引用了不存在的 runId ${id}`);
+      }
+      if (spec.runId && !['durationSec', 'targets'].includes(spec.field)) {
+        errors.push(`${where}: claim 占位符 {{${name}}} 单 runId 只能取 durationSec / targets`);
+      }
+    }
+    for (const name of Object.keys(specs)) {
+      const referenced = placeholders.includes(name) || Object.values(specs).some((sp) => (sp.of ?? []).includes(name));
+      if (!referenced) warnings.push(`${where}: claimFields.${name} 没有被任何占位符引用`);
+    }
+  } else if (c.claimFields) {
+    errors.push(`${where}: 有 claimFields 但没有 claim 模板`);
   }
 
   // 5. 模型卡

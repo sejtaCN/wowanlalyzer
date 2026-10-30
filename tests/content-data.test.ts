@@ -26,6 +26,7 @@ import {
   skillUsage,
 } from '../apps/web/src/data/content';
 import { DEFAULT_SPEC, findSpec, hasContent, SPECS } from '../apps/web/src/data/specs';
+import { claimPlaceholders, resolveClaim } from '../apps/web/src/data/claim';
 import { burstValueFor } from '../apps/web/src/components/Teaching/rules';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -87,6 +88,48 @@ describe('前端数据适配层', () => {
     expect(priority.hero).toBe('archon');
     expect(priority.source).toBe('content/profiles/MID2_shadow_archon.simc');
     expect(priority.sections.flatMap((section: { rows: unknown[] }) => section.rows)).toHaveLength(38);
+  });
+
+  it('claim 只写占位符，数字全部由 runId 现算', () => {
+    const boss = CHAPTERS.find((chapter) => chapter.id === 'l1-04-boss');
+    expect(boss?.claim).toBeTruthy();
+    // 模板里除了占位符不许剩数字
+    expect(boss!.claim!.replace(/\{\{\w+\}\}/g, '')).not.toMatch(/\d/);
+    expect(claimPlaceholders(boss!.claim).sort()).toEqual(
+      ['bossDamageM', 'bossDurationSec', 'bossVsLargePct', 'smallDamageM', 'smallTargets'].sort(),
+    );
+
+    const resolved = resolveClaim(boss!);
+    expect(resolved.missing).toEqual([]);
+    expect(resolved.text).not.toMatch(/\{\{|\}\}/);
+
+    // 独立复算：直接用 run 记录算一遍，不经过解析器，避免两处一起错
+    const on = getRun('dec_voidform_on_1__w90_1b__5000')!;
+    const off = getRun('dec_voidform_on_0__w90_1b__5000')!;
+    const largeOn = getRun('dec_voidform_on_1__w30_8__5000')!;
+    const largeOff = getRun('dec_voidform_on_0__w30_8__5000')!;
+    const smallOn = getRun('dec_voidform_on_1__w30_2__5000')!;
+    const smallOff = getRun('dec_voidform_on_0__w30_2__5000')!;
+    const bossDamageM = ((on.dps - off.dps) * on.durationSec!) / 1e6;
+    const largeDamageM = ((largeOn.dps - largeOff.dps) * largeOn.durationSec!) / 1e6;
+    const smallDamageM = ((smallOn.dps - smallOff.dps) * smallOn.durationSec!) / 1e6;
+    expect(resolved.text).toContain(`单体 ${on.durationSec} 秒`);
+    expect(resolved.text).toContain(`${bossDamageM.toFixed(2)}M`);
+    expect(resolved.text).toContain(`${Math.round((bossDamageM / largeDamageM) * 100)}%`);
+    expect(resolved.text).toContain(`${smallOn.targets} 只小波`);
+    expect(resolved.text).toContain(`（${smallDamageM.toFixed(2)}M）`);
+
+    // 取不到就整体不给文本：宁可没结论句，也不留半句带旧数字的文案
+    const broken = {
+      claim: boss!.claim,
+      claimFields: {
+        ...boss!.claimFields,
+        bossDamageM: { pair: ['missing-a', 'missing-b'] as [string, string], field: 'deltaDamageM' as const },
+      },
+    };
+    const bad = resolveClaim(broken);
+    expect(bad.text).toBe('');
+    expect(bad.missing).toContain('bossDamageM');
   });
 
   it('路线按副本取，缺数据时不拿别的副本顶', () => {

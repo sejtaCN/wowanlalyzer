@@ -17,9 +17,9 @@
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
 | 图契约 | 12 章 × 5 段；54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段（没有真人日志）；L0-03 / L1-01 第五段为模拟时间线；L0-03 第②段是「表 + 两张核对图」同屏（契约 kind 仍为 priority-table） | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 5,524 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 代码量 | 约 5,684 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 827,395 字节（含 L0-03 右栏的杠杆与相邻交换汇总） |（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
+| 单文件产物 | 828,817 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -136,7 +136,7 @@ npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
 npm run check:analysis     # 配装阳性对照 / 属性复现差 / 最优预测误差
 npm run check:adjacent     # 相邻两行交换的差值、误差与判定按 runId 重算
 npm run check:ui           # 先构建，再逐章查 12 章；图契约标 ready 的段必须有真图
-npm run verify:gates       # 门禁自检 23 项：正样本绿、坏样本红
+npm run verify:gates       # 门禁自检 24 项：正样本绿、坏样本红
 npm run build              # 单文件产出
 ```
 
@@ -153,7 +153,7 @@ npm run build              # 单文件产出
 | # | 待办 | 为什么 | 入口 |
 | --- | --- | --- | --- |
 | 1 | **虚空编织者数据待补** | 当前决定只做执政官。Voidweaver 只有 7 个基础模拟，缺杠杆、伤害构成、配装、属性优化、章节和独立优先级；补齐前不展示，也不回退 Archon 数据 | `content/profiles/*voidweaver*`；后续按 Archon 同一数据契约补齐 |
-| 2 | **正文硬编码数字与 runId 脱钩** | 现在 claim 里的数字是手写，换版本后要人工核对；爆发增量已改为从 runId 计算，claim 仍待处理 | 续做 `claimTemplate` + 占位符（`{{delta}}`），渲染时从 runId 取 |
+| 2 | ~~正文硬编码数字与 runId 脱钩~~ 已解决 | claim 改成模板：正文只写占位符，`claimFields` 挂 runId（`pair` 差值 / `runId` 单条字段 / `of` 比值），渲染在 `apps/web/src/data/claim.ts`。`validate:content` 拦「claim 里有写死数字 / 占位符没规则 / 规则引用不存在的 runId」，`check:ui` 拦「页面残留占位符或结论句超长」，`verify:gates` 有坏样本。顺手改掉一处旧错：JSON 与文档一直写「是大波的 41%」，由 runId 实算是 **40%**，页面此前已显示 40%，现在三处只剩一个来源 | `apps/web/src/data/claim.ts`、`content/chapters/l1-04-boss.json` |
 
 ### P1 · 内容缺口
 

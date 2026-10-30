@@ -43,6 +43,7 @@ const CHAPTERS_DIR = join(ROOT, 'content', 'chapters');
 const FIGURES = JSON.parse(readFileSync(join(ROOT, 'content', 'figures', 'chapters.json'), 'utf8'));
 const ROUTE = JSON.parse(readFileSync(join(ROOT, 'content', 'routes', 'waves-altar-of-fangs.json'), 'utf8'));
 const CSS = readFileSync(join(ROOT, 'apps', 'web', 'src', 'ui.css'), 'utf8');
+const COPY_RULES = JSON.parse(readFileSync(join(ROOT, 'content', 'guides', 'copy-rules.json'), 'utf8'));
 const typographySource = Object.fromEntries(
   ['display', 'title', 'sub', 'body', 'meta', 'caption'].map((name) => {
     const value = CSS.match(new RegExp(`--fs-${name}:\\s*([^;]+);`))?.[1]?.trim();
@@ -251,6 +252,16 @@ for (const chapter of chapters) {
     }
     if (f.status === 'missing') warnings.push(`${chapter.id} 第${i + 1}段缺图 ${f.kind}（→${f.next ?? '未写批次'}）`);
   });
+
+  // claim：占位符必须在页面上全部替换成数字，不能把模板原文漏给读者。
+  if (chapter.claim) {
+    const claimText = await page.evaluate(() => document.querySelector('.claim')?.innerText ?? '');
+    check(claimText.trim().length > 0, `${chapter.id}: 有 claim 模板，页面却没渲染结论句`);
+    check(!/\{\{|\}\}/.test(claimText), `${chapter.id}: 结论句里有未替换的占位符`);
+    check(!/undefined|NaN/.test(claimText), `${chapter.id}: 结论句里出现 undefined/NaN`);
+    const claimBudget = COPY_RULES.lengthBudget?.claim?.max ?? 120;
+    check(claimText.length <= claimBudget, `${chapter.id}: 结论句渲染后 ${claimText.length} 字，超过 ${claimBudget} 字上限`);
+  }
 
   // L0-03：优先级表与两张核对图必须真的同屏并排，且三态判定齐全。
   if (chapter.id === 'l0-03-priority-table') {

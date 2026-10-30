@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { CaseBlock, Chapter, EvidenceRef, MapRef, PriorityShift } from '@learn';
 import { CHAPTERS, FIGURES, budgetFor, burstPairs, chapterRoute, getLog, getPhases, getRun, getSimulatedTimeline, prioritySections, skillName, skillUsage, type BurstPair, type RouteDoc } from '../data/content';
+import { resolveClaim } from '../data/claim';
 import { Gloss } from './Gloss';
 import TopBand from './Teaching/TopBand';
 import WaveDiagram from './Teaching/WaveDiagram';
@@ -170,20 +171,11 @@ export function BurstChart({ runIds, title, showScale = false }: { runIds: strin
   );
 }
 
-/** 唯一保留的 claim：措辞来自章节，三个数字全部由当前 runId 配对重算。 */
-function BossClaim({ claim }: { claim: string }) {
-  const pairFor = (chapterId: string, scenarioId: string) => {
-    const chapter = CHAPTERS.find((item) => item.id === chapterId);
-    return burstPairs(chapter?.chart.runIds ?? []).find((pair) => pair.on.scenarioId === scenarioId) ?? null;
-  };
-  const boss = pairFor('l1-04-boss', 'w90_1b');
-  const large = pairFor('l1-02-large', 'w30_8');
-  const small = pairFor('l1-03-small', 'w30_2');
-  if (!boss || !large || !small) return null;
-  const text = claim
-    .replace('5.15M', `${(boss.deltaDamage / 1e6).toFixed(2)}M`)
-    .replace('41%', `${Math.round((boss.deltaDamage / large.deltaDamage) * 100)}%`)
-    .replace('4.93M', `${(small.deltaDamage / 1e6).toFixed(2)}M`);
+/** claim：正文只写占位符，数字由 claimFields 里的 runId 现算（见 data/claim.ts）。 */
+function ChapterClaim({ chapter }: { chapter: Chapter }) {
+  const { text, missing } = resolveClaim(chapter);
+  // 取不到就不渲染：宁可没有结论句，也不让别人手填的数字留在页面上。
+  if (!text || missing.length) return null;
   return <div className="claim"><Gloss text={text} /></div>;
 }
 
@@ -619,7 +611,7 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         ) : chapter.chart.kind === 'burst-bars' ? (
           <>
             <BurstChart runIds={chapter.chart.runIds ?? []} title={chapter.chart.title} showScale={chapter.id === 'l1-01-mid'} />
-            {chapter.id === 'l1-04-boss' && chapter.claim ? <BossClaim claim={chapter.claim} /> : null}
+            {chapter.claim ? <ChapterClaim chapter={chapter} /> : null}
           </>
         ) : chapter.chart.kind === 'priority-table' ? (
           <div className="split-evidence" data-figure-kind="priority-table-split">

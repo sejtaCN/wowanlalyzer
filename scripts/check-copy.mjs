@@ -165,7 +165,9 @@ const TECH_TERMS = new Set([
 ]);
 
 function checkFragment(frag, fileLabel, strict) {
-  const { where, text } = frag;
+  // 占位符是机器语法（{{bossDamageM}}），渲染时会被数字替换；先剥掉再做文案判断。
+  const text = frag.text.replace(/\{\{\w+\}\}/g, '');
+  const { where } = frag;
   const channel = strict && !frag.baseline ? errors : warnings;
 
   for (const w of bannedError) {
@@ -218,7 +220,8 @@ function checkLengths(ch, fileLabel) {
     if (text.length > max) warnings.push(`${fileLabel} · ${where}：${text.length} 字，超过 ${max} 字上限`);
   };
   check('subtitle', ch.subtitle, budget.subtitle.max);
-  check('claim', ch.claim, budget.claim.max);
+  // claim 里的数字是占位符，按渲染后的长度算：每个占位符保守按 5 个字符（如 12.7M）估。
+  check('claim', ch.claim ? ch.claim.replace(/\{\{\w+\}\}/g, '00.0M') : ch.claim, budget.claim.max);
   for (const s of [...(ch.priorityDiff?.add ?? []), ...(ch.priorityDiff?.drop ?? [])]) {
     check('priorityDiff.reason', s.reason, budget['priorityDiff.reason'].max);
     check('priorityDiff.evidence', s.evidence, budget['priorityDiff.evidence'].max);
