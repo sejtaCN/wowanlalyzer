@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-30",
+  "note": "优先级表 38 行的「人话条件」。Apl 直译（conditionZh）保持机器口径不动，这里只做同一逻辑的口语重写：不改条件、不改阈值、不补理由。没出处的中文名保留原键并用「」框住。`npm run guide:apl` 会把本文件合并进 priority-table.json 的 conditionHuman 字段；缺一行则由 validate:content 报错。",
+  "rows": {
+    "actions.main#1": {
+      "skill": "shadow_word_death",
+      "human": "目标身上有吸收盾，或刚触发强制吞噬「force_devour_matter」，并且点了「devour_matter」天赋"
+    },
+    "actions.main#2": {
+      "skill": "tentacle_slam",
+      "human": "吸血鬼之触没在跳，目标还能活 ≥10 秒，身上挂着的吸血鬼之触不到 5 个"
+    },
+    "actions.main#3": {
+      "skill": "vampiric_touch",
+      "human": "和上一行同一条件，这一行负责真正把吸血鬼之触挂上去"
+    },
+    "actions.main#4": {
+      "skill": "shadow_word_madness",
+      "human": "满足任一条：癫没铺满或快掉了；疯狂值差 ≤35 且这一波还等得及；「mind_devourer」触发；目标 10 秒内会死且不加怪；有「entropic_rift」且爆发还远；已经在虚空形态里"
+    },
+    "actions.main#5": {
+      "skill": "tentacle_slam",
+      "human": "吸血鬼之触可刷新，且这层没在弹道中（或场上目标比已挂的触多 6 个以上）；或触须猛击两层已充满"
+    },
+    "actions.main#6": {
+      "skill": "void_torrent",
+      "human": "「holding_tentacle_slam」没有置位，且 DoT 都已挂上（「dots_up」）"
+    },
+    "actions.main#7": {
+      "skill": "shadow_word_pain",
+      "human": "点了被唤起的梦魇，可刷新，目标还能活 >12 秒，且吸血鬼之触在跳（或触须猛击正在飞）"
+    },
+    "actions.main#8": {
+      "skill": "void_volley",
+      "human": "虚空形态冷却已好"
+    },
+    "actions.main#9": {
+      "skill": "void_blast",
+      "human": "无条件，排到就打"
+    },
+    "actions.main#10": {
+      "skill": "mind_blast",
+      "human": "「mind_devourer」没触发或没点它，且虚空冲击这条路没占位：没点虚空冲击或「thought_harvester」，或虚空洪流还要等 2 个 GCD 以上，或触须猛击被留着，或 DoT 还没挂全"
+    },
+    "actions.main#11": {
+      "skill": "mind_flay_insanity",
+      "human": "无条件，排到就打"
+    },
+    "actions.main#12": {
+      "skill": "tentacle_slam",
+      "human": "点了「void_apparitions」或「maddening_tentacles」，且离下次加怪 >30 秒（或 >5 秒且触须猛击已充满）"
+    },
+    "actions.main#13": {
+      "skill": "vampiric_touch",
+      "human": "可刷新且目标还能活 >12 秒，触在跳或 DoT 没挂全，「max_vts」有量或只有一个目标，且触须猛击还要等得比触的剩余时间长（或触须猛击被留着、或它没启用）"
+    },
+    "actions.main#14": {
+      "skill": "vampiric_touch",
+      "human": "可刷新且目标还能活 >12 秒"
+    },
+    "actions.main#15": {
+      "skill": "shadow_word_death",
+      "human": "宠物在场（「mindbender」/「voidwraith」/「shadowfiend」）且点了「inescapable_torment」；或目标血量 <20%（每点「deathspeaker」再宽 15%）且带「shadowfiend」「idol_of_yshaarj」"
+    },
+    "actions.main#16": {
+      "skill": "shadow_word_death",
+      "human": "目标血量 <20%（每点「deathspeaker」再宽 15%）"
+    },
+    "actions.main#17": {
+      "skill": "void_volley",
+      "human": "没点共振能量，或虚空形态冷却剩不到 60 秒，或已在虚空形态，或「resonant_energy_damage」触发，或「crushing_void」≥4 层，或战斗剩不到 45 秒"
+    },
+    "actions.main#18": {
+      "skill": "mind_flay",
+      "human": "无条件，排到就打"
+    },
+    "actions.main#19": {
+      "skill": "tentacle_slam",
+      "human": "离下次加怪 >20 秒"
+    },
+    "actions.main#20": {
+      "skill": "shadow_word_death",
+      "human": "无条件，排到就打"
+    },
+    "actions.main#21": {
+      "skill": "shadow_word_death",
+      "human": "无条件，排到就打"
+    },
+    "actions.main#22": {
+      "skill": "shadow_word_pain",
+      "human": "无条件，排到就打"
+    },
+    "actions.cds#1": {
+      "skill": "fireblood",
+      "human": "（已在虚空形态 或 没点虚空形态）且身上有能量灌注；或战斗只剩 ≤8 秒"
+    },
+    "actions.cds#2": {
+      "skill": "berserking",
+      "human": "（已在虚空形态 或 没点虚空形态）且身上有能量灌注；或战斗只剩 ≤12 秒"
+    },
+    "actions.cds#3": {
+      "skill": "blood_fury",
+      "human": "（已在虚空形态 或 没点虚空形态）且身上有能量灌注；或战斗只剩 ≤15 秒"
+    },
+    "actions.cds#4": {
+      "skill": "ancestral_call",
+      "human": "（已在虚空形态 或 没点虚空形态）且身上有能量灌注；或战斗只剩 ≤15 秒"
+    },
+    "actions.cds#5": {
+      "skill": "invoke_external_buff",
+      "human": "（已在虚空形态 或 没点虚空形态）且身上还没有能量灌注"
+    },
+    "actions.cds#6": {
+      "skill": "invoke_external_buff",
+      "human": "身上有能量灌注且战斗剩不到 120 秒；或战斗只剩 ≤40 秒"
+    },
+    "actions.cds#7": {
+      "skill": "power_infusion",
+      "human": "（已在虚空形态 或 没点虚空形态）且身上还没有能量灌注"
+    },
+    "actions.cds#8": {
+      "skill": "halo",
+      "human": "无条件，排到就打"
+    },
+    "actions.cds#9": {
+      "skill": "use_item",
+      "human": "虚空形态冷却还剩 ≤2 秒，已挂的暗言术：痛不少于已挂的吸血鬼之触，且没有「crushing_void」增益"
+    },
+    "actions.cds#10": {
+      "skill": "voidform",
+      "human": "已挂的暗言术：痛不少于已挂的吸血鬼之触"
+    },
+    "actions.cds#11": {
+      "skill": "desperate_prayer",
+      "human": "自己血量 ≤75%"
+    },
+    "actions.precombat#1": {
+      "skill": "shadowform",
+      "human": "身上没有「shadowform」"
+    },
+    "actions.precombat#2": {
+      "skill": "arcane_torrent",
+      "human": "无条件，排到就打"
+    },
+    "actions.precombat#3": {
+      "skill": "potion",
+      "human": "喝「liquid_luster」药水"
+    },
+    "actions.precombat#4": {
+      "skill": "mind_blast",
+      "human": "身上有「mid2_4pc」套装效果"
+    },
+    "actions.precombat#5": {
+      "skill": "tentacle_slam",
+      "human": "无条件，排到就打"
+    }
+  }
+}

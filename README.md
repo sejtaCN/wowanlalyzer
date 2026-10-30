@@ -23,6 +23,10 @@ D:\wowanlalyzer\dist\index.html
 
 单文件构建，CSS/JS 全部内联，双击就能用；地图在 `dist/maps/`。
 
+> **打开时是白页？** 说明那一刻正在重新构建（`npm run build` / `check:ui` / `verify:gates` 都会重写 `dist/index.html`）。
+> 等构建结束按 `Ctrl+Shift+R` 强刷即可——`file://` 页面会被浏览器缓存，普通刷新可能还是旧的半成品。
+> 不是服务器问题：这版没有后端，也不依赖任何服务。
+
 ### ③ 命令行
 
 ```bash
@@ -88,6 +92,7 @@ npm run check:analysis     # 关卡：配装阳性对照 / 属性复现差 / 最
 npm run check:adjacent     # 关卡：相邻两行交换的差值、误差与判定按 runId 重算
 npm run check:ui           # 关卡：先构建，再逐章查 12 章五段 / 图契约 / 字号 / 栅格 / 无 JS 错误
 npm run check:static       # 关卡：本地起 HTTP 加载 dist，验证放到静态托管上也能跑
+npm run audit:text         # 报告型：逐页查读者可见文字里的工程口径泄漏（记录编号按数据计）
 npm run verify:gates       # 关卡自检：25 项正样本应绿、坏样本应红
 
 # 数据生产线（一般只在换版本时跑）
@@ -138,7 +143,7 @@ npm run phases             # 日志 → 阶段表
 - 专精：暗影牧师当前只开放执政官；虚空编织者设为待办，噬灭（歼灭者）仍是占位预览
 - 章节 12 篇：L0×4、L1×6、L2×2（毒牙祭坛 / 红玉新生池）
 - 数据：原始归档 296 个 runId；站点只查询已明确归属执政官的记录 235 条（含配装 36 + 属性优化 80 + 动作 trace 7）、9 段真实日志阶段、2 条副本路线（毒牙祭坛 15 波 / 红玉新生池 12 波，合计 27 波 184 只）、4 个输出模型；L0-03 / L1-01 第五段使用模拟动作时间线，不冒充真人日志阶段
-- 门禁：`validate:content` 通过（60 段图契约：54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段，没有真人日志） · `check:doc` 12/12 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 12 章 + Archon-only 解析台 + 属性四模型 DOM 断言 + 桌面宽屏；移动端仅保留冻结冒烟 · `check:static` 本地 HTTP 0 失败请求 · `verify:gates` 25/25（含坏样本） · `vitest` 28/28 · `tsc` 通过
+- 门禁：`validate:content` 通过（60 段图契约：54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段，没有真人日志） · `check:doc` 12/12 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 12 章 + Archon-only 解析台 + 属性四模型 DOM 断言 + 桌面宽屏；移动端仅保留冻结冒烟 · `check:static` 本地 HTTP 0 失败请求 · `audit:text` 读者页 0 处工程口径 · `verify:gates` 26/26（含坏样本） · `vitest` 28/28 · `tsc` 通过
 
 ## 许可与来源
 

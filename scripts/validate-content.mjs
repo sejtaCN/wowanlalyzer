@@ -28,6 +28,7 @@ const DATA_ROOT = resolve(argOf('root', ROOT));
 const SRC = (p) => join(DATA_ROOT, p);
 const FIGURES = resolve(argOf('check-figures', SRC('content/figures/chapters.json')));
 const CHAPTERS_DIR = resolve(argOf('check-chapters', SRC('content/chapters')));
+const PRIORITY = resolve(argOf('check-priority', SRC('content/guides/priority-table.json')));
 
 const errors = [];
 const warnings = [];
@@ -258,6 +259,30 @@ for (const f of files) {
 }
 for (const id of Object.keys(figureDoc?.chapters ?? {})) {
   if (!files.includes(`${id}.json`)) errors.push(`图契约包含不存在的章节 ${id}`);
+}
+
+// ---- 优先级表：38 行必须都有「人话条件」，且不许把 APL 原文抄进来 ----
+const APL_SYNTAX = /,if=|,target_if=|>=|<=|&&|\|\||actions\.|active_enemies|cooldown\./;
+if (existsSync(PRIORITY)) {
+  const table = JSON.parse(readFileSync(PRIORITY, 'utf8'));
+  const rows = (table.sections ?? []).flatMap((section) => section.rows ?? []);
+  if (!rows.length) errors.push('优先级表没有解析到任何行');
+  for (const row of rows) {
+    const where = `优先级表 ${row.section}#${row.order} ${row.skill}`;
+    if (!row.conditionHuman) {
+      errors.push(`${where}: 缺少人话条件（在 content/guides/condition-human.json 补一行）`);
+      continue;
+    }
+    if (APL_SYNTAX.test(row.conditionHuman)) {
+      errors.push(`${where}: 人话条件里混进了 APL 原文（${row.conditionHuman.slice(0, 40)}…）`);
+    }
+    if (row.conditionHuman.length > 150) {
+      errors.push(`${where}: 人话条件 ${row.conditionHuman.length} 字，超过 150 字上限——拆成两句或收进行内说明`);
+    }
+  }
+  console.log(`优先级表：${rows.length} 行，人话条件 ${rows.filter((row) => row.conditionHuman).length}/${rows.length}`);
+} else {
+  errors.push(`缺少优先级表：${PRIORITY}`);
 }
 
 console.log(`图契约：${Object.keys(figureDoc?.chapters ?? {}).length} 章；缺图警告 ${missingFigures.length} 段`);

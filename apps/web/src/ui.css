@@ -372,6 +372,9 @@ h3 { font-size: var(--fs-sub); line-height: 1.45; margin: 0 0 8px; font-weight: 
   .split-evidence { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* ---------- 优先级表：口语条件 ---------- */
+.cond-human { color: var(--sub); line-height: 1.6; }
+
 /* ---------- 顶栏层级进度：L0 2/4 · L1 1/6 · L2 0/2 ---------- */
 .nav-levels { display: flex; gap: var(--sp-4); margin-left: auto; font-size: var(--fs-caption); color: var(--muted); white-space: nowrap; }
 .nav-levels b { color: var(--gold); font-weight: 500; }

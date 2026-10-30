@@ -604,7 +604,8 @@ const archonOnly = await page.evaluate(() => {
   return {
     voidRows: allRunIds.filter((runId) => runId.startsWith('voidweaver')).length,
     visibleRunIds: allRunIds.length,
-    statesBothHeroes: /执政官 runId \d+ 个/.test(pageText) && pageText.includes('虚空编织者数据待补'),
+    // 只要求「执政官 + 条数」和「虚空编织者」同时在页面上，不锁死具体措辞
+    statesBothHeroes: /执政官.{0,8}\d+\s*(个|条)/.test(pageText) && pageText.includes('虚空编织者'),
     sections: [...document.querySelectorAll('.statopt, .gear, [data-hero]')].map((node) => node.getAttribute('data-hero')),
   };
 });

@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { INTERACTIONS, LEVERAGE, SHARE, shareFor, skillName } from '../data/content';
 
+/** 中文名；查不到就保留原键并加「」，让读者一眼看出是标识符 */
 const zh = (id: string) => {
   const n = INTERACTIONS.nodes.find((x) => x.id === id);
-  return (n?.zh as string | null) ?? skillName(id).text ?? id;
+  const named = (n?.zh as string | null) ?? skillName(id).text ?? id;
+  return named === id ? `「${id}」` : named;
 };
 
 /* ---------------- 杠杆：禁用某技能后掉多少 ---------------- */
@@ -156,7 +158,10 @@ export function InteractionGraph({ hero }: { hero: string }) {
   const strokeOf = (k: string) =>
     k === 'requires_dot' ? 'var(--dep-dot)' : k === 'requires_buff' || k === 'procs_on' ? 'var(--dep-buff)' : 'var(--dep-burst)';
 
-  const labelOf = (id: string) => CN_LABEL[id] ?? nodes.find((n) => n.id === id)?.zh ?? skillName(id).text ?? id;
+  const labelOf = (id: string) => {
+    const named = CN_LABEL[id] ?? nodes.find((n) => n.id === id)?.zh ?? skillName(id).text ?? id;
+    return named === id ? `「${id}」` : named;
+  };
 
   return (
     <div className="card">
@@ -283,7 +288,7 @@ export function ShareTable({ hero }: { hero: string }) {
         <div className="bars">
           {rows.map((r) => (
             <div className="brow" key={r.spell} style={{ gridTemplateColumns: '132px 1fr 96px' }}>
-              <span>{skillName(r.spell).text ?? r.spellName ?? r.spell}</span>
+              <span>{(() => { const named = skillName(r.spell).text || r.spellName || r.spell; return named === r.spell ? `「${named}」` : named; })()}</span>
               <span className="tr">
                 <i className="on" style={{ width: `${(r.sharePct / max) * 100}%` }} />
               </span>

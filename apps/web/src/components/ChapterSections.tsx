@@ -219,18 +219,8 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
                         ) : null}
                       </td>
                       <td>
-                        {r.conditionGroups?.length ? (
-                          <div className="cond-groups">
-                            {r.conditionGroups.map((g, gi) => (
-                              <div className="cond-line" key={gi}>
-                                {gi > 0 ? <span className="cond-or">或</span> : null}
-                                <span>{g}</span>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <span className="dim">{r.conditionZh || '无条件（按顺序直接用）'}</span>
-                        )}
+                        {/* 人话条件优先；生成器保证 38 行都有，缺行由 validate:content 报错 */}
+                        <span className="cond-human">{r.conditionHuman || r.conditionZh || '无条件（按顺序直接用）'}</span>
                         {r.dead ? (
                           <span className="dead-why">
                             {r.dead.reason}；{r.dead.evidence}
@@ -248,7 +238,7 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
         );
       })}
       <div className="note">
-        表格顺序来自 APL 原文。条件翻成了人话，逻辑一个字没改。
+        表格顺序来自 APL 原文；条件写成口语，逻辑与阈值一个字没改。标识符是天赋/变量的原名。
         {deadCount
           ? ` 标「这套配置用不上」的 ${deadCount} 条里，多数是这套配置本身没有的（种族 / 天赋 / 装备 / 队友），原因写在行内；标「木桩测不到」的是有、但木桩打不到的条件，换到实战仍要按条件用。`
           : ''}

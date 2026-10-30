@@ -80,6 +80,8 @@ export interface PriorityRow {
   order: number;
   skill: string;
   conditionRaw: string;
+  /** 人工口语版条件（condition-human.json 合并进来） */
+  conditionHuman?: string | null;
   conditionZh: string;
   conditionGroups?: string[];
   targetSelectRaw: string;

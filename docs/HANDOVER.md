@@ -17,9 +17,9 @@
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
 | 图契约 | 12 章 × 5 段；54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段（没有真人日志）；L0-03 / L1-01 第五段为模拟时间线；L0-03 第②段是「表 + 两张核对图」同屏（契约 kind 仍为 priority-table） | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 5,712 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 代码量 | 约 5,709 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 830,395 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
+| 单文件产物 | 834,202 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -33,6 +33,7 @@ content/
   profiles/*.simc       SimC profile（含 APL）—— 一切数值的源头
   guides/priority-table.json   APL → 人话优先级表（38 条；10 条本构建用不上，行内带原因）
   guides/skills.json          技能中文名（verified 分两档）
+  guides/condition-human.json 优先级表 38 行的人工「人话条件」（生成时合并进 priority-table.json）
   glossary.json               术语表（页面上悬停解释）
   chapters/*.json             章节内容（五段结构）
   figures/chapters.json       五段图契约：ready / missing / not-applicable + 来源
@@ -138,6 +139,7 @@ npm run check:adjacent     # 相邻两行交换的差值、误差与判定按 ru
 npm run check:ui           # 先构建，再逐章查 12 章；图契约标 ready 的段必须有真图
 npm run check:static       # 本地起 HTTP 加载 dist：验证放到静态托管也能跑（底图走相对路径）
 npm run audit:text         # 报告型：逐页抓读者可见文字里的工程口径泄漏（「」框住的不算）
+                           # 记录编号按数据计，不计入问题数
 npm run verify:gates       # 门禁自检 25 项：正样本绿、坏样本红
 npm run build              # 单文件产出
 ```
@@ -176,7 +178,8 @@ npm run build              # 单文件产出
 | --- | --- | --- | --- |
 | 8 | ~~章节页进度~~ 已上线 | 顶栏显示 `L0 x/4 · L1 x/6 · L2 x/2`，`check:ui` 断言数值与章节表一致；900px 以下隐藏 | — |
 | 9 | ~~相邻两行交换 A/B 上图~~ 已上到 L0-03 右栏 | 4 组结论 + 无效对照说明；入口只有 L0-03 第②段 | — |
-| 10 | **优先级表「条件」列仍是机器派生中文** | 那张表 38 行的条件列是 APL 直译（形如 `（「priest.force_devour_matter」 或 目标有吸收盾） 且 「devour_matter」天赋`）。合规（标识符用「」框住），但读者要停下来翻译。两条路：① 逐行补一句人工「人话条件」（38 行，约 3–4 小时）；② 维持现状，只在表头加一句「标识符=天赋/变量原名，展开行内看原文」 | **等你选 ①/②** |
+| 10 | ~~优先级表「条件」列人工补人话~~ 已上线 | 38 行口语版写在 `content/guides/condition-human.json`，生成时合并成 `conditionHuman`；页面读人话，`validate:content` 查「缺行 / 混进 APL 原文 / 超过 150 字」，`verify:gates` 有坏样本 | — |
+| 10b | ~~解析台读者化~~ 已上线 | 技能名缺中文时加「」、段名/表头改「模拟记录」、`跑批`改「模拟」、配装方法里的 SimC 命令加「」；`audit:text` 现为 0 处（记录编号按数据计） | — |
 | 11 | **红玉地形图只有一层** | 现在是路线页展示的那一层（1536×1024）。要么标注「只画主层」，要么把另外两层瓦片也拼上并加楼层切换 | **等你选**（拼图约 1 小时/层） |
 | 12 | 联动图补「谁挂上了 DoT」的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） | **等数据** |
 | 13 | 教练卡按「你哪条没做到」高亮 | 依赖日志分段 | **等日志导出** |

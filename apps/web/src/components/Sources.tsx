@@ -15,7 +15,7 @@ const STATUS_LABEL: Record<string, { text: string; tone: 'ok' | 'warn' | 'info' 
   consistent: { text: '说法一致', tone: 'ok' },
   low_impact: { text: '差异不影响结论', tone: 'info' },
   naming: { text: '术语差异', tone: 'info' },
-  needs_sim_check: { text: '待跑批复核', tone: 'warn' },
+  needs_sim_check: { text: '待模拟复核', tone: 'warn' },
 };
 
 export default function Sources({ summary, crosscheck }: { summary: SourcesSummary; crosscheck: CrosscheckDoc }) {
@@ -117,7 +117,7 @@ export default function Sources({ summary, crosscheck }: { summary: SourcesSumma
         {summary.howWeUse}
       </div>
       <div className="note" style={{ marginTop: 4 }}>
-        抓取时间 {summary.generatedAt} · 基线 {summary.baseline}。四条英雄天赋机制（光晕送鞭笞：狂、共振能量增伤）目前只有原文支持，本站没有单独跑批。
+        抓取时间 {summary.generatedAt} · 基线 {summary.baseline}。四条英雄天赋机制（光晕送鞭笞：狂、共振能量增伤）目前只有原文支持，本站没有单独做过模拟。
       </div>
     </div>
   );

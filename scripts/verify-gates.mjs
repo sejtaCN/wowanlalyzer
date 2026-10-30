@@ -66,6 +66,19 @@ try {
     `--check-chapters=${badChapters}`,
   ], false, 'claim 里写死了数字');
 
+  // 优先级表的人话条件被删掉一行：必须点名，不能悄悄退回机器直译
+  const badPriority = join(temp, 'priority-bad.json');
+  const priorityDoc = JSON.parse(readFileSync(join(ROOT, 'content', 'guides', 'priority-table.json'), 'utf8'));
+  const targetRow = priorityDoc.sections[0].rows[0];
+  const keepHuman = targetRow.conditionHuman;
+  targetRow.conditionHuman = null;
+  writeFileSync(badPriority, JSON.stringify(priorityDoc, null, 1));
+  run('validate 负样本：优先级表缺人话条件', process.execPath, [
+    'scripts/validate-content.mjs',
+    `--check-priority=${badPriority}`,
+  ], false, '缺少人话条件');
+  targetRow.conditionHuman = keepHuman;
+
   // ---- 静态托管预演：file:// 能开不代表托管能开（底图走相对路径） ----
   run('static 正样本：本地 HTTP 起 dist 走一遍', process.execPath, ['scripts/check-static.mjs'], true, '静态托管预演通过');
 

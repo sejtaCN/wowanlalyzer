@@ -63,7 +63,7 @@ export default function WaveDiagram({ route, targets, highlightPull, limit = 3, 
     }
     return (
       <div className="figempty">
-        这条路线里没有 {range ? `${range[0]}–${range[1]}` : kind} 只的波：这一档只在别的副本出现，模型仍然成立（跑批按目标数，不按地图）。
+        这条路线里没有 {range ? `${range[0]}–${range[1]}` : kind} 只的波：这一档只在别的副本出现，模型仍然成立（模拟按目标数，不按地图）。
       </div>
     );
   }

@@ -17,6 +17,14 @@ const PROFILE = resolve(process.env.APL_FILE ?? join(ROOT, 'content', 'profiles'
 const PROFILE_SOURCE = relative(ROOT, PROFILE).split(sep).join('/');
 const HERO = basename(PROFILE).match(/shadow_([a-z]+)\.simc$/i)?.[1]?.toLowerCase() ?? null;
 const OUT_DIR = join(ROOT, 'content', 'guides');
+/**
+ * 人工「人话条件」：38 行的口语版由人写，机器只负责合并与查缺。
+ * 键是 `${section}#${order}`——APL 顺序变了会被下面的 skill 校验抓出来。
+ */
+const HUMAN_FILE = join(OUT_DIR, 'condition-human.json');
+const HUMAN = existsSync(HUMAN_FILE)
+  ? JSON.parse(readFileSync(HUMAN_FILE, 'utf8')).rows ?? {}
+  : {};
 
 /**
  * 中文条件生成：把 APL 条件翻成能扫读的中文短语。
@@ -417,6 +425,11 @@ for (const line of lines) {
   const targetIfRaw = grab('target_if');
   const cond = condRaw ? toChinese(condRaw) : { zh: '无条件（排到就打）', groups: [] };
   const deadInfo = dead.get(skill) ?? null;
+  const humanKey = `${section}#${order[section]}`;
+  const human = HUMAN[humanKey] ?? null;
+  if (human && human.skill !== skill) {
+    throw new Error(`${humanKey} 的人话条件挂的是 ${human.skill}，但 APL 这一行是 ${skill}——顺序变了，先核对 condition-human.json`);
+  }
   rows.push({
     section,
     sectionLabel: SECTION_LABEL[section],
@@ -424,6 +437,8 @@ for (const line of lines) {
     skill,
     conditionRaw: condRaw,
     conditionZh: cond.zh,
+    /** 人工口语版；缺行由 validate:content 报错，不在生成器里静默兜底 */
+    conditionHuman: human?.human ?? null,
     /** 顶层「或」拆开的每一支；前端渲染成可扫读的一组短语 */
     conditionGroups: cond.groups,
     targetSelectRaw: targetIfRaw,
@@ -450,7 +465,12 @@ const out = {
 };
 writeFileSync(join(OUT_DIR, 'priority-table.json'), JSON.stringify(out, null, 2) + '\n');
 
-console.log(`写出 content/guides/priority-table.json · ${rows.length} 条优先级`);
+const missingHuman = rows.filter((row) => !row.conditionHuman);
+console.log(`写出 content/guides/priority-table.json · ${rows.length} 条优先级 · 人话条件 ${rows.length - missingHuman.length}/${rows.length}`);
+if (missingHuman.length) {
+  console.log('  缺人话条件（请在 condition-human.json 补）：');
+  for (const row of missingHuman) console.log(`    ${row.section}#${row.order} ${row.skill}`);
+}
 if (dead.size) {
   console.log(`  本构建用不上 ${dead.size} 条：`);
   for (const [skill, info] of dead) console.log(`    ${skill.padEnd(22)} ${info.reason}（${info.evidence}）`);

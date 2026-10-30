@@ -50,16 +50,16 @@ export default function Analyzer() {
     <div className="page">
       <h1>解析台</h1>
       <p className="page-sub">
-        当前只展示执政官这一套天赋。学习页给的每个数字都在这里能查到出处。从上往下读：结构 → 数量 → 构成 → 配装 → 参考资料 → 原始结果。
+        当前只展示执政官这一套天赋。学习页给的每个数字都能在这里查到出处。从上往下读：结构 → 数量 → 构成 → 配装 → 参考资料 → 原始记录。
       </p>
 
       <p className="note">
-        <a href="#grp-decision-ab">决策 A/B：{abCount} 条对照记录，跳到原始结果</a>
+        <a href="#grp-decision-ab">决策 A/B：{abCount} 条对照记录，跳到原始记录</a>
       </p>
 
       <div className="statusline" style={{ marginTop: 0, borderTop: 0, paddingTop: 0 }}>
         <span>SimC {simc?.version ?? '—'} ({simc?.commit?.slice(0, 7) ?? '—'})</span>
-        <span>执政官 runId {runs.length} 个</span>
+        <span>执政官模拟记录 {runs.length} 条</span>
         <span>杠杆 {LEVERAGE.scenarios.length} 场景 × {LEVERAGE.rows.length} 技能</span>
         <span>联动边 {INTERACTIONS.counts.apl + INTERACTIONS.counts.applies + INTERACTIONS.counts.burst + INTERACTIONS.counts.opener} 条</span>
         <span>配装 {GEARING.effects.length} 项 × {GEARING.scenarios.length} 模型</span>
@@ -107,7 +107,7 @@ export default function Analyzer() {
         no="⑤"
         question="攻略是谁说的，这里验了什么"
         tag={`${SOURCES_SUMMARY.sources.length} 家原文`}
-        note={`四家一致 ${CROSSCHECK.agreements.length} 条直接进正文；分歧 ${CROSSCHECK.divergences.length} 条不挑权威，交给 APL 与 runId 裁决。原文抓取时间 ${SOURCES_SUMMARY.generatedAt}。`}
+        note={`四家一致 ${CROSSCHECK.agreements.length} 条直接进正文；分歧 ${CROSSCHECK.divergences.length} 条不挑权威，交给 APL 与模拟记录裁决。原文抓取时间 ${SOURCES_SUMMARY.generatedAt}。`}
       >
         <Sources summary={SOURCES_SUMMARY} crosscheck={CROSSCHECK} />
       </Section>
@@ -115,7 +115,7 @@ export default function Analyzer() {
       <Section
         no="⑥"
         question="原始结果在哪"
-        tag={`执政官 · ${runs.length} 个 runId`}
+        tag={`执政官 · ${runs.length} 条模拟记录`}
         note="只列出明确归属执政官的模拟文件；每一行都带 SimC 版本、commit、迭代数和 95% CI。虚空编织者数据待补，不在此混列。"
       >
         <input
@@ -139,7 +139,7 @@ export default function Analyzer() {
                     <th className="n">DPS</th>
                     <th className="n">±CI</th>
                     <th className="n">n</th>
-                    <th>runId</th>
+                    <th>记录编号</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,7 +157,7 @@ export default function Analyzer() {
               {rows.length > 60 ? <div className="note">只显示前 60 条（共 {rows.length}）。</div> : null}
             </div>
           ))}
-          {!groups.length ? <div className="figempty">没有匹配的 runId。</div> : null}
+          {!groups.length ? <div className="figempty">没有匹配的记录编号。</div> : null}
         </div>
       </Section>
     </div>

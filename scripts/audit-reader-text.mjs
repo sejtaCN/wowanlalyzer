@@ -99,9 +99,14 @@ report.push({ label: '解析台（数据面板，标识符属预期）', hits: a
 await browser.close();
 
 let total = 0;
-for (const { label, hits } of report) {
+/** 模拟记录编号（archon__st__5000 / dec_voidform_on_1__w30_8__5000）是数据本身，不是口径泄漏 */
+const isRecordId = (token) => token.includes('__') && /^[a-z0-9_]+$/.test(token) && /\d/.test(token);
+
+for (const { label, hits: allHits } of report) {
+  const recordIds = allHits.filter((hit) => isRecordId(hit.token));
+  const hits = allHits.filter((hit) => !isRecordId(hit.token));
   if (!hits.length) {
-    console.log(`✓ ${label}`);
+    console.log(`✓ ${label}${recordIds.length ? `（记录编号 ${recordIds.length} 处，数据本身）` : ''}`);
     continue;
   }
   const grouped = new Map();

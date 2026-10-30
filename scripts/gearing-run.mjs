@@ -259,7 +259,7 @@ async function main() {
     effects,
     control: { label: control.label, perScenario: controlPerScenario, passed: controlOk },
     method: {
-      secondary: 'SimC calculate_scale_factors：对每个次级属性做 ±delta 重跑，得到"每 1 点 rating 换多少 DPS"；换算成每 700 点的百分比。',
+      secondary: '用 SimC 的「calculate_scale_factors」命令：对每个次级属性做 ±delta 重跑，得到"每 1 点 rating 换多少 DPS"；再换算成每 700 点的百分比。',
       effects: '逐个从 profile 摘掉一样东西（附魔 / 武器油 / 饰品）再跑同一场景，差值 = 那样东西的整套贡献。',
       caveat: '饰品是"属性 + 特效"的整体贡献，不是纯特效；附魔同理含其属性。差值在 95% CI 内视为无结论。',
     },

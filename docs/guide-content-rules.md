@@ -164,6 +164,8 @@
 
 `claim`、`chart.title`、②段导读、`casePanel.points[]`、顶图带「一条数字结论」格。
 
+**优先级表的「条件」列用人工人话**：38 行的口语版放在 `content/guides/condition-human.json`，按 `section#order` 挂到 `priority-table.json` 的 `conditionHuman`。规矩三条：① 逻辑与阈值一个字不改（`≥10 秒`、`<5 个` 照抄）；② 没出处的中文名保留原键并用「」框住；③ 不许把 APL 原文抄进人话（`,if=`、`>=`、`&&`、`actions.` 会被 `validate:content` 拦）。生成器会核对 key 与技能是否对得上，顺序变了直接报错。
+
 **claim 里的数字一律写占位符**，例如 `单体 {{bossDurationSec}} 秒只换 {{bossDamageM}}M`，具体数值在同章 `claimFields` 里挂 runId（`pair` 取配对差值 / `runId` 取时长目标数 / `of` 取比值）。渲染由 `apps/web/src/data/claim.ts` 负责；写死数字会被 `validate:content` 直接拦下（门禁自检里有一条坏样本专门试这个）。
 
 ---
