@@ -77,7 +77,7 @@ npm run build    # 重新打包到 dist/index.html
 ```bash
 npm run dev                # 开发服务器
 npm run build              # 打包（产出 dist/index.html）
-npm test                   # 26 条测试：结构 / 数据层 / 相邻交换 / 分析门禁
+npm test                   # 28 条测试：结构 / 数据层 / 相邻交换 / 分析门禁 / claim 解析
 npm run typecheck          # 类型
 npm run validate:content   # 关卡：没有来源的数字不许进页面
 npm run check:copy         # 关卡：可见文案（禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追）
@@ -87,7 +87,8 @@ npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
 npm run check:analysis     # 关卡：配装阳性对照 / 属性复现差 / 最优预测误差
 npm run check:adjacent     # 关卡：相邻两行交换的差值、误差与判定按 runId 重算
 npm run check:ui           # 关卡：先构建，再逐章查 12 章五段 / 图契约 / 字号 / 栅格 / 无 JS 错误
-npm run verify:gates       # 关卡自检：23 项正样本应绿、坏样本应红
+npm run check:static       # 关卡：本地起 HTTP 加载 dist，验证放到静态托管上也能跑
+npm run verify:gates       # 关卡自检：25 项正样本应绿、坏样本应红
 
 # 数据生产线（一般只在换版本时跑）
 npm run sims:run           # 全场景模拟
@@ -128,6 +129,7 @@ npm run phases             # 日志 → 阶段表
 | [methods.md](docs/methods.md) | 方法说明：联动/杠杆 · 日志阶段推断 · 教程交叉核对 · 配装与属性优化 |
 | [figure-contract.md](docs/figure-contract.md) | 图契约：五段图清单、缺图状态、12 章 UI 门禁与坏样本自检 |
 | [first-principles.md](docs/first-principles.md) | 第一性原理：其他教程做什么、我们缺什么、下一步补什么 |
+| [DEPLOY.md](docs/DEPLOY.md) | 静态部署预演：三个平台怎么连、需要你做什么、上线前检查表 |
 
 ---
 
@@ -135,8 +137,18 @@ npm run phases             # 日志 → 阶段表
 
 - 专精：暗影牧师当前只开放执政官；虚空编织者设为待办，噬灭（歼灭者）仍是占位预览
 - 章节 12 篇：L0×4、L1×6、L2×2（毒牙祭坛 / 红玉新生池）
-- 数据：原始归档 296 个 runId；站点只查询已明确归属执政官的记录 235 条（含配装 36 + 属性优化 80 + 动作 trace 7）、9 段真实日志阶段、1 条副本路线（毒牙祭坛 15 波）、4 个输出模型；L0-03 / L1-01 第五段使用模拟动作时间线，不冒充真人日志阶段
-- 门禁：`validate:content` 通过（60 段图契约：54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段，没有真人日志） · `check:doc` 12/12 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 12 章 + Archon-only 解析台 + 属性四模型 DOM 断言 + 桌面宽屏；移动端仅保留冻结冒烟 · `verify:gates` 23/23（含坏样本） · `vitest` 27/27 · `tsc` 通过
+- 数据：原始归档 296 个 runId；站点只查询已明确归属执政官的记录 235 条（含配装 36 + 属性优化 80 + 动作 trace 7）、9 段真实日志阶段、2 条副本路线（毒牙祭坛 15 波 / 红玉新生池 12 波，合计 27 波 184 只）、4 个输出模型；L0-03 / L1-01 第五段使用模拟动作时间线，不冒充真人日志阶段
+- 门禁：`validate:content` 通过（60 段图契约：54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段，没有真人日志） · `check:doc` 12/12 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 12 章 + Archon-only 解析台 + 属性四模型 DOM 断言 + 桌面宽屏；移动端仅保留冻结冒烟 · `check:static` 本地 HTTP 0 失败请求 · `verify:gates` 25/25（含坏样本） · `vitest` 28/28 · `tsc` 通过
+
+## 许可与来源
+
+- **代码**（`apps/` `packages/` `scripts/` `tests/` 与配置）：MIT，见 [LICENSE](LICENSE)
+- **教学内容**（`content/` 正文与图表数据、`docs/` 讲解）：CC BY-NC 4.0，见 [LICENSE-CONTENT](LICENSE-CONTENT)
+  ——可非商业转载与改编，须署名、附协议链接、标明是否修改
+- **第三方素材与非官方声明**：见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
+  ——World of Warcraft 相关名称与地图美术权利归 Blizzard；路线与底图来自 keystone.guru，
+  只作非商业引用；商业使用需自行替换底图与路线数据
+- 本项目为玩家自制教学工具，与 Blizzard Entertainment 无关联
 
 ## 三条红线
 

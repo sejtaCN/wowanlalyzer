@@ -1,0 +1,52 @@
+# 教学内容的许可：CC BY-NC 4.0
+
+本仓库的**教学内容**（不是代码）采用：
+
+**署名—非商业性使用 4.0 协议国际版**（Creative Commons Attribution-NonCommercial 4.0
+International，简称 CC BY-NC 4.0）
+
+- 许可协议全文（具有法律效力的版本）：
+  <https://creativecommons.org/licenses/by-nc/4.0/legalcode.zh-hans>
+- 官方中文摘要页：<https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans>
+- 规范 URL：<https://creativecommons.org/licenses/by-nc/4.0/>
+
+## 覆盖范围
+
+适用：
+
+- `content/chapters/`、`content/guides/`、`content/coaching/`、`content/glossary.json`、
+  `content/figures/`、`content/specs.json` —— 教学正文、优先级表、图契约、教练建议；
+- `content/analysis/`、`content/routes/`、`content/logs/`、`content/sims/` —— 由
+  SimulationCraft 与 Warcraft Logs 派生出的**数据与图表素材**；
+- `docs/` 下的讲解与规范文档；
+- `apps/web/src/components/`、`apps/web/src/views/` 里**写给读者看的文案**。
+
+不适用（不属于本许可授权范围）：
+
+- 代码：按根目录 `LICENSE`（MIT）授权；
+- 第三方素材：见 `THIRD-PARTY-NOTICES.md`——包括暴雪的技能名、怪物名、地名与地图美术，
+  以及 keystone.guru 的路线数据与地图瓦片；
+- 游戏本体与其数据的所有权利归 Blizzard Entertainment。
+
+## 你可以做什么
+
+只要你遵守下列条件，你就可以**共享**（以任何媒介复制、发行本作品）与**演绎**
+（修改、转换、以本作品为基础创作）：
+
+1. **署名** —— 给出适当的署名，提供指向本许可协议的链接，并标明是否作了修改。
+   不得以任何方式暗示作者为你或你的使用背书。
+2. **非商业性使用** —— 不得将本作品用于商业目的。
+3. **没有附加限制** —— 不得用法律条款或技术措施限制他人做本许可允许的事。
+
+许可人不能收回这些权利，只要使用者遵守协议条款。
+
+## 建议署名格式
+
+> 引自《专精学习系统》（作者：刘仲 / sejtaCN），采用 CC BY-NC 4.0 许可，
+> 来源：https://github.com/sejtaCN/wowanlalyzer 。本文对原文作了修改/未作修改。
+
+## 说明
+
+- 本文件是许可摘要与适用范围说明，不是许可协议本身；有疑义以官方许可协议全文为准。
+- 商业使用（含付费课程、企业内部培训、付费社群、带广告的站点）需另行取得书面授权。
+- 文中数字来自本地模拟与日志（来源随图给出）；这些数字**不是**对当前游戏版本的持续承诺。

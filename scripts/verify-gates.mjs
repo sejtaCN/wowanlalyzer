@@ -66,6 +66,9 @@ try {
     `--check-chapters=${badChapters}`,
   ], false, 'claim 里写死了数字');
 
+  // ---- 静态托管预演：file:// 能开不代表托管能开（底图走相对路径） ----
+  run('static 正样本：本地 HTTP 起 dist 走一遍', process.execPath, ['scripts/check-static.mjs'], true, '静态托管预演通过');
+
   // ---- check:ui ----
   const badDistDir = join(temp, 'dist-bad');
   const shotsBad = join(temp, 'shots-bad');

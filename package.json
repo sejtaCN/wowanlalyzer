@@ -2,6 +2,7 @@
   "name": "wowanlalyzer",
   "private": true,
   "version": "0.1.0",
+  "license": "MIT",
   "type": "module",
   "description": "暗牧学习系统 — 看图学输出：这一波怎么打，爆发给哪一波",
   "scripts": {
@@ -24,6 +25,7 @@
     "check:analysis": "node scripts/check-analysis.mjs",
     "check:adjacent": "node scripts/check-adjacent.mjs",
     "check:ui": "npm run build && node scripts/check-ui.mjs",
+    "check:static": "node scripts/check-static.mjs",
     "verify:gates": "npm run build && node scripts/verify-gates.mjs",
     "sims:summary": "node scripts/sims-summary.mjs",
     "sims:adds": "node scripts/adds-run.mjs",

@@ -19,7 +19,7 @@
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
 | 代码量 | 约 5,684 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 828,817 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
+| 单文件产物 | 829,393 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -136,7 +136,8 @@ npm run check:doc          # 文档 §4 与章节 JSON 逐字一致
 npm run check:analysis     # 配装阳性对照 / 属性复现差 / 最优预测误差
 npm run check:adjacent     # 相邻两行交换的差值、误差与判定按 runId 重算
 npm run check:ui           # 先构建，再逐章查 12 章；图契约标 ready 的段必须有真图
-npm run verify:gates       # 门禁自检 24 项：正样本绿、坏样本红
+npm run check:static       # 本地起 HTTP 加载 dist：验证放到静态托管也能跑（底图走相对路径）
+npm run verify:gates       # 门禁自检 25 项：正样本绿、坏样本红
 npm run build              # 单文件产出
 ```
 
@@ -179,8 +180,8 @@ npm run build              # 单文件产出
 
 | # | 待办 | 说明 |
 | --- | --- | --- |
-| 13 | **补 `LICENSE`** | 参考同类开源项目的许可文件作为模板；同时确认代码授权、第三方数据/地图来源和魔兽世界非官方声明。正式公开前完成，当前不阻塞主线。 |
-| 14 | **静态部署预演** | 用 Cloudflare Pages / Netlify / Vercel 之一部署只读版本；构建命令 `npm ci && npm run build`，产物目录 `dist`。先使用平台临时域名，不购买或绑定域名。 |
+| 13 | ~~补 `LICENSE`~~ 已完成 | 代码 MIT（`LICENSE`）、内容 CC BY-NC 4.0（`LICENSE-CONTENT`）、第三方与暴雪非官方声明（`THIRD-PARTY-NOTICES.md`）；README 增「许可与来源」一节 |
+| 14 | **静态部署预演** | 本地预演已完成：`npm run check:static` 起 HTTP 真实加载 dist（0 失败请求 / 12 章 / 底图 1536px），构建命令 `npm ci && npm run build`、产物 `dist`、底图由 `sync-maps.mjs` 自动同步，步骤见 `docs/DEPLOY.md`。**卡在平台账号**：需要用户登录 Cloudflare Pages / Netlify / Vercel 并授权本仓库，我拿不到登录态，不排期 |
 | 15 | **`.io` 域名与在线产品化** | 预演通过后再处理自定义域名、章节 URL/分享链接、SEO 元数据、SPA 回退和自动部署门禁；账号、收藏、评论等动态能力另立后端议题。 |
 
 ---
