@@ -69,9 +69,10 @@ export default function CooldownWindow() {
       <p className="note">
         具体某一波能不能开，要拿那一波的间隔和 {f1(cd)} 秒比；这份数据只给规则，不给某一场的具体两波结论。{d.limitation}
       </p>
-      <p className="note cw-source">
-        来源：{d.cooldown.sourceRuns.join(' / ')} · {d.returns.sourceRuns.join(' / ')}
-      </p>
+      <details className="pm-raw">
+        <summary>来源记录</summary>
+        <div className="note">{d.cooldown.sourceRuns.join(' / ')} · {d.returns.sourceRuns.join(' / ')}</div>
+      </details>
     </div>
   );
 }

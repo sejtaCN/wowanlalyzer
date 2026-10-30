@@ -17,9 +17,9 @@
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
 | 图契约 | 12 章 × 5 段；54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段（没有真人日志）；L0-03 / L1-01 第五段为模拟时间线；L0-03 第②段是「表 + 两张核对图」同屏（契约 kind 仍为 priority-table） | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 5,684 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 代码量 | 约 5,712 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 829,393 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
+| 单文件产物 | 830,395 字节（含 L0-03 右栏的杠杆与相邻交换汇总） | `dist/index.html`，内联 CSS/JS；Vite 报的 kB 数是字符计量，不是文件字节 | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -137,6 +137,7 @@ npm run check:analysis     # 配装阳性对照 / 属性复现差 / 最优预测
 npm run check:adjacent     # 相邻两行交换的差值、误差与判定按 runId 重算
 npm run check:ui           # 先构建，再逐章查 12 章；图契约标 ready 的段必须有真图
 npm run check:static       # 本地起 HTTP 加载 dist：验证放到静态托管也能跑（底图走相对路径）
+npm run audit:text         # 报告型：逐页抓读者可见文字里的工程口径泄漏（「」框住的不算）
 npm run verify:gates       # 门禁自检 25 项：正样本绿、坏样本红
 npm run build              # 单文件产出
 ```
@@ -149,42 +150,50 @@ npm run build              # 单文件产出
 
 ## 5. 待办（按优先级）
 
+> 现状：**能立即动手 4 条**（P2 的三条体验项 + P0 的决策项）、**被外部来源卡住 5 条**、**等你拍板 3 条**、**已完成 8 条**。
+> 每条只写「为什么 / 入口 / 依赖」，做完改成 ~~删除线~~ 并补一句实测口径，不要另开第二份待办文档。
+
 ### P0 · 影响正确性
 
-| # | 待办 | 为什么 | 入口 |
+| # | 待办 | 为什么 | 入口 / 依赖 |
 | --- | --- | --- | --- |
-| 1 | **虚空编织者数据待补** | 当前决定只做执政官。Voidweaver 只有 7 个基础模拟，缺杠杆、伤害构成、配装、属性优化、章节和独立优先级；补齐前不展示，也不回退 Archon 数据 | `content/profiles/*voidweaver*`；后续按 Archon 同一数据契约补齐 |
-| 2 | ~~正文硬编码数字与 runId 脱钩~~ 已解决 | claim 改成模板：正文只写占位符，`claimFields` 挂 runId（`pair` 差值 / `runId` 单条字段 / `of` 比值），渲染在 `apps/web/src/data/claim.ts`。`validate:content` 拦「claim 里有写死数字 / 占位符没规则 / 规则引用不存在的 runId」，`check:ui` 拦「页面残留占位符或结论句超长」，`verify:gates` 有坏样本。顺手改掉一处旧错：JSON 与文档一直写「是大波的 41%」，由 runId 实算是 **40%**，页面此前已显示 40%，现在三处只剩一个来源 | `apps/web/src/data/claim.ts`、`content/chapters/l1-04-boss.json` |
+| 1 | **虚空编织者数据待补** | 当前决定只做执政官。Voidweaver 只有 7 个基础模拟，缺杠杆、伤害构成、配装、属性优化、章节和独立优先级；补齐前不展示，也不回退 Archon 数据 | `content/profiles/*voidweaver*`；按 Archon 同一数据契约整套重跑（**被数据卡住**） |
+| 2 | ~~正文硬编码数字与 runId 脱钩~~ 已解决 | claim 改模板，`claimFields` 挂 runId（`pair` / `runId` / `of`），渲染在 `apps/web/src/data/claim.ts`；顺带纠正「41%」应为 **40%** | `content/chapters/l1-04-boss.json`；门禁 4 道 + `verify:gates` 坏样本 |
 
 ### P1 · 内容缺口
 
-| # | 待办 | 说明 |
-| --- | --- | --- |
-| 3 | ~~图契约中 2 段缺图~~ 已补齐 | L0-03 与 L1-01 第⑤段改用模拟动作时间线（`content/analysis/simulated-timelines-archon.json`，契约里 kind 仍为 `phase-chart`），状态由 `missing` 改为 `ready`；当前 55 段为 50 有图 / 0 缺图 / 5 不适用 | `content/figures/chapters.json` |
-| 4 | ~~第二个副本的 L2 页~~ 已上线 | 红玉新生池（`l2-02-ruby-life-pools`）：12 波 / 76 只 / 554 forces，路线 `Xnxx3lT`；地形图 `content/maps/ruby-life-pools.webp`；`chapterRoute` 按副本读取，缺数据不拿祭牙顶 |
-| 5 | 高手对照做到单波级 | 需要带 `Fights` 或 `UNIT_DIED` 的导出；现在的 9 段是阶段级 |
-| 6 | ~~BOSS 带小怪改用真加怪模型~~ 已按近似方案落地 | 毒牙祭坛 p10（11 只含 BOSS）与 p15（7 只含 BOSS）改为按全场目标数近似（`w30_8` / `w30_7`，BOSS 计入目标数），波次上带 `approximation` 标记，页面顶部与当前波都标注「近似 · 按 N 目标档」，p12 空波次仍不出数。真加怪仍不可得：`raid_events+=/adds` 被静默忽略（41.4 万 → 41.6 万，±0.6% 内），`fight_style=DungeonSlice` 是合成副本。换到支持 raid_events 的构建后应改回真模型 |
+| # | 待办 | 说明 | 依赖 |
+| --- | --- | --- | --- |
+| 3 | ~~图契约缺图~~ 已补齐 | L0-03 / L1-01 第⑤段改用模拟动作时间线；当前 60 段 = 54 有图 / 1 缺图 / 5 不适用 | — |
+| 4 | ~~第二个副本的 L2 页~~ 已上线 | 红玉新生池：12 波 / 76 只 / 554 forces，路线 `Xnxx3lT`，地形图已拼 | — |
+| 5 | **红玉第⑤段（真人对照）** | 现在契约标 `missing`，页面明写「缺这份副本的日志」。补一份**带战斗分段的导出**即可对齐阶段与爆发时刻 | **等日志导出**（WCL 事件表 CSV） |
+| 6 | 高手对照做到单波级 | 需要 `Fights` 或 `UNIT_DIED` 事件；现有 9 段只到阶段级 | **等日志导出** |
+| 7 | ~~BOSS 带小怪的真加怪模型~~ 按近似方案落地 | p10 / p15 按全场目标数近似并显式标注；`raid_events+=/adds` 被静默忽略 | 若要精确 → **等支持 raid_events 的 SimC 构建** |
 
-### P2 · 体验
+### P2 · 体验（本地网页，能立即动手）
 
-| # | 待办 | 说明 |
-| --- | --- | --- |
-| 7 | 章节页进度条 | 顶栏显示 L0/L1/L2 各读了几篇（`progress.seen` 已用于首页路径打点与「已读」标记；顶栏「各读了几篇」的计数尚未渲染，只差这一处） |
-| 8 | ~~相邻两行交换 A/B 上图~~ 已上到 L0-03 | `scripts/adjacent-swap.mjs` 只换相邻两行、`check:adjacent` 按 runId 重算；4 组结论（s1 / s3 有效，s2 **无效对照**——交换的 `void_blast` 四场景 0 次施放，s4 误差内）在 `content/analysis/adjacent-archon.json`。**入口只有 L0-03 第②段右栏**：2026-10-30 之前这份数据只有跑批与分析门禁、页面上没有任何入口，旧版这里写的「解析台页首有锚点」是错的，已删 | `npm run check:adjacent`、`check:ui` 断言 4 行 |
-| 9 | 联动图补"谁挂上了 DoT"的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） |
-| 10 | 教练卡按"你哪条没做到"高亮 | 依赖日志分段 |
-| 11 | **读者可见文案中文化 + 排版 6 档字号** | 全局已落地 `36/24/18/16/14/12`、400/500 两档字重、16px 正文、32px 段距与 36em 行长；6 个 L1 与 L2 已统一目录、决策顶图带、证据折叠与阶段结构，L0 仍保留基础章节结构 | `docs/ui-reference-decomposition.md`、`docs/ui-blueprint.md` §3–§4 |
-| 12 | **UI 设计文档（已出稿）** | 已有 `docs/ui-blueprint.md`：功能模块盘点、10 个真实参考站来源、设计语言、逐页详细设计、响应式断点、验收门禁 | 同上；§0 有 7 条待确认（Q1 评论/账号是否本轮新建、Q2 亮色主题、Q3 粘性目录侧栏） |
+| # | 待办 | 说明 | 依赖 |
+| --- | --- | --- | --- |
+| 8 | ~~章节页进度~~ 已上线 | 顶栏显示 `L0 x/4 · L1 x/6 · L2 x/2`，`check:ui` 断言数值与章节表一致；900px 以下隐藏 | — |
+| 9 | ~~相邻两行交换 A/B 上图~~ 已上到 L0-03 右栏 | 4 组结论 + 无效对照说明；入口只有 L0-03 第②段 | — |
+| 10 | **优先级表「条件」列仍是机器派生中文** | 那张表 38 行的条件列是 APL 直译（形如 `（「priest.force_devour_matter」 或 目标有吸收盾） 且 「devour_matter」天赋`）。合规（标识符用「」框住），但读者要停下来翻译。两条路：① 逐行补一句人工「人话条件」（38 行，约 3–4 小时）；② 维持现状，只在表头加一句「标识符=天赋/变量原名，展开行内看原文」 | **等你选 ①/②** |
+| 11 | **红玉地形图只有一层** | 现在是路线页展示的那一层（1536×1024）。要么标注「只画主层」，要么把另外两层瓦片也拼上并加楼层切换 | **等你选**（拼图约 1 小时/层） |
+| 12 | 联动图补「谁挂上了 DoT」的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） | **等数据** |
+| 13 | 教练卡按「你哪条没做到」高亮 | 依赖日志分段 | **等日志导出** |
 
-### P3 · 上线与合规（暂不进入主线）
+### P3 · 上线与合规
 
-| # | 待办 | 说明 |
-| --- | --- | --- |
-| 13 | ~~补 `LICENSE`~~ 已完成 | 代码 MIT（`LICENSE`）、内容 CC BY-NC 4.0（`LICENSE-CONTENT`）、第三方与暴雪非官方声明（`THIRD-PARTY-NOTICES.md`）；README 增「许可与来源」一节 |
-| 14 | **静态部署预演** | 本地预演已完成：`npm run check:static` 起 HTTP 真实加载 dist（0 失败请求 / 12 章 / 底图 1536px），构建命令 `npm ci && npm run build`、产物 `dist`、底图由 `sync-maps.mjs` 自动同步，步骤见 `docs/DEPLOY.md`。**卡在平台账号**：需要用户登录 Cloudflare Pages / Netlify / Vercel 并授权本仓库，我拿不到登录态，不排期 |
-| 15 | **`.io` 域名与在线产品化** | 预演通过后再处理自定义域名、章节 URL/分享链接、SEO 元数据、SPA 回退和自动部署门禁；账号、收藏、评论等动态能力另立后端议题。 |
+| # | 待办 | 说明 | 依赖 |
+| --- | --- | --- | --- |
+| 14 | ~~补 `LICENSE`~~ 已完成 | 代码 MIT / 内容 CC BY-NC 4.0 / 第三方与暴雪非官方声明；GitHub 已识别为 MIT | — |
+| 15 | **静态部署预演** | 本地预演已过（`npm run check:static`：0 失败请求 / 12 章 / 底图正常）；三平台步骤在 `docs/DEPLOY.md` | **等你授权平台账号**（Cloudflare Pages / Netlify / Vercel） |
+| 16 | `.io` 域名与在线产品化 | 自定义域名、章节 URL/分享、SEO、自动部署门禁；账号/收藏/评论另立后端议题 | 依赖 15 |
 
----
+### 等你拍板（三选一即可，不拍也能继续跑）
+
+1. **优先级表条件列**：人工补人话（3–4 小时）还是维持现状 + 表头说明？
+2. **红玉地形图**：只画主层（加标注）还是补齐三层 + 楼层切换？
+3. **部署**：继续等账号，还是先不做、只保留双击与本地 HTTP 两种打开方式？
 
 ## 6. 已知限制（别重复踩）
 

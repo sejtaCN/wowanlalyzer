@@ -253,6 +253,18 @@ for (const chapter of chapters) {
     if (f.status === 'missing') warnings.push(`${chapter.id} 第${i + 1}段缺图 ${f.kind}（→${f.next ?? '未写批次'}）`);
   });
 
+  // 顶栏层级进度：首页必须显示 L0/L1/L2 的已读篇数，且总数与章节表一致
+  if (chapter.id === 'l0-01-what-shadow-does') {
+    const nav = await page.evaluate(() => {
+      const el = document.querySelector('.nav-levels');
+      return { text: el?.innerText?.replace(/\s+/g, ' ').trim() ?? '', seen: el?.getAttribute('data-seen') ?? null };
+    });
+    // 打开即计入已读，所以此刻正在看 L0-01，L0 应为 1/4
+    const expected = 'L0:1/4,L1:0/6,L2:0/2';
+    check(nav.seen === expected, `顶栏层级进度应为 ${expected}，实际 ${nav.seen ?? '(没有 .nav-levels)'}`);
+    check(/L0/.test(nav.text) && /1\/4/.test(nav.text) && /0\/6/.test(nav.text) && /0\/2/.test(nav.text), `顶栏层级进度文本不对：${nav.text}`);
+  }
+
   // claim：占位符必须在页面上全部替换成数字，不能把模板原文漏给读者。
   if (chapter.claim) {
     const claimText = await page.evaluate(() => document.querySelector('.claim')?.innerText ?? '');

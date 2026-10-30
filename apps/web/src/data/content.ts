@@ -840,6 +840,14 @@ export function skillName(skill: string): SkillLabel {
   };
 }
 
+/**
+ * APL 段（actions.main / actions.cds / …）的读者标签。
+ * 页面不许直接把段键印出来——那是机器标识，不是栏目名。
+ */
+export function sectionLabel(key: string): string {
+  return priorityTable.sections.find((section) => section.key === key)?.label ?? key;
+}
+
 export function skillUsage(): Array<{ skill: string; count: number; sections: string[] }> {
   const usage = new Map<string, { skill: string; count: number; sections: Set<string> }>();
   for (const section of priorityTable.sections) {

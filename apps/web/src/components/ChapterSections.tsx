@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { CaseBlock, Chapter, EvidenceRef, MapRef, PriorityShift } from '@learn';
-import { CHAPTERS, FIGURES, budgetFor, burstPairs, chapterRoute, getLog, getPhases, getRun, getSimulatedTimeline, prioritySections, skillName, skillUsage, type BurstPair, type RouteDoc } from '../data/content';
+import { CHAPTERS, FIGURES, budgetFor, burstPairs, chapterRoute, getLog, getPhases, getRun, getSimulatedTimeline, prioritySections, sectionLabel, skillName, skillUsage, type BurstPair, type RouteDoc } from '../data/content';
 import { resolveClaim } from '../data/claim';
 import { Gloss } from './Gloss';
 import TopBand from './Teaching/TopBand';
@@ -193,7 +193,7 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
           <h3 style={{ display: 'flex', gap: 8, alignItems: 'baseline' }}>
             {sec.label}
             <span className="note">
-              {sec.rows.length} 条{deadInSec ? ` · ${deadInSec} 条本构建用不上` : ''}
+              {sec.rows.length} 条{deadInSec ? ` · ${deadInSec} 条这套配置用不上` : ''}
             </span>
           </h3>
           <div className="tblwrap">
@@ -213,9 +213,9 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
                     <tr key={`${sec.key}-${r.order}-${r.skill}`} className={r.dead ? 'is-dead' : undefined}>
                       <td className="n dim">{r.order}</td>
                       <td title={r.skill}>
-                        {s.text}
+                        {s.verified ? s.text : `「${s.text}」`}
                         {r.dead ? (
-                          <span className="dead-tag">{r.dead.kind === 'condition' ? '木桩测不到' : '本构建用不上'}</span>
+                          <span className="dead-tag">{r.dead.kind === 'condition' ? '木桩测不到' : '这套配置用不上'}</span>
                         ) : null}
                       </td>
                       <td>
@@ -250,7 +250,7 @@ export function PriorityTableChart({ filter }: { filter?: { sections?: string[] 
       <div className="note">
         表格顺序来自 APL 原文。条件翻成了人话，逻辑一个字没改。
         {deadCount
-          ? ` 标「本构建用不上」的 ${deadCount} 条里，多数是这个构建本身没有的（种族 / 天赋 / 装备 / 队友），原因写在行内；标「木桩测不到」的是有、但木桩打不到的条件，换到实战仍要按条件用。`
+          ? ` 标「这套配置用不上」的 ${deadCount} 条里，多数是这套配置本身没有的（种族 / 天赋 / 装备 / 队友），原因写在行内；标「木桩测不到」的是有、但木桩打不到的条件，换到实战仍要按条件用。`
           : ''}
       </div>
     </>
@@ -269,11 +269,12 @@ export function SkillCards() {
           return (
             <div className="sk" key={u.skill}>
               <div className="nm" title={u.skill}>
-                {s.text}
+                {s.verified ? s.text : `「${s.text}」`}
+                {!s.verified ? <span className="sec-tag pending">待核对</span> : null}
               </div>
               <div className="meta">
                 <span className="cnt">{u.count} 条规则</span>
-                <span className="dim">{u.sections.join(' · ')}</span>
+                <span className="dim">{u.sections.map(sectionLabel).join(' · ')}</span>
               </div>
             </div>
           );

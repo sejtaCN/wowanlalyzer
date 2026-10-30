@@ -60,10 +60,9 @@ export default function PriorityMap({
               </div>
               <div className="pm-body">
                 <div className="pm-head">
-                  <b title={item.skill}>{visibleName}</b>
+                  <b title={item.skill}>{label.verified ? visibleName : `「${visibleName}」`}</b>
                   {!label.verified ? <span className="sec-tag pending">待核对</span> : null}
                   <span className={`pm-tag ${item.tone}`}>{item.tone === 'add' ? up : down}</span>
-                  {item.row?.conditionZh ? <span className="pm-cond">{item.row.conditionZh}</span> : null}
                 </div>
                 <div className="pm-reason"><Gloss text={item.reason} /></div>
                 <div className="pm-evidence">{item.evidence}</div>

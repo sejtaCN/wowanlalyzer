@@ -60,7 +60,7 @@ export default function SimulatedTimelineFigure({ timeline }: { timeline: Simula
             <span key={role} role="listitem"><i className={`simtl-seg ${role}`} />{ROLE_LABEL[role]}</span>
           ))}
         </div>
-        <span>阶段色条表示职责构成；下方标出每段的关键动作时刻。来源固定到代表迭代与 runId。</span>
+        <span>阶段色条表示职责构成；下方标出每段的关键动作时刻。来源是这份模拟的代表迭代。</span>
       </div>
       <div className="simtl-events" role="list" aria-label={`${timeline.label} 关键动作时刻`}>
         {timeline.phases.map((phase) => (
@@ -79,7 +79,11 @@ export default function SimulatedTimelineFigure({ timeline }: { timeline: Simula
         ))}
       </div>
       <p className="simtl-read">{timeline.decision}</p>
-      <p className="note">{timeline.evidence} 来源：{timeline.runId}。这是模拟执行节奏，不是真人日志阶段。</p>
+      <p className="note">{timeline.evidence} 这是模拟执行节奏，不是真人日志阶段。</p>
+      <details className="pm-raw">
+        <summary>来源记录</summary>
+        <div className="note">{timeline.runId}</div>
+      </details>
     </div>
   );
 }

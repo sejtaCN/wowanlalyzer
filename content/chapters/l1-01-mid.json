@@ -34,7 +34,7 @@
    {
     "skill": "tentacle_slam",
     "reason": "目标 ≥5 时它能挂上多个目标，优先级往前挪",
-    "evidence": "APL 条件：已挂吸血鬼之触的目标数 <5；模拟从「w30_5」起收益就稳定了",
+    "evidence": "APL 条件：已挂吸血鬼之触的目标数 <5；模拟从 5 目标这档起收益就稳定了",
     "raw": "active_dot.vampiric_touch<5 条件；模拟 w30_5 起收益稳定"
    }
   ],
@@ -63,7 +63,7 @@
   "timelineKey": "mid-wave",
   "headline": "模拟里的 5 目标中波：先铺 DoT，再进爆发",
   "reading": "起手阶段 15 个动作主要铺 DoT 与开增益；进入爆发后补多目标 DoT 和直伤；收尾继续续 DoT、按优先级填空，不切回单体连招。",
-  "evidence": "来源：Archon 动作序列 trace_archon__w30_5__5000，代表迭代 42 个动作；阶段是对 30 秒模拟时间的三等分。"
+  "evidence": "来源：Archon 动作序列的代表迭代（42 个动作，记录编号见页面底部证据条）；阶段是对 30 秒模拟时间的三等分。"
  },
  "evidence": {
   "runIds": [

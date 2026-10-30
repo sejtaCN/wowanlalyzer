@@ -71,6 +71,12 @@ function Shell() {
 
   const chapters = chaptersFor(spec.id, ARCHON_PROFILE_ID);
   const chapter = screen.name === 'chapter' ? findChapter(chapters, screen.id) : null;
+  // 顶栏进度：按层级数已读篇数，读过的用 progress.seen
+  const seenLevels = ['L0', 'L1', 'L2'].map((level) => {
+    const total = chapters.filter((item) => item.level === level).length;
+    const seenCount = chapters.filter((item) => item.level === level && progress.seen.includes(item.id)).length;
+    return { level, total, seenCount };
+  });
 
   return (
     <>
@@ -85,6 +91,15 @@ function Shell() {
             解析台
           </button>
         </nav>
+        <span
+          className="nav-levels"
+          data-seen={seenLevels.map((item) => `${item.level}:${item.seenCount}/${item.total}`).join(',')}
+          title="按层级数已读篇数"
+        >
+          {seenLevels.map((item) => (
+            <span key={item.level}>{item.level} <b>{item.seenCount}</b>/{item.total}</span>
+          ))}
+        </span>
       </header>
 
       {note ? (

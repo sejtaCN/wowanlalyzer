@@ -15,7 +15,7 @@
    {
     "skill": "vampiric_touch",
     "reason": "第一个 GCD 就给它，别等怪聚齐",
-    "evidence": "APL 条件：「actions.main」里，吸血鬼之触排在填充技能之前",
+    "evidence": "APL 条件：主循环里，吸血鬼之触排在填充技能之前",
     "raw": "actions.main 顺序里 vampiric_touch 排在填充技能之前"
    },
    {
@@ -29,7 +29,7 @@
    {
     "skill": "mind_flay",
     "reason": "它是填充。持续伤害没铺满时，不要拿它换刷新",
-    "evidence": "APL 条件：「actions.main」里，精神鞭笞排在所有持续伤害之后",
+    "evidence": "APL 条件：主循环里，精神鞭笞排在所有持续伤害之后",
     "raw": "actions.main 里 mind_flay 排在所有 DoT 之后"
    }
   ]

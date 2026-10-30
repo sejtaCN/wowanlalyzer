@@ -38,7 +38,7 @@
    {
     "skill": "aoe_loop",
     "reason": "目标数没到阈值，整段 AoE 不执行",
-    "evidence": "模拟「w30_2」：AoE 开不开的差落在 CI 内",
+    "evidence": "2 目标这档的模拟：AoE 开不开的差落在误差内",
     "raw": "模拟 w30_2：AoE 开与不开都在 CI 内"
    }
   ]

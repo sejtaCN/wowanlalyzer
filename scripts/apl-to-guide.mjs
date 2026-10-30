@@ -355,12 +355,12 @@ function buildDeadRows(lines, profileText, hero) {
     if (rule.races.includes(race)) continue;
     const owner = rule.races.map(zhRace).join('/');
     for (const skill of rule.skills) {
-      if (apl.has(skill)) mark(skill, 'race', `种族技能（${owner}专属），本构建是${zhRace(race)}`);
+      if (apl.has(skill)) mark(skill, 'race', `种族技能（${owner}专属），这套配置是${zhRace(race)}`);
     }
   }
 
   for (const skill of TALENT_ONLY) {
-    if (apl.has(skill)) mark(skill, 'talent', '天赋没点，本构建的技能集里没有它');
+    if (apl.has(skill)) mark(skill, 'talent', '这套配置没点这个天赋');
   }
 
   if (apl.has('use_item')) {
@@ -443,7 +443,7 @@ const out = {
   note:
     '直接从 APL 抽取，条件原文与人话并列；人话只改写法，不改逻辑，也不补"为什么"。' +
     '有出处的名字用中文，没出处的用「」标成标识符。' +
-    'dead 非空的行表示本构建用不上（种族/装备/队友/条件/天赋），原因与施放次数一并给出。',
+    'dead 非空的行表示这套配置用不上（种族/装备/队友/条件/天赋），原因与施放次数一并给出。',
   sections: Object.entries(SECTION_LABEL)
     .map(([k, v]) => ({ key: k, label: v, rows: rows.filter((r) => r.section === k) }))
     .filter((s) => s.rows.length),

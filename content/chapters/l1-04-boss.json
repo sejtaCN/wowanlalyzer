@@ -28,7 +28,7 @@
    {
     "skill": "vampiric_touch",
     "reason": "单目标时覆盖率决定一切，断了立刻补",
-    "evidence": "APL 条件：「actions.main」里，吸血鬼之触的条件含「active_dot」判断",
+    "evidence": "APL 条件：主循环里，吸血鬼之触的条件含「已挂 DoT 目标数」判断",
     "raw": "actions.main 中 vampiric_touch 条件含 active_dot 判断"
    },
    {
