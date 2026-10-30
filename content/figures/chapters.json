@@ -104,7 +104,8 @@
         "section": 2,
         "kind": "priority-table",
         "status": "ready",
-        "source": "priority-table.json"
+        "source": "priority-table.json",
+        "note": "左栏是 38 条优先级表；右栏两张核对图：禁掉一行掉多少（杠杆）、相邻两行交换值多少（A/B）。"
       },
       {
         "section": 3,

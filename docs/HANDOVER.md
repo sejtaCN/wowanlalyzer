@@ -15,11 +15,11 @@
 | 章节 | 12（L0×4 / L1×6 / L2×2：毒牙祭坛 / 红玉新生池） | `content/chapters/` |
 | 教练建议 | 7 条 | `content/coaching/general.json` |
 | 模拟 runId | 原始 296 个；前端只查明确归属 Archon 的 235 条 | `content/sims/` + 汇总 `numeric-summary.json` |
-| 图契约 | 12 章 × 5 段；54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段（没有真人日志）；L0-03 / L1-01 第五段为模拟时间线 | `content/figures/chapters.json` |
+| 图契约 | 12 章 × 5 段；54 有图 / 1 缺图 / 5 不适用；缺的是红玉第⑤段（没有真人日志）；L0-03 / L1-01 第五段为模拟时间线；L0-03 第②段是「表 + 两张核对图」同屏（契约 kind 仍为 priority-table） | `content/figures/chapters.json` |
 | 分析数据 | 联动 / 杠杆 / 伤害构成 / 加怪窗口 / 动作预算 / 两波冷却 / 阶段表 / 配装 / 属性最优化 / 相邻交换 | `content/analysis/`、`content/logs/` |
-| 代码量 | 约 5,390 行 TS/TSX | `apps/web`、`packages/learning-core` |
+| 代码量 | 约 5,524 行 TS/TSX | `apps/web`、`packages/learning-core` |
 | 前端数据层 | `content.ts` / `specs.ts` 已入库；由 JSON 真源建立运行时索引 | `apps/web/src/data/` |
-| 单文件产物 | 807,533 字节（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
+| 单文件产物 | 827,395 字节（含 L0-03 右栏的杠杆与相邻交换汇总） |（`dist/index.html`，内联 CSS/JS；Vite 报的 743.96 kB 是字符计量，不是文件字节） | `dist/` |
 
 技术底座：Vite + React 18 + TypeScript；SimC 1210-01（WoW 12.1.5）在 `.tools/simc/`（不进 git）。
 
@@ -169,7 +169,7 @@ npm run build              # 单文件产出
 | # | 待办 | 说明 |
 | --- | --- | --- |
 | 7 | 章节页进度条 | 顶栏显示 L0/L1/L2 各读了几篇（`progress.seen` 已用于首页路径打点与「已读」标记；顶栏「各读了几篇」的计数尚未渲染，只差这一处） |
-| 8 | ~~解析台加"相邻两行交换" A/B~~ 已上线 | `scripts/adjacent-swap.mjs` 只换相邻两行、`check:adjacent` 按 runId 重算；4 组结论（s1 / s3 有效，s2 **无效对照**——交换的 `void_blast` 四场景 0 次施放，s4 误差内）在 `content/analysis/adjacent-archon.json`，解析台页首有锚点入口 | `npm run check:adjacent` |
+| 8 | ~~相邻两行交换 A/B 上图~~ 已上到 L0-03 | `scripts/adjacent-swap.mjs` 只换相邻两行、`check:adjacent` 按 runId 重算；4 组结论（s1 / s3 有效，s2 **无效对照**——交换的 `void_blast` 四场景 0 次施放，s4 误差内）在 `content/analysis/adjacent-archon.json`。**入口只有 L0-03 第②段右栏**：2026-10-30 之前这份数据只有跑批与分析门禁、页面上没有任何入口，旧版这里写的「解析台页首有锚点」是错的，已删 | `npm run check:adjacent`、`check:ui` 断言 4 行 |
 | 9 | 联动图补"谁挂上了 DoT"的边 | 需要重导完整 DoT 条带（现在只有 600 条样本） |
 | 10 | 教练卡按"你哪条没做到"高亮 | 依赖日志分段 |
 | 11 | **读者可见文案中文化 + 排版 6 档字号** | 全局已落地 `36/24/18/16/14/12`、400/500 两档字重、16px 正文、32px 段距与 36em 行长；6 个 L1 与 L2 已统一目录、决策顶图带、证据折叠与阶段结构，L0 仍保留基础章节结构 | `docs/ui-reference-decomposition.md`、`docs/ui-blueprint.md` §3–§4 |

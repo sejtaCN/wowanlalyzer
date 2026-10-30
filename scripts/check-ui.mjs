@@ -252,6 +252,34 @@ for (const chapter of chapters) {
     if (f.status === 'missing') warnings.push(`${chapter.id} 第${i + 1}段缺图 ${f.kind}（→${f.next ?? '未写批次'}）`);
   });
 
+  // L0-03：优先级表与两张核对图必须真的同屏并排，且三态判定齐全。
+  if (chapter.id === 'l0-03-priority-table') {
+    const split = await page.evaluate(() => {
+      const wrap = document.querySelector('.split-evidence');
+      const table = wrap?.querySelector('.split-main .tbl-priority');
+      const side = wrap?.querySelector('.split-side');
+      const tableBox = table?.getBoundingClientRect();
+      const sideBox = side?.getBoundingClientRect();
+      const states = [...(side?.querySelectorAll('.lev-row') ?? [])].map((el) => el.dataset.state);
+      return {
+        hasWrap: Boolean(wrap),
+        tableRows: wrap?.querySelectorAll('.split-main tbody tr').length ?? 0,
+        levRows: side?.querySelectorAll('.lev-row').length ?? 0,
+        adjRows: side?.querySelectorAll('.adj-row').length ?? 0,
+        states,
+        sideBySide: Boolean(tableBox && sideBox && sideBox.left >= tableBox.right - 2 && Math.abs(sideBox.top - tableBox.top) < 48),
+      };
+    });
+    check(split.hasWrap && split.tableRows > 0, 'l0-03: 同屏左栏没有优先级表');
+    check(split.levRows > 0, 'l0-03: 右栏杠杆条没渲染');
+    check(split.adjRows === 4, `l0-03: 右栏相邻交换应 4 行，实际 ${split.adjRows}`);
+    check(split.sideBySide, 'l0-03: 右栏没有和表并排（被堆叠或换行）');
+    check(
+      split.states.every((state) => ['significant', 'within-noise', 'inert'].includes(state)),
+      `l0-03: 杠杆三态判定缺失（${split.states.join(',')}）`,
+    );
+  }
+
   const sizes = await fontSizesIn('.page');
   sizes.forEach((s) => check(FS_OK.has(s), `${chapter.id}: 出现了六档之外的字号 ${s}`));
   const weights = await fontWeightsIn('.page');

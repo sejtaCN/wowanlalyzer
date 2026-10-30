@@ -9,6 +9,7 @@ import { burstAdvice } from './Teaching/rules';
 import TargetBand from './Teaching/TargetBand';
 import PriorityMap from './Teaching/PriorityMap';
 import { RouteExplorer, SelectedWavePanel } from './Teaching/RouteExplorer';
+import { AdjacentRows, LeverageBars } from './Teaching/PriorityEvidence';
 import ActionBudget from './Teaching/ActionBudget';
 import CooldownWindow from './Teaching/CooldownWindow';
 import CastChart from './Teaching/CastChart';
@@ -74,7 +75,7 @@ const L0_OPENING: Record<string, { title: string; body: string; question: string
     title: '顺序固定，选择随条件变化',
     body: '优先级表不是背诵用的技能清单。每次选择都从表头开始，当前状态满足哪一行，哪一行就是这次输出判断的位置。',
     question: '每个 GCD 怎么决定',
-    note: '先读条件，再读技能；表格顺序来自 APL，页面不另排一套循环。',
+    note: '先读条件，再读技能。右边两张图说明这张表凭什么这么排：禁掉哪一行掉得最多、把相邻两行反过来打会怎样。',
   },
   'l0-04-cooldowns': {
     title: '同一轮冷却，换到的伤害不同',
@@ -82,6 +83,23 @@ const L0_OPENING: Record<string, { title: string; body: string; question: string
     question: '爆发价值看哪把尺',
     note: '先比较当前与后续窗口，再决定这一轮冷却落在哪一波。',
   },
+};
+
+/** 主图类型 → 段标题 / 标签。kind 是内部标识，不许直接印到页面上。 */
+const CHART_QUESTION: Record<string, string> = {
+  'burst-bars': '开爆发值多少',
+  'priority-table': '表的顺序凭什么这样',
+  'skill-cards': '技能先按什么分主次',
+  'log-stats': '整场他打了什么',
+  'wave-table': '这些波次值多少',
+};
+
+const CHART_TAG: Record<string, string> = {
+  'burst-bars': '模拟 · 5000 迭代',
+  'priority-table': '顺序来自 APL',
+  'skill-cards': '按出现场合',
+  'log-stats': '真实日志',
+  'wave-table': '路线波次',
 };
 
 function L0OpeningScope({ chapterId }: { chapterId: string }) {
@@ -574,10 +592,8 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         no="②"
         figureKind={isRoute ? 'selected-wave' : chapter.chart.kind}
         figureStatus={figure(2)?.status}
-        question={isRoute ? '选中的这一波值多少' : '开爆发值多少'}
-        tag={isRoute
-          ? '当前波 · 开 / 不开对照'
-          : chapter.chart.kind === 'burst-bars' ? '模拟 · 5000 迭代' : chapter.chart.kind}
+        question={isRoute ? '选中的这一波值多少' : CHART_QUESTION[chapter.chart.kind] ?? '这一章的图答什么'}
+        tag={isRoute ? '当前波 · 开 / 不开对照' : CHART_TAG[chapter.chart.kind] ?? '数据图'}
         note={
           isRoute && routeWave
             ? routeWave.mobCount <= 0
@@ -606,7 +622,15 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
             {chapter.id === 'l1-04-boss' && chapter.claim ? <BossClaim claim={chapter.claim} /> : null}
           </>
         ) : chapter.chart.kind === 'priority-table' ? (
-          <PriorityTableChart filter={chapter.chart.filter} />
+          <div className="split-evidence" data-figure-kind="priority-table-split">
+            <div className="split-main">
+              <PriorityTableChart filter={chapter.chart.filter} />
+            </div>
+            <aside className="split-side">
+              <LeverageBars />
+              <AdjacentRows />
+            </aside>
+          </div>
         ) : chapter.chart.kind === 'skill-cards' ? (
           <SkillCards />
         ) : chapter.chart.kind === 'log-stats' ? (

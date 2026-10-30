@@ -32,6 +32,7 @@ import crosscheckJson from '../../../../content/guides/crosscheck-archon.json';
 import sourcesSummaryJson from '../../../../content/guides/sources-summary.json';
 import altarWavesJson from '../../../../content/routes/waves-altar-of-fangs.json';
 import rubyWavesJson from '../../../../content/routes/waves-ruby-life-pools.json';
+import adjacentJson from '../../../../content/analysis/adjacent-archon.json';
 import eventsJson from '../../../../content/logs/xiaohuasheng-events.json';
 import phasesJson from '../../../../content/logs/xiaohuasheng-phases.json';
 import numericSummaryJson from '../../../../content/sims/numeric-summary.json';
@@ -652,6 +653,20 @@ const ROUTE_DOCS: Record<string, RouteDoc> = {
 
 /** L1 通用模型借路线举例时的默认副本；换样本只改这一处。 */
 const EXAMPLE_DUNGEON = 'altar_of_fangs';
+
+export interface AdjacentGroup {
+  id: string;
+  label: string;
+  why: string;
+  tableOrder: number[];
+  verdict: 'effective' | 'structurally_inert' | 'within_noise' | 'inconsistent' | 'undetermined';
+  deltaPct: number | null;
+  structuralNote?: string | null;
+  guideMatch?: string;
+}
+
+/** 相邻两行交换 A/B 的汇总（只读跑批产物；明细与 runId 在 content/analysis/adjacent-archon.json）。 */
+export const ADJACENT = adjacentJson as unknown as { hero: string; groups: AdjacentGroup[] };
 
 export const ROUTE_DUNGEONS = Object.keys(ROUTE_DOCS).sort();
 
