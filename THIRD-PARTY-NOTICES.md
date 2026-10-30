@@ -1,5 +1,15 @@
 # 第三方素材与非官方声明
 
+## 许可分区
+
+| 范围 | 许可 |
+| --- | --- |
+| `apps/`、`packages/`、`scripts/`、`tests/` 与仓库根配置文件 | MIT（见 `LICENSE`） |
+| `content/` 教学正文与图表数据、`docs/` 讲解 | CC BY-NC 4.0（见 `LICENSE-CONTENT`） |
+| 本文件列出的第三方素材（暴雪、keystone.guru、WCL、SimC 等） | 归各自权利人，本项目只按下列限度引用 |
+
+`LICENSE` 保持标准 MIT 原文不动（GitHub 靠逐字匹配识别许可）；范围说明写在这里，不写进许可文件。
+
 ## 非官方声明
 
 本项目是**玩家自制的教学工具**，与 Blizzard Entertainment 无任何关联，未获其授权、
