@@ -11,5 +11,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // 这个 index.html 是 Vite 的开发入口：直接双击（file://）一定白屏，因为 /src/main.tsx 需要开发服务器。
+      // 这里给一个中文提示页，避免把"白屏"误判成程序坏了。构建产物里没有这段逻辑（产物是内联脚本）。
+      (function () {
+        if (location.protocol !== 'file:') return;
+        if (!document.querySelector('script[src*="/src/main.tsx"]')) return;
+        var el = document.getElementById('root');
+        if (!el) return;
+        el.innerHTML =
+          '<div style="font:16px/1.7 system-ui,\'Microsoft YaHei\',sans-serif;color:#f8fafc;background:#0b0e13;min-height:100vh;padding:48px 32px">' +
+          '<h1 style="font-size:24px;margin:0 0 12px">这是开发入口，不是给你双击的文件</h1>' +
+          '<p style="margin:0 0 8px">要看的界面在 <b>dist/index.html</b>：双击它，或者双击仓库根的 <b>打开系统.bat</b>。</p>' +
+          '<p style="margin:0;color:#94a0af">这个目录下的 index.html 需要 Vite 开发服务器（npm run dev）才能渲染，双击一定是空白。</p>' +
+          '</div>';
+      })();
+    </script>
   </body>
 </html>

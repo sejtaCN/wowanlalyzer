@@ -23,9 +23,13 @@ D:\wowanlalyzer\dist\index.html
 
 单文件构建，CSS/JS 全部内联，双击就能用；地图在 `dist/maps/`。
 
-> **打开时是白页？** 说明那一刻正在重新构建（`npm run build` / `check:ui` / `verify:gates` 都会重写 `dist/index.html`）。
-> 等构建结束按 `Ctrl+Shift+R` 强刷即可——`file://` 页面会被浏览器缓存，普通刷新可能还是旧的半成品。
-> 不是服务器问题：这版没有后端，也不依赖任何服务。
+> **打开时是白页？** 按顺序排查三件事：
+>
+> 1. **是不是打开错了文件**：`apps/web/index.html` 是开发入口，双击一定白屏（需要 `npm run dev`）。要开的是 `dist/index.html`。现在开错也会看到一句中文提示，不再是空白。
+> 2. **是不是正在重新构建**：`npm run build` / `check:ui` / `verify:gates` 都会重写 `dist/index.html`，重写那一两秒打开就是空白。等构建结束按 `Ctrl+Shift+R` 强刷（`file://` 会被浏览器缓存）。
+> 3. **Chrome 没窗口**：实测过一种情况——`chrome.exe` 进程在跑但没有任何窗口（任务管理器可见），双击 html 就"没反应"或白屏。这时双击 **`打开系统.bat`**：它优先用 Edge 打开，没有 Edge 才回退到 Chrome/系统默认。也可以手动右键 html →「打开方式」→ Edge。
+>
+> 这版没有后端，不依赖任何服务器。
 
 ### ③ 命令行
 
