@@ -231,10 +231,11 @@
 
 | Token | 值 | 用途 |
 | --- | --- | --- |
-| `--font-sans` | `system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif` | 正文 |
-| `--font-mono` | `ui-monospace, 'Cascadia Mono', 'SF Mono', Consolas, monospace` | 数字、runId、路径、命令 |
+| `--sans` | `'Noto Sans SC', 'Microsoft YaHei UI', 'PingFang SC', 'Source Han Sans SC', system-ui, sans-serif` | 正文 |
+| `--serif` | `'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', STSong, serif` | 页面主标题与段标题 |
+| `--mono` | `ui-monospace, 'Cascadia Mono', 'SF Mono', Consolas, monospace` | 数字、runId、路径、命令 |
 
-> **删掉 `Inter`**：现状 `ui.css:53` 声明了 `Inter` 但从未加载（无 `@font-face`、无外链），实际落到系统字体。声明一个不存在的字体是误导。
+> `Inter` 已从字体栈移除；正文优先使用本机可用的 Noto Sans SC，标题优先 Noto Serif SC，均保留系统字体回退。
 
 **字重只用两档**（R4/R5 的共识）：`400` 常规 / `500` 中等。现状 `ui.css` 用了 600/700/800 三档（`h1` 800、`h2` 700、`h3` 600），在暗底上过重。**改为 500**，靠字号与颜色拉开层级。
 
@@ -773,8 +774,8 @@
 
 #### ④ 配装与属性
 
-- 收益曲线：SVG 多线（4 个输出模型），4 条线用 `--positive` / `--info` / `--warning` / `--accent` 区分，**必须在图例标注模型名**
-- 最优配比表：每属性 4 档实测值 + 当前最优配比行高亮 `--accent-soft`
+- 收益曲线：SVG 四属性曲线，暴击 / 急速 / 精通 / 全能分别使用 `--stat-crit` / `--stat-haste` / `--stat-mastery` / `--stat-vers`，并以实线 / 虚线 / 点线 / 点划线形成第二信号
+- 最优配比表：每属性 4 档实测值 + 当前输出模型的固定预算配比高亮 `--accent-soft`；不显示玩家当前装备快照
 - 摘除 A/B 表：字段与②同构
 
 #### ⑤ 参考资料

@@ -197,6 +197,13 @@ export interface RouteDoc {
   mdtMappingHash?: string | null;
   mdtAddonVersion?: number | null;
   mapScope?: string | null;
+  mapProjection?: {
+    width: number;
+    height: number;
+    zoom: number;
+    pixelsPerWorldUnit: number;
+  };
+  routePaths?: Array<Array<{ lat: number; lng: number; floor_id?: number }>>;
   statExamples?: Array<{
     scenario: string;
     targets: number;
@@ -355,12 +362,14 @@ export interface StatOptimum {
   actualDps: number;
   runId: string;
   absErrorPct: number;
+  /** 与固定测试基线比较，仅供校核；页面改用相对全零基准。 */
   gainVsCurrentPct: number;
   gainVsCurrentDps: number;
 }
 
 export interface StatScenario {
   budget: number;
+  /** 内部复现用的固定测试基线；页面不把它当玩家当前面板展示。 */
   currentRatings: Record<string, number>;
   currentRunId: string;
   currentDps: number;

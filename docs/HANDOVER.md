@@ -49,6 +49,7 @@ content/
 scripts/                 数据生产线（全部可重跑）
   import-wcl-event-pages.mjs  公开 WCL 标题筛选事件 → 真实 Pull 分段
 docs/                    产品 / UI / 教学 / 流程 / 规范
+  CONTENT-SYSTEM-PLAYBOOK.md **总方法**：数据分层、生产流程、表达规范、复核与治疗/团本扩展
   guide-content-rules.md  **文案与内容结构规范源**：四类内容表达规范 / 写作流程 / AI 味清单
   design-rules.md         **设计规范适配层**：间距阶 / 颜色 token / 中文排版 / 无障碍底线
   nga-copy-spec.md        NGA 风格改写的施工记录 + 已落盘正文快照
@@ -65,7 +66,7 @@ packages/learning-core/  内容模型 + 进度（纯逻辑）
 
 ## 3. 四种常见更新，怎么做
 
-### 3.1 只改数值（版本更新、新装备）
+### 3.1 只改数值（版本更新、固定测试模板变更）
 
 ```bash
 # 1) 换 profile（新赛季的 APL）
@@ -74,7 +75,7 @@ cp <新 profile> content/profiles/MID2_shadow_archon.simc
 # 2) 重跑全部模拟
 npm run sims:run && npm run sims:summary
 npm run analysis:leverage && npm run analysis:share && npm run analysis:interactions
-npm run gearing && npm run statopt   # 配装与属性最优化（换版本才需要重跑）
+npm run gearing && npm run statopt   # 换游戏版本或主动更换固定测试模板时重跑
 npm run sims:adds
 npm run sims:trace && npm run analysis:budget && npm run analysis:cooldown
 
@@ -112,7 +113,7 @@ curl -s  -o .tools/tmp/kg-<slug>-data.js   "https://assets.keystone.guru/compile
 node scripts/import-route.mjs --dungeon=<slug> --out=content/routes/waves-<slug>.json
 ```
 
-地形图：从路线页挑出该副本的 `tiles_webp/<expansion>/<dungeonKey>/<floor>/<zoom>/<x>_<y>.webp`，4×4 张 384×256 拼成 1536×1024，存 `content/maps/<slug 用连字符>.webp`（入库）；`npm run build` 会把它复制到 `dist/maps`。
+地形图：从路线页挑出该副本的 `tiles_webp/<expansion>/<dungeonKey>/<floor>/<zoom>/<x>_<y>.webp`，4×4 张 384×256 拼成 1536×1024，存 `content/maps/<slug 用连字符>.webp`（入库）；`npm run build` 会把它复制到 `dist/maps`。路线页的 `killZonePaths` 与敌人坐标同时写入 `routePaths` / `enemyPositions`，页面按 `lng×4, -lat×4` 投影绘制真实连线和波次中心；空波次只保留在右侧列表，不伪造地图落点。
 
 写完收口这两步（`chapterRoute` 已按副本读取）：
 
@@ -132,7 +133,7 @@ node scripts/import-route.mjs --dungeon=<slug> --out=content/routes/waves-<slug>
 ```bash
 npm run validate:content   # 数字来源 + 结构完整性 + 60 段图契约
 npm run typecheck          # 类型
-npx vitest run             # 30 条，含结构、数据层、相邻交换、分析门禁与 WCL 8 本清单
+npx vitest run             # 31 条，含结构、数据层、相邻交换、分析门禁、WCL 8 本清单与非个人面板约束
 npm run check:copy         # 可见文案：禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追
 npm run check:design       # 间距阶 / 颜色 token / 中文排版 / 无障碍
 npm run check:doc:selftest  # 文档解析器 LF / CRLF 自测

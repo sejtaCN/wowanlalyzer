@@ -35,7 +35,7 @@ export default function Gearing({ doc, hero }: { doc: GearingDoc; hero: string }
 
   return (
     <div className="gear" data-hero={hero}>
-      <h3>次级属性：每 700 点（约一颗宝石当量）换来多少</h3>
+      <h3>次级属性：固定测试模板下，每 700 点约换来多少</h3>
       <div className="tblwrap">
         <table className="tbl">
           <thead>
@@ -67,10 +67,12 @@ export default function Gearing({ doc, hero }: { doc: GearingDoc; hero: string }
         </table>
       </div>
       <div className="note" style={{ marginTop: 6 }}>
-        灰色 = 差值在误差带内（|Δ| &lt; 0.3 个百分点，等于没影响）。读法：同一行四个数不一样，说明「哪个属性最好」取决于你在打什么——单体堆一个、8 目标堆另一个。金色 = 这一行里最高的模型。
+        这里使用固定的测试模板和场景矩阵，不读取玩家当前装备或人物面板。
+        灰色 = 差值在误差带内（|Δ| &lt; 0.3 个百分点，等于没影响）。同一行四个数不一样，
+        说明「哪个属性更好」取决于输出模型；金色 = 这一行里最高的模型。
       </div>
 
-      <h3 style={{ marginTop: 18 }}>武器附魔 / 武器油 / 美化 / 饰品 / 套装：摘掉它掉多少</h3>
+      <h3 style={{ marginTop: 18 }}>固定测试模板：摘掉一项装备效果后掉多少</h3>
       <div className="tblwrap">
         <table className="tbl">
           <thead>
@@ -133,12 +135,8 @@ export default function Gearing({ doc, hero }: { doc: GearingDoc; hero: string }
         口径限制：{doc.method.caveat}
       </div>
       <div className="note" style={{ marginTop: 4 }}>
-        基线 DPS：
-        {scs.map((sc) => {
-          const b = doc.baseline[sc.id];
-          return <span key={sc.id} style={{ marginRight: 12 }}>{sc.label} {b ? Math.round(b.dps).toLocaleString() : '—'}（±{b?.ci95Pct ?? '—'}%）</span>;
-        })}
-        · {doc.iterations} 迭代/次
+        固定测试模板、{doc.iterations} 迭代/次。百分比只表示该固定条件下的相对贡献，
+        不会因为玩家更换装备或洗属性而自动变成个人面板结论。
       </div>
     </div>
   );

@@ -363,7 +363,7 @@ function buildDeadRows(lines, profileText, hero) {
     if (rule.races.includes(race)) continue;
     const owner = rule.races.map(zhRace).join('/');
     for (const skill of rule.skills) {
-      if (apl.has(skill)) mark(skill, 'race', `种族技能（${owner}专属），这套配置是${zhRace(race)}`);
+      if (apl.has(skill)) mark(skill, 'race', `种族技能（${owner}专属），固定模拟模板未启用该种族`);
     }
   }
 

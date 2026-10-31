@@ -97,7 +97,7 @@ export default function Analyzer() {
         no="④"
         question="换个输出模型，这件东西还值多少"
         tag={`${GEARING.effects.length} 项 · ${GEARING.scenarios.length} 个模型`}
-        note={`属性不是常数：同一行四个模型数字不同，说明「堆什么」取决于你在打什么。预算固定 ${STAT_OPT.budget} 评点时，最优配比在四个模型里各不相同（见下表）。阳性对照（整把武器拿掉 ${GEARING.control.perScenario[GEARING.scenarios[0].id]?.deltaPct?.toFixed(0) ?? '—'}%）${GEARING.control.passed ? '通过，读数可信' : '没通过，别信这次读数'}。`}
+        note={`属性不是常数：同一行四个模型数字不同，说明「堆什么」取决于输出模型。这里固定 ${STAT_OPT.budget} 点评级预算作为统一测试尺度，不读取玩家当前装备或人物属性；最优配比在四个模型里各不相同。阳性对照（整把武器拿掉 ${GEARING.control.perScenario[GEARING.scenarios[0].id]?.deltaPct?.toFixed(0) ?? '—'}%）${GEARING.control.passed ? '通过，读数可信' : '没通过，别信这次读数'}。`}
       >
         <StatCurves doc={STAT_OPT} hero="archon" />
         <Gearing doc={GEARING} hero="archon" />

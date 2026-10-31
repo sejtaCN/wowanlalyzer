@@ -9,10 +9,17 @@ import type { StatOptDoc } from '../data/content';
  */
 
 const COLORS: Record<string, string> = {
-  crit: 'var(--gold)',
-  haste: 'var(--up)',
-  mastery: 'var(--curve-a)',
-  vers: 'var(--curve-b)',
+  crit: 'var(--stat-crit)',
+  haste: 'var(--stat-haste)',
+  mastery: 'var(--stat-mastery)',
+  vers: 'var(--stat-vers)',
+};
+
+const DASH: Record<string, string | undefined> = {
+  crit: undefined,
+  haste: '8 5',
+  mastery: '2 5',
+  vers: '10 4 2 4',
 };
 
 const W = 660;
@@ -28,7 +35,7 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
   }
 
   const stats = doc.stats.map((s) => ({ ...s, points: data.curves[s.key] ?? [] }));
-  const allDps = [...stats.flatMap((s) => s.points.map((p) => p.dps)), data.currentDps];
+  const allDps = [...stats.flatMap((s) => s.points.map((p) => p.dps)), data.zeroDps];
   const lo = Math.min(...allDps) * 0.97;
   const hi = Math.max(...allDps) * 1.01;
   const B = data.budget || doc.budget || 1;
@@ -75,14 +82,14 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
           </button>
         ))}
         <span className="note" style={{ marginLeft: 'auto' }}>
-          预算 {B} 评级 · {doc.iterations} 迭代
+          固定测试预算 {B} 评级 · {doc.iterations} 迭代
         </span>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${sc.label} 下四个次级属性的收益曲线`}>
-        <line x1={PAD.l} y1={y(data.currentDps)} x2={W - PAD.r} y2={y(data.currentDps)} stroke="var(--data-off)" strokeDasharray="4 3" strokeWidth={1} />
-        <text x={W - PAD.r} y={y(data.currentDps) - 4} textAnchor="end" fontSize={9} fill="var(--curve-down-soft)">
-          现装备 {Math.round(data.currentDps).toLocaleString('en-US')}
+        <line x1={PAD.l} y1={y(data.zeroDps)} x2={W - PAD.r} y2={y(data.zeroDps)} stroke="var(--data-off)" strokeDasharray="4 3" strokeWidth={1} />
+        <text x={W - PAD.r} y={y(data.zeroDps) - 4} textAnchor="end" fontSize={9} fill="var(--curve-down-soft)">
+          全零评级基准 {Math.round(data.zeroDps).toLocaleString('en-US')}
         </text>
 
         {[0, 0.25, 0.5, 0.75, 1].map((f) => (
@@ -107,7 +114,13 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
 
         {stats.map((st) => (
           <g key={st.key}>
-            <polyline points={st.points.map((p) => `${x(p.rating)},${y(p.dps)}`).join(' ')} fill="none" stroke={COLORS[st.key]} strokeWidth={2} />
+            <polyline
+              points={st.points.map((p) => `${x(p.rating)},${y(p.dps)}`).join(' ')}
+              fill="none"
+              stroke={COLORS[st.key]}
+              strokeWidth={2.4}
+              strokeDasharray={DASH[st.key]}
+            />
             {st.points.map((p) => (
               <circle key={p.rating} cx={x(p.rating)} cy={y(p.dps)} r={2.6} fill={COLORS[st.key]}>
                 <title>{`${st.label} 全给 ${p.rating} → ${Math.round(p.dps).toLocaleString('en-US')} DPS`}</title>
@@ -120,14 +133,14 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
       <div className="btl-legend">
         {stats.map((st) => (
           <span key={st.key}>
-            <i style={{ background: COLORS[st.key] }} />
+            <i className={`stat-line-key ${st.key}`} />
             {st.label}
           </span>
         ))}
-        <span>虚线 = 现装备（真实评级）下的 DPS</span>
+        <span>虚线水平线 = 四项全零基准；属性线型同时区分四项</span>
       </div>
 
-      <h3 style={{ marginTop: 14 }}>固定预算下的最优配比（同一份评审点，重新分配）</h3>
+      <h3 style={{ marginTop: 14 }}>固定预算下的最优配比（同一组评级点，重新分配）</h3>
       <div className="tblwrap">
         <table className="tbl">
           <thead>
@@ -137,7 +150,7 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
                 <th key={s.key} className="n" style={{ width: 66 }}>{s.label}</th>
               ))}
               <th className="n" style={{ width: 92 }}>实测 DPS</th>
-              <th className="n" style={{ width: 82 }}>相对现装备</th>
+              <th className="n" style={{ width: 82 }}>相对全零</th>
               <th className="n" style={{ width: 74 }}>预测误差</th>
             </tr>
           </thead>
@@ -146,6 +159,7 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
               const d = doc.perScenario[s.id];
               if (!d) return null;
               const opt = d.optimum;
+              const gainVsZeroPct = (opt.actualDps / d.zeroDps - 1) * 100;
               return (
                 <tr key={s.id} className={s.id === sc.id ? 'ph-mark' : undefined}>
                   <td style={{ whiteSpace: 'nowrap' }}>{s.label.replace(/（.*?）/g, '')}</td>
@@ -155,9 +169,9 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
                     </td>
                   ))}
                   <td className="n mono">{Math.round(opt.actualDps).toLocaleString('en-US')}</td>
-                  <td className={`n ${opt.gainVsCurrentPct > 0 ? 'gear-pos' : 'gear-flat'}`}>
-                    {opt.gainVsCurrentPct > 0 ? '+' : ''}
-                    {opt.gainVsCurrentPct.toFixed(2)}%
+                  <td className={`n ${gainVsZeroPct > 0 ? 'gear-pos' : 'gear-flat'}`}>
+                    {gainVsZeroPct > 0 ? '+' : ''}
+                    {gainVsZeroPct.toFixed(2)}%
                   </td>
                   <td className="n dim">{opt.absErrorPct.toFixed(2)}%</td>
                 </tr>
@@ -168,18 +182,13 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
       </div>
 
       <div className="note" style={{ marginTop: 6 }}>
-        <span className="nowrap">现装备：暴 {data.currentRatings.crit ?? 0}</span> ·{' '}
-        <span className="nowrap">急 {data.currentRatings.haste ?? 0}</span> ·{' '}
-        <span className="nowrap">精 {data.currentRatings.mastery ?? 0}</span> ·{' '}
-        <span className="nowrap">全 {data.currentRatings.vers ?? 0}</span>（合计 {data.budget}）。{' '}
-        <span className="nowrap">最优：暴 {o.ratings.crit}</span> · <span className="nowrap">急 {o.ratings.haste}</span> ·{' '}
+        固定测试预算 {data.budget} 点评级，不读取玩家当前装备或人物属性。当前模型最优分布：
+        <span className="nowrap">暴 {o.ratings.crit}</span> · <span className="nowrap">急 {o.ratings.haste}</span> ·{' '}
         <span className="nowrap">精 {o.ratings.mastery}</span> · <span className="nowrap">全 {o.ratings.vers}</span>，实测{' '}
-        <span className="nowrap">{Math.round(o.actualDps).toLocaleString('en-US')} DPS</span>，比现装备{' '}
-        {o.gainVsCurrentPct >= 0 ? '高' : '低'} <span className="nowrap">{Math.abs(o.gainVsCurrentPct).toFixed(2)}%</span>
-        （<span className="nowrap">{o.gainVsCurrentDps >= 0 ? '+' : ''}{Math.round(o.gainVsCurrentDps).toLocaleString('en-US')} DPS</span>）。
+        <span className="nowrap">{Math.round(o.actualDps).toLocaleString('en-US')} DPS</span>。
       </div>
       <div className="note" style={{ marginTop: 4 }}>
-        复现校核：用当前评级作为绝对值重跑，与现装备的差 {data.reproduced.gapPct}%{data.reproduced.ok ? '（通过，覆盖语义吃透了）' : '（未通过，别用这组数）'}。
+        基准复现：沿用同一固定测试条件重跑，差值 {data.reproduced.gapPct}%{data.reproduced.ok ? '（通过）' : '（未通过，别用这组数）'}。
       </div>
       <h3 style={{ marginTop: 18 }}>四个输出模型的属性分配，哪里必须改</h3>
       <p className="statopt-lead">
@@ -190,7 +199,7 @@ export default function StatCurves({ doc, hero }: { doc: StatOptDoc; hero: strin
           <div className={`stat-alloc-row${scenario.id === sid ? ' on' : ''}`} role="listitem" key={scenario.id}>
             <div className="stat-alloc-hd">
               <b>{scenario.label}</b>
-              <span>本模型内 +{row.optimum.gainVsCurrentPct.toFixed(2)}%</span>
+              <span>相对全零 +{((row.optimum.actualDps / row.zeroDps - 1) * 100).toFixed(2)}%</span>
             </div>
             <div className="stat-alloc-bar">
               {doc.stats.map((stat) => {

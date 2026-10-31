@@ -4,7 +4,6 @@ import { CHAPTERS, FIGURES, budgetFor, burstPairs, chapterRoute, getLog, getPhas
 import { resolveClaim } from '../data/claim';
 import { Gloss } from './Gloss';
 import TopBand from './Teaching/TopBand';
-import WaveDiagram from './Teaching/WaveDiagram';
 import BurstTimeline from './Teaching/BurstTimeline';
 import { burstAdvice } from './Teaching/rules';
 import TargetBand from './Teaching/TargetBand';
@@ -15,6 +14,7 @@ import ActionBudget from './Teaching/ActionBudget';
 import CooldownWindow from './Teaching/CooldownWindow';
 import CastChart from './Teaching/CastChart';
 import SimulatedTimelineFigure from './Teaching/SimulatedTimeline';
+import RouteMap from './Teaching/RouteMap';
 
 /** 段外壳：编号 + 一句话（这一段回答什么）→ 图 → 一句说明 */
 export function Section({
@@ -324,7 +324,7 @@ export function PriorityDiff({ add, drop, level }: { add: PriorityShift[]; drop:
   return <PriorityMap add={add} drop={drop} level={level} />;
 }
 
-/* ④ 路线与地图；没有坐标就不在地图上标点。 */
+/* ④ 路线与地图；有坐标就连线并标波次，缺坐标则显式拒绝伪造。 */
 export function MapPanel({
   map,
   route,
@@ -332,6 +332,7 @@ export function MapPanel({
   targets,
   kind,
   selectedPull,
+  onSelect,
 }: {
   map: MapRef | null;
   route: RouteDoc | null;
@@ -339,6 +340,7 @@ export function MapPanel({
   targets?: string | null;
   kind?: 'wave' | 'boss' | 'adds' | 'rhythm';
   selectedPull?: number;
+  onSelect?: (pull: number) => void;
 }) {
   if (!map) {
     if (level === 'L0') {
@@ -349,39 +351,18 @@ export function MapPanel({
   if (!route) {
     return <div className="figempty" data-figure-kind="missing">待补：这条副本的路线数据还没导入，地形图与波次都不画。</div>;
   }
-  const wave = route.waves.find((w) => w.pull === (selectedPull ?? map.pull));
   return (
-    <div className="mapgrid" data-figure-kind={level === 'L2' ? 'route-map' : 'route-examples'}>
-      <div className="mapviz">
-        <img
-          className="mapimg"
-          src={`./maps/${(map.dungeon || '').replace(/_/g, '-')}.webp`}
-          alt={`${route.dungeon} 地牢平面图（keystone.guru 瓦片拼接${route.mapScope ? `，${route.mapScope}` : ''}）`}
-        />
-        <div className="note" style={{ marginTop: 6 }}>
-          {level === 'L2'
-            ? `${route.mapScope ? `${route.mapScope}。` : ''}keystone.guru 瓦片拼接（1536×1024）。路线没有每波坐标，所以这张图只给地形，不标位置。`
-            : '这条路线只用来举例：它不证明通用模型绑定这一波。路线没有每波坐标，不往图上标位置。'}
-        </div>
-      </div>
-      <div className="maptext">
-        {level === 'L2' && wave ? (
-          <>
-            <div className="map-current">
-              <span className="tb-k">当前选中</span>
-              <b>第 {wave.pull} 波 · {wave.mobCount} 只 · {wave.mobCount <= 0 ? '空波次' : wave.isBoss ? 'BOSS' : wave.mobCount >= 10 ? '大波' : wave.mobCount >= 5 ? '中波' : '小波'}</b>
-              <div className="map-mobs">
-                {wave.mobs.map((m) => <span key={m.name}>{m.name} ×{m.count}</span>)}
-              </div>
-            </div>
-            <p className="note">
-              {route.mapScope ? `${route.mapScope}。` : ''}
-              平面图只回答“整张地牢长什么样”；波次顺序看上面的路线条。
-            </p>
-          </>
-        ) : (
-          <WaveDiagram route={route} targets={targets ?? null} highlightPull={selectedPull ?? map.pull} kind={kind} />
-        )}
+    <div className="map-panel" data-figure-kind={level === 'L2' ? 'route-map' : 'route-examples'}>
+      <RouteMap
+        route={route}
+        dungeon={map.dungeon}
+        mapScope={route.mapScope}
+        selectedPull={selectedPull}
+        defaultPull={map.pull}
+        onSelect={onSelect}
+      />
+      <div className="route-source">
+        <span>{targets ? `当前章节目标档：${targets} 只` : '通用机制页'}</span>
         <p className="note">路线来源：<a href={route.sourceUrl} target="_blank" rel="noreferrer">keystone.guru · {route.route}</a></p>
       </div>
     </div>
@@ -659,16 +640,24 @@ export function ChapterBody({ chapter }: { chapter: Chapter }) {
         figureKind={figure(4)?.kind}
         figureStatus={figure(4)?.status}
         question={isRoute ? '这一波在地图哪里' : chapter.level === 'L0' ? '这套规则用在哪里' : '落到真实路线是什么样'}
-        tag={chapter.map ? (isRoute ? '地形图 · 不标波次坐标' : '路线示例') : '不绑定地图'}
+        tag={chapter.map ? (isRoute ? '地形图 · 全路线' : '路线示例 · 全部波次') : '不绑定地图'}
         note={
           isRoute
-            ? '选波看第①段。这一段只核对地形：路线没有每波坐标，不给不存在的点位。'
+            ? '路线连线、波次编号和右侧的怪物构成来自同一份路线数据。点地图编号或右侧波次，会同步切换当前波。'
             : chapter.map
-              ? '借这条真实路线说明模型。路线没有每波坐标，不往图上标位置。'
+              ? '借这条真实路线说明模型：先看整条路线的顺序，再核对当前目标档落在哪一波。'
               : '这一章不绑副本。套到具体路线看 L2。'
         }
       >
-        <MapPanel map={chapter.map} route={route} level={chapter.level} targets={model?.targets} kind={model?.kind} selectedPull={isRoute ? selectedPull : undefined} />
+        <MapPanel
+          map={chapter.map}
+          route={route}
+          level={chapter.level}
+          targets={model?.targets}
+          kind={model?.kind}
+          selectedPull={isRoute ? selectedPull : undefined}
+          onSelect={isRoute ? setSelectedPull : undefined}
+        />
       </Section>
 
       <Section

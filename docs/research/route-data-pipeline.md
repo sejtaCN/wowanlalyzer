@@ -95,6 +95,19 @@ done; done
 - **阶段名**：红玉按「遇到过几个 BOSS」推（`approach` → `after-first-boss` → `after-second-boss` → `after-final-boss`），毒牙祭坛保留原有六段名（`inner-altar` 等，L1 节奏图要读）。
 - **一波两个 BOSS**：红玉 p11 是 Kyrakka + Erkhart Stormvein 同波，`encounter` 写全名（`Kyrakka / Erkhart Stormvein`），不能只记第一个。
 
+### 2.2 路线连线与地图投影
+
+路线页不只有波次怪物列表，还包含 `killZonePaths`：按行进顺序连接各波世界坐标。
+导入器把它原样写入 `routePaths`，并写入底图投影：
+
+- `mapProjection = { width: 1536, height: 1024, zoom: 2, pixelsPerWorldUnit: 4 }`
+- 像素坐标：`x = lng × pixelsPerWorldUnit`，`y = -lat × pixelsPerWorldUnit`
+- 每波圆点取该波 `enemyPositions` 的坐标中心
+- 空波次没有敌人位置，只进入右侧波次列表，不在地图上伪造落点
+
+因此第④段应显示真实路线连线、编号波次和完整波次描述。只放一张没有点位的地形图
+不算“路线”，UI 门禁会检查连线、标记、列表行数和底图加载状态。
+
 ## 3. 三道自校验（脚本内建，不通过就停）
 
 1. 路线里每个 enemy 实例 id 必须能在**同版本** mapping 中找到；

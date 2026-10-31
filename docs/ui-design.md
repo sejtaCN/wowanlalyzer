@@ -94,7 +94,7 @@
 | ① 模型卡 | `ModelCard` + `Teaching/WaveDiagram` + `Teaching/TargetBand` + `Teaching/ActionBudget` + `Teaching/CooldownWindow` | 四个数值 + 一句结论；方块数 = 该波实际怪数（keystone 路线），同色 = 同族；三步判断（几只 → 多久 → 开不开）已并入顶图带主行动格，不单独占位；有 trace 的 L1 章再加目标数轴与动作预算；L1-05 用两波冷却窗口代替目标数轴 |
 | ② 主图 | `BurstChart` / `PriorityTableChart` / `SkillCards` / `LogStats` / `WaveTable` | 开 vs 不开必须两行各带真实 DPS，避免"绿色是增量还是全长"的歧义；表格类必须带 n、±CI、来源 |
 | ③ 技能调整 | `PriorityDiff` | 只用「加 / 降」两列；每条一句话理由，理由必须能追到 APL 条件或 runId |
-| ④ 地图 | `MapPanel` | 瓦片来自 `dist/maps/altar-of-fangs.webp`（keystone.guru 4×4 拼接）；逐波柱 + 横轴波次号 + 本章高亮。**路线没有坐标，所以不往图上标位置** |
+| ④ 地图 | `MapPanel` + `Teaching/RouteMap` | 瓦片来自 `dist/maps/*.webp`（keystone.guru 4×4 拼接）；真实 `killZonePaths` 连线和波次中心叠在地形上，右侧完整列出全部波次构成；点地图编号或列表行同步选波 |
 | ⑤ 高手对照 | `CasePanel` + `Teaching/CastChart` + `Teaching/BurstTimeline` | L0 用整场施法次数（被动另列）；阶段日志给出阶段表和爆发窗口；红玉新生池使用 8 个 WCL Pull + 12 个虚空形态窗口；无数据时显示「待补 · 需要带 Fights 的导出」 |
 | 证据条 | `EvidenceBar` | 常驻页面底部；列出 runId / 日志 / 来源 / 日期 |
 
@@ -174,8 +174,10 @@
 | 项 | 值 |
 | --- | --- |
 | 字号 | 六档：`--fs-display` 36 / `--fs-title` 24 / `--fs-sub` 18 / `--fs-body` 16 / `--fs-meta` 14 / `--fs-caption` 12（图内 SVG 刻度字不算排版） |
+| 字体 | 正文 `Noto Sans SC` 优先；页面与段标题 `Noto Serif SC` 优先；数字统一等宽；中文标题不用正字距 |
 | 栅格 | 内容宽 `--content` 1600；1440 视口下实测壳宽 1392、章节正文主栏 1168；卡片与段内图间距 `--gap` 16；首页、章节页、解析台共用 |
 | 强调色 | 金色 `#f5c451`；正 `#4ade80`；负 `#f87171`；警示 `#fbbf24` |
+| 四属性 | 暴击 `#ff8a65` 实线 / 急速 `#4cc9f0` 虚线 / 精通 `#c77dff` 点线 / 全能 `#7bd88f` 点划线；颜色与线型同时区分 |
 | 数字 | 一律 `ui-monospace` + `tabular-nums`，右对齐 |
 
 ### 页面顺序（首页）
@@ -198,7 +200,7 @@
 | 章节页（L0/L1/L2 共用） | `views/ChapterView.tsx` + `components/ChapterSections.tsx` | 已实现（顶图带 + 五段；L1 用目标数刻度，L2 用选波路线台） |
 | 解析台 | `views/Analyzer.tsx` | 已实现（纵向六段，不是 tab） |
 | 未实装专精骨架页 | `views/ComingSoon.tsx` | 已实现（流水线 + 三张灰模） |
-| 教学图组件 | `components/Teaching/{TopBand,TargetBand,PriorityMap,RouteExplorer,ActionBudget,CooldownWindow,CastChart,WaveDiagram,BurstTimeline,SimulatedTimeline,Skeleton,rules}` | 已实现，跨页复用 |
+| 教学图组件 | `components/Teaching/{TopBand,TargetBand,PriorityMap,RouteExplorer,RouteMap,ActionBudget,CooldownWindow,CastChart,WaveDiagram,BurstTimeline,SimulatedTimeline,Skeleton,rules}` | 已实现，跨页复用 |
 | 配装 / 优化图 | `components/{Gearing,StatCurves}.tsx` | 已实现：收益曲线（SVG 多线）+ 最优配比表 + 摘除 A/B 表 |
 | 参考资料 | `components/Sources.tsx` | 已实现：四家要点卡 + 一致项 + 分歧裁决表（APL 条件单独成行） |
 | 术语 | `components/Gloss.tsx`（`<abbr>` 悬停） | 已实现 |

@@ -3,11 +3,12 @@
  *
  * 口径（都是实测，不是假设）：
  *   - SimC 改属性只能用 `gear_<stat>_rating=<绝对值>`（命令行 `haste_rating=` 之类会被静默忽略）。
- *   - 预算 = 当前角色四项评级的真实合计（从 simc 文本报告里读，含宝石/附魔），不是拿装备行硬加。
+ *   - 预算 = 固定测试 profile 的四项评级合计（从 simc 文本报告里读，含宝石/附魔），
+ *     只作为统一测试尺度；它不是会随玩家换装备自动更新的个人面板。
  *   - 曲线：把全部预算压到一个属性上，其余三项置 0，取 25/50/75/100% 四档真跑。
  *   - 优化：贡献模型 DPS(分配) ≈ DPS(全零) + Σ[DPS(只给 i 这么多) − DPS(全零)]，
  *     在 Σ评级 = 预算、单属性 ≤ 曲线覆盖上限 的约束下网格搜索。
- *   - 校核两件事：① 用当前评级复跑，必须回到现装备 DPS（reproduced）；② 最优解真跑一次，
+ *   - 校核两件事：① 用固定测试基线复跑，必须回到基准 DPS（reproduced）；② 最优解真跑一次，
  *     与预测的差写进 JSON（absErrorPct）——近似有多准，页面直接印出来。
  *
  * 用法：
@@ -159,7 +160,7 @@ async function main() {
     const budget = (r.crit ?? 0) + (r.haste ?? 0) + (r.mastery ?? 0) + (r.vers ?? 0);
     if (!budget) throw new Error(`读不出 ${sc.id} 的当前评级，检查 simc 文本报告格式`);
     budgetByScenario[sc.id] = { ratings: r, budget };
-    console.log(`  → 当前评级 ${JSON.stringify(r)} 合计 ${budget}（这就是预算）`);
+    console.log(`  → 固定测试基线 ${JSON.stringify(r)} 合计 ${budget}（这就是统一预算）`);
     await sim(`stato_zero__${sc.id}__${ITERS}`, sc, 'zero', STATS.map((s) => `${s.opt}=0`));
   }
 
@@ -182,7 +183,7 @@ async function main() {
     const zero = runs.find((r) => r.scenario === sc.id && r.kind === 'zero');
     const current = runs.find((r) => r.scenario === sc.id && r.kind === 'current');
 
-    // 3a. 用当前评级绝对值复跑：必须回到现装备 DPS，否则说明覆盖语义没吃透
+    // 3a. 用固定测试基线复跑：必须回到基准 DPS，否则说明覆盖语义没吃透
     const reproOverrides = STATS.map((s) => `${s.opt}=${B.ratings[s.key] ?? 0}`);
     const repro = await sim(`stato_repro__${sc.id}__${ITERS}`, sc, 'repro', reproOverrides);
     const reproGapPct = r2(((repro.dps.mean - current.dps) / current.dps) * 100);
@@ -259,7 +260,7 @@ async function main() {
     iterations: ITERS,
     budget: first?.budget ?? null,
     budgetNote:
-      '预算 = 当前角色四项评级的真实合计（从 simc 文本报告读出，含宝石/附魔），四个场景同装备所以预算一致。',
+      '预算固定为同一测试 profile 的四项评级合计，仅作为四个输出模型共用的测试尺度；不读取玩家当前装备与人物属性。',
     scenarios: scenarios.map(({ id, label, targets, maxTime }) => ({ id, label, targets, maxTime })),
     stats: STATS.map(({ key, label }) => ({ key, label })),
     perScenario,
@@ -267,7 +268,7 @@ async function main() {
       curves: '把全部预算压到一个属性上（25/50/75/100%），其余三项置 0，每个点真跑一次。',
       optimize:
         '乘区模型：DPS(分配) ≈ DPS(全零) × Π[单项曲线(i)/DPS(全零)]（属性各自是伤害乘区，实测误差 ±0.8%，可加模型会低估 8.5%），在 Σ评级 = 预算、单项 ≤ 预算 的约束下按 100 评级步长穷举。',
-      validate: '两个校核：① 用当前评级复跑必须回到现装备 DPS；② 最优解真跑一次，与预测的差写进 absErrorPct。',
+      validate: '两个校核：① 用同一固定测试基线复跑必须回到基准 DPS；② 最优解真跑一次，与预测的差写进 absErrorPct。页面不展示角色面板快照。',
     },
     caveats: [
       '乘区近似：假定四项各自独立乘区。预测与实测的差已逐模型给出，超过 2% 说明该模型不能用这套近似。',
@@ -281,7 +282,7 @@ async function main() {
     const d = perScenario[sc.id];
     const o = d.optimum;
     console.log(
-      `${sc.id.padEnd(5)} 预算 ${d.budget} | 复现差 ${d.reproduced.gapPct}% | 最优 暴${o.ratings.crit} 急${o.ratings.haste} 精${o.ratings.mastery} 全${o.ratings.vers} | 实测 ${Math.round(o.actualDps).toLocaleString('en-US')} ×现装备 ${o.gainVsCurrentPct >= 0 ? '+' : ''}${o.gainVsCurrentPct}% | 预测误差 ${o.absErrorPct}%`,
+      `${sc.id.padEnd(5)} 预算 ${d.budget} | 复现差 ${d.reproduced.gapPct}% | 最优 暴${o.ratings.crit} 急${o.ratings.haste} 精${o.ratings.mastery} 全${o.ratings.vers} | 实测 ${Math.round(o.actualDps).toLocaleString('en-US')} ×固定基线 ${o.gainVsCurrentPct >= 0 ? '+' : ''}${o.gainVsCurrentPct}% | 预测误差 ${o.absErrorPct}%`,
     );
   }
 }

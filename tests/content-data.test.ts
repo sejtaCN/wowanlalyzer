@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -32,7 +32,7 @@ import { burstValueFor } from '../apps/web/src/components/Teaching/rules';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-/** 祭牙祭坛是当前唯一登记的路线；换副本时这里跟着换 slug。 */
+/** 当前两本 L2 都登记了路线；没有路线的副本必须显式返回 null。 */
 const ALTAR = routeFor('altar_of_fangs')!;
 
 describe('前端数据适配层', () => {
@@ -69,6 +69,19 @@ describe('前端数据适配层', () => {
     ).toBe(true);
     expect(getRun('dec_voidform_on_1__w30_8__5000')?.targets).toBe(8);
     expect(getRun('missing-run')).toBeNull();
+  });
+
+  it('公开内容不绑定玩家当前装备或角色面板', () => {
+    const files = [
+      'content/chapters/l0-02-skill-list.json',
+      'content/guides/priority-table.json',
+      'content/analysis/stat-opt-archon.json',
+    ];
+    const forbidden = /本角色是|这套配置是虚空精灵|现装备：|相对现装备|当前角色四项评级/;
+    for (const file of files) {
+      const text = readFileSync(join(ROOT, file), 'utf8');
+      expect(text, file).not.toMatch(forbidden);
+    }
   });
 
   it('Archon-only：拒绝 Voidweaver 与归属未知 run', () => {
@@ -168,6 +181,29 @@ describe('前端数据适配层', () => {
       if (wave.scenarioId == null) continue;
       expect(getRun(`dec_voidform_on_1__${wave.scenarioId}__5000`)).toBeTruthy();
       expect(getRun(`dec_voidform_on_0__${wave.scenarioId}__5000`)).toBeTruthy();
+    }
+
+    // 地图不是只放底图：每条路线都要有可绘制的连线、投影尺寸和波次坐标中心。
+    for (const route of [ALTAR, ruby]) {
+      expect(route.mapProjection).toEqual({
+        width: 1536,
+        height: 1024,
+        zoom: 2,
+        pixelsPerWorldUnit: 4,
+      });
+      expect(route.routePaths?.length).toBeGreaterThan(0);
+      expect(route.routePaths?.every((path) => path.length >= 2)).toBe(true);
+      const projection = route.mapProjection!;
+      for (const wave of route.waves.filter((item) => (item.enemyPositions?.length ?? 0) > 0)) {
+        const lat = wave.enemyPositions!.reduce((sum, point) => sum + point.x, 0) / wave.enemyPositions!.length;
+        const lng = wave.enemyPositions!.reduce((sum, point) => sum + point.y, 0) / wave.enemyPositions!.length;
+        const x = lng * projection.pixelsPerWorldUnit;
+        const y = -lat * projection.pixelsPerWorldUnit;
+        expect(x).toBeGreaterThanOrEqual(0);
+        expect(x).toBeLessThanOrEqual(projection.width);
+        expect(y).toBeGreaterThanOrEqual(0);
+        expect(y).toBeLessThanOrEqual(projection.height);
+      }
     }
   });
 

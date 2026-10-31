@@ -30,6 +30,8 @@ const BROWSER = findBrowser();
 const CHAPTERS_DIR = join(ROOT, 'content', 'chapters');
 const FIGURES = JSON.parse(readFileSync(join(ROOT, 'content', 'figures', 'chapters.json'), 'utf8'));
 const ROUTE = JSON.parse(readFileSync(join(ROOT, 'content', 'routes', 'waves-altar-of-fangs.json'), 'utf8'));
+const RUBY_ROUTE = JSON.parse(readFileSync(join(ROOT, 'content', 'routes', 'waves-ruby-life-pools.json'), 'utf8'));
+const ROUTE_DOCS = { altar_of_fangs: ROUTE, ruby_life_pools: RUBY_ROUTE };
 const CSS = readFileSync(join(ROOT, 'apps', 'web', 'src', 'ui.css'), 'utf8');
 const COPY_RULES = JSON.parse(readFileSync(join(ROOT, 'content', 'guides', 'copy-rules.json'), 'utf8'));
 const typographySource = Object.fromEntries(
@@ -67,7 +69,7 @@ const VISUALS = {
   'skill-cards': '.skills .sk',
   'log-stats': '.kpis .v',
   'priority-map': '[data-figure-kind="priority-map"]',
-  'route-examples': '.pulls .p, .wavediag .wd-row',
+  'route-examples': '[data-figure-kind="route-examples"] .route-map-stage img, [data-figure-kind="route-examples"] .route-node',
   'route-strip': '.route-wave',
   'route-map': '[data-figure-kind="route-map"] img, [data-figure-kind="route-map"] .map-current',
   'selected-wave': '[data-figure-kind="selected-wave"] .sw-bars',
@@ -315,6 +317,8 @@ for (const chapter of chapters) {
         ...[...sec5.children].filter((el) => el.matches('.note, .sec-note')),
       ])].filter((el) => el.textContent?.trim() && !el.closest('details:not([open])')).length
       : 0;
+    const routeStage = document.querySelector('.route-map-stage')?.getBoundingClientRect();
+    const routeSheet = document.querySelector('.route-sheet')?.getBoundingClientRect();
 
     return {
       id,
@@ -334,6 +338,22 @@ for (const chapter of chapters) {
       hasPhaseMethod: Boolean(sec5?.querySelector('details.phase-method')),
       hasSelectedWaveRaw: Boolean(document.querySelector('details.sw-raw')),
       selectedWaveRawText: document.querySelector('details.sw-raw')?.textContent ?? '',
+      routeLines: document.querySelectorAll('.route-map-paths .route-line').length,
+      routeNodes: document.querySelectorAll('.route-node').length,
+      routeRows: document.querySelectorAll('.route-wave-row').length,
+      routeImageLoaded: (document.querySelector('.route-map-stage img')?.naturalWidth ?? 0) > 0,
+      routeLayout: {
+        stageLeft: Math.round(routeStage?.left ?? 0),
+        stageRight: Math.round(routeStage?.right ?? 0),
+        sheetLeft: Math.round(routeSheet?.left ?? 0),
+        sheetWidth: Math.round(routeSheet?.width ?? 0),
+        sideBySide: Boolean(
+          routeStage &&
+          routeSheet &&
+          routeSheet.left >= routeStage.right - 2 &&
+          Math.abs(routeSheet.top - routeStage.top) < 48
+        ),
+      },
       readerPage: Boolean(document.querySelector('.reader-page')),
       readerTopBand: Boolean(document.querySelector('.reader-topband')),
       readerActionCells: document.querySelectorAll('.reader-topband .reader-action').length,
@@ -430,6 +450,18 @@ for (const chapter of chapters) {
         `${chapter.id}: 时间轴爆发窗口 ${readerView.timelineBursts} 个，与阶段统计 ${readerView.phaseBursts} 个不一致`,
       );
       check(readerView.hasPhaseMethod, `${chapter.id}: 第五段缺少 methods/限制折叠 details.phase-method`);
+    }
+    if (chapter.map) {
+      const routeDoc = ROUTE_DOCS[chapter.map.dungeon];
+      const markerCount = routeDoc.waves.filter((wave) => (wave.enemyPositions?.length ?? 0) > 0).length;
+      check(readerView.routeLines > 0, `${chapter.id}: 路线坐标系没有渲染任何连线`);
+      check(readerView.routeNodes === markerCount, `${chapter.id}: 路线标记应 ${markerCount} 个，实际 ${readerView.routeNodes}`);
+      check(readerView.routeRows === routeDoc.pulls, `${chapter.id}: 路线说明应 ${routeDoc.pulls} 波，实际 ${readerView.routeRows}`);
+      check(readerView.routeImageLoaded, `${chapter.id}: 路线底图未成功加载`);
+      check(
+        readerView.routeLayout.sideBySide,
+        `${chapter.id}: 路线说明没有和地图并排（${JSON.stringify(readerView.routeLayout)}）`,
+      );
     }
     if (chapter.level === 'L2') {
       check(readerView.hasSelectedWaveRaw, `${chapter.id}: 当前波缺少配对记录折叠 details.sw-raw`);
@@ -594,9 +626,11 @@ await page.screenshot({ path: `${SHOTS}/chapter-l2-empty-pull.png` });
 await goHome();
 await page.evaluate(() => document.querySelector('button.chap[data-chapter-id="l2-02-ruby-life-pools"]')?.click());
 await sleep(240);
-const rubyMapScope = await page.evaluate(() => document.querySelector('.mapgrid')?.innerText ?? '');
+const rubyMapScope = await page.evaluate(() => document.querySelector('.map-panel')?.innerText ?? '');
 check(rubyMapScope.includes('仅主层'), `红玉地图未标明主层范围：${rubyMapScope}`);
 check(rubyMapScope.includes('不表示完整楼层路径'), `红玉地图未说明楼层限制：${rubyMapScope}`);
+const rubySections = await page.$$('.sec');
+if (rubySections[3]) await rubySections[3].screenshot({ path: `${SHOTS}/chapter-l2-ruby-map.png` });
 
 // ---- 解析台 ----
 await page.evaluate(() => [...document.querySelectorAll('nav button')].find((b) => b.textContent.includes('解析台'))?.click());
@@ -633,11 +667,23 @@ const statModels = await page.evaluate(() => ({
   allocationLabels: [...document.querySelectorAll('.stat-alloc-hd b')].map((node) => node.textContent?.trim()),
   heatColumns: document.querySelectorAll('.stat-heat-head > span').length,
   heatRows: document.querySelectorAll('.stat-heat-row:not(.stat-heat-head)').length,
+  bodyFont: getComputedStyle(document.body).fontFamily,
+  headingFont: getComputedStyle(document.querySelector('.page h1')).fontFamily,
+  statColors: ['crit', 'haste', 'mastery', 'vers'].map((key) =>
+    getComputedStyle(document.querySelector(`.stat-dot.${key}`)).backgroundColor,
+  ),
+  statDashes: [...document.querySelectorAll('.statopt svg polyline')].map(
+    (node) => getComputedStyle(node).strokeDasharray,
+  ),
 }));
 check(statModels.allocations === 4, `属性配比应显示 4 个模型，实际 ${statModels.allocations}`);
 check(statModels.allocationLabels[0] === '单体 300s', `属性配比首个模型应为单体 300s，实际 ${statModels.allocationLabels[0]}`);
 check(statModels.heatColumns === 5, `属性热矩阵应为属性列 + 4 模型列，实际 ${statModels.heatColumns}`);
 check(statModels.heatRows === 4, `属性热矩阵应有 4 行属性，实际 ${statModels.heatRows}`);
+check(statModels.bodyFont.includes('Noto Sans SC'), `正文字体未使用 Noto Sans SC：${statModels.bodyFont}`);
+check(statModels.headingFont.includes('Noto Serif SC'), `标题字体未使用 Noto Serif SC：${statModels.headingFont}`);
+check(new Set(statModels.statColors).size === 4, `四属性颜色不够区分：${statModels.statColors.join(' / ')}`);
+check(new Set(statModels.statDashes).size === 4, `四属性线型不够区分：${statModels.statDashes.join(' / ')}`);
 await page.screenshot({ path: `${SHOTS}/analyzer.png` });
 const anSecs = await page.$$('.sec');
 if (anSecs[3]) await anSecs[3].screenshot({ path: `${SHOTS}/analyzer-gearing.png` });
@@ -730,10 +776,18 @@ await sleep(260);
 const mobile375 = await page.evaluate(() => ({
   overflow: document.documentElement.scrollWidth - window.innerWidth,
   h1Size: getComputedStyle(document.querySelector('.reader-page h1')).fontSize,
+  routeLines: document.querySelectorAll('.route-map-paths .route-line').length,
+  routeNodes: document.querySelectorAll('.route-node').length,
+  routeRows: document.querySelectorAll('.route-wave-row').length,
 }));
 check(mobile375.overflow === 0, `L1-02 375px 横向溢出 ${mobile375.overflow}px`);
 check(mobile375.h1Size === '36px', `L1-02 375px 标题应为 36px，实际 ${mobile375.h1Size}`);
+check(mobile375.routeLines > 0, 'L1-02 375px 路线连线未渲染');
+check(mobile375.routeNodes === ROUTE.waves.filter((wave) => (wave.enemyPositions?.length ?? 0) > 0).length, 'L1-02 375px 路线波次标记数量不足');
+check(mobile375.routeRows === ROUTE.pulls, `L1-02 375px 波次说明应 ${ROUTE.pulls} 行，实际 ${mobile375.routeRows}`);
 await page.screenshot({ path: `${SHOTS}/chapter-l1-02-375.png` });
+const mobileRouteSection = (await page.$$('.sec'))[3];
+if (mobileRouteSection) await mobileRouteSection.screenshot({ path: `${SHOTS}/chapter-l1-02-route-mobile.png` });
 
 // 冻结兼容冒烟：全页面不得横向滚动，只有显式表格容器可以局部滚动
 await page.setViewport({ width: 420, height: 900 });

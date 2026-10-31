@@ -89,6 +89,11 @@ const html = readFileSync(ROUTE_FILE, 'utf8');
 const routeMatch = html.match(/"killZones":(\[.*?\]),"mapIcons":/s);
 if (!routeMatch) throw new Error('找不到路线 killZones');
 const killZones = JSON.parse(routeMatch[1]);
+const routePathMatch = html.match(/"killZonePaths":(\[.*?\]),"killZones":/s);
+if (!routePathMatch) throw new Error('找不到路线 killZonePaths');
+const killZonePaths = JSON.parse(routePathMatch[1]);
+const defaultZoom = Number(html.match(/"defaultZoom":(\d+)/)?.[1] ?? 2);
+if (!killZonePaths.length) throw new Error('路线没有可绘制的 killZonePaths');
 const routeInfo = html.match(/"publicKey":"([^"]+)".*?"enemyForces":(\d+)/s);
 const routeForces = routeInfo ? Number(routeInfo[2]) : null;
 const routeTitle = html.match(/"title":"([^"]+)"/)?.[1] ?? spec.name;
@@ -197,6 +202,7 @@ if (routeForces != null && totalForces !== routeForces) {
 }
 const totalMobs = waves.reduce((n, w) => n + w.mobCount, 0);
 const existing = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : {};
+const fetchedAt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date());
 const out = {
   ...existing,
   dungeon: spec.name,
@@ -204,7 +210,7 @@ const out = {
   routePublicKey: routeInfo?.[1] ?? null,
   source: 'keystone.guru',
   sourceUrl: spec.sourceUrl,
-  fetchedAt: new Date().toISOString().slice(0, 10),
+  fetchedAt,
   mappingVersion: mapping.mappingVersion.id,
   mdtMappingHash: mapping.mappingVersion.mdt_mapping_hash,
   mdtAddonVersion: mapping.mappingVersion.mdt_addon_version,
@@ -212,6 +218,13 @@ const out = {
   totalMobs,
   totalForces,
   requiredForces: mapping.mappingVersion.enemy_forces_required,
+  mapProjection: {
+    width: 1536,
+    height: 1024,
+    zoom: defaultZoom,
+    pixelsPerWorldUnit: 2 ** defaultZoom,
+  },
+  routePaths: killZonePaths,
   waves,
 };
 writeFileSync(OUT, JSON.stringify(out, null, 1) + '\n');

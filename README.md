@@ -85,7 +85,7 @@ npm run build    # 重新打包到 dist/index.html
 ```bash
 npm run dev                # 开发服务器
 npm run build              # 打包（产出 dist/index.html）
-npm test                   # 30 条测试：结构 / 数据层 / 相邻交换 / 分析门禁 / claim 解析 / WCL 清单
+npm test                   # 31 条测试：结构 / 数据层 / 相邻交换 / 分析门禁 / claim 解析 / WCL 清单 / 非个人面板约束
 npm run typecheck          # 类型
 npm run validate:content   # 关卡：没有来源的数字不许进页面
 npm run check:copy         # 关卡：可见文案（禁用词 / 术语 / AI 腔 / 长度预算 / 依据可追）
@@ -139,6 +139,7 @@ npm run wcl:archon:status  # 查看 8 本 WCL / Pull / 路线 / 打法覆盖；-
 | [ui-reference-decomposition.md](docs/ui-reference-decomposition.md) | 参考站拆解、第一性原理、L1-02 视觉重构基线 |
 | [curriculum.md](docs/curriculum.md) | 章节结构与进度表 |
 | [methods.md](docs/methods.md) | 方法说明：联动/杠杆 · 日志阶段推断 · 教程交叉核对 · 配装与属性优化 |
+| [CONTENT-SYSTEM-PLAYBOOK.md](docs/CONTENT-SYSTEM-PLAYBOOK.md) | 最终方法手册：数据分层、生产流程、页面表达、复核状态，以及向治疗与团本扩展的规则 |
 | [figure-contract.md](docs/figure-contract.md) | 图契约：五段图清单、缺图状态、12 章 UI 门禁与坏样本自检 |
 | [first-principles.md](docs/first-principles.md) | 第一性原理：其他教程做什么、我们缺什么、下一步补什么 |
 | [DEPLOY.md](docs/DEPLOY.md) | 静态部署预演：三个平台怎么连、需要你做什么、上线前检查表 |
@@ -151,7 +152,7 @@ npm run wcl:archon:status  # 查看 8 本 WCL / Pull / 路线 / 打法覆盖；-
 - 专精：暗影牧师当前只开放执政官；虚空编织者设为待办，噬灭（歼灭者）仍是占位预览
 - 章节 12 篇：L0×4、L1×6、L2×2（毒牙祭坛 / 红玉新生池）
 - 数据：原始归档 296 个 runId；站点只查询已明确归属执政官的记录 235 条（含配装 36 + 属性优化 80 + 动作 trace 7）、9 段阶段级日志；8 本大秘境 WCL 单样本共 329 页、97,599 条筛选事件、81 个有效 Pull、100 个虚空形态窗口和 12,147 个 DoT 区间（打法状态均为 `sample-reviewed`），2 条副本路线（毒牙祭坛 15 波 / 红玉新生池 12 波，合计 27 波 184 只）、4 个输出模型；L0-03 / L1-01 第五段使用模拟动作时间线，不冒充真人日志阶段
-- 门禁：`validate:content` 通过（60 段图契约：55 有图 / 0 缺图 / 5 不适用） · `check:doc` 12/12 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 12 章 + Archon-only 解析台 + 属性四模型 DOM 断言 + 桌面宽屏；移动端仅保留冻结冒烟 · `check:static` 本地 HTTP 0 失败请求 · `audit:text` 读者页 0 处工程口径 · `verify:gates` 26/26（含坏样本） · `vitest` 30/30 · `tsc` 通过
+- 门禁：`validate:content` 通过（60 段图契约：55 有图 / 0 缺图 / 5 不适用） · `check:doc` 12/12 章一致 · `check:copy` 0 错 / 0 提醒 · `check:design` 0 错 · `check:analysis` 配装与属性对照通过 · `check:adjacent` 4 组相邻交换通过 · `check:ui` 逐章检查 12 章 + Archon-only 解析台 + 四属性色相/线型/字体断言 + 桌面宽屏；移动端保留路线与溢出冒烟 · `check:static` 本地 HTTP 0 失败请求 · `audit:text` 读者页 0 处工程口径 · `verify:gates` 26/26（含坏样本） · `vitest` 31/31 · `tsc` 通过
 
 ## 许可与来源
 

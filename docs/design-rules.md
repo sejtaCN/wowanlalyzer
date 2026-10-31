@@ -117,7 +117,8 @@ SVG 例外：SVG 的 `fill` / `stroke` 支持 CSS 变量，所以依赖图、曲
 | 图表轨道 | `--track` `--track-2` `--track-soft` | 柱底、轨道 |
 | 图表文字 | `--ink-on-gold` `--ink-on-gold-soft` | 色底上的文字 |
 | 依赖图 | `--dep-dot` `--dep-buff` `--dep-burst` `--dep-opener` `--dep-node-*` `--dep-label` `--dep-muted` | `Analysis.tsx` 的 SVG |
-| 曲线图 | `--curve-a` `--curve-b` `--curve-up-soft` `--curve-down-soft` `--curve-axis` `--curve-fill` `--curve-label` | `StatCurves.tsx` |
+| 四属性 | `--stat-crit` `--stat-haste` `--stat-mastery` `--stat-vers` | 暴击 / 急速 / 精通 / 全能；同时配合实线、虚线、点线、点划线 |
+| 曲线辅助 | `--curve-a` `--curve-b` `--curve-up-soft` `--curve-down-soft` `--curve-axis` `--curve-fill` `--curve-label` | 非属性专用的曲线与网格 |
 | 骨架屏 | `--skel-base` `--skel-sheen` | `Skeleton.tsx` |
 | 怪物族 | `--family-1` … `--family-6` | `WaveDiagram.tsx`，按族名哈希取色，保证同族同色 |
 
